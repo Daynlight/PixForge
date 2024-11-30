@@ -15,6 +15,6 @@ class Window{
     Window(const char* title = "");
   
 }; 
-
-#endif
 } // namespace PC
+#endif
+
