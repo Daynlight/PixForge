@@ -1,7 +1,7 @@
 #include "Settings.h"
+#include "PixCore/PixCore.h"
 
-int main(){
-  
-
+int WinMain(){
+  PC::Window window("heloo");
   return 0;
 }
