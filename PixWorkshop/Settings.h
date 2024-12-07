@@ -1,3 +1,7 @@
+#pragma once
+#define WINDOWTITLE "PixWorkbench"
+#define WINDOWBACKGROUNDCOLOR 25, 25, 25, 255
+
 #ifdef DLLEXPORT
 #define  DLLIO __declspec(dllexport)
 #else

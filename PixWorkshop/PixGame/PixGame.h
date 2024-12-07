@@ -3,12 +3,12 @@
 #include "../PixCore/PixCore.h"
 
 namespace PC{
-class Editor{
+class GameRunner{
   private:
     Window *window;
   public:
-    Editor(Window *window);
-    ~Editor();
+    GameRunner(Window *window);
+    ~GameRunner();
     void run();
 };
 
