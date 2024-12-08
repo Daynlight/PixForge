@@ -1,0 +1,4 @@
+[submodule "PixWorkshop/vendor/Data"]
+	path = PixWorkshop/vendor/Data
+	url = https://github.com/Daynlight/Data
+	branch = deploy
