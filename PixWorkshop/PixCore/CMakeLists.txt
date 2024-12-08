@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
-file(GLOB_RECURSE src "*.cpp" "*.h" "../Settings.h")
+file(GLOB_RECURSE src "*.cpp" "*.h" "../Settings.h" "../vendor/ImGui/**.cpp" "../vendor/ImGui/**.h")
 
 project(PixCore VERSION 1.0 LANGUAGES CXX)
 add_library(PixCore SHARED ${src})
+
+target_link_directories(PixCore PRIVATE "../vendor/ImGui/")
 
 target_compile_definitions(PixCore PRIVATE DLLEXPORT)
 

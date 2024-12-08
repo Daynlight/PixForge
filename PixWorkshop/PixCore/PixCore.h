@@ -1,5 +1,6 @@
 #pragma once
 #include "../Settings.h"
+#include "../vendor/ImGui/imgui.h"
 #include <functional>
 #include <stdexcept>
 
