@@ -1,6 +1,7 @@
 #pragma once
 #define WINDOWTITLE "PixWorkbench"
 #define WINDOWBACKGROUNDCOLOR 25, 25, 25, 255
+#define HASHKEY "gamehashvalue"
 
 #ifdef DLLEXPORT
 #define  DLLIO __declspec(dllexport)

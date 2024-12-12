@@ -9,7 +9,7 @@ namespace PC{
 class Editor{
   private:
     Window *window;
-    Data::BaseHash hash = Data::BaseHash("gamehashvalue");
+    Data::BaseHash hash = Data::BaseHash(HASHKEY);
     Data::File game = Data::File("game.bin");
   public:
     Editor(Window *window);

@@ -34,3 +34,4 @@ endif()
 
 # Link PixCore library
 target_link_libraries(PixGame PRIVATE PixCore)
+target_link_libraries(PixGame PRIVATE ${CMAKE_SOURCE_DIR}/PixWorkshop/vendor/Data/lib/libData.a)
