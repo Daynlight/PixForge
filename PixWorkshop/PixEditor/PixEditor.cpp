@@ -11,11 +11,14 @@ int WinMain(){
 namespace PC{
 
 Editor::Editor(Window *window)
-  :window(window) { }
+  :window(window) {
+    
+   }
 
 Editor::~Editor(){
 }
 void Editor::run() {
+
   window->run();
 }
 }

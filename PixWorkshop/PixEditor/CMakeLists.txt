@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 
-file(GLOB_RECURSE src "*.cpp" "*.h" "../Settings.h") 
+file(GLOB_RECURSE src "*.cpp" 
+                        "*.h" "../Settings.h" 
+                        "../vendor/ImGui/*.cpp"
+                        "../vendor/ImGui/*.h") 
 
 project(PixEditor VERSION 1.0 LANGUAGES CXX)
 add_executable(PixEditor ${src})
@@ -34,3 +37,4 @@ endif()
 
 # Link PixCore library
 target_link_libraries(PixEditor PRIVATE PixCore)
+target_link_libraries(PixEditor PRIVATE ${CMAKE_SOURCE_DIR}/PixWorkshop/vendor/Data/lib/libData.a)
