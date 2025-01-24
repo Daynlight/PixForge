@@ -1,5 +1,4 @@
 #pragma once
-#include <SDL2/SDL.h>
 
 // Window Settings
 #define WINDOW_SIZES 500, 600 
