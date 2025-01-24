@@ -1,8 +1,8 @@
 #pragma once
 #include "../Settings.h"
 #include "../vendor/ImGui/imgui.h"
-#include <functional>
 #include <stdexcept>
+#include <functional>
 #include <SDL2/SDL.h>
 
 namespace PC {
@@ -13,6 +13,10 @@ class Window{
     const char* title = "";
     bool running = true;
   public:
-    Window(const char* title = "PixEditor");
+    Window(const char* title);
+    ~Window();
+    bool isRunning();
+    SDL_Renderer* getRenderer();
+    void windowEvent(SDL_Event event);
 }; 
 }

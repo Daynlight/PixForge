@@ -1,6 +1,8 @@
 #pragma once
 #include "../Settings.h"
 #include "PCWindow.h"
+#include "PCRenderer.h"
+#include "../Assets/Assets.h"
 #include "imgui.h"
 
 namespace PE{
@@ -9,5 +11,6 @@ namespace PE{
       PC::Window window = PC::Window("PixEditor");    
     public:
       void run();
+      void editorEvent();
   };
 };

@@ -10,3 +10,16 @@ PC::Window::Window(const char* title)
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
 }
+
+PC::Window::~Window(){
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
+}
+
+void PC::Window::windowEvent(SDL_Event event){
+  if(event.type == SDL_QUIT) running = false;
+}
+
+bool PC::Window::isRunning() { return running; }
+SDL_Renderer *PC::Window::getRenderer() { return renderer; }
