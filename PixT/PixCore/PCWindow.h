@@ -1,9 +1,10 @@
 #pragma once
-#include "../Settings.h"
+#include "../Macro.h"
+#include "../Assets/Settings.h"
 #include "../vendor/ImGui/imgui.h"
+#include <SDL2/SDL.h>
 #include <stdexcept>
 #include <functional>
-#include <SDL2/SDL.h>
 
 namespace PC {
 class Window{

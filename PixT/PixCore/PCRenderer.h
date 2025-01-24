@@ -1,3 +1,4 @@
+#pragma once
 #include "PCWindow.h"
 
 namespace PC{

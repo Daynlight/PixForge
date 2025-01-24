@@ -1,4 +1,4 @@
-#include "Settings.h"
+#include "Macro.h"
 #include "PixEditor/PixEditor.h"
 
 int WinMain(){
