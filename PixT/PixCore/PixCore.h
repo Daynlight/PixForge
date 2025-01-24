@@ -1,8 +1,6 @@
 #pragma once
 #include "../Settings.h"
 #include <stdexcept>
-
-#ifdef SDL2
 #include <SDL2/SDL.h>
 
 namespace PC {
@@ -12,12 +10,6 @@ class DLLIO Window{
     SDL_Renderer *renderer;
     const char* title = "";
   public:
-    Window(const char* title = "");
+    Window(const char* title = "PixEditor");
 }; 
-} // namespace PC
-#elif GLFW
-  #include <GLFW/glfw3.h>
-#elif GLEW
-  #include <GL/gl.h>
-#endif
-
+}

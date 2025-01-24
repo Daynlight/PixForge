@@ -1,6 +1,5 @@
 #include "PixCore.h"
 
-#ifdef SDL2
 PC::Window::Window(const char* title)
   :title(title) {
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
@@ -11,4 +10,3 @@ PC::Window::Window(const char* title)
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
 }
-#endif
