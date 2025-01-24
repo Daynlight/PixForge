@@ -1,7 +1,7 @@
 #pragma once
 #include "../Macro.h"
-#include "../Assets/Assets.h"
-#include "../Assets/Settings.h"
+#include "Settings.h"
+#include "Assets.h"
 #include "PCRenderer.h"
 #include "PCWindow.h"
 #include "imgui.h"
