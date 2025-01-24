@@ -1,5 +1,4 @@
-#include "Settings.h"
-#include "PixEditor/PixEditor.h"
+#include "PixEditor.h"
 
 int WinMain(){
   PE::Editor editor;
