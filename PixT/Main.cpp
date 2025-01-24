@@ -1,8 +1,9 @@
 #include "Settings.h"
-#include "PixCore/PixCore.h"
+#include "PixEditor/PixEditor.h"
 
 int WinMain(){
-  PC::Window window;
+  PE::Editor editor;
+  editor.run();
   
   return 0;
 }

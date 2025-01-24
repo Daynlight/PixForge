@@ -1,4 +1,4 @@
-#include "PixCore.h"
+#include "PCWindow.h"
 
 PC::Window::Window(const char* title)
   :title(title) {

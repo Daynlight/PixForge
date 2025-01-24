@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 
 namespace PC {
-class DLLIO Window{
+class Window{
   private:
     SDL_Window *window;
     SDL_Renderer *renderer;
