@@ -4,7 +4,6 @@
 #include "../vendor/ImGui/imgui.h"
 #include <SDL2/SDL.h>
 #include <stdexcept>
-#include <functional>
 
 namespace PC {
 class Window{
