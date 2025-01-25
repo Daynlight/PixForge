@@ -23,3 +23,7 @@ void PC::Window::windowEvent(SDL_Event event){
 
 bool PC::Window::isRunning() { return running; }
 SDL_Renderer *PC::Window::getRenderer() { return renderer; }
+
+SDL_Window *PC::Window::getWindow(){
+  return window;
+}

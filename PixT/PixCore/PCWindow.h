@@ -17,6 +17,7 @@ class Window{
     ~Window();
     bool isRunning();
     SDL_Renderer* getRenderer();
+    SDL_Window* getWindow();
     void windowEvent(SDL_Event event);
 }; 
 }
