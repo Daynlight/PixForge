@@ -16,10 +16,11 @@ namespace PE{
       void imGuiDock();
       void renderGui();
       void editorEvent();
-      bool buildGame(); 
-      bool runGame();
+      void buildGame(); 
+      void runGame();
     public:
       Editor();
+      ~Editor();
       void run();
   };
 };

@@ -7,7 +7,7 @@ file(GLOB_RECURSE core "../PixCore/*.cpp")
 project(PixGame VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_executable(PixGame ${src} ${core} ${libs})
+add_executable(PixGame WIN32 ${src} ${core} ${libs})
 
 find_package(SDL2 REQUIRED)
 target_link_libraries(PixGame PRIVATE ${SDL2_LIBRARIES})
