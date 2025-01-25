@@ -1,7 +1,6 @@
 #pragma once
-#include "../Macro.h"
 #include "../Assets/Settings.h"
-#include "../vendor/ImGui/imgui.h"
+#include "../vendor/imgui/imgui.h"
 #include <SDL2/SDL.h>
 #include <stdexcept>
 

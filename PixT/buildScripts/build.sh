@@ -1,5 +1,5 @@
 mkdir build 
 cd build
-cmake.exe ../../PixT/PixGame/ 
+cmake.exe ../Game 
 cmake --build . 
 cp PixGame.exe "../$1.exe"

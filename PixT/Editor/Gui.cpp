@@ -1,4 +1,4 @@
-#include "PixEditor.h"
+#include "Editor.h"
 
 void PE::Editor::run() {
   while (window.isRunning()){

@@ -1,4 +1,4 @@
-#include "PCWindow.h"
+#include "Window.h"
 
 PC::Window::Window(const char* title)
   :title(title) {

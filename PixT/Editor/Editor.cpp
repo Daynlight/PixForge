@@ -1,4 +1,4 @@
-#include "PixEditor.h"
+#include "Editor.h"
 
 PE::Editor::Editor(){
   IMGUI_CHECKVERSION();
@@ -10,7 +10,7 @@ PE::Editor::Editor(){
   //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
   ImGui::StyleColorsDark();
-
+ 
   ImGui_ImplSDL2_InitForSDLRenderer(window.getWindow(), window.getRenderer());
   ImGui_ImplSDLRenderer2_Init(window.getRenderer());
 }
@@ -18,9 +18,9 @@ PE::Editor::Editor(){
 PE::Editor::~Editor(){
     ImGui_ImplSDLRenderer2_Shutdown();
     ImGui_ImplSDL2_Shutdown();
-
+ 
     ImGui::DestroyContext();
-}
+} 
 
 void PE::Editor::editorEvent(){
   SDL_Event event;
@@ -35,20 +35,21 @@ void PE::Editor::editorEvent(){
   }
 }
 
+
 void PE::Editor::buildGame(){
   #ifdef _WIN32
-    std::string buildCommand = "start /B cmd.exe /C ..\\PixT\\PixGame\\scripts\\build.bat \""GAME_TITLE"\"";
+    std::string buildCommand = "start /B cmd.exe /C buildScripts\\build.bat \""+game_title+"\"";
   #else
-    std::string buildCommand = "bash ../PixT/PixGame/scripts/build.sh '"GAME_TITLE"' &";
+    std::string buildCommand = "bash buildScripts/build.sh '"+game_title+"' &";
   #endif
   system(buildCommand.c_str());
 }
 
 void PE::Editor::runGame(){
   #ifdef _WIN32
-    std::string runCommand = "start /B cmd.exe /C ..\\PixT\\PixGame\\scripts\\run.bat \""GAME_TITLE"\"";
+    std::string runCommand = "start /B cmd.exe /C buildScripts\\run.bat \""+game_title+"\"";
   #else
-    std::string runCommand = "bash ../PixT/PixGame/scripts/run.sh '"GAME_TITLE"' &";
+    std::string runCommand = "bash buildScripts/run.sh '"+game_title+"' &";
   #endif
   system(runCommand.c_str());
 }

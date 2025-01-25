@@ -1,4 +1,4 @@
-#include "PixGame.h"
+#include "Game.h"
 
 int WinMain(){
   PG::Game game;
