@@ -5,6 +5,7 @@
 #include "PCRenderer.h"
 #include "PCWindow.h"
 #include "imgui.h"
+#include <cstdlib>
 
 namespace PE{
   class Editor{
@@ -13,5 +14,6 @@ namespace PE{
     public:
       void run();
       void editorEvent();
+      bool buildGame(); 
   };
 };
