@@ -15,6 +15,7 @@ void PE::Editor::editorEvent(){
   while(SDL_PollEvent(&event)){
     if(event.type == SDL_KEYDOWN){
       if(event.key.keysym.sym == SDLK_F5) buildGame();
+      if(event.key.keysym.sym == SDLK_F6) runGame();
     }
 
     window.windowEvent(event);
@@ -22,11 +23,14 @@ void PE::Editor::editorEvent(){
 }
 
 bool PE::Editor::buildGame(){
-  std::string buildCommand = "bash ../PixT/PixEditor/buildscript.sh " + std::string(GAME_TITLE);
-
-  // Run the build command
+  std::string buildCommand = "bash ../PixT/PixGame/scripts/build.sh "GAME_TITLE;
   int result = system(buildCommand.c_str());
-
   if (result == -1) return false;
+  return true;
+}
+
+bool PE::Editor::runGame(){
+  std::string runCommand = "bash ../PixT/PixGame/scripts/run.sh "GAME_TITLE;
+  int result = system(runCommand.c_str());
   return true;
 }

@@ -15,5 +15,6 @@ namespace PE{
       void run();
       void editorEvent();
       bool buildGame(); 
+      bool runGame();
   };
 };
