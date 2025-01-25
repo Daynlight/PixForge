@@ -20,25 +20,21 @@ add_custom_command(TARGET PixEditor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Assets/
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/PixT/Assets/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Assets/
-    COMMENT "Copying Assets folder"
 
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/vendor/
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/PixT/vendor/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/vendor/
-    COMMENT "Copying vendor folder"
 
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Game/
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/PixT/Game/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Game/
-    COMMENT "Copying Game folder"
 
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Core/
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/PixT/Core/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Core/
-    COMMENT "Copying Core folder"
 
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/buildScripts/
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/PixT/buildScripts/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/buildScripts/
-    COMMENT "Copying buildScripts folder"
+    COMMENT "Copying folders"
 )
