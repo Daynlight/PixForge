@@ -2,16 +2,25 @@
 #include "../Macro.h"
 #include "Settings.h"
 #include "Assets.h"
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer2.h"
 #include "PCRenderer.h"
 #include "PCWindow.h"
-#include "imgui.h"
+#include <cstdlib>
 
 namespace PE{
   class Editor{
     private:
-      PC::Window window = PC::Window("PixEditor");    
-    public:
-      void run();
+      PC::Window window = PC::Window("PixEditor");  
+      void imGuiDock();
+      void renderGui();
       void editorEvent();
+      void buildGame(); 
+      void runGame();
+    public:
+      Editor();
+      ~Editor();
+      void run();
   };
 };
