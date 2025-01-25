@@ -23,14 +23,23 @@ void PE::Editor::editorEvent(){
 }
 
 bool PE::Editor::buildGame(){
-  const char* buildCommand = "bash ../PixT/PixGame/scripts/build.sh '"GAME_TITLE"'";
-  int result = system(buildCommand);
+  #ifdef _WIN32
+    std::string buildCommand = "cmd.exe /C ..\\PixT\\PixGame\\scripts\\build.bat \""GAME_TITLE"\"";
+  #else
+    std::string buildCommand = "bash ../PixT/PixGame/scripts/build.sh '"GAME_TITLE"'";
+  #endif
+  int result = system(buildCommand.c_str());
   if (result == -1) return false;
   return true;
 }
 
 bool PE::Editor::runGame(){
-  const char* runCommand = "bash ../PixT/PixGame/scripts/run.sh '"GAME_TITLE"'";
-  int result = system(runCommand);
+  buildGame();
+  #ifdef _WIN32
+    std::string runCommand = "start /B cmd.exe /C ..\\PixT\\PixGame\\scripts\\run.bat \""GAME_TITLE"\"";
+  #else
+    std::string runCommand = "bash ../PixT/PixGame/scripts/run.sh '"GAME_TITLE"'";
+  #endif
+  system(runCommand.c_str());
   return true;
 }

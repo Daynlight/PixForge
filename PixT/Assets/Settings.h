@@ -6,5 +6,5 @@
 #define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 
 // Game Settings
-#define GAME_TITLE "PixT"
+#define GAME_TITLE "Pix T"
  
