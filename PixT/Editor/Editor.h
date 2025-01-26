@@ -1,25 +1,18 @@
 #pragma once
-#include "../vendor/imgui/imgui.h"
-#include "../vendor/imgui/imgui_impl_sdl2.h"
-#include "../vendor/imgui/imgui_impl_sdlrenderer2.h"
 #include "../vendor/data/Data.h"
-#include "../Assets/Assets.h"
-#include "../Core/Renderer.h"
 #include "../Core/Window.h"
-#include <cstdlib>
+#include "../Core/Renderer.h"
+#include "Settings.h"
+#include "Tools.h"
+#include "Gui.h"
 
 namespace PE{
   class Editor{
     private:
-      PC::Window window = PC::Window("PixEditor");  
-      void imGuiDock();
-      void renderGui();
+      PC::Window window = PC::Window("PixEditor");
+      Gui gui = Gui(&window);
       void editorEvent();
-      void buildGame(); 
-      void runGame();
     public:
-      Editor();
-      ~Editor();
       void run();
   };
 };
