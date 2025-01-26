@@ -1,10 +1,10 @@
 #pragma once
-#include <vector>
+#include "../Core/STL.h"
 #include <string>
 
 namespace PE{
   struct Log{
-    static std::vector<std::pair<char, std::string>> entry;
+    static PC::Vector<std::pair<char, std::string>> entry;
     static void log(const std::string text);
     static void war(const std::string text);
     static void err(const std::string text);

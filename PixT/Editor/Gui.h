@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 #include "Tools.h"
 #include "../Core/STL.h"
 #include "../Core/Window.h"

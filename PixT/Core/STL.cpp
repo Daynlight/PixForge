@@ -18,15 +18,15 @@ void PC::File::createFile(){ file.open(path, std::ios::out); }
 void PC::File::read(){
   file.seekg(0, std::ios::beg);
   std::string line;
-  while(std::getline(file, line)) data.emplace_back(line);
+  while(std::getline(file, line)) data.push(line);
 }
 
 void PC::File::push(const std::string line){
-  data.emplace_back(line);
+  data.push(line);
 }
 
 void PC::File::clear(){
-  while(data.size() > 0) data.pop_back();
+  while(data.size() > 0) data.pop();
 }
 
 size_t PC::File::size(){ return data.size(); }
@@ -34,7 +34,7 @@ size_t PC::File::size(){ return data.size(); }
 void PC::File::save(){
   file.close();
   file.open(path, std::ios::out | std::ios::trunc);
-  for(auto &line : data) file << line << std::endl;  
+  for(int i = 0; i < data.size(); i++) file << data[i] << std::endl;  
   file.close();
   file.open(path, std::ios::in | std::ios::out);
 }

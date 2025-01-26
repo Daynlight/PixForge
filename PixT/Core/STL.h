@@ -1,13 +1,27 @@
 #pragma once
-#include <vector>
 #include <string>
 #include <fstream>
 #include <filesystem>
 
 namespace PC{
+  template<typename T>
+  class Vector{
+    private:
+      T* data;
+      size_t _size = 0;
+      size_t capacity = 1;
+      void resize();
+    public:
+      Vector(const size_t capacity = 1);
+      T& operator[](const size_t index);
+      void push(const T line);
+      T pop();
+      void clear();
+      size_t size();
+  };
   class File{
     private:
-      std::vector<std::string> data;
+      Vector<std::string> data;
       std::string path;
       std::fstream file;
     public:
@@ -31,3 +45,5 @@ namespace PC{
       void createFolder();
   };
 };
+
+#include "STL.hpp"
