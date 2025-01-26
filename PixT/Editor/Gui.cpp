@@ -93,6 +93,7 @@ inline void PE::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
         if (ImGui::MenuItem("Log")) { gui_window_open(1); };
+        if (ImGui::MenuItem("Text Editor")) { gui_window_open(2); };
         ImGui::EndMenu();
     };
 
@@ -123,6 +124,9 @@ bool PE::GuiWindow::render(uint8_t type){
   case 1:
     return GuiWindow::log();
     break;
+  case 2: 
+    return GuiWindow::textEditor();
+    break;
   };
 };
 
@@ -147,5 +151,51 @@ inline bool PE::GuiWindow::log(){
   }
   ImGui::End();
 
+  return 1;
+};
+
+inline bool PE::GuiWindow::textEditor() {
+  ImGui::Begin("Text Editor", nullptr, ImGuiWindowFlags_MenuBar);
+  if(ImGui::BeginMenuBar()){
+    if(ImGui::Button("exit")){
+      ImGui::EndMenuBar();
+      ImGui::End();
+      return 0;
+    };
+    ImGui::EndMenuBar();
+  };
+
+  ImGui::Text("Text Editor:");
+  ImGui::Text("Path: ");
+  ImGui::SameLine();
+
+  static char path[256] = "";
+  bool update = false;
+  if (ImGui::InputText("##path", path, sizeof(path))) update = true;
+  ImGui::Separator();
+
+  static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput;
+  static char text[1024 * 16] = "";
+
+  if(ImGui::Button("read") || update){  
+    std::ifstream file(path);
+    std::string line;
+    std::string temptext = "";
+    while(std::getline(file, line)) temptext += line + "\n";
+    strcpy(text, temptext.c_str());
+    update = false;
+    file.close();
+  };
+  ImGui::SameLine();
+  if(ImGui::Button("save")){  
+    std::ofstream file(path);
+    file << text;
+    file.close();
+  };
+  
+  ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), flags);
+
+
+  ImGui::End();
   return 1;
 };
