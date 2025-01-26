@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <SDL2/SDL.h>
 #include "../vendor/imgui/imgui.h"
-#include "../vendor/data/Data.h"
+#include "STL.h"
 
 // Window Settings
 #define WINDOW_SIZES 800, 600 
@@ -12,7 +12,7 @@
 namespace PC {
 class Window{
   private:
-    Data::File window_settings = Data::File("settings/window_settings.ini");
+    File window_settings = File("settings/window_settings.ini");
     SDL_Window *window;
     SDL_Renderer *renderer;
     bool running = true;

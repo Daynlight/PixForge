@@ -4,7 +4,7 @@ PE::Gui::Gui(PC::Window *window)
   :window(window){
   Log::inf("Gui Created");
 
-  Data::Folder settings = Data::Folder("settings/");
+  PC::Folder settings = PC::Folder("settings/");
   if(!settings.exist()) {
     settings.createFolder();
     Log::war("settings folder Created");
@@ -117,6 +117,9 @@ void PE::Gui::renderGui(){
   
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
+}
+void PE::Gui::guiEvent(SDL_Event* event){
+  ImGui_ImplSDL2_ProcessEvent(event);
 };
 
 bool PE::GuiWindow::render(uint8_t type){

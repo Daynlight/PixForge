@@ -1,7 +1,7 @@
 #pragma once
 #include <array>
 #include "Tools.h"
-#include "../vendor/data/Data.h"
+#include "../Core/STL.h"
 #include "../Core/Window.h"
 #include "../vendor/imgui/imgui.h"
 #include "../vendor/imgui/imgui_impl_sdl2.h"
@@ -17,7 +17,7 @@ namespace PE{
   class Gui{
     private:
       PC::Window* window;
-      Data::File gui_window = Data::File("settings/gui_window.ini");
+      PC::File gui_window = PC::File("settings/gui_window.ini");
       inline void gui_window_open(uint8_t type);
       inline void renderDock();
       inline void renderTopBar();
@@ -25,5 +25,6 @@ namespace PE{
       Gui(PC::Window* window);
       ~Gui();
       void renderGui();
+      void guiEvent(SDL_Event* event);
   };
 };

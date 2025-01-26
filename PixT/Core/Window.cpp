@@ -1,7 +1,7 @@
 #include "Window.h"
 
 PC::Window::Window(const char* title) {
-  Data::Folder settings = Data::Folder("settings/");
+  Folder settings = Folder("settings/");
   if(!settings.exist()) settings.createFolder();
 
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
@@ -12,7 +12,7 @@ PC::Window::Window(const char* title) {
 PC::Window::~Window(){
   SDL_Rect window_location = getWindowSizesAndPosition();
   if(window_settings.isEmpty()) window_settings.createFile();
-  while(window_settings.size() > 0) window_settings.pop();
+  window_settings.clear();
   window_settings.push(std::to_string(window_location.x));
   window_settings.push(std::to_string(window_location.y));
   window_settings.push(std::to_string(window_location.w));

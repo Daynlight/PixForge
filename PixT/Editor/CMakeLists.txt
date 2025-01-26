@@ -31,9 +31,5 @@ add_custom_command(TARGET PixEditor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Core/
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/PixT/Core/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Core/
-
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/buildScripts/
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/PixT/buildScripts/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/buildScripts/
     COMMENT "Copying folders"
 )

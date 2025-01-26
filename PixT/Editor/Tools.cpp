@@ -8,22 +8,10 @@ void PE::Log::inf(const std::string text) { entry.emplace_back(3, "[Inf]: " + te
 
 void PE::Builder::buildGame(){
   Log::war("Building Game...");
-  #ifdef _WIN32
-    const char* buildCommand = "start /B cmd.exe /C buildScripts\\build.bat";
-  #else
-    const char* buildCommand = "bash buildScripts/build.sh &";
-  #endif
-  system(buildCommand);
   Log::inf("Game Built");
 }; 
 
 void PE::Builder::runGame(){
   Log::war("Game Running...");
-  #ifdef _WIN32
-    const char* runCommand = "start /B cmd.exe /C buildScripts\\run.bat";
-  #else
-    const char* runCommand = "bash buildScripts/run.sh &";
-  #endif
-  system(runCommand);
   Log::inf("Game Ran");
 };
