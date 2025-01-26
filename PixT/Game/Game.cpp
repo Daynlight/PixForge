@@ -1,4 +1,4 @@
-#include "PixGame.h"
+#include "Game.h"
 
 void PG::Game::run(){
   while (window.isRunning()){
