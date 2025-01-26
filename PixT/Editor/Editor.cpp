@@ -38,18 +38,18 @@ void PE::Editor::editorEvent(){
 
 void PE::Editor::buildGame(){
   #ifdef _WIN32
-    std::string buildCommand = "start /B cmd.exe /C buildScripts\\build.bat \""+game_title+"\"";
+    std::string buildCommand = "start /B cmd.exe /C buildScripts\\build.bat";
   #else
-    std::string buildCommand = "bash buildScripts/build.sh '"+game_title+"' &";
+    std::string buildCommand = "bash buildScripts/build.sh &";
   #endif
   system(buildCommand.c_str());
 }
 
 void PE::Editor::runGame(){
   #ifdef _WIN32
-    std::string runCommand = "start /B cmd.exe /C buildScripts\\run.bat \""+game_title+"\"";
+    std::string runCommand = "start /B cmd.exe /C buildScripts\\run.bat";
   #else
-    std::string runCommand = "bash buildScripts/run.sh '"+game_title+"' &";
+    std::string runCommand = "bash buildScripts/run.sh &";
   #endif
   system(runCommand.c_str());
 }

@@ -3,7 +3,6 @@
 #include "../vendor/imgui/imgui_impl_sdl2.h"
 #include "../vendor/imgui/imgui_impl_sdlrenderer2.h"
 #include "../vendor/data/Data.h"
-#include "../Assets/Settings.h"
 #include "../Assets/Assets.h"
 #include "../Core/Renderer.h"
 #include "../Core/Window.h"
@@ -18,7 +17,6 @@ namespace PE{
       void editorEvent();
       void buildGame(); 
       void runGame();
-      std::string game_title = GAME_TITLE;
     public:
       Editor();
       ~Editor();

@@ -1,8 +1,8 @@
 #pragma once
-#include "Settings.h"
 #include "../Assets/Assets.h"
 #include "../Core/Window.h"
 #include "../Core/Renderer.h"
+#include "CONFIG.h"
 
 namespace PG {
   class Game{

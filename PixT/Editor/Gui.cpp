@@ -26,8 +26,8 @@ void PE::Editor::imGuiDock(){
   ImGui::PopStyleVar(2);
   ImGui::PopStyleColor();
 
-  ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-  ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+  ImGuiID docspace_id = ImGui::GetID("MyDockSpace");
+  ImGui::DockSpace(docspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
 
   ImGui::End();
 }
