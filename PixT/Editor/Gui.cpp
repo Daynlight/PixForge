@@ -70,6 +70,22 @@ void PE::Gui::imGuiDock(){
   ImGui::End();
 }
 
+
+void PE::Gui::renderTopBar()
+{
+  if (ImGui::BeginMainMenuBar())  // This creates the top menu bar
+  {
+    if (ImGui::BeginMenu("Window")){
+        if (ImGui::MenuItem("Log")) { Log::inf("Log Window Opened"); gui_window_open(1); };
+        ImGui::EndMenu();
+    }
+
+    if(ImGui::Button("Build")) Builder::buildGame();
+    if(ImGui::Button("Run")) Builder::runGame();
+    ImGui::EndMainMenuBar();
+  }
+}
+
 void PE::Gui::renderGui(){
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame();
@@ -82,22 +98,6 @@ void PE::Gui::renderGui(){
   
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
-}
-
-void PE::Gui::renderTopBar()
-{
-    if (ImGui::BeginMainMenuBar())  // This creates the top menu bar
-    {
-        if(ImGui::Button("Run")) Builder::runGame();
-        if(ImGui::Button("Build")) Builder::buildGame();
-
-        if (ImGui::BeginMenu("Window")){
-            if (ImGui::MenuItem("Log")) { Log::inf("Log Window Opened"); gui_window_open(1); };
-            ImGui::EndMenu();
-        }
-
-        ImGui::EndMainMenuBar();
-    }
 }
 
 PE::GuiWindow::GuiWindow(uint8_t type) 
