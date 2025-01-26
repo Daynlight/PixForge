@@ -11,9 +11,19 @@ PC::Window::Window(const char* title)
   }
   else{
     window_settings.read();
-    window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
-      std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
-    if(!window) throw std::runtime_error("Can't create window");
+    
+    if(window_settings[4] == "1"){
+      window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
+        std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
+      if(!window) throw std::runtime_error("Can't create window");
+
+      SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    }
+    else{
+      window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
+        std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
+      if(!window) throw std::runtime_error("Can't create window");
+    }
   }
 
   renderer = SDL_CreateRenderer(window, 0, 0);
@@ -29,6 +39,7 @@ PC::Window::~Window(){
   window_settings.push(std::to_string(y));
   window_settings.push(std::to_string(w));
   window_settings.push(std::to_string(h));
+  window_settings.push(std::to_string(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0));
   window_settings.save();
 
   SDL_DestroyRenderer(renderer);
@@ -38,6 +49,18 @@ PC::Window::~Window(){
 
 void PC::Window::windowEvent(SDL_Event event){
   if(event.type == SDL_QUIT) running = false;
+  if(event.type == SDL_KEYDOWN){
+    if(event.key.keysym.sym == SDLK_F11){
+      if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0){
+        SDL_SetWindowFullscreen(window, 0);
+        SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+      }
+      else
+        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+
+      SDL_Delay(500);
+    }
+  }
 }
 
 bool PC::Window::isRunning() { return running; }
