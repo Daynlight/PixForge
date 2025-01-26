@@ -136,7 +136,9 @@ inline bool PE::GuiWindow::log(){
     };
     ImGui::EndMenuBar();
   };
-    
+  
+  ImGui::Text("Logs:");
+  ImGui::Separator();
   for(int i = Log::entry.size() - 1; i >= 0; i--) {
     if(Log::entry[i].first == 0) ImGui::TextColored(ImVec4(200,200,200,255), Log::entry[i].second.c_str());
     if(Log::entry[i].first == 1) ImGui::TextColored(ImVec4(255,255,0,255), Log::entry[i].second.c_str());
@@ -146,4 +148,4 @@ inline bool PE::GuiWindow::log(){
   ImGui::End();
 
   return 1;
-}
+};
