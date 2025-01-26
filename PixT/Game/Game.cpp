@@ -10,7 +10,7 @@ void PG::Game::run(){
 }
 
 void PG::Game::gameEvent(){
-    SDL_Event event;
+  SDL_Event event;
   while(SDL_PollEvent(&event)){
 
     window.windowEvent(event);
