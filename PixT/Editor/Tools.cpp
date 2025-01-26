@@ -1,26 +1,29 @@
 #include "Tools.h"
 
 std::vector<std::pair<char,std::string>> PE::Log::entry;
-void PE::Log::log(std::string text){ entry.emplace_back(0,"[Log]: "+text);};
-void PE::Log::war(std::string text){ entry.emplace_back(1,"[War]: "+text);};
-void PE::Log::err(std::string text){ entry.emplace_back(2,"[Err]: "+text);};
-void PE::Log::inf(std::string text){ entry.emplace_back(3,"[Inf]: "+text);};
+void PE::Log::log(const std::string text) { entry.emplace_back(0, "[Log]: " + text); };
+void PE::Log::war(const std::string text) { entry.emplace_back(1, "[War]: " + text); };
+void PE::Log::err(const std::string text) { entry.emplace_back(2, "[Err]: " + text); };
+void PE::Log::inf(const std::string text) { entry.emplace_back(3, "[Inf]: " + text); };
 
 void PE::Builder::buildGame(){
-  Log::war("Game Builded");
+  Log::war("Building Game...");
   #ifdef _WIN32
-    std::string buildCommand = "start /B cmd.exe /C buildScripts\\build.bat";
+    const char* buildCommand = "start /B cmd.exe /C buildScripts\\build.bat";
   #else
-    std::string buildCommand = "bash buildScripts/build.sh &";
+    const char* buildCommand = "bash buildScripts/build.sh &";
   #endif
-  system(buildCommand.c_str());
+  system(buildCommand);
+  Log::inf("Game Built");
 }; 
+
 void PE::Builder::runGame(){
-  Log::war("Game Runed");
+  Log::war("Game Running...");
   #ifdef _WIN32
-    std::string runCommand = "start /B cmd.exe /C buildScripts\\run.bat";
+    const char* runCommand = "start /B cmd.exe /C buildScripts\\run.bat";
   #else
-    std::string runCommand = "bash buildScripts/run.sh &";
+    const char* runCommand = "bash buildScripts/run.sh &";
   #endif
-  system(runCommand.c_str());
+  system(runCommand);
+  Log::inf("Game Ran");
 };

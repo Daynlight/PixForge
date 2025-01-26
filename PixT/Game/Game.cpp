@@ -2,7 +2,7 @@
 
 void PG::Game::run(){
   while (window.isRunning()){
-    PC::Renderer::background(&window, backgroundColour);
+    PC::Renderer::background(&window, whiteColour);
 
     gameEvent();
     SDL_RenderPresent(window.getRenderer());
