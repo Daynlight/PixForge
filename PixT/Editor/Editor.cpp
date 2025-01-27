@@ -1,5 +1,13 @@
 #include "Editor.h"
 
+PE::Editor::Editor(){
+  Log::inf("Editor Created");
+}
+
+PE::Editor::~Editor(){
+  Log::inf("Editor Destroyed");
+}
+
 void PE::Editor::run(){
   while (window.isRunning()){
     PC::Renderer::background(&window, backgroundColour);
@@ -7,8 +15,8 @@ void PE::Editor::run(){
     gui.renderGui();
     editorEvent();
     SDL_RenderPresent(window.getRenderer());
-  }
-}
+  };
+};
 
 void PE::Editor::editorEvent(){
   SDL_Event event;
@@ -20,5 +28,5 @@ void PE::Editor::editorEvent(){
 
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
-  }
-}
+  };
+};

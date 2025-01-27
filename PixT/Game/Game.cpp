@@ -2,7 +2,7 @@
 
 void PG::Game::run(){
   while (window.isRunning()){
-    PC::Renderer::background(&window, backgroundColour);
+    PC::Renderer::background(&window, whiteColour);
 
     gameEvent();
     SDL_RenderPresent(window.getRenderer());
@@ -10,7 +10,7 @@ void PG::Game::run(){
 }
 
 void PG::Game::gameEvent(){
-    SDL_Event event;
+  SDL_Event event;
   while(SDL_PollEvent(&event)){
 
     window.windowEvent(event);

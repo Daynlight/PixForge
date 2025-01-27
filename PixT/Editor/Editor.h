@@ -1,5 +1,4 @@
 #pragma once
-#include "../vendor/data/Data.h"
 #include "../Core/Window.h"
 #include "../Core/Renderer.h"
 #include "Settings.h"
@@ -13,6 +12,8 @@ namespace PE{
       Gui gui = Gui(&window);
       void editorEvent();
     public:
+      Editor();
+      ~Editor();
       void run();
   };
 };

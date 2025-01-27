@@ -1,8 +1,8 @@
 #pragma once
-#include "../vendor/imgui/imgui.h"
-#include "../vendor/data/Data.h"
-#include <SDL2/SDL.h>
 #include <stdexcept>
+#include <SDL2/SDL.h>
+#include "../vendor/imgui/imgui.h"
+#include "STL.h"
 
 // Window Settings
 #define WINDOW_SIZES 800, 600 
@@ -12,17 +12,20 @@
 namespace PC {
 class Window{
   private:
+    File window_settings = File("settings/window_settings.ini");
     SDL_Window *window;
     SDL_Renderer *renderer;
-    Data::File window_settings = Data::File("window_setings.ini");
-    const char* title = "";
     bool running = true;
+    inline void changeFullScreenDesktop();
+    inline void createWindow(const char* title);
+    inline void createRenderer();
   public:
     Window(const char* title);
     ~Window();
     bool isRunning();
+    void windowEvent(const SDL_Event event);
     SDL_Renderer* getRenderer();
     SDL_Window* getWindow();
-    void windowEvent(SDL_Event event);
-}; 
-}
+    SDL_Rect getWindowSizesAndPosition();
+  }; 
+};

@@ -1,15 +1,14 @@
 #pragma once
-#include <cstdlib>
-#include <vector>
+#include "../Core/STL.h"
 #include <string>
 
 namespace PE{
   struct Log{
-      static std::vector<std::pair<char,std::string>> entry;
-      static void log(std::string text);
-      static void war(std::string text);
-      static void err(std::string text);
-      static void inf(std::string text);
+    static PC::Vector<std::pair<char, std::string>> entry;
+    static void log(const std::string text);
+    static void war(const std::string text);
+    static void err(const std::string text);
+    static void inf(const std::string text);
   };
 
   class Builder{
