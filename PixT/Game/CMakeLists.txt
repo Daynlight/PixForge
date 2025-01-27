@@ -17,3 +17,5 @@ target_include_directories(PixGame PRIVATE ${SDL2_INCLUDE_DIRS})
 target_include_directories(PixGame PUBLIC "../vendor/data")
 target_include_directories(PixGame PUBLIC "../Core")
 target_include_directories(PixGame PUBLIC "../Assets")
+
+target_compile_definitions(PixGame PUBLIC BUILD)

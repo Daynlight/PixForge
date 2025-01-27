@@ -7,9 +7,14 @@
 namespace PG {
   class Game{
     private:
-      PC::Window window = PC::Window(GAME_TITLE);    
+      PC::Window *window;    
     public:
+      Game(PC::Window *window);
       void run();
+#ifdef BUILD
       void gameEvent();
+#else
+      void gameEvent(SDL_Event* event);
+#endif
   };
 };

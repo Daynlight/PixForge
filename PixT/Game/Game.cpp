@@ -1,18 +1,33 @@
 #include "Game.h"
 
-void PG::Game::run(){
-  while (window.isRunning()){
-    PC::Renderer::background(&window, whiteColour);
+PG::Game::Game(PC::Window* window) :window(window){};
 
-    gameEvent();
-    SDL_RenderPresent(window.getRenderer());
-  }
+void PG::Game::run(){
+  #ifdef BUILD
+    while (window->isRunning()){
+  #endif
+    PC::Renderer::background(window, 255, 20,12,255);
+
+
+
+    #ifdef BUILD
+      gameEvent();
+      SDL_RenderPresent(window->getRenderer());
+    }
+    #endif
 }
 
+#ifdef BUILD
 void PG::Game::gameEvent(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
+#else
+void PG::Game::gameEvent(SDL_Event* event){
+#endif
 
-    window.windowEvent(event);
+
+#ifdef BUILD
+    window->windowEvent(event);
   }
+#endif
 }
