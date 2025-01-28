@@ -12,7 +12,7 @@ void PE::Editor::run(){
   while (window.isRunning()){
     PC::Renderer::background(&window, backgroundColour);
 
-    game.run();
+    sandbox.run();
 
     gui.renderGui();
     editorEvent();
@@ -28,7 +28,7 @@ void PE::Editor::editorEvent(){
       if(event.key.keysym.sym == SDLK_F6) Builder::runGame();
     }
 
-    game.gameEvent(&event);
+    sandbox.gameEvent(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
   };

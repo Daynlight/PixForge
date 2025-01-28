@@ -1,7 +1,7 @@
 #pragma once
-#include "../Assets/Assets.h"
-#include "../Core/Window.h"
-#include "../Core/Renderer.h"
+#include "Assets/Assets.h"
+#include "../../Core/Window/Window.h"
+#include "../../Core/Render/Render.h"
 #include "CONFIG.h"
 
 namespace PG {
@@ -11,10 +11,6 @@ namespace PG {
     public:
       Game(PC::Window *window);
       void run();
-#ifdef BUILD
       void gameEvent();
-#else
-      void gameEvent(SDL_Event* event);
-#endif
   };
 };
