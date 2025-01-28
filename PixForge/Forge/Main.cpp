@@ -1,7 +1,7 @@
-#include "Editor.h"
+#include "Forge/Forge.h"
 
 int WinMain(){
-  PE::Editor editor;
-  editor.run();
+  PE::Forge forge;
+  forge.run();
   return 0;
 };
