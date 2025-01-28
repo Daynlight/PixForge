@@ -1,8 +1,8 @@
 #pragma once
 #include <stdexcept>
 #include <SDL2/SDL.h>
-#include "../vendor/imgui/imgui.h"
-#include "STL.h"
+#include "../../vendor/imgui/imgui.h"
+#include "../STL/STL.h"
 
 // Window Settings
 #define WINDOW_SIZES 800, 600 
