@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-file(GLOB_RECURSE src "*.cpp" "*.h")  
+file(GLOB_RECURSE src "**.cpp" "**.h")  
 file(GLOB_RECURSE core "../Core/*.cpp")
 file(GLOB_RECURSE game "../Game/Game/*.cpp" "../Game/Sandbox/*.cpp")
 list(FILTER game EXCLUDE REGEX ".*Main\\.cpp$")

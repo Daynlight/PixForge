@@ -1,26 +1,26 @@
-#include "Editor.h"
+#include "Forge.h"
 
-PE::Editor::Editor(){
-  Log::inf("Editor Created");
+PE::Forge::Forge(){
+  Log::inf("Forge Created");
 }
 
-PE::Editor::~Editor(){
-  Log::inf("Editor Destroyed");
+PE::Forge::~Forge(){
+  Log::inf("Forge Destroyed");
 }
 
-void PE::Editor::run(){
+void PE::Forge::run(){
   while (window.isRunning()){
     PC::Renderer::background(&window, backgroundColour);
 
     sandbox.run();
 
     gui.renderGui();
-    editorEvent();
+    events();
     SDL_RenderPresent(window.getRenderer());
   };
 };
 
-void PE::Editor::editorEvent(){
+void PE::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
     if(event.type == SDL_KEYDOWN){

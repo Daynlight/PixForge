@@ -1,10 +1,10 @@
 #pragma once
-#include "Tools.h"
-#include "../Core/STL/STL.h"
-#include "../Core/Window/Window.h"
-#include "../vendor/imgui/imgui.h"
-#include "../vendor/imgui/imgui_impl_sdl2.h"
-#include "../vendor/imgui/imgui_impl_sdlrenderer2.h"
+#include "../Tools/Tools.h"
+#include "../../Core/STL/STL.h"
+#include "../../Core/Window/Window.h"
+#include "../../vendor/imgui/imgui.h"
+#include "../../vendor/imgui/imgui_impl_sdl2.h"
+#include "../../vendor/imgui/imgui_impl_sdlrenderer2.h"
 
 namespace PE{
   struct GuiWindow{ 
