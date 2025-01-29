@@ -1,7 +1,7 @@
 #include "Forge/Forge.h"
 
 int WinMain(){
-  PE::Forge forge;
+  PF::Forge forge;
   forge.run();
   return 0;
 };

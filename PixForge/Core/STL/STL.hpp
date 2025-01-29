@@ -1,10 +1,10 @@
 #include "STL.h"
 
 template<typename T>
-PC::Vector<T>::Vector(const size_t capacity) :capacity(capacity) { data = new T[capacity]; }
+PF::Vector<T>::Vector(const size_t capacity) :capacity(capacity) { data = new T[capacity]; }
 
 template<typename T>
-void PC::Vector<T>::resize(){
+void PF::Vector<T>::resize(){
   capacity *= 2;
   T* temp = new T[capacity];
   for(size_t i = 0; i < _size; i++) temp[i] = data[i];
@@ -13,17 +13,17 @@ void PC::Vector<T>::resize(){
 }
 
 template<typename T>
-T &PC::Vector<T>::operator[](const size_t index) { return data[index]; }
+T &PF::Vector<T>::operator[](const size_t index) { return data[index]; }
 
 template<typename T>
-void PC::Vector<T>::push(const T line){
+void PF::Vector<T>::push(const T line){
   if(_size >= capacity) resize();
   data[_size] = line;
   _size++;
 }
 
 template<typename T>
-T PC::Vector<T>::pop(){
+T PF::Vector<T>::pop(){
   if(_size > 0){ 
       _size--;
       return data[_size-1];
@@ -32,7 +32,7 @@ T PC::Vector<T>::pop(){
 }
 
 template<typename T>
-void PC::Vector<T>::clear(){
+void PF::Vector<T>::clear(){
   delete[] data;
   data = new T[1];
   capacity = 1;
@@ -40,4 +40,4 @@ void PC::Vector<T>::clear(){
 }
 
 template<typename T>
-size_t PC::Vector<T>::size() { return _size; }
+size_t PF::Vector<T>::size() { return _size; }

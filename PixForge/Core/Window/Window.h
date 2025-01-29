@@ -1,15 +1,17 @@
 #pragma once
 #include <stdexcept>
-#include <SDL2/SDL.h>
-#include "../../vendor/imgui/imgui.h"
-#include "../STL/STL.h"
 
-// Window Settings
+#include "STL/STL.h"
+
+#include "SDL2/SDL.h"
+#include "imgui.h"
+
+// Default Window Settings
 #define WINDOW_SIZES 800, 600 
 #define WINDOW_POSITION SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
 #define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 
-namespace PC {
+namespace PF{
 class Window{
   private:
     File window_settings = File("settings/window_settings.ini");

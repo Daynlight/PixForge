@@ -1,6 +1,6 @@
 #include "Window.h"
 
-PC::Window::Window(const char* title) {
+PF::Window::Window(const char* title) {
   Folder settings = Folder("settings/");
   if(!settings.exist()) settings.createFolder();
 
@@ -9,7 +9,7 @@ PC::Window::Window(const char* title) {
   createRenderer();
 };
 
-PC::Window::~Window(){
+PF::Window::~Window(){
   SDL_Rect window_location = getWindowSizesAndPosition();
   if(window_settings.isEmpty()) window_settings.createFile();
   window_settings.clear();
@@ -25,7 +25,7 @@ PC::Window::~Window(){
   SDL_Quit();
 };
 
-inline void PC::Window::createWindow(const char *title){
+inline void PF::Window::createWindow(const char *title){
   if(window_settings.isEmpty()) {
     window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
     if(!window) throw std::runtime_error("Can't create window");
@@ -43,31 +43,31 @@ inline void PC::Window::createWindow(const char *title){
   };
 };
 
-inline void PC::Window::createRenderer(){
+inline void PF::Window::createRenderer(){
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
 };
 
-SDL_Rect PC::Window::getWindowSizesAndPosition(){
+SDL_Rect PF::Window::getWindowSizesAndPosition(){
   int x, y, w, h;
   SDL_GetWindowPosition(window ,&x, &y);
   SDL_GetWindowSize(window, &w, &h);
   return {x,y,w,h};
 };
 
-void PC::Window::windowEvent(const SDL_Event event){
+void PF::Window::windowEvent(const SDL_Event event){
   if(event.type == SDL_QUIT) running = false;
   if(event.type == SDL_KEYDOWN){
     if(event.key.keysym.sym == SDLK_F11) changeFullScreenDesktop();
   };
 };
 
-inline void PC::Window::changeFullScreenDesktop(){
+inline void PF::Window::changeFullScreenDesktop(){
   if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0) SDL_SetWindowFullscreen(window, 0);
   else SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
   SDL_Delay(500);
 };
 
-bool PC::Window::isRunning() { return running; }
-SDL_Renderer *PC::Window::getRenderer() { return renderer; }
-SDL_Window *PC::Window::getWindow() { return window; }
+bool PF::Window::isRunning() { return running; }
+SDL_Renderer *PF::Window::getRenderer() { return renderer; }
+SDL_Window *PF::Window::getWindow() { return window; }

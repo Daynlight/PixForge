@@ -1,7 +1,7 @@
 #pragma once
-#include "../Window/Window.h"
+#include "Window/Window.h"
 
-namespace PC{
+namespace PF{
   namespace Renderer{
     inline void background(Window* window, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
       SDL_SetRenderDrawColor(window->getRenderer(), r, g, b, a); 

@@ -1,17 +1,19 @@
 #pragma once
-#include "../../Core/Window/Window.h"
-#include "../../Core/Render/Render.h"
-#include "../../Game/Sandbox/Sandbox.h"
-#include "../Settings.h"
-#include "../Tools/Tools.h"
-#include "../Gui/Gui.h"
+#include "Window/Window.h"
+#include "Render/Render.h"
+#include "Gui/Gui.h"
 
-namespace PE{
+#include "Tools/Tools.h"
+#include "Settings.h"
+
+#include "Sandbox.h"
+
+namespace PF{
   class Forge{
     private:
-      PC::Window window = PC::Window("PixEditor");
+      Window window = Window("PixEditor");
       Gui gui = Gui(&window);
-      PG::Sandbox sandbox = PG::Sandbox(&window);
+      Sandbox sandbox = Sandbox(&window);
       void events();
     public:
       Forge();

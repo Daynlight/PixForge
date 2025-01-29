@@ -1,16 +1,16 @@
 #include "Forge.h"
 
-PE::Forge::Forge(){
+PF::Forge::Forge(){
   Log::inf("Forge Created");
 }
 
-PE::Forge::~Forge(){
+PF::Forge::~Forge(){
   Log::inf("Forge Destroyed");
 }
 
-void PE::Forge::run(){
+void PF::Forge::run(){
   while (window.isRunning()){
-    PC::Renderer::background(&window, backgroundColour);
+    Renderer::background(&window, backgroundColour);
 
     sandbox.run();
 
@@ -20,7 +20,7 @@ void PE::Forge::run(){
   };
 };
 
-void PE::Forge::events(){
+void PF::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
     if(event.type == SDL_KEYDOWN){

@@ -1,10 +1,10 @@
 #include "Gui.h"
 
-PE::Gui::Gui(PC::Window *window)
+PF::Gui::Gui(Window *window)
   :window(window){
   Log::inf("Gui Created");
 
-  PC::Folder settings = PC::Folder("settings/");
+  Folder settings = Folder("settings/");
   if(!settings.exist()) {
     settings.createFolder();
     Log::war("settings folder Created");
@@ -31,7 +31,7 @@ PE::Gui::Gui(PC::Window *window)
   else gui_window.read();
 };
 
-PE::Gui::~Gui(){
+PF::Gui::~Gui(){
   if(gui_window.isEmpty()) {
     gui_window.createFile();
     Log::war("gui_window file Created");
@@ -46,7 +46,7 @@ PE::Gui::~Gui(){
   Log::inf("Gui Destroyed");
 };
 
-inline void PE::Gui::gui_window_open(uint8_t type){
+inline void PF::Gui::gui_window_open(uint8_t type){
   bool found = 0;
   int free = -1;
   for(size_t i = 0; i < gui_window.size(); i++) {
@@ -65,7 +65,7 @@ inline void PE::Gui::gui_window_open(uint8_t type){
 };
 
 
-inline void PE::Gui::renderDock(){
+inline void PF::Gui::renderDock(){
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
   ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -89,7 +89,7 @@ inline void PE::Gui::renderDock(){
   ImGui::End();
 };
 
-inline void PE::Gui::renderTopBar(){
+inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
         if (ImGui::MenuItem("Log")) { gui_window_open(1); };
@@ -103,7 +103,7 @@ inline void PE::Gui::renderTopBar(){
   };
 };
 
-void PE::Gui::renderGui(){
+void PF::Gui::renderGui(){
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame();
   ImGui::NewFrame();
@@ -118,11 +118,11 @@ void PE::Gui::renderGui(){
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
 }
-void PE::Gui::guiEvent(SDL_Event* event){
+void PF::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
 };
 
-bool PE::GuiWindow::render(uint8_t type){
+bool PF::GuiWindow::render(uint8_t type){
   switch (type){
   case 1:
     return GuiWindow::log();
@@ -133,7 +133,7 @@ bool PE::GuiWindow::render(uint8_t type){
   };
 };
 
-inline bool PE::GuiWindow::log(){
+inline bool PF::GuiWindow::log(){
   ImGui::Begin("Logs", nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")){
@@ -157,7 +157,7 @@ inline bool PE::GuiWindow::log(){
   return 1;
 };
 
-inline bool PE::GuiWindow::textEditor() {
+inline bool PF::GuiWindow::textEditor() {
   ImGui::Begin("Text Editor", nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")){

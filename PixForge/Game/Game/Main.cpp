@@ -1,8 +1,8 @@
 #include "Game.h"
 
 int WinMain(){
-  PC::Window window = PC::Window(GAME_TITLE);
-  PG::Game game = PG::Game(&window);
+  PF::Window window = PF::Window(GAME_TITLE);
+  PF::Game game = PF::Game(&window);
   game.run();
   
   return 0;
