@@ -1,10 +1,12 @@
 #pragma once
-#include "../../Core/Window/Window.h"
-#include "../../Core/Render/Render.h"
-#include "../../Game/Sandbox/Sandbox.h"
-#include "../Settings.h"
-#include "../Tools/Tools.h"
-#include "../Gui/Gui.h"
+#include "Window/Window.h"
+#include "Render/Render.h"
+#include "Gui/Gui.h"
+
+#include "Tools/Tools.h"
+#include "Settings.h"
+
+#include "Sandbox.h"
 
 namespace PF{
   class Forge{

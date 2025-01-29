@@ -17,4 +17,8 @@ target_link_libraries(Game PRIVATE
     version
     setupapi
 )
-target_include_directories(Forge PRIVATE "../../vendor/SDL2/")
+
+target_include_directories(Game PRIVATE ".")
+target_include_directories(Game PRIVATE "../../Core/")
+target_include_directories(Game PRIVATE "../../vendor/SDL2/")
+target_include_directories(Game PRIVATE "../../vendor/imgui/")

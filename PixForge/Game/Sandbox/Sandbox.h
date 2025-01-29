@@ -1,6 +1,6 @@
 #pragma once
-#include "../../Core/Window/Window.h"
-#include "../../Core/Render/Render.h"
+#include "Window/Window.h"
+#include "Render/Render.h"
 
 namespace PF {
   class Sandbox{

@@ -22,4 +22,9 @@ target_link_libraries(Forge PRIVATE
     version
     setupapi
 )
+
+target_include_directories(Forge PRIVATE ".")
+target_include_directories(Forge PRIVATE "../Core/")
+target_include_directories(Forge PRIVATE "../Game/Sandbox/")
 target_include_directories(Forge PRIVATE "../vendor/SDL2/")
+target_include_directories(Forge PRIVATE "../vendor/imgui/")

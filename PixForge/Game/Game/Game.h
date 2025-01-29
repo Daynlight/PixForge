@@ -1,7 +1,8 @@
 #pragma once
+#include "Window/Window.h"
+#include "Render/Render.h"
+
 #include "Assets/Assets.h"
-#include "../../Core/Window/Window.h"
-#include "../../Core/Render/Render.h"
 #include "CONFIG.h"
 
 namespace PF {
