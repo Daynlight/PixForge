@@ -6,12 +6,12 @@
 #include "../Tools/Tools.h"
 #include "../Gui/Gui.h"
 
-namespace PE{
+namespace PF{
   class Forge{
     private:
-      PC::Window window = PC::Window("PixEditor");
+      Window window = Window("PixEditor");
       Gui gui = Gui(&window);
-      PG::Sandbox sandbox = PG::Sandbox(&window);
+      Sandbox sandbox = Sandbox(&window);
       void events();
     public:
       Forge();

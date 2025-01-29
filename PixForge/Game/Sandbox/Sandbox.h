@@ -2,12 +2,12 @@
 #include "../../Core/Window/Window.h"
 #include "../../Core/Render/Render.h"
 
-namespace PG {
+namespace PF {
   class Sandbox{
     private:
-      PC::Window *window;    
+      Window *window;    
     public:
-      Sandbox(PC::Window *window);
+      Sandbox(Window *window);
       void run();
       void gameEvent(SDL_Event* event);
   };

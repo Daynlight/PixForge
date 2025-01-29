@@ -11,7 +11,7 @@
 #define WINDOW_POSITION SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
 #define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 
-namespace PC {
+namespace PF {
 class Window{
   private:
     File window_settings = File("settings/window_settings.ini");

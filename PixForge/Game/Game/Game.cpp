@@ -1,10 +1,10 @@
 #include "Game.h"
 
-PG::Game::Game(PC::Window* window) :window(window){};
+PF::Game::Game(Window* window) :window(window){};
 
-void PG::Game::run(){
+void PF::Game::run(){
   while (window->isRunning()){
-  PC::Renderer::background(window, 255, 20,12,255);
+    Renderer::background(window, 255, 20,12,255);
 
 
 
@@ -13,7 +13,7 @@ void PG::Game::run(){
   };
 };
 
-void PG::Game::gameEvent(){
+void PF::Game::gameEvent(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
 
