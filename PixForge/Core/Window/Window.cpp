@@ -62,6 +62,7 @@ void PF::Window::windowEvent(const SDL_Event event){
   };
 };
 
+// [BUG] This function is not working properly
 inline void PF::Window::changeFullScreenDesktop(){
   if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0) SDL_SetWindowFullscreen(window, 0);
   else SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
