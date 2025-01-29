@@ -13,6 +13,6 @@ void PE::Builder::buildGame(){
 
 void PE::Builder::runGame(){
   Log::war("Game Running...");
-  system("start /B PixGame.exe");
+  system("start /B Game.exe");
   Log::inf("Game Ran");
 };

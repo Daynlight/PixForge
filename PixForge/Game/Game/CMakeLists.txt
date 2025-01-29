@@ -6,10 +6,15 @@ file(GLOB_RECURSE core "../../Core/**.cpp")
 project(Game VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 add_executable(Game WIN32 ${src} ${core})
 
-find_package(SDL2 REQUIRED)
-target_link_libraries(Game PRIVATE ${SDL2_LIBRARIES})
-target_link_libraries(Game PRIVATE ${libraries})
-
-target_include_directories(Game PRIVATE ${SDL2_INCLUDE_DIRS})
+file(GLOB_RECURSE libraries "../../vendor/SDL2/**.a")
+target_link_libraries(Game PRIVATE 
+    ${libraries}
+    winmm
+    imm32 
+    version
+    setupapi
+)
+target_include_directories(Forge PRIVATE "../../vendor/SDL2/")
