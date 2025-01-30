@@ -43,6 +43,7 @@ namespace PF{
       Folder(const std::string path);
       bool exist();
       void createFolder();
+      Vector<std::string> list();
   };
 };
 

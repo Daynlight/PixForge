@@ -11,9 +11,11 @@
 namespace PF{
   class Forge{
     private:
-      Window window = Window("PixEditor");
-      Gui gui = Gui(&window);
-      Sandbox sandbox = Sandbox(&window);
+      Window window;
+      Gui gui;
+      Sandbox sandbox;
+      Folder assets_folder = Folder("assets");
+      Vector<std::string> assets_list;
       void events();
     public:
       Forge();

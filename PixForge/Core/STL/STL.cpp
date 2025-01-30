@@ -43,4 +43,10 @@ PF::Folder::Folder(const std::string path) :path(path){}
 
 bool PF::Folder::exist(){ return std::filesystem::exists(path); };
 
-void PF::Folder::createFolder(){ std::filesystem::create_directory(path); };
+void PF::Folder::createFolder(){ std::filesystem::create_directory(path); }
+
+PF::Vector<std::string> PF::Folder::list(){
+  Vector<std::string> list;
+  for(auto& p: std::filesystem::directory_iterator(path)) list.push(p.path().string());
+  return list;
+};
