@@ -14,10 +14,12 @@
 namespace PF{
 class Window{
   private:
-    File window_settings = File("settings/window_settings.ini");
     SDL_Window *window;
     SDL_Renderer *renderer;
+  private:
+    File window_settings = File("settings/window_settings.ini");
     bool running = true;
+  private:
     inline void changeFullScreenDesktop();
     inline void createWindow(const char* title);
     inline void createRenderer();

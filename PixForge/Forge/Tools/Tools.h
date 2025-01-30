@@ -10,6 +10,7 @@ namespace PF{
     static void inf(const std::string text);
   };
 
+  //[FEATURE] Change remove build and run functions
   class Builder{
     public:
       static void buildGame();

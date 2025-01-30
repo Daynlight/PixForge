@@ -9,6 +9,6 @@ namespace PF {
     public:
       Sandbox(Window *window);
       void run();
-      void gameEvent(SDL_Event* event);
+      void event(SDL_Event* event);
   };
 };

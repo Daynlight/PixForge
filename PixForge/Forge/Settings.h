@@ -1,3 +1,3 @@
 #pragma once
 
-#define backgroundColour 255,255,255,255
+#define backgroundColour 25,25,25,255

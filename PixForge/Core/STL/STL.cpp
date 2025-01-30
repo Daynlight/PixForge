@@ -28,3 +28,5 @@ std::string &PF::Folder::operator[](const size_t index){ return files[index]; }
 bool PF::Folder::exist() { return std::filesystem::exists(path); };
 void PF::Folder::createFolder(){ std::filesystem::create_directory(path); }
 void PF::Folder::fetchList(){ files.clear(); for(auto& p: std::filesystem::directory_iterator(path)) files.push(p.path().string()); }
+std::string PF::Folder::getPath() { return path; }
+
