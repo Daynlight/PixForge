@@ -48,6 +48,7 @@ namespace PF{
       bool exist();
       void createFolder();
       void fetchList();
+      std::string getPath();
   };
 };
 

@@ -220,6 +220,17 @@ inline bool PF::GuiWindow::fileExplorer(Folder *folder){
       ImGui::End();
       return 0;
     };
+    ImGui::Text("Path: ");
+    ImGui::SameLine();
+    static char name[100] = "";
+    ImGui::InputText("##path", name, sizeof(name));
+    ImGui::SameLine();
+    if(ImGui::Button("new")){
+      File file = File(folder->getPath() + "/" + name);
+      if(file.isEmpty()) file.createFile();
+      folder->fetchList();
+      Log::inf("File Created");
+    };
     ImGui::EndMenuBar();
   };
   
