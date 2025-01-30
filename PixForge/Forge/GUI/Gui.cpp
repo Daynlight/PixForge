@@ -1,7 +1,7 @@
 #include "Gui.h"
 
-PF::Gui::Gui(Window *window)
-  :window(window){
+PF::Gui::Gui(Window *window, Folder* assets_folder)
+  :window(window), assets_folder(assets_folder){
   Log::inf("Gui Created");
 
   Folder settings = Folder("settings/");
@@ -94,6 +94,7 @@ inline void PF::Gui::renderTopBar(){
     if (ImGui::BeginMenu("Window")){
         if (ImGui::MenuItem("Log")) { gui_window_open(1); };
         if (ImGui::MenuItem("Text Editor")) { gui_window_open(2); };
+        if (ImGui::MenuItem("File Explorer")) { gui_window_open(3); };
         ImGui::EndMenu();
     };
 
@@ -112,7 +113,7 @@ void PF::Gui::renderGui(){
 
   for(size_t i = 0; i < gui_window.size(); i++) 
     if(gui_window[i] != "0")
-      if(!GuiWindow::render(std::stoi(gui_window[i])))
+      if(!GuiWindow::render(std::stoi(gui_window[i]), assets_folder))
         { gui_window[i] = "0"; Log::inf("Window Closed");};
   
   ImGui::Render();
@@ -122,7 +123,7 @@ void PF::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
 };
 
-bool PF::GuiWindow::render(uint8_t type){
+bool PF::GuiWindow::render(uint8_t type, Folder *folder){
   switch (type){
   case 1:
     return GuiWindow::log();
@@ -130,7 +131,11 @@ bool PF::GuiWindow::render(uint8_t type){
   case 2: 
     return GuiWindow::textEditor();
     break;
+  case 3:
+    return GuiWindow::fileExplorer(folder);
+    break;
   };
+  return false;
 };
 
 inline bool PF::GuiWindow::log(){
@@ -201,4 +206,28 @@ inline bool PF::GuiWindow::textEditor() {
 
   ImGui::End();
   return 1;
+}
+
+inline bool PF::GuiWindow::fileExplorer(Folder *folder){
+  ImGui::Begin("File Explorer", nullptr, ImGuiWindowFlags_MenuBar);
+  if(ImGui::BeginMenuBar()){
+    if(ImGui::Button("refresh")){
+      folder->fetchList();
+    };
+    ImGui::SameLine();
+    if(ImGui::Button("exit")){
+      ImGui::EndMenuBar();
+      ImGui::End();
+      return 0;
+    };
+    ImGui::EndMenuBar();
+  };
+  
+  ImGui::Text("Files:");
+  ImGui::Separator();
+  for(size_t i = 0; i < folder->files.size(); i++) {
+    ImGui::Text((*folder).files[i].c_str());
+  }
+  ImGui::End();
+  return true;
 };

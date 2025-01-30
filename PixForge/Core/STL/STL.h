@@ -40,9 +40,13 @@ namespace PF{
     private:
       std::string path;
     public:
+      Vector<std::string> files;
+    public:
       Folder(const std::string path);
+      std::string& operator[](const size_t index);
       bool exist();
       void createFolder();
+      void fetchList();
   };
 };
 
