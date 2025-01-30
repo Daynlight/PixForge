@@ -10,6 +10,7 @@ namespace PF{
       T* data;
       size_t _size = 0;
       size_t capacity = 1;
+    private:
       void resize();
     public:
       Vector(const size_t capacity = 1);

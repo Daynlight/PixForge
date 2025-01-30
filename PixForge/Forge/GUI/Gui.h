@@ -9,6 +9,7 @@
 #include "Tools/Tools.h"
 
 namespace PF{
+  //[FEATURE] Change Gui Windows System to be more dynamic and add interface class
   struct GuiWindow{ 
     static bool render(uint8_t type = 0, Folder* folder = nullptr);
     inline static bool log();
@@ -19,8 +20,10 @@ namespace PF{
   class Gui{
     private:
       Window* window;
-      File gui_window = File("settings/gui_window.ini");
       Folder *assets_folder;
+    private:
+      File gui_window = File("settings/gui_window.ini");
+    private:
       inline void gui_window_open(uint8_t type);
       inline void renderDock();
       inline void renderTopBar();

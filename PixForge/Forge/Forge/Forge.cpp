@@ -2,8 +2,8 @@
 
 PF::Forge::Forge()
   :window("PixEditor"), sandbox(&window), gui(&window, &assets_folder){
-
   Log::inf("Forge Created");
+
   if(!assets_folder.exist()){
     assets_folder.createFolder();
     Log::war("Assets folder created");
@@ -27,7 +27,7 @@ void PF::Forge::run(){
   };
 };
 
-void PF::Forge::events(){
+inline void PF::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
     if(event.type == SDL_KEYDOWN){
@@ -35,7 +35,7 @@ void PF::Forge::events(){
       if(event.key.keysym.sym == SDLK_F6) Builder::runGame();
     }
 
-    sandbox.gameEvent(&event);
+    sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
   };

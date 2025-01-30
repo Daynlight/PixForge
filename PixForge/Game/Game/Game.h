@@ -2,9 +2,6 @@
 #include "Window/Window.h"
 #include "Render/Render.h"
 
-#include "Assets/Assets.h"
-#include "CONFIG.h"
-
 namespace PF {
   class Game{
     private:
@@ -12,6 +9,6 @@ namespace PF {
     public:
       Game(Window *window);
       void run();
-      void gameEvent();
+      void event();
   };
 };

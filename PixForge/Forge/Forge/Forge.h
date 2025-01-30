@@ -12,10 +12,12 @@ namespace PF{
   class Forge{
     private:
       Window window;
-      Gui gui;
       Sandbox sandbox;
+      Gui gui;
+    private:
       Folder assets_folder = Folder("assets");
-      void events();
+    private:
+      inline void events();
     public:
       Forge();
       ~Forge();
