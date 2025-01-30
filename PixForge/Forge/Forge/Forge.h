@@ -15,7 +15,6 @@ namespace PF{
       Gui gui;
       Sandbox sandbox;
       Folder assets_folder = Folder("assets");
-      Vector<std::string> assets_list;
       void events();
     public:
       Forge();

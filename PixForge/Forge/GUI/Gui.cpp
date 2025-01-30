@@ -1,7 +1,7 @@
 #include "Gui.h"
 
-PF::Gui::Gui(Window *window, Vector<std::string> *assets_list)
-  :window(window), assets_list(assets_list){
+PF::Gui::Gui(Window *window, Folder* assets_folder)
+  :window(window), assets_folder(assets_folder){
   Log::inf("Gui Created");
 
   Folder settings = Folder("settings/");
@@ -113,7 +113,7 @@ void PF::Gui::renderGui(){
 
   for(size_t i = 0; i < gui_window.size(); i++) 
     if(gui_window[i] != "0")
-      if(!GuiWindow::render(std::stoi(gui_window[i]), assets_list))
+      if(!GuiWindow::render(std::stoi(gui_window[i]), assets_folder))
         { gui_window[i] = "0"; Log::inf("Window Closed");};
   
   ImGui::Render();
@@ -123,7 +123,7 @@ void PF::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
 };
 
-bool PF::GuiWindow::render(uint8_t type, Vector<std::string> *fileList){
+bool PF::GuiWindow::render(uint8_t type, Folder *folder){
   switch (type){
   case 1:
     return GuiWindow::log();
@@ -132,7 +132,7 @@ bool PF::GuiWindow::render(uint8_t type, Vector<std::string> *fileList){
     return GuiWindow::textEditor();
     break;
   case 3:
-    return GuiWindow::fileExplorer(fileList);
+    return GuiWindow::fileExplorer(folder);
     break;
   };
 };
@@ -207,9 +207,13 @@ inline bool PF::GuiWindow::textEditor() {
   return 1;
 }
 
-inline bool PF::GuiWindow::fileExplorer(Vector<std::string> *fileList){
+inline bool PF::GuiWindow::fileExplorer(Folder *folder){
   ImGui::Begin("File Explorer", nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
+    if(ImGui::Button("refresh")){
+      folder->fetchList();
+    };
+    ImGui::SameLine();
     if(ImGui::Button("exit")){
       ImGui::EndMenuBar();
       ImGui::End();
@@ -220,8 +224,8 @@ inline bool PF::GuiWindow::fileExplorer(Vector<std::string> *fileList){
   
   ImGui::Text("Files:");
   ImGui::Separator();
-  for(size_t i = 0; i < fileList->size(); i++) {
-    ImGui::Text((*fileList)[i].c_str());
+  for(size_t i = 0; i < folder->files.size(); i++) {
+    ImGui::Text((*folder).files[i].c_str());
   }
   ImGui::End();
   return true;

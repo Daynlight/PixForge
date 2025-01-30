@@ -1,18 +1,12 @@
 #include "STL.h"
 
-PF::File::File(const std::string path)
-  :path(path){
-  file.open(path, std::ios::in | std::ios::out);
-}
-
-PF::File::~File(){
-  file.close();
-}
-
+PF::File::File(const std::string path) :path(path){ file.open(path, std::ios::in | std::ios::out); }
+PF::File::~File(){ file.close(); }
 std::string& PF::File::operator[](const size_t index){ return data[index]; };
-
 bool PF::File::isEmpty(){ return file.peek() == std::ifstream::traits_type::eof(); }
-
+size_t PF::File::size(){ return data.size(); }
+void PF::File::push(const std::string line){ data.push(line); }
+void PF::File::clear(){ while(data.size() > 0) data.pop(); }
 void PF::File::createFile(){ file.open(path, std::ios::out); }
 
 void PF::File::read(){
@@ -20,16 +14,6 @@ void PF::File::read(){
   std::string line;
   while(std::getline(file, line)) data.push(line);
 }
-
-void PF::File::push(const std::string line){
-  data.push(line);
-}
-
-void PF::File::clear(){
-  while(data.size() > 0) data.pop();
-}
-
-size_t PF::File::size(){ return data.size(); }
 
 void PF::File::save(){
   file.close();
@@ -40,13 +24,7 @@ void PF::File::save(){
 }
 
 PF::Folder::Folder(const std::string path) :path(path){}
-
-bool PF::Folder::exist(){ return std::filesystem::exists(path); };
-
+std::string &PF::Folder::operator[](const size_t index){ return files[index]; }
+bool PF::Folder::exist() { return std::filesystem::exists(path); };
 void PF::Folder::createFolder(){ std::filesystem::create_directory(path); }
-
-PF::Vector<std::string> PF::Folder::list(){
-  Vector<std::string> list;
-  for(auto& p: std::filesystem::directory_iterator(path)) list.push(p.path().string());
-  return list;
-};
+void PF::Folder::fetchList(){ files.clear(); for(auto& p: std::filesystem::directory_iterator(path)) files.push(p.path().string()); }
