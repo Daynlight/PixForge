@@ -135,6 +135,7 @@ bool PF::GuiWindow::render(uint8_t type, Folder *folder){
     return GuiWindow::fileExplorer(folder);
     break;
   };
+  return false;
 };
 
 inline bool PF::GuiWindow::log(){
