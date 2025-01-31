@@ -45,11 +45,13 @@ inline void PF::Gui::loadGuiWindow(){
       std::string line = gui_window[i];
       char type = line[0];
       char id = line[1];
-      if(uint8_t(type)==1) UIs.push(new LogUI(uint8_t(id)));
-      if(uint8_t(type)==2) UIs.push(new FileExplorerUI(uint8_t(id), &UIs, Folder("assets/")));
-    }
-  }
-}
+      std::string path = line.substr(2);
+      if(uint8_t(type)==UI::Type::LOG) UIs.push(new LogUI(uint8_t(id)));
+      if(uint8_t(type)==UI::Type::FILE_EXPLORER) UIs.push(new FileExplorerUI(uint8_t(id), &UIs, Folder(path)));
+      if(uint8_t(type)==UI::Type::TEXT_EDITOR) UIs.push(new TextEditorUI(uint8_t(id), path));
+    };
+  };
+};
 
 inline void PF::Gui::saveGuiWindow(){
   if(gui_window.isEmpty()) {
@@ -61,12 +63,14 @@ inline void PF::Gui::saveGuiWindow(){
       std::string record = "";
       record += (char)UIs[i]->getType();
       record += (char)UIs[i]->getID();
+      if(UIs[i]->getType() == UI::Type::FILE_EXPLORER) record += static_cast<FileExplorerUI*>(UIs[i])->getFolder().getPath();
+      if(UIs[i]->getType() == UI::Type::TEXT_EDITOR) record += static_cast<TextEditorUI*>(UIs[i])->getPath();
       gui_window.push(record);
     }
   while(UIs.size() != 0) delete UIs.pop();
   
   gui_window.save();
-}
+};
 
 inline void PF::Gui::renderDock()
 {

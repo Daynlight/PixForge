@@ -6,8 +6,11 @@
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 
-#include "Tools/Tools.h"
-#include "UI.h"
+#include "Tools/Log.h"
+#include "UI/UI.h"
+#include "UI/LogUI.h"
+#include "UI/FileExplorerUI.h"
+#include "UI/TextEditorUI.h"
 
 namespace PF{
   class Gui{

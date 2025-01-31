@@ -3,7 +3,7 @@
 #include "Render/Render.h"
 #include "Gui/Gui.h"
 
-#include "Tools/Tools.h"
+#include "Tools/Log.h"
 #include "Settings.h"
 
 #include "Sandbox.h"
