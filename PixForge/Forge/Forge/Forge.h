@@ -15,8 +15,8 @@ namespace PF{
       Sandbox sandbox;
       Gui gui;
     private:
-      Folder assets_folder = Folder("assets");
-      Folder texture_folder = assets_folder.openFolder("texture");
+      Folder assets_folder = Folder("assets/");
+      Folder texture_folder = assets_folder.openFolder("texture/");
     private:
       inline void events();
     public:

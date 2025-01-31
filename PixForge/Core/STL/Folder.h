@@ -19,5 +19,6 @@ namespace PF{
       void fetchList();
       std::string getPath();
       Folder openFolder(const std::string folder);
+      Folder back();
   };
 };

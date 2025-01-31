@@ -72,8 +72,7 @@ inline void PF::Gui::saveGuiWindow(){
   gui_window.save();
 };
 
-inline void PF::Gui::renderDock()
-{
+inline void PF::Gui::renderDock() {
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
   ImGui::SetNextWindowPos(viewport->WorkPos);
