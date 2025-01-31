@@ -3,6 +3,8 @@
 
 #include "imgui.h"
 
+// [FEATURE] Refactor the UI classes to be better
+
 namespace PF{
   class UI{
     protected:
@@ -42,5 +44,4 @@ namespace PF{
       Type getType() override { return Type::FILE_EXPLORER; };
       bool render() override;
   };
-
 }
