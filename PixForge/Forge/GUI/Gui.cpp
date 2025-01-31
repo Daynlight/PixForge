@@ -1,9 +1,8 @@
 #include "Gui.h"
 
-PF::Gui::Gui(Window *window, Folder* assets_folder)
-  :window(window), assets_folder(assets_folder){
+PF::Gui::Gui(Window *window)
+  :window(window){
   Log::inf("Gui Created");
-
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -45,8 +44,7 @@ inline void PF::Gui::loadGuiWindow(){
     for(size_t i = 0; i < gui_window.size(); i++){
       std::string line = gui_window[i];
       if(line=="1") UIs.push(new LogUI());
-      if(line=="2") UIs.push(new TextEditorUI());
-      if(line=="3") UIs.push(new FileExplorerUI(assets_folder));
+      if(line=="2") UIs.push(new FileExplorerUI(&UIs, Folder("assets/")));
     }
   }
 }
@@ -57,7 +55,12 @@ inline void PF::Gui::saveGuiWindow(){
     Log::war("gui_window file Created");
   }
   gui_window.clear();
-  for(size_t i = 0; i < UIs.size(); i++) gui_window.push(std::to_string(UIs[i]->getType()));
+  bool assetsUnique = 1;
+  for(size_t i = 0; i < UIs.size(); i++) 
+    if(!UIs[i]->getType() == 2 || assetsUnique) {
+      gui_window.push(std::to_string(UIs[i]->getType()));
+      if(UIs[i]->getType() == 2) assetsUnique = 0;
+    }
   while(UIs.size() != 0) delete UIs.pop();
   
   gui_window.save();
@@ -92,8 +95,7 @@ inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
         if (ImGui::MenuItem("Log")) { UIs.push(new LogUI()); };
-        if (ImGui::MenuItem("Text Editor")) { UIs.push(new TextEditorUI()); };
-        if (ImGui::MenuItem("File Explorer")) { UIs.push(new FileExplorerUI(assets_folder)); };
+        if (ImGui::MenuItem("File Explorer [assets]")) { UIs.push(new FileExplorerUI(&UIs, Folder("assets/"))); };
         ImGui::EndMenu();
     };
 
