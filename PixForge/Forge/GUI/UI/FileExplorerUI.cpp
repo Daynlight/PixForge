@@ -51,7 +51,7 @@ inline void PF::FileExplorerUI::fileManager() {
 inline void PF::FileExplorerUI::mainMenuBar(){
   if(ImGui::BeginMenuBar()){
   ImGui::Text(folder.getPath().c_str());
-
+  
   ImGui::SameLine();
   if(ImGui::Button("back")) {
     folder = folder.back();
@@ -81,12 +81,13 @@ inline void PF::FileExplorerUI::renderFolder() {
       if(ImGui::Button((folder.files[i].second).c_str()))
         UIs->push(new TextEditorUI(generateUniqueID(UIs), folder.getPath() + folder.files[i].second));
 
-    ImGui::SameLine();
-    if(ImGui::Button(std::string("delete " + folder.files[i].second).c_str())){
-      folder.remove(folder.files[i].second);
-      folder.fetchList();
-      break;
-      Log::inf("File deleted: "+std::string(folder.getPath() + folder.files[i].second));
+    if (ImGui::BeginPopupContextItem(std::to_string(i).c_str())) {
+      if (ImGui::MenuItem("Delete")) {
+        Log::inf("File deleted: " + std::string(folder.getPath() + folder.files[i].second));
+        folder.remove(folder.files[i].second);
+        folder.fetchList();
+      }
+      ImGui::EndPopup();
     };
   };
 };
