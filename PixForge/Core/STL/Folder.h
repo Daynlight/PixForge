@@ -1,6 +1,6 @@
 #pragma once
-#include "STL/Vector/Vector.h"
-#include "STL/File/File.h"
+#include "Vector.h"
+#include "File.h"
 #include <filesystem>
 
 namespace PF{
