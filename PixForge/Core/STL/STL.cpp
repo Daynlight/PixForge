@@ -27,7 +27,9 @@ PF::Folder::Folder(const std::string path) :path(path){}
 std::pair<char, std::string> &PF::Folder::operator[](const size_t index){ return files[index]; }
 bool PF::Folder::exist() { return std::filesystem::exists(path); };
 void PF::Folder::createFolder(){ std::filesystem::create_directory(path); }
-void PF::Folder::fetchList(){ 
+PF::File PF::Folder::openFile(const std::string file) { return File(path + "/" + file); }
+void PF::Folder::fetchList()
+{
   files.clear(); 
   for(auto& p: std::filesystem::directory_iterator(path)){
     if(p.is_directory()) files.push(std::pair<char, std::string>('d', p.path().filename().string()));

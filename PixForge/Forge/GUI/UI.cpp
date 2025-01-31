@@ -81,6 +81,33 @@ bool PF::FileExplorerUI::render(){
     ImGui::EndMenuBar();
   };
 
+  if(ImGui::Button("new folder")) createFolder = true;
+    if(createFolder){ 
+      ImGui::SameLine();    
+      ImGui::InputText("##folder", folderName, IM_ARRAYSIZE(folderName));
+      ImGui::SameLine();
+      if(ImGui::Button("create folder")){
+        folder.openFolder(folderName).createFolder();
+        folder.fetchList();
+        createFolder = false;
+        Log::inf("Folder created: "+std::string(folderName) + "/");
+      };
+      ImGui::NewLine();
+    };
+    ImGui::SameLine();
+    if(ImGui::Button("new file")) createFile = true;
+    if(createFile){   
+      ImGui::SameLine();   
+      ImGui::InputText("##file", fileName, IM_ARRAYSIZE(fileName));
+      ImGui::SameLine();
+      if(ImGui::Button("create file")){
+        folder.openFile(fileName).createFile();
+        folder.fetchList();
+        createFile = false;
+        Log::inf("File created: "+std::string(fileName));
+      };
+    };
+
   ImGui::Text("Files:");
   ImGui::Separator();
   for(size_t i = 0; i < folder.files.size(); i++) {

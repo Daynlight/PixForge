@@ -50,6 +50,8 @@ namespace PF{
       const uint8_t ID;
       Folder folder;
       Vector<UI*> *UIs;
+      char folderName[128] = "", fileName[128] = "";
+      bool createFolder = false, createFile = false;
     public:
       FileExplorerUI(const uint8_t ID, Vector<UI*> *UIs, Folder folder);
       uint8_t getType() override { return Type::FILE_EXPLORER; };

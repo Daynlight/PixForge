@@ -48,6 +48,7 @@ namespace PF{
       std::pair<char, std::string>& operator[](const size_t index);
       bool exist();
       void createFolder();
+      File openFile(const std::string file);
       void fetchList();
       std::string getPath();
       Folder openFolder(const std::string folder);
