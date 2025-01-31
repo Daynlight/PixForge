@@ -4,6 +4,10 @@
 #include "Tools/Log.h"
 #include "GUI/UI/TextEditorUI.h"
 
+#define FILE_BOX_WIDTH 100
+#define FILE_BOX_BORDER 1
+#define FILE_BOX_BORDER_ROUNDING 19
+
 namespace PF{
   class FileExplorerUI : public UI{
   private:

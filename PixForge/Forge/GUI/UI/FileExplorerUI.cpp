@@ -69,27 +69,47 @@ inline void PF::FileExplorerUI::renderFolder() {
   ImGui::Text("Files:");
   ImGui::Separator();
   
-  for(size_t i = 0; i < folder.files.size(); i++) {
-    if(folder.files[i].first == 'd'){
-      if(ImGui::Button((folder.files[i].second).c_str())){
-        folder = folder.openFolder(folder.files[i].second);
-        folder.fetchList();
-        break;
-      };
-    }
-    else 
-      if(ImGui::Button((folder.files[i].second).c_str()))
-        UIs->push(new TextEditorUI(generateUniqueID(UIs), folder.getPath() + folder.files[i].second));
+  // make dynamic columns
+  int columns = std::max(1, static_cast<int>(ImGui::GetWindowWidth() / FILE_BOX_WIDTH));
+  ImGui::Columns(columns, nullptr, false);
 
-    if (ImGui::BeginPopupContextItem(std::to_string(i).c_str())) {
+  for(size_t i = 0; i < folder.files.size(); i++) {
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, FILE_BOX_BORDER_ROUNDING);
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, FILE_BOX_BORDER);
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
+
+    ImGui::Button((folder.files[i].second).c_str(), ImVec2(FILE_BOX_WIDTH - FILE_BOX_BORDER_ROUNDING, FILE_BOX_WIDTH - FILE_BOX_BORDER_ROUNDING));
+
+    ImGui::PopStyleColor();
+    ImGui::PopStyleVar(2);
+    
+    if (ImGui::IsItemClicked(1)) {
+      ImGui::OpenPopup(std::to_string(i).c_str());
+    }
+
+    if (ImGui::BeginPopup(std::to_string(i).c_str())) {
       if (ImGui::MenuItem("Delete")) {
         Log::inf("File deleted: " + std::string(folder.getPath() + folder.files[i].second));
         folder.remove(folder.files[i].second);
         folder.fetchList();
       }
       ImGui::EndPopup();
-    };
-  };
+    }
+
+    if (ImGui::IsItemClicked(0)) {
+      if(folder.files[i].first == 'd') {
+        folder = folder.openFolder(folder.files[i].second);
+        folder.fetchList();
+        break;
+      } else {
+        UIs->push(new TextEditorUI(generateUniqueID(UIs), folder.getPath() + folder.files[i].second));
+      }
+    }
+
+    ImGui::NextColumn();
+  }
+
+  ImGui::Columns(1);
 };
 
 bool PF::FileExplorerUI::render(){
