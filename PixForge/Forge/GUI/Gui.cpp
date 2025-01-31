@@ -43,8 +43,10 @@ inline void PF::Gui::loadGuiWindow(){
     gui_window.read();
     for(size_t i = 0; i < gui_window.size(); i++){
       std::string line = gui_window[i];
-      if(line=="1") UIs.push(new LogUI());
-      if(line=="2") UIs.push(new FileExplorerUI(&UIs, Folder("assets/")));
+      char type = line[0];
+      char id = line[1];
+      if(uint8_t(type)==1) UIs.push(new LogUI(uint8_t(id)));
+      if(uint8_t(type)==2) UIs.push(new FileExplorerUI(uint8_t(id), &UIs, Folder("assets/")));
     }
   }
 }
@@ -55,11 +57,11 @@ inline void PF::Gui::saveGuiWindow(){
     Log::war("gui_window file Created");
   }
   gui_window.clear();
-  bool assetsUnique = 1;
-  for(size_t i = 0; i < UIs.size(); i++) 
-    if(!UIs[i]->getType() == 2 || assetsUnique) {
-      gui_window.push(std::to_string(UIs[i]->getType()));
-      if(UIs[i]->getType() == 2) assetsUnique = 0;
+  for(size_t i = 0; i < UIs.size(); i++) {
+      std::string record = "";
+      record += (char)UIs[i]->getType();
+      record += (char)UIs[i]->getID();
+      gui_window.push(record);
     }
   while(UIs.size() != 0) delete UIs.pop();
   
@@ -94,8 +96,8 @@ inline void PF::Gui::renderDock()
 inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) { UIs.push(new LogUI()); };
-        if (ImGui::MenuItem("File Explorer [assets]")) { UIs.push(new FileExplorerUI(&UIs, Folder("assets/"))); };
+        if (ImGui::MenuItem("Log")) { UIs.push(new LogUI(PF::UI::generateUniqueID(&UIs))); };
+        if (ImGui::MenuItem("File Explorer [assets]")) { UIs.push(new FileExplorerUI(PF::UI::generateUniqueID(&UIs), &UIs, Folder("assets/"))); };
         ImGui::EndMenu();
     };
 

@@ -1,8 +1,13 @@
 #include "UI.h"
 
-bool PF::LogUI::render()
-{
-  ImGui::Begin(("Logs("+windowID+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+uint8_t PF::UI::generateUniqueID(Vector<UI*> *UIs){
+  uint8_t ID = 0;
+  for(size_t i = 0; i < UIs->size(); i++) if((*UIs)[i]->getID() == ID) ID++;
+  return ID;
+};
+
+bool PF::LogUI::render() {
+  ImGui::Begin(("Logs("+std::to_string(ID)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")){
       ImGui::EndMenuBar();
@@ -25,21 +30,9 @@ bool PF::LogUI::render()
   return 1;
 };
 
-void PF::TextEditorUI::read(){
-  std::ifstream file(path);
-  std::string line;
-  std::string temptext = "";
-  while(std::getline(file, line)) temptext += line + "\n";
-  strcpy(text, temptext.c_str());
-  file.close();
-}
-
-PF::TextEditorUI::TextEditorUI(std::string path) : path(path){
-  read();
-}
-
+PF::TextEditorUI::TextEditorUI(const uint8_t ID,std::string path) : ID(ID), path(path) { read(); }
 bool PF::TextEditorUI::render() {
-  ImGui::Begin(("Text Editor("+windowID+") ["+path+"]").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+  ImGui::Begin(("Text Editor("+std::to_string(ID)+") ["+path+"]").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")){
       ImGui::EndMenuBar();
@@ -49,8 +42,6 @@ bool PF::TextEditorUI::render() {
     ImGui::EndMenuBar();
   };
 
-  static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput;
-
   if(ImGui::Button("read")) read();
   ImGui::SameLine();
   if(ImGui::Button("save")){  
@@ -59,18 +50,26 @@ bool PF::TextEditorUI::render() {
     file.close();
   };
   
-  ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), flags);
+  ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), ImGuiInputTextFlags_AllowTabInput);
 
   ImGui::End();
   return 1;
+};
+void PF::TextEditorUI::read(){
+  std::ifstream file(path);
+  std::string line;
+  std::string temptext = "";
+  while(std::getline(file, line)) temptext += line + "\n";
+  strcpy(text, temptext.c_str());
+  file.close();
 }
 
-PF::FileExplorerUI::FileExplorerUI(Vector<UI*> *UIs, Folder folder) : UIs(UIs), folder(folder) { 
+PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<UI*> *UIs, Folder folder) : ID(ID), UIs(UIs), folder(folder) { 
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
 }
 bool PF::FileExplorerUI::render(){
-  ImGui::Begin(("File Explorer("+windowID+") ["+folder.getPath()+"]").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+  ImGui::Begin(("File Explorer("+std::to_string(ID)+") ["+folder.getPath()+"]").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
     if(ImGui::BeginMenuBar()){
     if(ImGui::Button("refresh")) folder.fetchList();
     ImGui::SameLine();
@@ -82,15 +81,42 @@ bool PF::FileExplorerUI::render(){
     ImGui::EndMenuBar();
   };
 
+  if(ImGui::Button("new folder")) createFolder = true;
+    if(createFolder){ 
+      ImGui::SameLine();    
+      ImGui::InputText("##folder", folderName, IM_ARRAYSIZE(folderName));
+      ImGui::SameLine();
+      if(ImGui::Button("create folder")){
+        folder.openFolder(folderName).createFolder();
+        folder.fetchList();
+        createFolder = false;
+        Log::inf("Folder created: "+std::string(folderName) + "/");
+      };
+      ImGui::NewLine();
+    };
+    ImGui::SameLine();
+    if(ImGui::Button("new file")) createFile = true;
+    if(createFile){   
+      ImGui::SameLine();   
+      ImGui::InputText("##file", fileName, IM_ARRAYSIZE(fileName));
+      ImGui::SameLine();
+      if(ImGui::Button("create file")){
+        folder.openFile(fileName).createFile();
+        folder.fetchList();
+        createFile = false;
+        Log::inf("File created: "+std::string(fileName));
+      };
+    };
+
   ImGui::Text("Files:");
   ImGui::Separator();
   for(size_t i = 0; i < folder.files.size(); i++) {
     if(folder.files[i].first == 'd'){
       if(ImGui::Button((folder.files[i].second + "/").c_str())) 
-        UIs->push(new FileExplorerUI(UIs, Folder(folder.getPath() + folder.files[i].second + "/")));
+        UIs->push(new FileExplorerUI(generateUniqueID(UIs), UIs, Folder(folder.getPath() + folder.files[i].second + "/")));
     }
     else if(ImGui::Button(folder.files[i].second.c_str()))
-      UIs->push(new TextEditorUI(folder.getPath()+ folder.files[i].second));
+      UIs->push(new TextEditorUI(generateUniqueID(UIs), folder.getPath()+ folder.files[i].second));
   };
   ImGui::End();
   return true;
