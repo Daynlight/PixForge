@@ -1,4 +1,4 @@
-#include "Tools.h"
+#include "Log.h"
 
 PF::Vector<std::pair<char,std::string>> PF::Log::entry;
 void PF::Log::log(const std::string text) { entry.push(std::pair<char, std::string>(0, "[Log]: " + text)); };

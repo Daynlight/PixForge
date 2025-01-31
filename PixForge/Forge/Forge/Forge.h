@@ -1,9 +1,9 @@
 #pragma once
 #include "Window/Window.h"
-#include "Render/Render.h"
+#include "Renderer/Renderer.h"
 #include "Gui/Gui.h"
 
-#include "Tools/Tools.h"
+#include "Tools/Log.h"
 #include "Settings.h"
 
 #include "Sandbox.h"
@@ -15,8 +15,8 @@ namespace PF{
       Sandbox sandbox;
       Gui gui;
     private:
-      Folder assets_folder = Folder("assets");
-      Folder texture_folder = assets_folder.openFolder("texture");
+      Folder assets_folder = Folder("assets/");
+      Folder texture_folder = assets_folder.openFolder("texture/");
     private:
       inline void events();
     public:

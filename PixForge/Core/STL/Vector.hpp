@@ -1,7 +1,10 @@
-#include "STL.h"
+#include "Vector.h"
 
 template<typename T>
 PF::Vector<T>::Vector(const size_t capacity) :capacity(capacity) { data = new T[capacity]; }
+
+template<typename T>
+size_t PF::Vector<T>::size() { return _size; };
 
 template<typename T>
 void PF::Vector<T>::resize(){
@@ -10,17 +13,14 @@ void PF::Vector<T>::resize(){
   for(size_t i = 0; i < _size; i++) temp[i] = data[i];
   delete[] data;
   data = temp;
-}
-
-template<typename T>
-T &PF::Vector<T>::operator[](const size_t index) { return data[index]; }
+};
 
 template<typename T>
 void PF::Vector<T>::push(const T line){
   if(_size >= capacity) resize();
   data[_size] = line;
   _size++;
-}
+};
 
 template<typename T>
 T PF::Vector<T>::pop(){
@@ -29,7 +29,7 @@ T PF::Vector<T>::pop(){
       return data[_size];
     }
   return T();
-}
+};
 
 template<typename T>
 void PF::Vector<T>::clear(){
@@ -37,7 +37,7 @@ void PF::Vector<T>::clear(){
   data = new T[1];
   capacity = 1;
   _size = 0;
-}
+};
 
 template <typename T>
 inline T PF::Vector<T>::remove(const size_t index){
@@ -45,7 +45,7 @@ inline T PF::Vector<T>::remove(const size_t index){
   for(size_t i = index; i < _size - 1; i++) data[i] = data[i + 1];
   _size--;
   return temp;
-}
+};
 
 template<typename T>
-size_t PF::Vector<T>::size() { return _size; }
+T &PF::Vector<T>::operator[](const size_t index){ return data[index]; };
