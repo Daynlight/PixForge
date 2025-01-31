@@ -14,7 +14,6 @@ namespace PF{
     private:
       Window* window;
       Vector<UI*> UIs;
-      Folder *assets_folder;
     private:
       File gui_window = File("settings/gui_window.ini");
       inline void loadGuiWindow();
@@ -23,7 +22,7 @@ namespace PF{
       inline void renderDock();
       inline void renderTopBar();
     public:
-      Gui(Window* window, Folder *assets_folder);
+      Gui(Window* window);
       ~Gui();
       void renderGui();
       void guiEvent(SDL_Event* event);

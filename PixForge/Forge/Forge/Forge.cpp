@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), sandbox(&window), gui(&window, &assets_folder){
+  :window("PixEditor"), sandbox(&window), gui(&window){
   Log::inf("Forge Created");
 
   if(!assets_folder.exist()){
@@ -9,6 +9,12 @@ PF::Forge::Forge()
     Log::war("Assets folder created");
   }
   assets_folder.fetchList();
+
+  if(!texture_folder.exist()){
+    texture_folder.createFolder();
+    Log::war("Texture folder created");
+  }
+  texture_folder.fetchList();
 }
 
 PF::Forge::~Forge(){

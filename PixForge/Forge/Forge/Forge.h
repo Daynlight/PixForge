@@ -16,6 +16,7 @@ namespace PF{
       Gui gui;
     private:
       Folder assets_folder = Folder("assets");
+      Folder texture_folder = assets_folder.openFolder("texture");
     private:
       inline void events();
     public:
