@@ -4,11 +4,6 @@ PF::Gui::Gui(Window *window, Folder* assets_folder)
   :window(window), assets_folder(assets_folder){
   Log::inf("Gui Created");
 
-  Folder settings = Folder("settings/");
-  if(!settings.exist()) {
-    settings.createFolder();
-    Log::war("settings folder Created");
-  };
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -24,19 +19,17 @@ PF::Gui::Gui(Window *window, Folder* assets_folder)
   ImGui_ImplSDLRenderer2_Init(window->getRenderer());
   Log::inf("ImGui Initialized");
 
-  if(gui_window.isEmpty()) {
-    gui_window.createFile();
-    Log::war("gui_window file Created");
-  }
-  else gui_window.read();
+  Folder settings = Folder("settings/");
+  if(!settings.exist()) {
+    settings.createFolder();
+    Log::war("settings folder Created");
+  };
+
+  loadGuiWindow();
 };
 
 PF::Gui::~Gui(){
-  if(gui_window.isEmpty()) {
-    gui_window.createFile();
-    Log::war("gui_window file Created");
-  }
-  gui_window.save();
+  saveGuiWindow();
   Log::inf("gui_window settings Saved");
 
   ImGui_ImplSDLRenderer2_Shutdown();
@@ -46,26 +39,32 @@ PF::Gui::~Gui(){
   Log::inf("Gui Destroyed");
 };
 
-inline void PF::Gui::gui_window_open(uint8_t type){
-  bool found = 0;
-  int free = -1;
-  for(size_t i = 0; i < gui_window.size(); i++) {
-    if(free == -1 && gui_window[i] == "0") free = i;
-    if(std::stoi(gui_window[i]) == type) found = 1;
-  };
-  
-  if(found == 0){
-    if(free >= 0 && free < gui_window.size()) gui_window[free] = std::to_string(type);
-    else gui_window.push(std::to_string(type));
-    Log::inf("Window Opened"); 
+inline void PF::Gui::loadGuiWindow(){
+  if(!gui_window.isEmpty()){
+    gui_window.read();
+    for(size_t i = 0; i < gui_window.size(); i++){
+      std::string line = gui_window[i];
+      if(line=="1") UIs.push(new LogUI());
+      if(line=="2") UIs.push(new TextEditorUI());
+      if(line=="3") UIs.push(new FileExplorerUI(assets_folder));
+    }
   }
-  else{
-    Log::war("Window Already is Open");
-  };
-};
+}
 
+inline void PF::Gui::saveGuiWindow(){
+  if(gui_window.isEmpty()) {
+    gui_window.createFile();
+    Log::war("gui_window file Created");
+  }
+  gui_window.clear();
+  for(size_t i = 0; i < UIs.size(); i++) gui_window.push(std::to_string(UIs[i]->getType()));
+  while(UIs.size() != 0) delete UIs.pop();
+  
+  gui_window.save();
+}
 
-inline void PF::Gui::renderDock(){
+inline void PF::Gui::renderDock()
+{
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
   ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -92,9 +91,9 @@ inline void PF::Gui::renderDock(){
 inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) { gui_window_open(1); };
-        if (ImGui::MenuItem("Text Editor")) { gui_window_open(2); };
-        if (ImGui::MenuItem("File Explorer")) { gui_window_open(3); };
+        if (ImGui::MenuItem("Log")) { UIs.push(new LogUI()); };
+        if (ImGui::MenuItem("Text Editor")) { UIs.push(new TextEditorUI()); };
+        if (ImGui::MenuItem("File Explorer")) { UIs.push(new FileExplorerUI(assets_folder)); };
         ImGui::EndMenu();
     };
 
@@ -111,134 +110,13 @@ void PF::Gui::renderGui(){
 
   renderDock();
 
-  for(size_t i = 0; i < gui_window.size(); i++) 
-    if(gui_window[i] != "0")
-      if(!GuiWindow::render(std::stoi(gui_window[i]), assets_folder))
-        { gui_window[i] = "0"; Log::inf("Window Closed");};
+  for(size_t i = 0; i < UIs.size(); i++) 
+    if(!UIs[i]->render())
+      { delete UIs.remove(i); Log::inf("Window Closed");};
   
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
 }
 void PF::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
-};
-
-bool PF::GuiWindow::render(uint8_t type, Folder *folder){
-  switch (type){
-  case 1:
-    return GuiWindow::log();
-    break;
-  case 2: 
-    return GuiWindow::textEditor();
-    break;
-  case 3:
-    return GuiWindow::fileExplorer(folder);
-    break;
-  };
-  return false;
-};
-
-inline bool PF::GuiWindow::log(){
-  ImGui::Begin("Logs", nullptr, ImGuiWindowFlags_MenuBar);
-  if(ImGui::BeginMenuBar()){
-    if(ImGui::Button("exit")){
-      ImGui::EndMenuBar();
-      ImGui::End();
-      return 0;
-    };
-    ImGui::EndMenuBar();
-  };
-  
-  ImGui::Text("Logs:");
-  ImGui::Separator();
-  for(int i = Log::entry.size() - 1; i >= 0; i--) {
-    if(Log::entry[i].first == 0) ImGui::TextColored(ImVec4(200,200,200,255), Log::entry[i].second.c_str());
-    if(Log::entry[i].first == 1) ImGui::TextColored(ImVec4(255,255,0,255), Log::entry[i].second.c_str());
-    if(Log::entry[i].first == 2) ImGui::TextColored(ImVec4(255,0,0,255), Log::entry[i].second.c_str());
-    if(Log::entry[i].first == 3) ImGui::TextColored(ImVec4(0,255,200,255), Log::entry[i].second.c_str());
-  }
-  ImGui::End();
-
-  return 1;
-};
-
-inline bool PF::GuiWindow::textEditor() {
-  ImGui::Begin("Text Editor", nullptr, ImGuiWindowFlags_MenuBar);
-  if(ImGui::BeginMenuBar()){
-    if(ImGui::Button("exit")){
-      ImGui::EndMenuBar();
-      ImGui::End();
-      return 0;
-    };
-    ImGui::EndMenuBar();
-  };
-
-  ImGui::Text("Text Editor:");
-  ImGui::Text("Path: ");
-  ImGui::SameLine();
-
-  static char path[256] = "";
-  bool update = false;
-  if (ImGui::InputText("##path", path, sizeof(path))) update = true;
-  ImGui::Separator();
-
-  static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput;
-  static char text[1024 * 16] = "";
-
-  if(ImGui::Button("read") || update){  
-    std::ifstream file(path);
-    std::string line;
-    std::string temptext = "";
-    while(std::getline(file, line)) temptext += line + "\n";
-    strcpy(text, temptext.c_str());
-    update = false;
-    file.close();
-  };
-  ImGui::SameLine();
-  if(ImGui::Button("save")){  
-    std::ofstream file(path);
-    file << text;
-    file.close();
-  };
-  
-  ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), flags);
-
-
-  ImGui::End();
-  return 1;
-}
-
-inline bool PF::GuiWindow::fileExplorer(Folder *folder){
-  ImGui::Begin("File Explorer", nullptr, ImGuiWindowFlags_MenuBar);
-  if(ImGui::BeginMenuBar()){
-    if(ImGui::Button("refresh")){
-      folder->fetchList();
-    };
-    ImGui::SameLine();
-    if(ImGui::Button("exit")){
-      ImGui::EndMenuBar();
-      ImGui::End();
-      return 0;
-    };
-    ImGui::Text("Path: ");
-    ImGui::SameLine();
-    static char name[100] = "";
-    ImGui::InputText("##path", name, sizeof(name));
-    ImGui::SameLine();
-    if(ImGui::Button("new")){
-      File file = File(folder->getPath() + "/" + name);
-      if(file.isEmpty()) file.createFile();
-      folder->fetchList();
-      Log::inf("File Created");
-    };
-    ImGui::EndMenuBar();
-  };
-  
-  ImGui::Text("Files:");
-  ImGui::Separator();
-  for(size_t i = 0; i < folder->files.size(); i++) {
-    ImGui::Text((*folder).files[i].c_str());
-  }
-  ImGui::End();
-  return true;
 };

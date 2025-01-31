@@ -18,6 +18,7 @@ namespace PF{
       void push(const T line);
       T pop();
       void clear();
+      T remove(const size_t index);
       size_t size();
   };
   class File{

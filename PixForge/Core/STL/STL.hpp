@@ -24,11 +24,11 @@ void PF::Vector<T>::push(const T line){
 
 template<typename T>
 T PF::Vector<T>::pop(){
-  if(_size > 0){ 
+  if(_size >= 0){ 
       _size--;
-      return data[_size-1];
+      return data[_size];
     }
-  return "";
+  return T();
 }
 
 template<typename T>
@@ -37,6 +37,14 @@ void PF::Vector<T>::clear(){
   data = new T[1];
   capacity = 1;
   _size = 0;
+}
+
+template <typename T>
+inline T PF::Vector<T>::remove(const size_t index){
+  T temp = data[index];
+  for(size_t i = index; i < _size - 1; i++) data[i] = data[i + 1];
+  _size--;
+  return temp;
 }
 
 template<typename T>
