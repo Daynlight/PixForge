@@ -1,12 +1,12 @@
 # PixForge Public License (Based on GNU GPL v3)  
-### With the â€œPet Food Contribution Clauseâ€  
+### With the “Pet Food Contribution Clause”  
 
 ## Preamble  
 PixForge is free software, and you are free to use, modify, and distribute it under the terms of this license. This license is based on the GNU General Public License v3, with an additional requirement for commercial projects to support animal welfare.  
 
 ---
 
-## Section 0.1 â€” Pet Food Contribution Clause  
+## Section 0.1 — Pet Food Contribution Clause  
 ### Commercial Use Requirement  
 Any company or organization that uses PixForge, or any derivative works of it, in a **commercial project** must allocate **1% of the gross income** generated from that project to the **purchase of pet food or donations to registered animal welfare organizations**.  
 
@@ -31,4 +31,4 @@ Except for the Pet Food Contribution Clause, all other rights and obligations of
 
 ---
 
-*Version 1.0 â€“ Â© Daynlight 2025*  
+*Version 1.0 – © Daynlight 2025*
