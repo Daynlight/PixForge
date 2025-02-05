@@ -8,15 +8,12 @@
 
 #include "Tools/Log.h"
 #include "UI/UI.h"
-#include "UI/LogUI.h"
-#include "UI/FileExplorerUI.h"
-#include "UI/TextEditorUI.h"
 
 namespace PF{
   class Gui{
     private:
       Window* window;
-      Vector<UI*> UIs;
+      UIManager* ui;
     private:
       File gui_window = File("settings/gui_window.ini");
       inline void loadGuiWindow();
@@ -25,7 +22,7 @@ namespace PF{
       inline void renderDock();
       inline void renderTopBar();
     public:
-      Gui(Window* window);
+      Gui(Window* window, UIManager* ui);
       ~Gui();
       void renderGui();
       void guiEvent(SDL_Event* event);

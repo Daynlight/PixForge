@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), sandbox(&window), gui(&window){
+  :window("PixEditor"), sandbox(&window), gui(&window, &ui){
   Log::inf("Forge Created");
 
   if(!assets_folder.exist()){

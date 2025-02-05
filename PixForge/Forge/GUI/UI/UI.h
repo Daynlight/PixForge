@@ -1,20 +1,18 @@
 #pragma once
-#include "imgui.h"
-#include "STL/STL.h"
+#include "STL/Vector.h"
+
+#include "iUI.h"
+#include "LogUI.h"
+#include "FileExplorerUI.h"
+#include "TextEditorUI.h"
 
 namespace PF{
-  class UI{
+  class UIManager{
     public:
-      enum Type{
-        LOG = 1,
-        FILE_EXPLORER = 2,
-        TEXT_EDITOR = 3
-      };
+      Vector<UI*> windows;
     public:
-      static uint8_t generateUniqueID(Vector<UI*> *UIs);
-    public:
-      virtual uint8_t getType() = 0;
-      virtual uint8_t getID() = 0;
-      virtual bool render() = 0;
+      ~UIManager(){ for(size_t i = 0; i < windows.size(); i++) delete windows[i]; };
+      void load(File *file);
+      void save(File *file);
   };
 };
