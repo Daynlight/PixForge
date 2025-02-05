@@ -1,7 +1,7 @@
 #include "Gui.h"
 
-PF::Gui::Gui(Window *window)
-  :window(window){
+PF::Gui::Gui(Window *window, UIManager *ui) 
+  :window(window), ui(ui){
   Log::inf("Gui Created");
 
   IMGUI_CHECKVERSION();
@@ -41,15 +41,7 @@ PF::Gui::~Gui(){
 inline void PF::Gui::loadGuiWindow(){
   if(!gui_window.isEmpty()){
     gui_window.read();
-    for(size_t i = 0; i < gui_window.size(); i++){
-      std::string line = gui_window[i];
-      char type = line[0];
-      char id = line[1];
-      std::string path = line.substr(2);
-      if(uint8_t(type)==UI::Type::LOG) UIs.push(new LogUI(uint8_t(id)));
-      if(uint8_t(type)==UI::Type::FILE_EXPLORER) UIs.push(new FileExplorerUI(uint8_t(id), &UIs, Folder(path)));
-      if(uint8_t(type)==UI::Type::TEXT_EDITOR) UIs.push(new TextEditorUI(uint8_t(id), path));
-    };
+    ui->load(&gui_window);
   };
 };
 
@@ -57,18 +49,9 @@ inline void PF::Gui::saveGuiWindow(){
   if(gui_window.isEmpty()) {
     gui_window.createFile();
     Log::war("gui_window file Created");
-  }
+  };
   gui_window.clear();
-  for(size_t i = 0; i < UIs.size(); i++) {
-      std::string record = "";
-      record += (char)UIs[i]->getType();
-      record += (char)UIs[i]->getID();
-      if(UIs[i]->getType() == UI::Type::FILE_EXPLORER) record += static_cast<FileExplorerUI*>(UIs[i])->getFolder().getPath();
-      if(UIs[i]->getType() == UI::Type::TEXT_EDITOR) record += static_cast<TextEditorUI*>(UIs[i])->getPath();
-      gui_window.push(record);
-    }
-  while(UIs.size() != 0) delete UIs.pop();
-  
+  ui->save(&gui_window);
   gui_window.save();
 };
 
@@ -99,8 +82,8 @@ inline void PF::Gui::renderDock() {
 inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) { UIs.push(new LogUI(PF::UI::generateUniqueID(&UIs))); };
-        if (ImGui::MenuItem("File Explorer [assets]")) { UIs.push(new FileExplorerUI(PF::UI::generateUniqueID(&UIs), &UIs, Folder("assets/"))); };
+        if (ImGui::MenuItem("Log")) { ui->windows.push(new LogUI(PF::UI::generateUniqueID(&ui->windows))); };
+        if (ImGui::MenuItem("File Explorer [assets]")) { ui->windows.push(new FileExplorerUI(PF::UI::generateUniqueID(&ui->windows), &ui->windows, Folder("assets/"))); };
         ImGui::EndMenu();
     };
 
@@ -117,9 +100,9 @@ void PF::Gui::renderGui(){
 
   renderDock();
 
-  for(size_t i = 0; i < UIs.size(); i++) 
-    if(!UIs[i]->render())
-      { delete UIs.remove(i); Log::inf("Window Closed");};
+  for(size_t i = 0; i < ui->windows.size(); i++) 
+    if(!ui->windows[i]->render())
+      { delete ui->windows.remove(i); Log::inf("Window Closed");};
   
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());

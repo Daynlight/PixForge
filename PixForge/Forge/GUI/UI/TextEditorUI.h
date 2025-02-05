@@ -1,5 +1,5 @@
 #pragma once
-#include "GUI/UI/UI.h"
+#include "GUI/UI/iUI.h"
 
 namespace PF{
   class TextEditorUI : public UI{
@@ -12,7 +12,7 @@ namespace PF{
     public:
       TextEditorUI(const uint8_t ID, std::string path);
       bool render() override;
-      uint8_t getType() override { return Type::TEXT_EDITOR; };
+      uint8_t getType() override { return UI::Type::TEXT_EDITOR; };
       uint8_t getID() override { return ID; };
       std::string getPath() { return path; };
   };

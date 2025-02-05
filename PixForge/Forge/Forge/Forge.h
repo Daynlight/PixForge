@@ -13,6 +13,7 @@ namespace PF{
     private:
       Window window;
       Sandbox sandbox;
+      UIManager ui;
       Gui gui;
     private:
       Folder assets_folder = Folder("assets/");
