@@ -6,7 +6,12 @@
 namespace PF{
   class ColourBox : public Object{
     private:
-      Vec<int, 4> position = {0,0,0,0};
+      union IntChar{
+        int i;
+        char c[4];
+      };
+    private:
+      Vec<IntChar, 4> position;
       Vec<char, 4> colour = {0,0,0,0};
     public:
       ColourBox(){};
