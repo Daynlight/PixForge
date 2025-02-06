@@ -1,14 +1,15 @@
 #pragma once
 #include "Window/Window.h"
-#include "Object.h"
+#include "iObject.h"
+#include "STL/Vec.h"
 
 namespace PF{
   class ColourBox : public Object{
     private:
-      SDL_Rect rect;
-      SDL_Color colour;
+      Vec<int, 4> rect;
+      Vec<char, 4> colour;
     public:
-      ColourBox(SDL_Rect rect, SDL_Color colour);
+      ColourBox(Vec<int, 4> rect, Vec<char, 4> colour);
       void render(Window *window) override;
   };
 };

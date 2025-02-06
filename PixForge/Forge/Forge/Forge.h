@@ -3,10 +3,7 @@
 #include "Renderer/Renderer.h"
 #include "Gui/Gui.h"
 #include "Gui/UI/UI.h"
-
 #include "Objects/Object.h"
-#include "Objects/ColourBox.h"
-#include "Objects/Sprite.h"
 
 #include "Tools/Log.h"
 #include "Settings.h"

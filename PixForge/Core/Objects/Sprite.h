@@ -1,5 +1,5 @@
 #pragma once
-#include "Object.h"
+#include "iObject.h"
 #include "SDL2/SDL.h"
 #include "STL/Vec.h"
 #include "Window/Window.h"

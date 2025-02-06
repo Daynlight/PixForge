@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), sandbox(&window, &objects), gui(&window, &ui){
+  :window("PixEditor"), sandbox(&window, &objects), ui(&objects), gui(&window, &ui){
   Log::inf("Forge Created");
 
   {

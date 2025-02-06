@@ -14,6 +14,7 @@ void PF::UIManager::load(File *file){
     if(type == UI::Type::LOG) windows.push(new LogUI(ID));
     if(type == UI::Type::FILE_EXPLORER) windows.push(new FileExplorerUI(ID, &windows, Folder(record.substr(2))));
     if(type == UI::Type::TEXT_EDITOR) windows.push(new TextEditorUI(ID, record.substr(2)));
+    if(type == UI::Type::OBJECTS_UI) windows.push(new ObjectsUI(ID, objects));
   };
 };
 
@@ -25,6 +26,14 @@ void PF::UIManager::save(File *file){
     if(windows[i]->getType() == UI::Type::LOG) record += "";
     if(windows[i]->getType() == UI::Type::FILE_EXPLORER) record += static_cast<FileExplorerUI*>(windows[i])->getFolder().getPath();
     if(windows[i]->getType() == UI::Type::TEXT_EDITOR) record += static_cast<TextEditorUI*>(windows[i])->getPath();
+    if(windows[i]->getType() == UI::Type::OBJECTS_UI) record += "";
     file->push(record);
   };
+}
+
+void PF::UIManager::addWindow(UI::Type type) {
+  if (type == UI::LOG) { windows.push(new LogUI(PF::UI::generateUniqueID(&windows))); };
+  if (type == UI::FILE_EXPLORER) { windows.push(new FileExplorerUI(PF::UI::generateUniqueID(&windows), &windows, Folder("assets/"))); };
+  if (type == UI::TEXT_EDITOR) { windows.push(new TextEditorUI(PF::UI::generateUniqueID(&windows), "assets/texture/")); };
+  if (type == UI::OBJECTS_UI) { windows.push(new ObjectsUI(PF::UI::generateUniqueID(&windows), objects)); };
 };

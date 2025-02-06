@@ -9,7 +9,8 @@ namespace PF{
     public:
       Vec(){};
       Vec(std::initializer_list<T> value){
-        for(size_t i = 0; i < S; i++) data[i] = value[i];
+        auto it = value.begin();
+        for(size_t i = 0; i < S; i++, ++it) data[i] = *it;
       };
       Vec(T *data){
         for(size_t i = 0; i < S; i++) this->data[i] = data[i];
@@ -17,10 +18,10 @@ namespace PF{
       Vec(const Vec<T, S> &vec){
         for(size_t i = 0; i < S; i++) data[i] = vec.data[i];
       };
-      SDL_Rect getRect(){
-        SDL_Rect rect = { data[0], data[1], data[2], data[3] };
-        return rect;
-      };
+      void operator%(T value){
+        for(size_t i = 0; i < S; i++) data[i] %= value;
+      }
+      T& operator[](size_t i){ return data[i]; }
       ~Vec(){};
   };
 };
