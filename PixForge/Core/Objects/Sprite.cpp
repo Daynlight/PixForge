@@ -5,3 +5,10 @@ void PF::Sprite::render(PF::Window *window){
   SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
   SDL_RenderCopy(window->getRenderer(), texture, NULL, &dest);
 }
+
+std::string PF::Sprite::save(){
+  return "";
+}
+
+void PF::Sprite::load(std::string record){
+}

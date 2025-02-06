@@ -12,9 +12,9 @@ namespace PF{
   class UIManager{
     public:
       Vector<UI*> windows;
-      Vector<PF::Object*> *objects;
+      ObjectManager *objects;
     public:
-      UIManager(Vector<PF::Object*> *objects) : objects(objects) {};
+      UIManager(ObjectManager *objects) : objects(objects) {};
       ~UIManager(){ for(size_t i = 0; i < windows.size(); i++) delete windows[i]; };
       void load(File *file);
       void save(File *file);

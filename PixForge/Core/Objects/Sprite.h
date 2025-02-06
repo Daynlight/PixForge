@@ -13,5 +13,7 @@ namespace PF{
       void render(Window *window) override;
       Type getType() override { return Type::SPRITE; };
       const char* getName() override { return "Sprite"; };
+      std::string save() override;
+      void load(std::string record) override;
   };
 }

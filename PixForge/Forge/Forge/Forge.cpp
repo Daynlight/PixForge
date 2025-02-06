@@ -20,10 +20,12 @@ PF::Forge::Forge()
   texture_folder.fetchList();
   
   loadGuiWindow();
+  loadObjects();
 };
 
 PF::Forge::~Forge(){
   saveGuiWindow();
+  saveObjects();
   Log::inf("Forge Destroyed");
 };
 
@@ -39,23 +41,6 @@ void PF::Forge::run(){
   };
 };
 
-inline void PF::Forge::loadGuiWindow(){
-  if(!gui_window.isEmpty()){
-    gui_window.read();
-    ui.load(&gui_window);
-  };
-};
-
-inline void PF::Forge::saveGuiWindow(){
-  if(gui_window.isEmpty()) {
-    gui_window.createFile();
-    Log::war("gui_window file Created");
-  };
-  gui_window.clear();
-  ui.save(&gui_window);
-  gui_window.save();
-};
-
 inline void PF::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
@@ -68,4 +53,40 @@ inline void PF::Forge::events(){
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
   };
+};
+
+inline void PF::Forge::loadGuiWindow(){
+  gui_window.read();
+  if(!gui_window.exist()){
+    gui_window.read();
+    ui.load(&gui_window);
+  };
+};
+
+inline void PF::Forge::saveGuiWindow(){
+  if(gui_window.exist()) {
+    gui_window.createFile();
+    Log::war("gui_window file Created");
+  };
+  gui_window.clear();
+  ui.save(&gui_window);
+  gui_window.save();
+}
+
+inline void PF::Forge::loadObjects() {
+  objects_file.read();
+  if(!objects_file.exist()){
+    objects_file.read();
+    objects.load(&objects_file);
+  };
+};
+
+inline void PF::Forge::saveObjects() {
+  if(objects_file.exist()) {
+    objects_file.createFile();
+    Log::war("objects file Created");
+  };
+  objects_file.clear();
+  objects.save(&objects_file);
+  objects_file.save();
 };

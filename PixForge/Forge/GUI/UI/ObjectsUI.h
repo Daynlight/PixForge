@@ -6,7 +6,7 @@
 namespace PF{
   class ObjectsUI : public UI{
     private:
-      Vector<PF::Object*> *objects;
+      ObjectManager *objects;
       Vec<int, 4> position = {0, 0, 0, 0};
       Vec<int, 4> colour = {0, 0, 0, 0};
       bool addWindowOpen = false;
@@ -16,7 +16,7 @@ namespace PF{
       inline void renderObjectsList();
       inline void renderAddObjectWindow();
     public:
-      ObjectsUI(const uint8_t ID, Vector<PF::Object*> *objects) : ID(ID), objects(objects) {};
+      ObjectsUI(const uint8_t ID, ObjectManager *objects) : ID(ID), objects(objects) {};
     public:
       uint8_t getType() override { return Type::OBJECTS_UI; };
       uint8_t getID() override { return ID; };

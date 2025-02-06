@@ -1,8 +1,8 @@
 #include "ObjectsUI.h"
 
 inline void PF::ObjectsUI::renderObjectsList(){
-  for(size_t i = 0; i < objects->size(); i++){
-    ImGui::Text((*objects)[i]->getName());
+  for(size_t i = 0; i < objects->objects.size(); i++){
+    ImGui::Text((objects->objects)[i]->getName());
   };
 }
 inline void PF::ObjectsUI::renderAddObjectWindow() {
@@ -25,7 +25,8 @@ inline void PF::ObjectsUI::renderAddObjectWindow() {
     Vec<char, 4> colourTemp;
     for (size_t i = 0; i < 4; ++i) 
       colourTemp[i] = static_cast<char>(colour[i]);
-    objects->push(new ColourBox(position, colourTemp));
+
+    objects->objects.push(new ColourBox(position, colourTemp));
   };
 
   ImGui::End();

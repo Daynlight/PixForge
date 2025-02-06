@@ -29,7 +29,7 @@ void PF::UIManager::save(File *file){
     if(windows[i]->getType() == UI::Type::OBJECTS_UI) record += "";
     file->push(record);
   };
-}
+};
 
 void PF::UIManager::addWindow(UI::Type type) {
   if (type == UI::LOG) { windows.push(new LogUI(PF::UI::generateUniqueID(&windows))); };

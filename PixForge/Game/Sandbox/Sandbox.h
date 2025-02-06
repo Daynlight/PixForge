@@ -8,9 +8,9 @@ namespace PF {
   class Sandbox{
     private:
       Window *window;
-      Vector<PF::Object*> *objects;
+      ObjectManager *objects;
     public:
-      Sandbox(Window *window, Vector<PF::Object*> *objects);
+      Sandbox(Window *window, ObjectManager *objects);
       void run();
       void event(SDL_Event* event);
   };

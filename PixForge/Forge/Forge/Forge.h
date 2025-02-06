@@ -16,14 +16,17 @@ namespace PF{
       Window window;
       Sandbox sandbox;
       UIManager ui;
+      ObjectManager objects;
       Gui gui;
     private:
+      File objects_file = File("objects.bin");
       File gui_window = File("settings/gui_window.ini");
       Folder texture_folder = Folder("assets/texture/");
-      Vector<PF::Object*> objects;
     private:
       inline void loadGuiWindow();
       inline void saveGuiWindow();
+      inline void loadObjects();
+      inline void saveObjects();
       inline void events();
     public:
       Forge();
