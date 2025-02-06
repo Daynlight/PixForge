@@ -23,12 +23,9 @@ PF::Gui::Gui(Window *window, UIManager *ui)
     settings.createFolder();
     Log::war("settings folder Created");
   };
-
-  loadGuiWindow();
 };
 
 PF::Gui::~Gui(){
-  saveGuiWindow();
   Log::inf("gui_window settings Saved");
 
   ImGui_ImplSDLRenderer2_Shutdown();
@@ -36,23 +33,6 @@ PF::Gui::~Gui(){
   ImGui::DestroyContext();
   Log::inf("ImGui Destroyed");
   Log::inf("Gui Destroyed");
-};
-
-inline void PF::Gui::loadGuiWindow(){
-  if(!gui_window.isEmpty()){
-    gui_window.read();
-    ui->load(&gui_window);
-  };
-};
-
-inline void PF::Gui::saveGuiWindow(){
-  if(gui_window.isEmpty()) {
-    gui_window.createFile();
-    Log::war("gui_window file Created");
-  };
-  gui_window.clear();
-  ui->save(&gui_window);
-  gui_window.save();
 };
 
 inline void PF::Gui::renderDock() {

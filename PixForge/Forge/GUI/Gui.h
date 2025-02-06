@@ -15,10 +15,6 @@ namespace PF{
       Window* window;
       UIManager* ui;
     private:
-      File gui_window = File("settings/gui_window.ini");
-      inline void loadGuiWindow();
-      inline void saveGuiWindow();
-    private:
       inline void renderDock();
       inline void renderTopBar();
     public:

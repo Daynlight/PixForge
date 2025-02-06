@@ -15,9 +15,11 @@ PF::Forge::Forge()
     Log::war("Texture folder created");
   }
   texture_folder.fetchList();
+  loadGuiWindow();
 }
 
 PF::Forge::~Forge(){
+  saveGuiWindow();
   Log::inf("Forge Destroyed");
 }
 
@@ -31,6 +33,23 @@ void PF::Forge::run(){
     events();
     SDL_RenderPresent(window.getRenderer());
   };
+};
+
+inline void PF::Forge::loadGuiWindow(){
+  if(!gui_window.isEmpty()){
+    gui_window.read();
+    ui.load(&gui_window);
+  };
+};
+
+inline void PF::Forge::saveGuiWindow(){
+  if(gui_window.isEmpty()) {
+    gui_window.createFile();
+    Log::war("gui_window file Created");
+  };
+  gui_window.clear();
+  ui.save(&gui_window);
+  gui_window.save();
 };
 
 inline void PF::Forge::events(){
