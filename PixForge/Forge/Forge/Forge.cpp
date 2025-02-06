@@ -1,27 +1,31 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), sandbox(&window), gui(&window, &ui){
+  :window("PixEditor"), sandbox(&window, &objects), gui(&window, &ui){
   Log::inf("Forge Created");
 
-  if(!assets_folder.exist()){
-    assets_folder.createFolder();
-    Log::war("Assets folder created");
+  {
+    Folder assets_folder = Folder("assets/");
+    if(!assets_folder.exist()){
+      assets_folder.createFolder();
+      Log::war("Assets folder created");
+    }
+    assets_folder.fetchList();
   }
-  assets_folder.fetchList();
-
+  
   if(!texture_folder.exist()){
     texture_folder.createFolder();
     Log::war("Texture folder created");
   }
   texture_folder.fetchList();
+  
   loadGuiWindow();
-}
+};
 
 PF::Forge::~Forge(){
   saveGuiWindow();
   Log::inf("Forge Destroyed");
-}
+};
 
 void PF::Forge::run(){
   while (window.isRunning()){

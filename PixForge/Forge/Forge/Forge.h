@@ -2,6 +2,11 @@
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
 #include "Gui/Gui.h"
+#include "Gui/UI/UI.h"
+
+#include "Objects/Object.h"
+#include "Objects/ColourBox.h"
+#include "Objects/Sprite.h"
 
 #include "Tools/Log.h"
 #include "Settings.h"
@@ -17,8 +22,8 @@ namespace PF{
       Gui gui;
     private:
       File gui_window = File("settings/gui_window.ini");
-      Folder assets_folder = Folder("assets/");
-      Folder texture_folder = assets_folder.openFolder("texture/");
+      Folder texture_folder = Folder("assets/texture/");
+      Vector<PF::Object*> objects;
     private:
       inline void loadGuiWindow();
       inline void saveGuiWindow();
