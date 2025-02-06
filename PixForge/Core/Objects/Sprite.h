@@ -11,5 +11,7 @@ namespace PF{
       Vec<int, 2> position;
     public:
       void render(Window *window) override;
+      Type getType() override { return Type::SPRITE; };
+      const char* getName() override { return "Sprite"; };
   };
 }

@@ -9,8 +9,12 @@ namespace PF{
       Vector<PF::Object*> *objects;
       Vec<int, 4> position = {0, 0, 0, 0};
       Vec<int, 4> colour = {0, 0, 0, 0};
+      bool addWindowOpen = false;
     private:
       const uint8_t ID;
+    private:
+      inline void renderObjectsList();
+      inline void renderAddObjectWindow();
     public:
       ObjectsUI(const uint8_t ID, Vector<PF::Object*> *objects) : ID(ID), objects(objects) {};
     public:
