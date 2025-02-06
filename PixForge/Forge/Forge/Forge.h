@@ -16,9 +16,12 @@ namespace PF{
       UIManager ui;
       Gui gui;
     private:
+      File gui_window = File("settings/gui_window.ini");
       Folder assets_folder = Folder("assets/");
       Folder texture_folder = assets_folder.openFolder("texture/");
     private:
+      inline void loadGuiWindow();
+      inline void saveGuiWindow();
       inline void events();
     public:
       Forge();
