@@ -8,7 +8,8 @@ namespace PF{
       enum Type{
         LOG = 1,
         FILE_EXPLORER = 2,
-        TEXT_EDITOR = 3
+        TEXT_EDITOR = 3,
+        OBJECTS_UI = 4
       };
     public:
       static uint8_t generateUniqueID(Vector<UI*> *UIs);

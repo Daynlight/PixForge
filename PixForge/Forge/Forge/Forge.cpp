@@ -1,27 +1,33 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), sandbox(&window), gui(&window, &ui){
+  :window("PixEditor"), sandbox(&window, &objects), ui(&objects), gui(&window, &ui){
   Log::inf("Forge Created");
 
-  if(!assets_folder.exist()){
-    assets_folder.createFolder();
-    Log::war("Assets folder created");
+  {
+    Folder assets_folder = Folder("assets/");
+    if(!assets_folder.exist()){
+      assets_folder.createFolder();
+      Log::war("Assets folder created");
+    }
+    assets_folder.fetchList();
   }
-  assets_folder.fetchList();
-
+  
   if(!texture_folder.exist()){
     texture_folder.createFolder();
     Log::war("Texture folder created");
   }
   texture_folder.fetchList();
+  
   loadGuiWindow();
-}
+  loadObjects();
+};
 
 PF::Forge::~Forge(){
   saveGuiWindow();
+  saveObjects();
   Log::inf("Forge Destroyed");
-}
+};
 
 void PF::Forge::run(){
   while (window.isRunning()){
@@ -33,23 +39,6 @@ void PF::Forge::run(){
     events();
     SDL_RenderPresent(window.getRenderer());
   };
-};
-
-inline void PF::Forge::loadGuiWindow(){
-  if(!gui_window.isEmpty()){
-    gui_window.read();
-    ui.load(&gui_window);
-  };
-};
-
-inline void PF::Forge::saveGuiWindow(){
-  if(gui_window.isEmpty()) {
-    gui_window.createFile();
-    Log::war("gui_window file Created");
-  };
-  gui_window.clear();
-  ui.save(&gui_window);
-  gui_window.save();
 };
 
 inline void PF::Forge::events(){
@@ -64,4 +53,40 @@ inline void PF::Forge::events(){
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
   };
+};
+
+inline void PF::Forge::loadGuiWindow(){
+  gui_window.read();
+  if(!gui_window.exist()){
+    gui_window.read();
+    ui.load(&gui_window);
+  };
+};
+
+inline void PF::Forge::saveGuiWindow(){
+  if(gui_window.exist()) {
+    gui_window.createFile();
+    Log::war("gui_window file Created");
+  };
+  gui_window.clear();
+  ui.save(&gui_window);
+  gui_window.save();
+}
+
+inline void PF::Forge::loadObjects() {
+  objects_file.read();
+  if(!objects_file.exist()){
+    objects_file.read();
+    objects.load(&objects_file);
+  };
+};
+
+inline void PF::Forge::saveObjects() {
+  if(objects_file.exist()) {
+    objects_file.createFile();
+    Log::war("objects file Created");
+  };
+  objects_file.clear();
+  objects.save(&objects_file);
+  objects_file.save();
 };

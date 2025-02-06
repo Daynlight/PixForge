@@ -14,6 +14,7 @@ namespace PF{
       ~File();
       std::string& operator[](const size_t index);
       bool isEmpty();
+      bool exist();
       void createFile();
       void push(const std::string line);
       void clear();

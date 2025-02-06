@@ -62,8 +62,10 @@ inline void PF::Gui::renderDock() {
 inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) { ui->windows.push(new LogUI(PF::UI::generateUniqueID(&ui->windows))); };
-        if (ImGui::MenuItem("File Explorer [assets]")) { ui->windows.push(new FileExplorerUI(PF::UI::generateUniqueID(&ui->windows), &ui->windows, Folder("assets/"))); };
+        if (ImGui::MenuItem("Log")) ui->addWindow(UI::Type::LOG);
+        if (ImGui::MenuItem("File Explorer [assets]")) ui->addWindow(UI::Type::FILE_EXPLORER);
+        if (ImGui::MenuItem("Text Editor")) ui->addWindow(UI::Type::TEXT_EDITOR);
+        if (ImGui::MenuItem("Objects")) ui->addWindow(UI::Type::OBJECTS_UI);
         ImGui::EndMenu();
     };
 
