@@ -62,10 +62,10 @@ inline void PF::Gui::renderDock() {
 inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) ui->addWindow(UI::Type::LOG);
-        if (ImGui::MenuItem("File Explorer [assets]")) ui->addWindow(UI::Type::FILE_EXPLORER);
-        if (ImGui::MenuItem("Text Editor")) ui->addWindow(UI::Type::TEXT_EDITOR);
-        if (ImGui::MenuItem("Objects")) ui->addWindow(UI::Type::OBJECTS_UI);
+        if (ImGui::MenuItem("Log")) ui->addWindow(Ui::Type::LOG);
+        if (ImGui::MenuItem("File Explorer [assets]")) ui->addWindow(Ui::Type::FILE_EXPLORER);
+        if (ImGui::MenuItem("Text Editor")) ui->addWindow(Ui::Type::TEXT_EDITOR);
+        if (ImGui::MenuItem("Objects")) ui->addWindow(Ui::Type::OBJECTS_UI);
         ImGui::EndMenu();
     };
 

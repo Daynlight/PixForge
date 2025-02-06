@@ -4,7 +4,7 @@ PF::File::File(const std::string path) :path(path){ file.open(path, std::ios::in
 PF::File::~File(){ file.close(); }
 std::string& PF::File::operator[](const size_t index){ return data[index]; };
 bool PF::File::isEmpty(){ return file.peek() == std::ifstream::traits_type::eof(); }
-bool PF::File::exist(){ return file.good(); };
+bool PF::File::notExist(){ return file.good(); };
 size_t PF::File::size(){ return data.size(); }
 void PF::File::push(const std::string line){ data.push(line); }
 void PF::File::clear(){ while(data.size() > 0) data.pop(); }

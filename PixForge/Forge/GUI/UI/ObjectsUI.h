@@ -1,10 +1,10 @@
 #pragma once
-#include "iUI.h"
+#include "iUi.h"
 #include "STL/Vector.h"
 #include "Objects/Object.h"
 
 namespace PF{
-  class ObjectsUI : public UI{
+  class ObjectsUI : public Ui{
     private:
       ObjectManager *objects;
       Vec<int, 4> position = {0, 0, 0, 0};

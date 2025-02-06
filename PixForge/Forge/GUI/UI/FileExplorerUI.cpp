@@ -1,6 +1,6 @@
 #include "FileExplorerUI.h"
 
-PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<UI *> *UIs, Folder folder) : ID(ID), UIs(UIs), folder(folder){
+PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<Ui*> *uis, Folder folder) : ID(ID), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
 };
@@ -102,7 +102,7 @@ inline void PF::FileExplorerUI::renderFolder() {
         folder.fetchList();
         break;
       } else {
-        UIs->push(new TextEditorUI(generateUniqueID(UIs), folder.getPath() + folder.files[i].second));
+        uis->push(new TextEditorUI(generateUniqueID(uis), folder.getPath() + folder.files[i].second));
       }
     }
 

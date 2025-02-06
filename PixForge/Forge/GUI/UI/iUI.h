@@ -3,16 +3,16 @@
 #include "STL/STL.h"
 
 namespace PF{
-  class UI{
+  class Ui{
     public:
       enum Type{
         LOG = 1,
-        FILE_EXPLORER = 2,
-        TEXT_EDITOR = 3,
-        OBJECTS_UI = 4
+        FILE_EXPLORER,
+        TEXT_EDITOR,
+        OBJECTS_UI
       };
     public:
-      static uint8_t generateUniqueID(Vector<UI*> *UIs);
+      static uint8_t generateUniqueID(Vector<Ui*> *uis);
     public:
       virtual uint8_t getType() = 0;
       virtual uint8_t getID() = 0;

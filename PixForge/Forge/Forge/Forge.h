@@ -1,9 +1,9 @@
 #pragma once
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
-#include "Gui/Gui.h"
-#include "Gui/UI/UI.h"
 #include "Objects/Object.h"
+#include "Gui/Gui.h"
+#include "Gui/Ui/Ui.h"
 
 #include "Tools/Log.h"
 #include "Settings.h"
@@ -23,10 +23,6 @@ namespace PF{
       File gui_window = File("settings/gui_window.ini");
       Folder texture_folder = Folder("assets/texture/");
     private:
-      inline void loadGuiWindow();
-      inline void saveGuiWindow();
-      inline void loadObjects();
-      inline void saveObjects();
       inline void events();
     public:
       Forge();
