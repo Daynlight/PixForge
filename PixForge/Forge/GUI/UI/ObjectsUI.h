@@ -13,9 +13,13 @@ private:
   Vec<int, 4> position = {0, 0, 0, 0};
   Vec<float, 4> colour = {0, 0, 0, 0};
   bool addColourBox = false;
+  bool showProperties = false;
+  size_t propertiesIndex = 0;
 private:
   inline void renderObjectsList();
   inline void renderAddColourBox();
+  inline void renderProperties();
+  inline void renderColourBoxProperties();
 public:
   ObjectsUI(const uint8_t ID, ObjectManager *objects) : ID(ID), objects(objects) {};
 public:

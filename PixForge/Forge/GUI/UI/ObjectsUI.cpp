@@ -8,6 +8,11 @@ inline void PF::ObjectsUI::renderObjectsList(){
         delete objects->objects[i];
         objects->objects.remove(i);
       };
+      if(ImGui::MenuItem("Properties")){
+        showProperties = true;
+        propertiesIndex = i;
+        position = static_cast<ColourBox*>(objects->objects[propertiesIndex])->getPosition();
+      };
       ImGui::EndPopup();
     };
   };
@@ -27,10 +32,41 @@ inline void PF::ObjectsUI::renderAddColourBox() {
 
   if(ImGui::Button("Add Object")){
     Vec<char, 4> colourTemp;
-    for (size_t i = 0; i < 4; ++i) 
+    for (size_t i = 0; i < 4; i++) 
       colourTemp[i] = static_cast<char>(colour[i] * 255);
 
     objects->objects.push(new ColourBox(position, colourTemp));
+  };
+
+  ImGui::End();
+};
+
+inline void PF::ObjectsUI::renderProperties(){
+  if(showProperties){
+    if(objects->objects[propertiesIndex]->getType() == Object::Type::COLOUR_BOX) renderColourBoxProperties();
+  }
+};
+
+inline void PF::ObjectsUI::renderColourBoxProperties(){
+  ImGui::Begin("Properties");
+
+  if(objects->objects[propertiesIndex]->getType() == Object::Type::COLOUR_BOX){
+    ImGui::Text(objects->objects[propertiesIndex]->getName());
+
+    ImGui::InputInt("X: ", &position[0]);
+    ImGui::InputInt("Y: ", &position[1]);
+    ImGui::InputInt("Width: ", &position[2]);
+    ImGui::InputInt("Height: ", &position[3]);
+
+    ImGui::ColorPicker4("##picker", colour.data);
+
+    if(ImGui::Button("Apply")){
+      Vec<char, 4> colourTemp;
+      for (size_t i = 0; i < 4; i++) 
+        colourTemp[i] = static_cast<char>(colour[i] * 255);          
+      static_cast<ColourBox*>(objects->objects[propertiesIndex])->setColour(colourTemp);
+    };
+    static_cast<ColourBox*>(objects->objects[propertiesIndex])->setPosition(position);
   };
 
   ImGui::End();
@@ -54,4 +90,5 @@ void PF::ObjectsUI::render(){
   ImGui::End();
 
   if(addColourBox) renderAddColourBox();
+  else if(showProperties) renderProperties();
 };

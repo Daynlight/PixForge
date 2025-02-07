@@ -22,5 +22,10 @@ public:
   const std::string save() override;
   void load(const std::string &record) override;
   void render(Window *window) override;
+public:
+  void setPosition(Vec<int, 4> position){ for(size_t i = 0; i < 4; i++) this->position[i].i = position[i]; };
+  void setColour(Vec<char, 4> colour){ this->colour = colour; };
+  Vec<char, 4> getColour(){ return { colour[0], colour[1], colour[2], colour[3] }; };
+  Vec<int, 4> getPosition(){ return { position[0].i, position[1].i, position[2].i, position[3].i }; };
 };
 }; // namespace PF
