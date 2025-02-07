@@ -2,7 +2,14 @@
 
 inline void PF::ObjectsUI::renderObjectsList(){
   for(size_t i = 0; i < objects->objects.size(); i++){
-    ImGui::Text((objects->objects)[i]->getName());
+    ImGui::Text(objects->objects[i]->getName());
+    if(ImGui::BeginPopupContextItem(("Object" + std::to_string(i)).c_str())){
+      if(ImGui::MenuItem("Delete")){
+        delete objects->objects[i];
+        objects->objects.remove(i);
+      };
+      ImGui::EndPopup();
+    };
   };
 };
 
