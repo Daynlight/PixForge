@@ -4,7 +4,7 @@
 namespace PF{
   template<typename T, size_t S>
   class Vec{
-    private:
+    public:
       T data[S];
     public:
       Vec(){};

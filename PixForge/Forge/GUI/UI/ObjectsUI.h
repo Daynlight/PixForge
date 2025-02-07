@@ -11,11 +11,11 @@ private:
 private:
   ObjectManager *objects;
   Vec<int, 4> position = {0, 0, 0, 0};
-  Vec<int, 4> colour = {0, 0, 0, 0};
-  bool addWindowOpen = false;
+  Vec<float, 4> colour = {0, 0, 0, 0};
+  bool addColourBox = false;
 private:
   inline void renderObjectsList();
-  inline void renderAddObjectWindow();
+  inline void renderAddColourBox();
 public:
   ObjectsUI(const uint8_t ID, ObjectManager *objects) : ID(ID), objects(objects) {};
 public:

@@ -63,7 +63,7 @@ inline void PF::FileExplorerUI::mainMenuBar(){
   if(ImGui::Button("exit")) open = false;
   ImGui::EndMenuBar();
   };
-}
+};
 
 inline void PF::FileExplorerUI::renderFolder() {
   ImGui::Text("Files:");
