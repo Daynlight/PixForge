@@ -2,7 +2,7 @@
 #include "Ui.h"
 #include "STL/Vector.h"
 #include "STL/Vec.h"
-#include "Objects/ObjectManager.h"
+#include "Renderer/Objects/ObjectManager.h"
 #include "Tools/Log.h"
 
 namespace PF{
