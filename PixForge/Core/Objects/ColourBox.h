@@ -1,10 +1,10 @@
 #pragma once
 #include "Window/Window.h"
-#include "iObject.h"
+#include "Object.h"
 #include "STL/Vec.h"
 
 namespace PF{
-class ColourBox : public Object{
+class ColourBox : public iObject{
 private:
   union IntChar{
     int i;

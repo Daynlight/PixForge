@@ -1,7 +1,7 @@
 #include "Gui.h"
 
-PF::Gui::Gui(Window *window, UIManager *ui) 
-  :window(window), ui(ui){
+PF::Gui::Gui(const std::string &path, Window *window, ObjectManager* object) 
+  :window(window), ui(object, path){
   Log::inf("Gui Created");
 
   IMGUI_CHECKVERSION();
@@ -23,11 +23,13 @@ PF::Gui::Gui(Window *window, UIManager *ui)
     settings.createFolder();
     Log::war("settings folder Created");
   };
+
+  ui.load();
 };
 
 PF::Gui::~Gui(){
   Log::inf("gui_window settings Saved");
-
+  ui.save();
   ImGui_ImplSDLRenderer2_Shutdown();
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
@@ -62,10 +64,10 @@ inline void PF::Gui::renderDock() {
 inline void PF::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) ui->addWindow(Ui::Type::LOG);
-        if (ImGui::MenuItem("File Explorer [assets]")) ui->addWindow(Ui::Type::FILE_EXPLORER);
-        if (ImGui::MenuItem("Text Editor")) ui->addWindow(Ui::Type::TEXT_EDITOR);
-        if (ImGui::MenuItem("Objects")) ui->addWindow(Ui::Type::OBJECTS_UI);
+        if (ImGui::MenuItem("Log")) ui.addWindow(iUi::Type::LOG);
+        if (ImGui::MenuItem("File Explorer [assets]")) ui.addWindow(iUi::Type::FILE_EXPLORER);
+        if (ImGui::MenuItem("Text Editor")) ui.addWindow(iUi::Type::TEXT_EDITOR);
+        if (ImGui::MenuItem("Objects")) ui.addWindow(iUi::Type::OBJECTS_UI);
         ImGui::EndMenu();
     };
     ImGui::EndMainMenuBar();
@@ -79,9 +81,9 @@ void PF::Gui::renderGui(){
 
   renderDock();
 
-  for(size_t i = 0; i < ui->windows.size(); i++) {
-    ui->windows[i]->render();
-    if(!ui->windows[i]->isOpen()) { delete ui->windows.remove(i); Log::inf("Window Closed");};
+  for(size_t i = 0; i < ui.windows.size(); i++) {
+    ui.windows[i]->render();
+    if(!ui.windows[i]->isOpen()) { delete ui.windows.remove(i); Log::inf("Window Closed");};
   };
 
   ImGui::Render();

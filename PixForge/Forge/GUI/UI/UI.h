@@ -1,23 +1,23 @@
 #pragma once
 #include "STL/Vector.h"
-#include "Objects/Object.h"
-
-#include "iUi.h"
-#include "LogUI.h"
-#include "FileExplorerUI.h"
-#include "TextEditorUI.h"
-#include "ObjectsUI.h"
+#include "imgui.h"
+#include <cstdint>
 
 namespace PF{
-class UIManager{
+class iUi{
 public:
-  Vector<Ui*> windows;
-  ObjectManager *objects;
+  enum Type{
+    LOG,
+    FILE_EXPLORER,
+    TEXT_EDITOR,
+    OBJECTS_UI
+  };
 public:
-  UIManager(ObjectManager *objects) : objects(objects) {};
-  ~UIManager(){ for(size_t i = 0; i < windows.size(); i++) delete windows[i]; };
-  void load(File *file);
-  void save(File *file);
-  void addWindow(Ui::Type type);
+  static uint8_t generateUniqueID(Vector<iUi*> *uis);
+public:
+  virtual uint8_t getID() = 0;
+  virtual uint8_t getType() = 0;
+  virtual bool isOpen() = 0;
+  virtual void render() = 0;
 };
 }; // namespace PF

@@ -1,11 +1,9 @@
 #include "TextEditorUI.h"
 
-PF::TextEditorUI::TextEditorUI(const uint8_t ID,std::string path) : ID(ID), path(path) { read(); }
-
 void PF::TextEditorUI::render() {
-  ImGui::Begin(("Text Editor ("+std::to_string(ID)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+  ImGui::Begin(("Text Editor ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
-    ImGui::Text(path.c_str());
+    ImGui::Text(file.getPath().c_str());
     if(ImGui::Button("exit")) open = false;
     ImGui::EndMenuBar();
   };
@@ -13,9 +11,9 @@ void PF::TextEditorUI::render() {
   if(ImGui::Button("read")) read();
   ImGui::SameLine();
   if(ImGui::Button("save")){  
-    std::ofstream file(path);
-    file << text;
-    file.close();
+    file.clear();
+    file.push(text);
+    file.save();
   };
   
   ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), ImGuiInputTextFlags_AllowTabInput);
@@ -23,11 +21,15 @@ void PF::TextEditorUI::render() {
   ImGui::End();
 };
 
-inline void PF::TextEditorUI::read(){
-  std::ifstream file(path);
-  std::string line;
-  std::string temptext = "";
-  while(std::getline(file, line)) temptext += line + "\n";
-  strcpy(text, temptext.c_str());
-  file.close();
+void PF::TextEditorUI::read(){
+  file.clear();
+  file.read();
+  size_t count = 0;
+  for(size_t i = 0; i < file.size(); i++){
+    std::string line = file[i];
+    for(size_t j = 0; j < line.size(); j++){
+      text[count] = line[j];
+      count++;
+    };
+  };
 };
