@@ -1,21 +1,21 @@
 #include "FileExplorerUI.h"
 
-PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<UI *> *UIs, Folder folder) : ID(ID), UIs(UIs), folder(folder){
+PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<Ui*> *uis, Folder folder) : ID(ID), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
 };
 
 inline void PF::FileExplorerUI::popUp(){
-  if (ImGui::IsMouseClicked(1)) {
+  if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered()) {
     ImGui::OpenPopup("Options");
-  }
+  };
   if (ImGui::BeginPopup("Options")) {
     ImGui::Text("Options");
     ImGui::Separator();
     fileManager();
     if (ImGui::Button("Close")) {
       ImGui::CloseCurrentPopup();
-    }
+    };
     ImGui::EndPopup();
   };
 };
@@ -63,13 +63,12 @@ inline void PF::FileExplorerUI::mainMenuBar(){
   if(ImGui::Button("exit")) open = false;
   ImGui::EndMenuBar();
   };
-}
+};
 
 inline void PF::FileExplorerUI::renderFolder() {
   ImGui::Text("Files:");
   ImGui::Separator();
   
-  // make dynamic columns
   int columns = std::max(1, static_cast<int>(ImGui::GetWindowWidth() / FILE_BOX_WIDTH));
   ImGui::Columns(columns, nullptr, false);
 
@@ -102,7 +101,7 @@ inline void PF::FileExplorerUI::renderFolder() {
         folder.fetchList();
         break;
       } else {
-        UIs->push(new TextEditorUI(generateUniqueID(UIs), folder.getPath() + folder.files[i].second));
+        uis->push(new TextEditorUI(generateUniqueID(uis), folder.getPath() + folder.files[i].second));
       }
     }
 
@@ -112,7 +111,7 @@ inline void PF::FileExplorerUI::renderFolder() {
   ImGui::Columns(1);
 };
 
-bool PF::FileExplorerUI::render(){
+void PF::FileExplorerUI::render(){
   ImGui::Begin(("File Explorer ("+std::to_string(ID)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
 
   popUp();
@@ -120,5 +119,4 @@ bool PF::FileExplorerUI::render(){
   renderFolder();
 
   ImGui::End();
-  return open;
 };

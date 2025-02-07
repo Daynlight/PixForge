@@ -1,13 +1,9 @@
 #include "LogUI.h"
 
-bool PF::LogUI::render() {
+void PF::LogUI::render() {
   ImGui::Begin(("Logs ("+std::to_string(ID)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
-    if(ImGui::Button("exit")){
-      ImGui::EndMenuBar();
-      ImGui::End();
-      return 0;
-    };
+    if(ImGui::Button("exit")) open = false;
     ImGui::EndMenuBar();
   };
   
@@ -20,6 +16,4 @@ bool PF::LogUI::render() {
     if(Log::entry[i].first == 3) ImGui::TextColored(ImVec4(0,255,200,255), Log::entry[i].second.c_str());
   }
   ImGui::End();
-
-  return 1;
 };

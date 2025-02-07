@@ -3,29 +3,14 @@
 PF::Forge::Forge()
   :window("PixEditor"), sandbox(&window, &objects), ui(&objects), gui(&window, &ui){
   Log::inf("Forge Created");
-
-  {
-    Folder assets_folder = Folder("assets/");
-    if(!assets_folder.exist()){
-      assets_folder.createFolder();
-      Log::war("Assets folder created");
-    }
-    assets_folder.fetchList();
-  }
   
-  if(!texture_folder.exist()){
-    texture_folder.createFolder();
-    Log::war("Texture folder created");
-  }
-  texture_folder.fetchList();
-  
-  loadGuiWindow();
-  loadObjects();
+  ui.load(&gui_window);
+  objects.load(&objects_file);
 };
 
 PF::Forge::~Forge(){
-  saveGuiWindow();
-  saveObjects();
+  objects.save(&objects_file);
+  ui.save(&gui_window);
   Log::inf("Forge Destroyed");
 };
 
@@ -44,49 +29,9 @@ void PF::Forge::run(){
 inline void PF::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
-    if(event.type == SDL_KEYDOWN){
-      if(event.key.keysym.sym == SDLK_F5) Builder::buildGame();
-      if(event.key.keysym.sym == SDLK_F6) Builder::runGame();
-    }
 
     sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
   };
-};
-
-inline void PF::Forge::loadGuiWindow(){
-  gui_window.read();
-  if(!gui_window.exist()){
-    gui_window.read();
-    ui.load(&gui_window);
-  };
-};
-
-inline void PF::Forge::saveGuiWindow(){
-  if(gui_window.exist()) {
-    gui_window.createFile();
-    Log::war("gui_window file Created");
-  };
-  gui_window.clear();
-  ui.save(&gui_window);
-  gui_window.save();
-}
-
-inline void PF::Forge::loadObjects() {
-  objects_file.read();
-  if(!objects_file.exist()){
-    objects_file.read();
-    objects.load(&objects_file);
-  };
-};
-
-inline void PF::Forge::saveObjects() {
-  if(objects_file.exist()) {
-    objects_file.createFile();
-    Log::war("objects file Created");
-  };
-  objects_file.clear();
-  objects.save(&objects_file);
-  objects_file.save();
 };

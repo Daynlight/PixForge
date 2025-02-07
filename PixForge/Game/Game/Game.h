@@ -3,12 +3,12 @@
 #include "Renderer/Renderer.h"
 
 namespace PF {
-  class Game{
-    private:
-      Window *window;    
-    public:
-      Game(Window *window);
-      void run();
-      void event();
-  };
+class Game{
+private:
+  Window *window;    
+public:
+  Game(Window *window);
+  void run();
+  void event();
 };
+}; // namespace PF

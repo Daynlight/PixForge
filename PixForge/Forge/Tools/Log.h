@@ -9,11 +9,4 @@ namespace PF{
     static void err(const std::string text);
     static void inf(const std::string text);
   };
-
-  //[FEATURE] Change remove build and run functions
-  class Builder{
-    public:
-      static void buildGame();
-      static void runGame();
-  };
 };

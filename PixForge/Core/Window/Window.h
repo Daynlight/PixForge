@@ -13,23 +13,26 @@
 
 namespace PF{
 class Window{
-  private:
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-  private:
-    File window_settings = File("settings/window_settings.ini");
-    bool running = true;
-  private:
-    inline void changeFullScreenDesktop();
-    inline void createWindow(const char* title);
-    inline void createRenderer();
-  public:
-    Window(const char* title);
-    ~Window();
-    bool isRunning();
-    void windowEvent(const SDL_Event event);
-    SDL_Renderer* getRenderer();
-    SDL_Window* getWindow();
-    SDL_Rect getWindowSizesAndPosition();
-  }; 
-};
+private:
+  SDL_Window *window;
+  SDL_Renderer *renderer;
+private:
+  File window_settings = File("settings/window_settings.ini");
+  bool running = true;
+private:
+  inline void changeFullScreenDesktop();
+  inline void createWindow(const char* title);
+  inline void createRenderer();
+  inline void saveWindowSettings();
+  inline void loadWindowSettings();
+public:
+  Window(const char* title);
+  ~Window();
+  void windowEvent(const SDL_Event event);
+  SDL_Rect getWindowSizesAndPosition();
+public:
+  SDL_Renderer* getRenderer() { return renderer; };
+  SDL_Window* getWindow() { return window; };
+  bool isRunning() { return running; };
+}; 
+}; // namespace PF

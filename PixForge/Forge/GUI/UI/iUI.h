@@ -1,21 +1,23 @@
 #pragma once
 #include "imgui.h"
-#include "STL/STL.h"
+#include "STL/Vector.h"
+#include <cstdint>
 
 namespace PF{
-  class UI{
-    public:
-      enum Type{
-        LOG = 1,
-        FILE_EXPLORER = 2,
-        TEXT_EDITOR = 3,
-        OBJECTS_UI = 4
-      };
-    public:
-      static uint8_t generateUniqueID(Vector<UI*> *UIs);
-    public:
-      virtual uint8_t getType() = 0;
-      virtual uint8_t getID() = 0;
-      virtual bool render() = 0;
+class Ui{
+public:
+  enum Type{
+    LOG,
+    FILE_EXPLORER,
+    TEXT_EDITOR,
+    OBJECTS_UI
   };
+public:
+  static uint8_t generateUniqueID(Vector<Ui*> *uis);
+public:
+  virtual uint8_t getID() = 0;
+  virtual uint8_t getType() = 0;
+  virtual bool isOpen() = 0;
+  virtual void render() = 0;
 };
+}; // namespace PF

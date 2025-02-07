@@ -4,7 +4,7 @@
 namespace PF{
   template<typename T, size_t S>
   class Vec{
-    private:
+    public:
       T data[S];
     public:
       Vec(){};
@@ -21,6 +21,9 @@ namespace PF{
       void operator%(T value){
         for(size_t i = 0; i < S; i++) data[i] %= value;
       }
+      void operator/=(T value){
+        for(size_t i = 0; i < S; i++) data[i] /= value;
+      };
       T& operator[](size_t i){ return data[i]; }
       ~Vec(){};
   };
