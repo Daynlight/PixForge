@@ -18,7 +18,7 @@ PF::Window::~Window(){
 };
 
 inline void PF::Window::createWindow(const char *title){
-  if(window_settings.isEmpty())
+  if(window_settings.notExist())
     window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
     window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
@@ -38,7 +38,7 @@ inline void PF::Window::createRenderer(){
 
 inline void PF::Window::saveWindowSettings() {
   SDL_Rect window_location = getWindowSizesAndPosition();
-  if(window_settings.isEmpty()) window_settings.createFile();
+  if(window_settings.notExist()) window_settings.createFile();
   window_settings.clear();
   window_settings.push(std::to_string(window_location.x));
   window_settings.push(std::to_string(window_location.y));
