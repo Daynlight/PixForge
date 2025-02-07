@@ -2,7 +2,7 @@
 
 PF::Gui::Gui(const std::string &path, Window *window, ObjectManager* object) 
   :window(window), ui(object, path){
-  Log::inf("Gui Created");
+  Log::log("Gui Created");
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -16,7 +16,7 @@ PF::Gui::Gui(const std::string &path, Window *window, ObjectManager* object)
  
   ImGui_ImplSDL2_InitForSDLRenderer(window->getWindow(), window->getRenderer());
   ImGui_ImplSDLRenderer2_Init(window->getRenderer());
-  Log::inf("ImGui Initialized");
+  Log::log("ImGui Initialized");
 
   Folder settings = Folder("settings/");
   if(!settings.exist()) {
@@ -28,7 +28,6 @@ PF::Gui::Gui(const std::string &path, Window *window, ObjectManager* object)
 };
 
 PF::Gui::~Gui(){
-  Log::inf("gui_window settings Saved");
   ui.save();
   ImGui_ImplSDLRenderer2_Shutdown();
   ImGui_ImplSDL2_Shutdown();
@@ -83,7 +82,7 @@ void PF::Gui::renderGui(){
 
   for(size_t i = 0; i < ui.windows.size(); i++) {
     ui.windows[i]->render();
-    if(!ui.windows[i]->isOpen()) { delete ui.windows.remove(i); Log::inf("Window Closed");};
+    if(!ui.windows[i]->isOpen()) { delete ui.windows.remove(i); };
   };
 
   ImGui::Render();

@@ -3,7 +3,7 @@
 void PF::LogUI::render() {
   ImGui::Begin(("Logs ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
-    if(ImGui::Button("exit")) open = false;
+    if(ImGui::Button("exit")) {open = false; Log::log("Log UI Window Closed");}
     ImGui::EndMenuBar();
   };
   

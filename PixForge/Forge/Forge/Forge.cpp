@@ -2,16 +2,23 @@
 
 PF::Forge::Forge()
   :window("PixEditor"), objects("objects.bin"), gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
-  Log::inf("Forge Created");
+  Log::log("Window Created");
+  Log::log("Objects Created");
   objects.load();
+  Log::inf("Objects loaded: "+std::to_string(objects.objects.size()));
+  Log::log("Forge Created");
 };
 
 PF::Forge::~Forge(){
   objects.save();
-  Log::inf("Forge Destroyed");
+  Log::inf("Objects saved: "+std::to_string(objects.objects.size()));
+  Log::log("Objects Destroyed");
+  Log::log("Window Destroyed");
+  Log::log("Forge Destroyed");
 };
 
 void PF::Forge::run(){
+  Log::inf("Forge Running");
   while (window.isRunning()){
     Renderer::background(&window, backgroundColour);
 
