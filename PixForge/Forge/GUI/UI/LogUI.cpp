@@ -1,7 +1,7 @@
 #include "LogUI.h"
 
 void PF::LogUI::render() {
-  ImGui::Begin(("Logs ("+std::to_string(ID)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+  ImGui::Begin(("Logs ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")) open = false;
     ImGui::EndMenuBar();

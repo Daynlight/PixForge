@@ -1,9 +1,9 @@
 #include "UiManager.h"
 
 uint8_t PF::iUi::generateUniqueID(Vector<iUi*> *uis){
-  uint8_t ID = 0;
-  for(size_t i = 0; i < uis->size(); i++) if((*uis)[i]->getID() == ID) ID++;
-  return ID;
+  uint8_t id = 0;
+  for(size_t i = 0; i < uis->size(); i++) if((*uis)[i]->getID() == id) id++;
+  return id;
 };
 
 void PF::UIManager::load(){

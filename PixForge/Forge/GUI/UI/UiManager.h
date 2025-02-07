@@ -3,10 +3,10 @@
 #include "Objects/ObjectManager.h"
 
 #include "Ui.h"
-#include "LogUI.h"
-#include "FileExplorerUI.h"
-#include "TextEditorUI.h"
-#include "ObjectsUI.h"
+#include "LogUi.h"
+#include "FileExplorerUi.h"
+#include "TextEditorUi.h"
+#include "ObjectsUi.h"
 
 namespace PF{
 class UIManager{

@@ -9,9 +9,9 @@ inline void PF::ObjectsUI::renderObjectsList(){
         objects->objects.remove(i);
       };
       if(ImGui::MenuItem("Properties")){
-        showProperties = true;
-        propertiesIndex = i;
-        position = static_cast<ColourBox*>(objects->objects[propertiesIndex])->getPosition();
+        show_properties = true;
+        properties_index = i;
+        position = static_cast<ColourBox*>(objects->objects[properties_index])->getPosition();
       };
       ImGui::EndPopup();
     };
@@ -42,16 +42,16 @@ inline void PF::ObjectsUI::renderAddColourBox() {
 };
 
 inline void PF::ObjectsUI::renderProperties(){
-  if(showProperties){
-    if(objects->objects[propertiesIndex]->getType() == Object::Type::COLOUR_BOX) renderColourBoxProperties();
+  if(show_properties){
+    if(objects->objects[properties_index]->getType() == iObject::Type::COLOUR_BOX) renderColourBoxProperties();
   }
 };
 
 inline void PF::ObjectsUI::renderColourBoxProperties(){
   ImGui::Begin("Properties");
 
-  if(objects->objects[propertiesIndex]->getType() == Object::Type::COLOUR_BOX){
-    ImGui::Text(objects->objects[propertiesIndex]->getName());
+  if(objects->objects[properties_index]->getType() == iObject::Type::COLOUR_BOX){
+    ImGui::Text(objects->objects[properties_index]->getName());
 
     ImGui::InputInt("X: ", &position[0]);
     ImGui::InputInt("Y: ", &position[1]);
@@ -64,20 +64,20 @@ inline void PF::ObjectsUI::renderColourBoxProperties(){
       Vec<char, 4> colourTemp;
       for (size_t i = 0; i < 4; i++) 
         colourTemp[i] = static_cast<char>(colour[i] * 255);          
-      static_cast<ColourBox*>(objects->objects[propertiesIndex])->setColour(colourTemp);
+      static_cast<ColourBox*>(objects->objects[properties_index])->setColour(colourTemp);
     };
-    static_cast<ColourBox*>(objects->objects[propertiesIndex])->setPosition(position);
+    static_cast<ColourBox*>(objects->objects[properties_index])->setPosition(position);
   };
 
   ImGui::End();
 };
 
 void PF::ObjectsUI::render(){
-  ImGui::Begin(("Objects (" + std::to_string(ID) + ")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+  ImGui::Begin(("Objects (" + std::to_string(id) + ")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if (ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")) open = false;
     if(ImGui::BeginMenu("Add")){
-      if(ImGui::MenuItem("ColourBox")) addColourBox = !addColourBox;
+      if(ImGui::MenuItem("ColourBox")) add_colour_box = !add_colour_box;
       ImGui::EndMenu();
     };
     ImGui::EndMenuBar();
@@ -89,6 +89,6 @@ void PF::ObjectsUI::render(){
   
   ImGui::End();
 
-  if(addColourBox) renderAddColourBox();
-  else if(showProperties) renderProperties();
+  if(add_colour_box) renderAddColourBox();
+  else if(show_properties) renderProperties();
 };

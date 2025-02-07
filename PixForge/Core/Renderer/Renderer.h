@@ -7,6 +7,8 @@ namespace PF{
       SDL_SetRenderDrawColor(window->getRenderer(), r, g, b, a); 
       SDL_RenderClear(window->getRenderer());
     };
+
     inline void background(Window* window, SDL_Colour colour) { background(window, colour.r, colour.g, colour.b, colour.a); };
-  };
-};
+    
+  }; // namespace Renderer
+}; // namespace PF

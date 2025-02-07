@@ -1,7 +1,7 @@
 #pragma once
 #include <stdexcept>
-
-#include "STL/STL.h"
+#include "STL/File.h"
+#include "STL/Folder.h"
 
 #include "SDL2/SDL.h"
 #include "imgui.h"

@@ -5,12 +5,12 @@
 namespace PF{
 class LogUI : public iUi{
 private:
-  const uint8_t ID;
+  const uint8_t id;
   bool open = true;
 public:
-  LogUI(const uint8_t ID) : ID(ID) {};
+  LogUI(const uint8_t ID) : id(id) {};
 public:
-  uint8_t getID() override { return ID; };
+  uint8_t getID() override { return id; };
   uint8_t getType() override { return iUi::Type::LOG; };
   bool isOpen() override { return open; };
   void render() override;
