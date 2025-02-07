@@ -8,8 +8,6 @@
 #define FILE_BOX_BORDER 1
 #define FILE_BOX_BORDER_ROUNDING 19
 
-// [BUG] on file remove program crashes when file isOpen 
-
 namespace PF{
 class FileExplorerUI : public iUi{
 private:

@@ -8,7 +8,7 @@ private:
   const uint8_t id;
   bool open = true;
 public:
-  LogUI(const uint8_t ID) : id(id) {};
+  LogUI(const uint8_t id) : id(id) {};
 public:
   uint8_t getID() override { return id; };
   uint8_t getType() override { return iUi::Type::LOG; };

@@ -88,9 +88,13 @@ inline void PF::FileExplorerUI::renderFolder() {
 
     if (ImGui::BeginPopup(std::to_string(i).c_str())) {
       if (ImGui::MenuItem("Delete")) {
-        Log::inf("File deleted: " + std::string(folder.getPath() + folder[i].second));
-        folder.remove(folder[i].second);
-        folder.fetchList();
+        try{
+          folder.remove(folder[i].second);
+          folder.fetchList();
+        }
+        catch(const std::exception &e){
+          Log::err("Can't remove file/folder in use!!");
+        }
       }
       ImGui::EndPopup();
     }
