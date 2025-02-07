@@ -1,16 +1,13 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), sandbox(&window, &objects), ui(&objects), gui(&window, &ui){
+  :window("PixEditor"), objects("objects.bin"), sandbox(&window, &objects), gui("settings/gui_window.ini", &window, &objects){
   Log::inf("Forge Created");
-  
-  ui.load(&gui_window);
-  objects.load(&objects_file);
+  objects.load();
 };
 
 PF::Forge::~Forge(){
-  objects.save(&objects_file);
-  ui.save(&gui_window);
+  objects.save();
   Log::inf("Forge Destroyed");
 };
 

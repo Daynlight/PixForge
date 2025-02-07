@@ -1,7 +1,7 @@
 #pragma once
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
-#include "Objects/Object.h"
+#include "Objects/ObjectManager.h"
 #include "STL/STL.h"
 
 namespace PF {

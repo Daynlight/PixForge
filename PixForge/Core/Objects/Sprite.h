@@ -1,11 +1,10 @@
 #pragma once
-#include "iObject.h"
-#include "SDL2/SDL.h"
-#include "STL/Vec.h"
 #include "Window/Window.h"
+#include "STL/Vec.h"
+#include "Object.h"
 
 namespace PF{
-class Sprite : public Object{
+class Sprite : public iObject{
 private:
   SDL_Texture *texture;
   Vec<int, 2> position;

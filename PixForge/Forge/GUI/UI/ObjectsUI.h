@@ -1,10 +1,10 @@
 #pragma once
-#include "iUi.h"
+#include "Ui.h"
 #include "STL/Vector.h"
 #include "Objects/Object.h"
 
 namespace PF{
-class ObjectsUI : public Ui{
+class ObjectsUI : public iUi{
 private:
   const uint8_t ID;
   bool open = true;

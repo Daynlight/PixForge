@@ -1,6 +1,6 @@
-#include "FileExplorerUI.h"
+#include "FileExplorerUi.h"
 
-PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<Ui*> *uis, Folder folder) : ID(ID), uis(uis), folder(folder){
+PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<iUi*> *uis, Folder folder) : ID(ID), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
 };
