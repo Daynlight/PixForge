@@ -3,6 +3,7 @@
 PF::FileExplorerUI::FileExplorerUI(const uint8_t id, Vector<iUi*> *uis, Folder folder) : id(id), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
+  Log::log("File Explorer UI Window Opened: "+this->folder.getPath());
 };
 
 inline void PF::FileExplorerUI::popUp(){
@@ -56,11 +57,12 @@ inline void PF::FileExplorerUI::mainMenuBar(){
   if(ImGui::Button("back")) {
     folder = folder.back();
     folder.fetchList();
+    Log::log("Folder back: "+folder.getPath());
   };
   
   if(ImGui::Button("refresh")) folder.fetchList();
   ImGui::SameLine();
-  if(ImGui::Button("exit")) open = false;
+  if(ImGui::Button("exit")) {open = false; Log::log("File Explorer UI Window Closed: "+folder.getPath());};
   ImGui::EndMenuBar();
   };
 };
@@ -91,6 +93,7 @@ inline void PF::FileExplorerUI::renderFolder() {
         try{
           folder.remove(folder[i].second);
           folder.fetchList();
+          Log::inf("File/Folder removed: "+folder[i].second);
         }
         catch(const std::exception &e){
           Log::err("Can't remove file/folder in use!!");
@@ -103,6 +106,7 @@ inline void PF::FileExplorerUI::renderFolder() {
       if(folder[i].first == 'd') {
         folder = folder.openFolder(folder[i].second);
         folder.fetchList();
+        Log::log("Folder open: "+folder.getPath());
         break;
       } else {
         uis->push(new TextEditorUI(generateUniqueID(uis), folder.getPath() + folder[i].second));

@@ -19,6 +19,7 @@ void PF::UIManager::load(){
       if(type == iUi::Type::OBJECTS_UI) windows.push(new ObjectsUI(ID, objects));
     };
   };
+  Log::inf("UI Windows Loaded: "+std::to_string(windows.size()));
 };
 
 void PF::UIManager::save(){
@@ -40,6 +41,7 @@ void PF::UIManager::save(){
   };
 
   file.save();
+  Log::inf("UI Windows Saved: "+std::to_string(windows.size()));
 };
 
 void PF::UIManager::addWindow(iUi::Type type) {

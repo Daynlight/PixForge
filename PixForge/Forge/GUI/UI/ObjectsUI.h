@@ -3,6 +3,7 @@
 #include "STL/Vector.h"
 #include "STL/Vec.h"
 #include "Objects/ObjectManager.h"
+#include "Tools/Log.h"
 
 namespace PF{
 class ObjectsUI : public iUi{
@@ -23,7 +24,7 @@ private:
   inline void renderProperties();
   inline void renderColourBoxProperties();
 public:
-  ObjectsUI(const uint8_t id, ObjectManager *objects) : id(id), objects(objects) {};
+  ObjectsUI(const uint8_t id, ObjectManager *objects) : id(id), objects(objects) { Log::log("Objects UI Window Opened"); };
 public:
   uint8_t getID() override { return id; };
   uint8_t getType() override { return Type::OBJECTS_UI; };

@@ -8,6 +8,8 @@
 #define FILE_BOX_BORDER 1
 #define FILE_BOX_BORDER_ROUNDING 19
 
+// [BUG] sometimes buttons have same name and this causes errors for imGui, when you open two same files
+
 namespace PF{
 class FileExplorerUI : public iUi{
 private:
