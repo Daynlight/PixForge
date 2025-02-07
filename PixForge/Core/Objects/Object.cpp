@@ -1,6 +1,8 @@
 #include "Object.h"
 
-PF::ObjectManager::~ObjectManager(){ for(size_t i = 0; i < objects.size(); i++) delete objects[i]; }
+PF::ObjectManager::~ObjectManager(){ 
+  for(size_t i = 0; i < objects.size(); i++) delete objects[i]; 
+};
 
 void PF::ObjectManager::load(File *file){
   file->read();
@@ -16,9 +18,7 @@ void PF::ObjectManager::load(File *file){
 };
 
 void PF::ObjectManager::save(File *file){
-  if(file->notExist()) {
-    file->createFile();
-  };
+  if(file->notExist()) file->createFile();
 
   file->clear();
   for(size_t i = 0; i < objects.size(); i++)

@@ -6,9 +6,9 @@ void PF::Sprite::render(PF::Window *window){
   SDL_RenderCopy(window->getRenderer(), texture, NULL, &dest);
 }
 
-std::string PF::Sprite::save(){
+const std::string PF::Sprite::save(){
   return "";
 }
 
-void PF::Sprite::load(std::string record){
+void PF::Sprite::load(const std::string &record){
 }
