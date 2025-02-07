@@ -1,6 +1,5 @@
 #pragma once
 #include "Gui/Ui/iUi.h"
-#include "STL/STL.h"
 #include "Tools/Log.h"
 #include "Gui/Ui/TextEditorUI.h"
 

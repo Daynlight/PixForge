@@ -1,6 +1,5 @@
 #pragma once
 #include "Window/Window.h"
-#include "STL/STL.h"
 
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"

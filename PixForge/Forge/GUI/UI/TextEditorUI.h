@@ -1,5 +1,6 @@
 #pragma once
 #include "Gui/Ui/iUi.h"
+#include <fstream>
 
 namespace PF{
 class TextEditorUI : public Ui{
