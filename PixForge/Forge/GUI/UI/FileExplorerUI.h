@@ -9,24 +9,27 @@
 #define FILE_BOX_BORDER_ROUNDING 19
 
 namespace PF{
-  class FileExplorerUI : public Ui{
-  private:
-    const uint8_t ID;
-    Folder folder;
-    Vector<Ui*> *uis;
-    char folderName[128] = "", fileName[128] = "";
-    bool createFolder = false, createFile = false;
-    bool open = true;
-  private:
-    inline void popUp();
-    inline void fileManager();
-    inline void mainMenuBar();
-    inline void renderFolder();
-  public:
-    FileExplorerUI(const uint8_t ID, Vector<Ui*> *uis, Folder folder);
-    uint8_t getType() override { return Ui::Type::FILE_EXPLORER; };
-    uint8_t getID() override { return ID; };
-    Folder getFolder() { return folder; };
-    bool render() override;
-  };
+class FileExplorerUI : public Ui{
+private:
+  const uint8_t ID;
+  Vector<Ui*> *uis;
+  Folder folder;
+  bool open = true;
+private:
+  char folderName[128] = "", fileName[128] = "";
+  bool createFolder = false, createFile = false;
+private:
+  inline void popUp();
+  inline void fileManager();
+  inline void mainMenuBar();
+  inline void renderFolder();
+public:
+  FileExplorerUI(const uint8_t ID, Vector<Ui*> *uis, Folder folder);
+  Folder* getFolder() { return &folder; };
+public:
+  uint8_t getID() override { return ID; };
+  uint8_t getType() override { return Ui::Type::FILE_EXPLORER; };
+  bool isOpen() { return open; };
+  void render() override;
 };
+}; // namespace PF

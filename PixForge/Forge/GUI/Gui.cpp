@@ -68,9 +68,6 @@ inline void PF::Gui::renderTopBar(){
         if (ImGui::MenuItem("Objects")) ui->addWindow(Ui::Type::OBJECTS_UI);
         ImGui::EndMenu();
     };
-
-    if(ImGui::Button("Build")) Builder::buildGame();
-    if(ImGui::Button("Run")) Builder::runGame();
     ImGui::EndMainMenuBar();
   };
 };
@@ -82,13 +79,15 @@ void PF::Gui::renderGui(){
 
   renderDock();
 
-  for(size_t i = 0; i < ui->windows.size(); i++) 
-    if(!ui->windows[i]->render())
-      { delete ui->windows.remove(i); Log::inf("Window Closed");};
-  
+  for(size_t i = 0; i < ui->windows.size(); i++) {
+    ui->windows[i]->render();
+    if(!ui->windows[i]->isOpen()) { delete ui->windows.remove(i); Log::inf("Window Closed");};
+  };
+
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
-}
+};
+
 void PF::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
 };

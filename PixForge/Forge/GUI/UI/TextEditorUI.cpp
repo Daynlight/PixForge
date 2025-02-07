@@ -2,15 +2,11 @@
 
 PF::TextEditorUI::TextEditorUI(const uint8_t ID,std::string path) : ID(ID), path(path) { read(); }
 
-bool PF::TextEditorUI::render() {
+void PF::TextEditorUI::render() {
   ImGui::Begin(("Text Editor ("+std::to_string(ID)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     ImGui::Text(path.c_str());
-    if(ImGui::Button("exit")){
-      ImGui::EndMenuBar();
-      ImGui::End();
-      return 0;
-    };
+    if(ImGui::Button("exit")) open = false;
     ImGui::EndMenuBar();
   };
 
@@ -25,7 +21,6 @@ bool PF::TextEditorUI::render() {
   ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), ImGuiInputTextFlags_AllowTabInput);
 
   ImGui::End();
-  return 1;
 };
 
 inline void PF::TextEditorUI::read(){

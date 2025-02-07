@@ -32,15 +32,11 @@ inline void PF::ObjectsUI::renderAddObjectWindow() {
   ImGui::End();
 };
 
-bool PF::ObjectsUI::render(){
+void PF::ObjectsUI::render(){
   ImGui::Begin(("Objects (" + std::to_string(ID) + ")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if (ImGui::BeginMenuBar())
   {
-    if(ImGui::Button("exit")){
-      ImGui::EndMenuBar();
-      ImGui::End();
-      return 0;
-    };
+    if(ImGui::Button("exit")) open = false;
     ImGui::EndMenuBar();
   };
 
@@ -52,6 +48,4 @@ bool PF::ObjectsUI::render(){
   ImGui::End();
 
   if(addWindowOpen) renderAddObjectWindow();
-
-  return true;
 };

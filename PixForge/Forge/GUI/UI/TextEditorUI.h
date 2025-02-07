@@ -2,18 +2,22 @@
 #include "Gui/Ui/iUi.h"
 
 namespace PF{
-  class TextEditorUI : public Ui{
-    private:
-      std::string path;
-      const uint8_t ID;
-      char text[1024 * 1024] = "";
-    private:
-      inline void read();
-    public:
-      TextEditorUI(const uint8_t ID, std::string path);
-      bool render() override;
-      uint8_t getType() override { return Ui::Type::TEXT_EDITOR; };
-      uint8_t getID() override { return ID; };
-      std::string getPath() { return path; };
-  };
+class TextEditorUI : public Ui{
+private:
+  const uint8_t ID;
+  bool open = true;
+private:
+  char text[1024 * 1024] = "";
+  std::string path;
+private:
+  inline void read();
+public:
+  TextEditorUI(const uint8_t ID, std::string path);
+  std::string getPath() { return path; };
+public:
+  uint8_t getID() override { return ID; };
+  uint8_t getType() override { return Ui::Type::TEXT_EDITOR; };
+  bool isOpen() { return open; };
+  void render() override;
 };
+}; // namespace PF

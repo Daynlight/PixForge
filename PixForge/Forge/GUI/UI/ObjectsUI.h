@@ -4,22 +4,24 @@
 #include "Objects/Object.h"
 
 namespace PF{
-  class ObjectsUI : public Ui{
-    private:
-      ObjectManager *objects;
-      Vec<int, 4> position = {0, 0, 0, 0};
-      Vec<int, 4> colour = {0, 0, 0, 0};
-      bool addWindowOpen = false;
-    private:
-      const uint8_t ID;
-    private:
-      inline void renderObjectsList();
-      inline void renderAddObjectWindow();
-    public:
-      ObjectsUI(const uint8_t ID, ObjectManager *objects) : ID(ID), objects(objects) {};
-    public:
-      uint8_t getType() override { return Type::OBJECTS_UI; };
-      uint8_t getID() override { return ID; };
-      bool render() override;
-  };
-}
+class ObjectsUI : public Ui{
+private:
+  const uint8_t ID;
+  bool open = true;
+private:
+  ObjectManager *objects;
+  Vec<int, 4> position = {0, 0, 0, 0};
+  Vec<int, 4> colour = {0, 0, 0, 0};
+  bool addWindowOpen = false;
+private:
+  inline void renderObjectsList();
+  inline void renderAddObjectWindow();
+public:
+  ObjectsUI(const uint8_t ID, ObjectManager *objects) : ID(ID), objects(objects) {};
+public:
+  uint8_t getID() override { return ID; };
+  uint8_t getType() override { return Type::OBJECTS_UI; };
+  bool isOpen() override { return open; };
+  void render() override;
+};
+};

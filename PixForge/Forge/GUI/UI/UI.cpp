@@ -33,7 +33,7 @@ void PF::UIManager::save(File *file){
     record += (char)windows[i]->getType();
     record += (char)windows[i]->getID();
     if(windows[i]->getType() == Ui::Type::LOG) record += "";
-    if(windows[i]->getType() == Ui::Type::FILE_EXPLORER) record += static_cast<FileExplorerUI*>(windows[i])->getFolder().getPath();
+    if(windows[i]->getType() == Ui::Type::FILE_EXPLORER) record += static_cast<FileExplorerUI*>(windows[i])->getFolder()->getPath();
     if(windows[i]->getType() == Ui::Type::TEXT_EDITOR) record += static_cast<TextEditorUI*>(windows[i])->getPath();
     if(windows[i]->getType() == Ui::Type::OBJECTS_UI) record += "";
     file->push(record);
