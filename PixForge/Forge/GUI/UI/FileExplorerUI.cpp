@@ -6,7 +6,7 @@ PF::FileExplorerUI::FileExplorerUI(const uint8_t ID, Vector<Ui*> *uis, Folder fo
 };
 
 inline void PF::FileExplorerUI::popUp(){
-  if (ImGui::IsMouseClicked(1)) {
+  if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered()) {
     ImGui::OpenPopup("Options");
   };
   if (ImGui::BeginPopup("Options")) {
