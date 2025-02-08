@@ -61,6 +61,7 @@ public:
 
   void load() { 
     file.read();
+    while(textures.size()) SDL_DestroyTexture(textures.pop());
     Vector<Vector<std::string>> file = this->file.split(';');
     for(size_t i = 0; i < file.size(); i++){
 

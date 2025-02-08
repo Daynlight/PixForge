@@ -40,6 +40,8 @@ void PF::Forge::run(){
 inline void PF::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
+    // [NOTE] this solution is not optimal
+    if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) textures.load();
 
     sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
