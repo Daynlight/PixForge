@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &textures), 
+  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &textures, &window), 
   gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
   Log::log("Window Created");
   Log::log("Objects Created");
@@ -12,7 +12,7 @@ PF::Forge::Forge()
   Log::inf("Textures loaded: "+std::to_string(textures.size()));
   Log::log("Forge Created");
 
-  objects.add(new Sprite(&textures, {0, 0, 400, 200}, 0));
+  objects.add(new Sprite(&textures, {0, 0, 400, 200}, 0, objects.null_texture));
 };
 
 PF::Forge::~Forge(){
