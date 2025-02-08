@@ -48,9 +48,34 @@ inline void PF::ObjectsUI::renderAddColourBox() {
   ImGui::End();
 };
 
+inline void PF::ObjectsUI::renderAddSprite(){
+  ImGui::Begin("Add Object", nullptr, ImGuiWindowFlags_MenuBar);
+
+  ImGui::BeginMenuBar();
+  if(ImGui::Button("exit")) {add_sprite = false; Log::log("Add Sprite Window Closed");}
+  ImGui::EndMenuBar();
+
+  ImGui::InputInt("X: ", &position[0]);
+  ImGui::InputInt("Y: ", &position[1]);
+  ImGui::InputInt("Width: ", &position[2]);
+  ImGui::InputInt("Height: ", &position[3]);
+  if(position[2] < 0) position[2] = 0;
+  if(position[3] < 0) position[3] = 0;
+
+  ImGui::InputInt("texture: ", &texture_index);
+
+  if(ImGui::Button("Add Object")){
+    objects->addSprite(position, texture_index);
+    Log::inf("Sprite Added");
+  };
+
+  ImGui::End();
+};
+
 inline void PF::ObjectsUI::renderProperties(){
   if(show_properties){
     if(objects->objects[properties_index]->getType() == iObject::Type::COLOUR_BOX) renderColourBoxProperties();
+    else if(objects->objects[properties_index]->getType() == iObject::Type::SPRITE) renderSpriteProperties();
   }
 };
 
@@ -84,12 +109,40 @@ inline void PF::ObjectsUI::renderColourBoxProperties(){
   ImGui::End();
 };
 
+inline void PF::ObjectsUI::renderSpriteProperties(){
+  ImGui::Begin("Properties", nullptr, ImGuiWindowFlags_MenuBar);
+
+  ImGui::BeginMenuBar();
+  if(ImGui::Button("exit")) { show_properties = false; Log::log("Properties Window Closed");}
+  ImGui::EndMenuBar();
+
+  if(objects->objects[properties_index]->getType() == iObject::Type::SPRITE){
+    ImGui::Text(objects->objects[properties_index]->getName());
+
+    ImGui::InputInt("X: ", &position[0]);
+    ImGui::InputInt("Y: ", &position[1]);
+    ImGui::InputInt("Width: ", &position[2]);
+    ImGui::InputInt("Height: ", &position[3]);
+
+    ImGui::InputInt("texture: ", &texture_index);
+
+    if(ImGui::Button("Apply")){
+      static_cast<Sprite*>(objects->objects[properties_index])->setPosition(position);
+      static_cast<Sprite*>(objects->objects[properties_index])->setTextureIndex(texture_index);
+      Log::inf("Sprite Properties Applied");
+    };
+  };
+
+  ImGui::End();
+};
+
 void PF::ObjectsUI::render(){
   ImGui::Begin(("Objects (" + std::to_string(id) + ")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if (ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")) {open = false; Log::log("Objects UI Window Closed");}
     if(ImGui::BeginMenu("Add")){
       if(ImGui::MenuItem("ColourBox")) add_colour_box = !add_colour_box;
+      if(ImGui::MenuItem("Sprite")) add_sprite = !add_sprite;
       ImGui::EndMenu();
     };
     ImGui::EndMenuBar();
@@ -102,5 +155,6 @@ void PF::ObjectsUI::render(){
   ImGui::End();
 
   if(add_colour_box) renderAddColourBox();
+  else if(add_sprite) renderAddSprite();
   else if(show_properties) renderProperties();
 };

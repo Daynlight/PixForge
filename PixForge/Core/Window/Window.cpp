@@ -2,6 +2,7 @@
 
 PF::Window::Window(const char* title) {
   Folder settings = Folder("settings/");
+  if(!settings.exist()) settings.createFolder();
   loadWindowSettings();
 
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
@@ -18,7 +19,7 @@ PF::Window::~Window(){
 };
 
 inline void PF::Window::createWindow(const char *title){
-  if(window_settings.notExist())
+  if(!window_settings.size())
     window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
     window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
@@ -45,11 +46,18 @@ inline void PF::Window::saveWindowSettings() {
   window_settings.push(std::to_string(window_location.w));
   window_settings.push(std::to_string(window_location.h));
   window_settings.push(std::to_string(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0));
+  std::string record = window_settings.concat(';');
+  window_settings.clear();
+  window_settings.push(record);
   window_settings.save();
 };
 
 inline void PF::Window::loadWindowSettings() {
+  if(!window_settings.notExist()) window_settings.createFile();
   window_settings.read();
+  Vector<std::string> record = window_settings.split(';')[0];
+  window_settings.clear();
+  for(size_t i = 0; i < record.size(); i++) window_settings.push(record[i]);
 };
 
 SDL_Rect PF::Window::getWindowSizesAndPosition(){

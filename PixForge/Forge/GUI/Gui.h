@@ -5,7 +5,7 @@
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 
-#include "Objects/ObjectManager.h"
+#include "Renderer/Objects/ObjectManager.h"
 #include "Ui/UiManager.h"
 
 #include "Tools/Log.h"
