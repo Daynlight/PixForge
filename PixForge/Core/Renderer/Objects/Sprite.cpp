@@ -9,8 +9,21 @@ void PF::Sprite::render(PF::Window *window){
 }
 
 const std::string PF::Sprite::save(){
-  return "";
+  Vector<std::string> record;
+  record.push(std::to_string(static_cast<int>(getType())));
+  record.push(std::to_string(position[0]));
+  record.push(std::to_string(position[1]));
+  record.push(std::to_string(position[2]));
+  record.push(std::to_string(position[3]));
+  record.push(std::to_string(texture_index));
+  std::string record_string = record.concat(';');
+  return record_string;
 }
 
-void PF::Sprite::load(const std::string &record){
-}
+void PF::Sprite::load(Vector<std::string> record){
+  position[0] = std::stoi(record[1]);
+  position[1] = std::stoi(record[2]);
+  position[2] = std::stoi(record[3]);
+  position[3] = std::stoi(record[4]);
+  texture_index = std::stoi(record[5]);
+};

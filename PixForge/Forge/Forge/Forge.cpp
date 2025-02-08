@@ -11,8 +11,6 @@ PF::Forge::Forge()
   textures.load();
   Log::inf("Textures loaded: "+std::to_string(textures.size()));
   Log::log("Forge Created");
-
-  objects.add(new Sprite(&textures, {0, 0, 400, 200}, 0, objects.null_texture));
 };
 
 PF::Forge::~Forge(){
