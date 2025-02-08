@@ -19,5 +19,7 @@ public:
   const std::string save() override;
   void load(Vector<std::string> record) override;
   void render(Window *window) override;
+  void setPosition(Vec<int, 4> position) { this->position = position; };
+  void setTextureIndex(size_t texture_index) { this->texture_index = texture_index; };
 };
 }; // namespace PF

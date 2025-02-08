@@ -28,6 +28,7 @@ public:
   };
   ~ObjectManager() { for(size_t i = 0; i < objects.size(); i++) delete objects[i]; };
   void add(iObject* object) { objects.push(object); };
+  void addSprite(Vec<int, 4> position, size_t texture_index) { objects.push(new Sprite(texture, position, texture_index, null_texture)); };
   void load();
   void save();
 };
