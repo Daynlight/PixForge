@@ -1,7 +1,7 @@
 #pragma once
 #include <stdexcept>
-#include "STL/File.h"
-#include "STL/Folder.h"
+#include "STL/File/File.h"
+#include "STL/Folder/Folder.h"
 
 #include "SDL2/SDL.h"
 #include "imgui.h"
@@ -11,13 +11,13 @@
 #define WINDOW_POSITION SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
 #define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 
-namespace PF{
+namespace PF::Core{
 class Window{
 private:
   SDL_Window *window;
   SDL_Renderer *renderer;
 private:
-  File window_settings = File("settings/window_settings.ini");
+  STL::File window_settings = STL::File("settings/window_settings.ini");
   bool running = true;
 private:
   inline void changeFullScreenDesktop();
@@ -35,4 +35,4 @@ public:
   SDL_Window* getWindow() { return window; };
   bool isRunning() { return running; };
 }; 
-}; // namespace PF
+}; // namespace PF::Core

@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 
-namespace PF{
+namespace PF::STL{
 template<typename T, size_t S>
 class Vec{
 public:
@@ -19,4 +19,4 @@ public:
   T& operator[](size_t i){ return data[i]; }
   ~Vec(){};
 };
-}; // namespace PF
+}; // namespace PF::STL

@@ -1,15 +1,15 @@
 #pragma once
-#include "../STL/Vector.h"
+#include "../STL/Vector/Vector.h"
 #include "SDL2/SDL.h"
 #include "../vendor/SDL2_image/SDL_image.h"
-#include "../STL/File.h"
+#include "../STL/File/File.h"
 #include "Window/Window.h"
 
-namespace PF{
+namespace PF::Core::Renderer{
 class Texture{
 private:
-  Vector<SDL_Texture*> textures;
-  File file;
+  STL::Vector<SDL_Texture*> textures;
+  STL::File file;
   Window* window;
 public:
   Texture(const std::string& path, Window* window) : file(path), window(window) {};
@@ -42,7 +42,7 @@ public:
       SDL_RenderReadPixels(window->getRenderer(), &rect, SDL_PIXELFORMAT_RGBA32, pixels, pitch);
       SDL_SetRenderTarget(window->getRenderer(), NULL);
 
-      Vector<std::string> record;
+      STL::Vector<std::string> record;
       record.push(std::to_string(width));
       record.push(std::to_string(height));
       record.push(std::to_string(pitch));
@@ -62,7 +62,7 @@ public:
   void load() { 
     file.read();
     while(textures.size()) SDL_DestroyTexture(textures.pop());
-    Vector<Vector<std::string>> file = this->file.split(';');
+    STL::Vector<STL::Vector<std::string>> file = this->file.split(';');
     for(size_t i = 0; i < file.size(); i++){
 
       int width = std::stoi(file[i][0]);
@@ -89,4 +89,4 @@ public:
     };
   };
 };
-}; // namespace PF
+}; // namespace PF::Core::Renderer

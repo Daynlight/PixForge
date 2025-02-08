@@ -5,20 +5,20 @@
 
 #include "Gui/Gui.h"
 #include "Sandbox.h"
-#include "Renderer/Objects/ObjectManager.h"
+#include "Renderer/Objects/Manager.h"
 #include "Renderer/Texture.h"
 
 #include "Tools/Log.h"
 #include "Settings.h"
 
-namespace PF{
+namespace PF::Forge{
 class Forge{
 private:
-  Window window;
+  Core::Window window;
   Sandbox sandbox;
   Gui gui;
-  ObjectManager objects;
-  Texture textures;
+  Core::Renderer::Objects::Manager objects;
+  Core::Renderer::Texture textures;
 private:
   inline void events();
 public:
@@ -26,4 +26,4 @@ public:
   ~Forge();
   void run();
 };
-}; // namespace PF
+}; // namespace PF::Forge

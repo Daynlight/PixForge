@@ -1,8 +1,8 @@
 #include "Gui.h"
 
-PF::Gui::Gui(const std::string &path, Window *window, ObjectManager* object) 
+PF::Forge::Gui::Gui(const std::string &path, Core::Window *window, Core::Renderer::Objects::Manager* object) 
   :window(window), ui(object, path){
-  Log::log("Gui Created");
+  Tools::Log::log("Gui Created");
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -16,27 +16,27 @@ PF::Gui::Gui(const std::string &path, Window *window, ObjectManager* object)
  
   ImGui_ImplSDL2_InitForSDLRenderer(window->getWindow(), window->getRenderer());
   ImGui_ImplSDLRenderer2_Init(window->getRenderer());
-  Log::log("ImGui Initialized");
+  Tools::Log::log("ImGui Initialized");
 
-  Folder settings = Folder("settings/");
+  STL::Folder settings = STL::Folder("settings/");
   if(!settings.exist()) {
     settings.createFolder();
-    Log::war("settings folder Created");
+    Tools::Log::war("settings folder Created");
   };
 
   ui.load();
 };
 
-PF::Gui::~Gui(){
+PF::Forge::Gui::~Gui(){
   ui.save();
   ImGui_ImplSDLRenderer2_Shutdown();
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
-  Log::inf("ImGui Destroyed");
-  Log::inf("Gui Destroyed");
+  Tools::Log::inf("ImGui Destroyed");
+  Tools::Log::inf("Gui Destroyed");
 };
 
-inline void PF::Gui::renderDock() {
+inline void PF::Forge::Gui::renderDock() {
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
   ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -60,20 +60,20 @@ inline void PF::Gui::renderDock() {
   ImGui::End();
 };
 
-inline void PF::Gui::renderTopBar(){
+inline void PF::Forge::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) ui.addWindow(iUi::Type::LOG);
-        if (ImGui::MenuItem("File Explorer [assets]")) ui.addWindow(iUi::Type::FILE_EXPLORER);
-        if (ImGui::MenuItem("Text Editor")) ui.addWindow(iUi::Type::TEXT_EDITOR);
-        if (ImGui::MenuItem("Objects")) ui.addWindow(iUi::Type::OBJECTS_UI);
+        if (ImGui::MenuItem("Log")) ui.addWindow(Ui::iUi::Type::LOG);
+        if (ImGui::MenuItem("File Explorer [assets]")) ui.addWindow(Ui::iUi::Type::FILE_EXPLORER);
+        if (ImGui::MenuItem("Text Editor")) ui.addWindow(Ui::iUi::Type::TEXT_EDITOR);
+        if (ImGui::MenuItem("Objects")) ui.addWindow(Ui::iUi::Type::OBJECTS_UI);
         ImGui::EndMenu();
     };
     ImGui::EndMainMenuBar();
   };
 };
 
-void PF::Gui::renderGui(){
+void PF::Forge::Gui::renderGui(){
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame();
   ImGui::NewFrame();
@@ -89,6 +89,6 @@ void PF::Gui::renderGui(){
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
 };
 
-void PF::Gui::guiEvent(SDL_Event* event){
+void PF::Forge::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
 };

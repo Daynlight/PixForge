@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace PF{
+namespace PF::STL{
 template<typename T>
 class Vector{
 private:
@@ -21,6 +21,6 @@ public:
   Vector<Vector<std::string>> split(const char sep);
   std::string concat(const char sep);
 };
-}; // namespace PF
+}; // namespace PF::STL
 
 #include "Vector.hpp"

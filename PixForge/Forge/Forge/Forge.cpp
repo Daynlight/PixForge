@@ -1,33 +1,33 @@
 #include "Forge.h"
 
-PF::Forge::Forge()
+PF::Forge::Forge::Forge()
   :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &textures, &window), 
   gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
-  Log::log("Window Created");
-  Log::log("Objects Created");
+  Tools::Log::log("Window Created");
+  Tools::Log::log("Objects Created");
   objects.load();
-  Log::inf("Objects loaded: "+std::to_string(objects.objects.size()));
-  Log::log("Texture Created");
+  Tools::Log::inf("Objects loaded: "+std::to_string(objects.objects.size()));
+  Tools::Log::log("Texture Created");
   textures.load();
-  Log::inf("Textures loaded: "+std::to_string(textures.size()));
-  Log::log("Forge Created");
+  Tools::Log::inf("Textures loaded: "+std::to_string(textures.size()));
+  Tools::Log::log("Forge Created");
 };
 
-PF::Forge::~Forge(){
+PF::Forge::Forge::~Forge(){
   objects.save();
-  Log::inf("Objects saved: "+std::to_string(objects.objects.size()));
-  Log::log("Objects Destroyed");
+  Tools::Log::inf("Objects saved: "+std::to_string(objects.objects.size()));
+  Tools::Log::log("Objects Destroyed");
   textures.save();
-  Log::inf("Textures saved: "+std::to_string(textures.size()));
-  Log::log("Textures Destroyed");
-  Log::log("Window Destroyed");
-  Log::log("Forge Destroyed");
+  Tools::Log::inf("Textures saved: "+std::to_string(textures.size()));
+  Tools::Log::log("Textures Destroyed");
+  Tools::Log::log("Window Destroyed");
+  Tools::Log::log("Forge Destroyed");
 };
 
-void PF::Forge::run(){
-  Log::inf("Forge Running");
+void PF::Forge::Forge::run(){
+  Tools::Log::inf("Forge Running");
   while (window.isRunning()){
-    Renderer::background(&window, backgroundColour);
+    Core::Renderer::background(&window, backgroundColour);
 
     sandbox.run();
 
@@ -37,7 +37,7 @@ void PF::Forge::run(){
   };
 };
 
-inline void PF::Forge::events(){
+inline void PF::Forge::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
     // [NOTE] this solution is not optimal

@@ -1,6 +1,6 @@
 #include "Folder.h"
 
-PF::Folder PF::Folder::back(){
+PF::STL::Folder PF::STL::Folder::back(){
   std::string temp = path;
   temp.pop_back();
   while(temp.size() != 0 && temp.back() != '/') 
@@ -9,7 +9,7 @@ PF::Folder PF::Folder::back(){
   return Folder(path);
 };
 
-void PF::Folder::fetchList() {
+void PF::STL::Folder::fetchList() {
   files.clear(); 
   for(auto& p: std::filesystem::directory_iterator(path)){
     if(p.is_directory()) files.push(std::pair<char, std::string>('d', p.path().filename().string() + "/"));
