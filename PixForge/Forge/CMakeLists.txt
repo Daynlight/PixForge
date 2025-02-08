@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Forge WIN32 ${src} ${libs} ${core} ${game})
 
-file(GLOB_RECURSE libraries "../vendor/SDL2/lib/**.a")
+file(GLOB_RECURSE libraries "../vendor/SDL2/lib/**.a" "../vendor/SDL2_image/lib/**.a")
 target_link_libraries(Forge PRIVATE 
     ${libraries}
     winmm
@@ -27,4 +27,5 @@ target_include_directories(Forge PRIVATE ".")
 target_include_directories(Forge PRIVATE "../Core/")
 target_include_directories(Forge PRIVATE "../Game/Sandbox/")
 target_include_directories(Forge PRIVATE "../vendor/SDL2/")
+target_include_directories(Forge PRIVATE "../vendor/SDL2_image/")
 target_include_directories(Forge PRIVATE "../vendor/imgui/")

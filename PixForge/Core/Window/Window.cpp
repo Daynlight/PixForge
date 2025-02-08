@@ -2,6 +2,7 @@
 
 PF::Window::Window(const char* title) {
   Folder settings = Folder("settings/");
+  if(!settings.exist()) settings.createFolder();
   loadWindowSettings();
 
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
@@ -18,7 +19,7 @@ PF::Window::~Window(){
 };
 
 inline void PF::Window::createWindow(const char *title){
-  if(window_settings.notExist())
+  if(!window_settings.size())
     window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
     window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
@@ -49,6 +50,7 @@ inline void PF::Window::saveWindowSettings() {
 };
 
 inline void PF::Window::loadWindowSettings() {
+  if(!window_settings.notExist()) window_settings.createFile();
   window_settings.read();
 };
 

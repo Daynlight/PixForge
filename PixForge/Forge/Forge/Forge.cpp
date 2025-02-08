@@ -1,11 +1,15 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), objects("objects.bin"), gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
+  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin"), 
+  gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
   Log::log("Window Created");
   Log::log("Objects Created");
   objects.load();
   Log::inf("Objects loaded: "+std::to_string(objects.objects.size()));
+  Log::log("Texture Created");
+  textures.load();
+  Log::inf("Textures loaded: "+std::to_string(textures.size()));
   Log::log("Forge Created");
 };
 
@@ -13,6 +17,9 @@ PF::Forge::~Forge(){
   objects.save();
   Log::inf("Objects saved: "+std::to_string(objects.objects.size()));
   Log::log("Objects Destroyed");
+  textures.save();
+  Log::inf("Textures saved: "+std::to_string(textures.size()));
+  Log::log("Textures Destroyed");
   Log::log("Window Destroyed");
   Log::log("Forge Destroyed");
 };
@@ -21,6 +28,11 @@ void PF::Forge::run(){
   Log::inf("Forge Running");
   while (window.isRunning()){
     Renderer::background(&window, backgroundColour);
+
+    //render texture
+    SDL_Rect rect = {0, 0, 100, 100};
+    SDL_RenderCopy(window.getRenderer(), textures[0], nullptr, &rect);
+
 
     sandbox.run();
 
