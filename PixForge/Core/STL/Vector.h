@@ -18,6 +18,8 @@ public:
   T remove(const size_t index);
   void clear();
   T& operator[](const size_t index);
+  Vector<Vector<std::string>> split(const char sep);
+  std::string concat(const char sep);
 };
 }; // namespace PF
 

@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin"), 
+  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &textures, &window), 
   gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
   Log::log("Window Created");
   Log::log("Objects Created");
@@ -29,11 +29,6 @@ void PF::Forge::run(){
   while (window.isRunning()){
     Renderer::background(&window, backgroundColour);
 
-    //render texture
-    SDL_Rect rect = {0, 0, 100, 100};
-    SDL_RenderCopy(window.getRenderer(), textures[0], nullptr, &rect);
-
-
     sandbox.run();
 
     gui.renderGui();
@@ -45,6 +40,8 @@ void PF::Forge::run(){
 inline void PF::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
+    // [NOTE] this solution is not optimal
+    if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) textures.load();
 
     sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);

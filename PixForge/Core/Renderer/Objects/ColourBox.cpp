@@ -10,23 +10,16 @@ void PF::ColourBox::render(Window *window) {
   SDL_RenderFillRect(window->getRenderer(), &tempRect);
 };
 
-void PF::ColourBox::load(const std::string &record){
-  for(size_t i = 0; i < 4; i++)
-    for(size_t j = 0; j < 4; j++)
-      position[i].c[j] = record[i*4+j+1];
-
-  for(size_t i = 0; i < 4; i++) colour[i] = record[4*4 + 1 + i];
+void PF::ColourBox::load(Vector<std::string> record){
+  for(size_t i = 0; i < 4; i++) position[i].i = std::stoi(record[i + 1]);
+  for(size_t i = 0; i < 4; i++) colour[i] = std::stoi(record[i + 4 + 1]);
 };
 
 const std::string PF::ColourBox::save(){
-  std::string record = "";
-  record += (char)getType();
-  
-  for(size_t i = 0; i < 4; i++) 
-    for(size_t j = 0; j < 4; j++)
-      record += position[i].c[j];
-  
-  for(size_t i = 0; i < 4; i++) record += colour[i];
-  
-  return record;
+  Vector<std::string> record;
+  record.push(std::to_string(static_cast<int>(getType())));
+  for(size_t i = 0; i < 4; i++) record.push(std::to_string(position[i].i));
+  for(size_t i = 0; i < 4; i++) record.push(std::to_string(colour[i]));
+  std::string record_string = record.concat(';');
+  return record_string;
 };

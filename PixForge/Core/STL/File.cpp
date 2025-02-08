@@ -1,6 +1,7 @@
 #include "File.h"
 
-void PF::File::read(){
+void PF::File::read()
+{
   file.seekg(0, std::ios::beg);
   std::string line;
   while(std::getline(file, line)) data.push(line);

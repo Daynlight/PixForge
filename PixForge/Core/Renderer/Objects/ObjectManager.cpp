@@ -3,11 +3,13 @@
 void PF::ObjectManager::load(){
   file.read();
   if(!file.notExist()){
+    Vector<Vector<std::string>> records = file.split(';');
     for(size_t i = 0; i < file.size(); i++) {
-      std::string record = file[i];
-      iObject::Type type = static_cast<iObject::Type>(record[0]);
+      Vector<std::string> record = records[i];
+      iObject::Type type = static_cast<iObject::Type>(std::stoi(record[0]));
 
-      if(type == iObject::Type::SPRITE) objects.push(new Sprite());
+      if(type == iObject::Type::SPRITE) objects.push(new Sprite(texture, record, null_texture));
+      else
       if(type == iObject::Type::COLOUR_BOX) { objects.push(new ColourBox(record)); };
     };
   };
