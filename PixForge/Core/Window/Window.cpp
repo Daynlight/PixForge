@@ -46,12 +46,18 @@ inline void PF::Window::saveWindowSettings() {
   window_settings.push(std::to_string(window_location.w));
   window_settings.push(std::to_string(window_location.h));
   window_settings.push(std::to_string(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0));
+  std::string record = window_settings.concat(';');
+  window_settings.clear();
+  window_settings.push(record);
   window_settings.save();
 };
 
 inline void PF::Window::loadWindowSettings() {
   if(!window_settings.notExist()) window_settings.createFile();
   window_settings.read();
+  Vector<std::string> record = window_settings.split(';')[0];
+  window_settings.clear();
+  for(size_t i = 0; i < record.size(); i++) window_settings.push(record[i]);
 };
 
 SDL_Rect PF::Window::getWindowSizesAndPosition(){
