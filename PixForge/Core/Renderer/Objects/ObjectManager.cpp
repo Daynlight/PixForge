@@ -7,7 +7,7 @@ void PF::ObjectManager::load(){
       std::string record = file[i];
       iObject::Type type = static_cast<iObject::Type>(record[0]);
 
-      if(type == iObject::Type::SPRITE) objects.push(new Sprite());
+      // if(type == iObject::Type::SPRITE) objects.push(new Sprite(texture));
       if(type == iObject::Type::COLOUR_BOX) { objects.push(new ColourBox(record)); };
     };
   };

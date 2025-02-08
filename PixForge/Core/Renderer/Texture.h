@@ -1,6 +1,7 @@
 #pragma once
 #include "../STL/Vector.h"
 #include "SDL2/SDL.h"
+#include "../vendor/SDL2_image/SDL_image.h"
 #include "../STL/File.h"
 #include "Window/Window.h"
 
@@ -27,7 +28,7 @@ public:
     SDL_SetRenderTarget(window->getRenderer(), NULL);
     SDL_FreeSurface(surface);
   };
-  
+
   void save() { 
     if(file.notExist()) file.createFile();
     file.clear();

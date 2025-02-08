@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge()
-  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin"), 
+  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &textures), 
   gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
   Log::log("Window Created");
   Log::log("Objects Created");
@@ -11,6 +11,8 @@ PF::Forge::Forge()
   textures.load();
   Log::inf("Textures loaded: "+std::to_string(textures.size()));
   Log::log("Forge Created");
+
+  objects.add(new Sprite(&textures, {0, 0, 400, 200}, 0));
 };
 
 PF::Forge::~Forge(){
@@ -28,11 +30,6 @@ void PF::Forge::run(){
   Log::inf("Forge Running");
   while (window.isRunning()){
     Renderer::background(&window, backgroundColour);
-
-    //render texture
-    SDL_Rect rect = {0, 0, 100, 100};
-    SDL_RenderCopy(window.getRenderer(), textures[0], nullptr, &rect);
-
 
     sandbox.run();
 
