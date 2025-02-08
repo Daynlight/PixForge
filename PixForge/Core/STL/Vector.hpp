@@ -49,3 +49,31 @@ inline T PF::Vector<T>::remove(const size_t index){
 
 template<typename T>
 T &PF::Vector<T>::operator[](const size_t index){ return data[index]; };
+
+template<typename T>
+PF::Vector<PF::Vector<std::string>> PF::Vector<T>::split(const char sep){
+  Vector<Vector<std::string>> result;
+  for(int i = 0; i < _size; i++){
+    Vector<std::string> temp;
+    std::string line = data[i];
+    std::string word = "";
+    for(int j = 0; j < line.size(); j++){
+      if(line[j] == sep){
+        temp.push(word);
+        word = "";
+      }else{
+        word += line[j];
+      };
+    };
+    temp.push(word);
+    result.push(temp);
+  };
+  return result;
+};
+
+template<typename T>
+std::string PF::Vector<T>::concat(const char sep){
+  std::string result = "";
+  for(size_t i = 0; i < _size; i++) result += data[i] + sep;
+  return result;
+};

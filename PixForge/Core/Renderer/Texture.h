@@ -29,29 +29,28 @@ public:
   void save() { 
     if(file.notExist()) file.createFile();
     file.clear();
-    size_t size = textures.size();
-    for(int i = 0; i < size; i++){
+    for(int i = 0; i < textures.size(); i++){
       int width, height;
       SDL_QueryTexture(textures[i], NULL, NULL, &width, &height);
-
       Uint32* pixels = new Uint32[width * height];
       SDL_Rect rect =  SDL_Rect({0,0,width,height});
       int pitch = width * sizeof(Uint32);
-
       SDL_SetRenderTarget(window->getRenderer(), textures[i]);
       SDL_RenderReadPixels(window->getRenderer(), &rect, SDL_PIXELFORMAT_RGBA32, pixels, pitch);
       SDL_SetRenderTarget(window->getRenderer(), NULL);
 
-      std::string record = "";
-      record += std::to_string(width) + " " + std::to_string(height) + " ";
-      record += std::to_string(pitch) + " ";
+      Vector<std::string> record;
+      record.push(std::to_string(width));
+      record.push(std::to_string(height));
+      record.push(std::to_string(pitch));
       for(int y = 0; y < height; y++){
         for(int x = 0; x < width; x++){
           Uint32 pixel = pixels[y * width + x];
-          record += std::to_string(pixel) + " ";
+          record.push(std::to_string(pixel));
         };
       };
-      file.push(record);
+      std::string record_string = record.concat(';');
+      file.push(record_string);
       delete[] pixels;
     };
     file.save();
@@ -59,47 +58,28 @@ public:
 
   void load() { 
     file.read();
+    Vector<Vector<std::string>> file = this->file.split(';');
     for(size_t i = 0; i < file.size(); i++){
-      std::string record = file[i];
-      std::string width = "";
-      std::string height = "";
-      std::string pitch = "";
-      std::string pixels = "";
-      size_t state = 0;
-      std::string line = "";
-      for(size_t j = 0; j < record.size(); j++){
-        if(record[j] == ' '){
-          if(state == 0) width = line;
-          if(state == 1) height = line;
-          if(state == 2) { pitch = line; state = j + 1; break; }
-          state++;
-          line = "";
-        }
-        else line += record[j];
-      };
-      line = "";
-      int w = std::stoi(width);
-      int h = std::stoi(height);
-      int p = std::stoi(pitch);
-      Uint32* pixel = new Uint32[w * h];
-      size_t pixelIndex = 0;
-      for(size_t j = state; j < record.size(); j++){
-        if(record[j] == ' '){
-          Uint32 pixelValue = std::stoul(line);
-          pixel[pixelIndex] = pixelValue;
-          pixelIndex++;
-          line = "";
-        }
-        else line += record[j];
+
+      int width = std::stoi(file[i][0]);
+      int height = std::stoi(file[i][1]);
+      int pitch = std::stoi(file[i][2]);
+      Uint32* pixel = new Uint32[width * height];
+
+      for(int y = 0; y < height; y++){
+        for(int x = 0; x < width; x++){
+          pixel[y * width + x] = std::stoul(file[i][3 + y * width + x]);
+        };
       };
 
-      SDL_Surface* surface = IMG_Load("texture.png");
-      SDL_Texture* texture = SDL_CreateTexture(window->getRenderer(), SDL_PIXELFORMAT_RGBA32,
-        SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
+      SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixel, width, height, 32, pitch, 0, 0, 0, 0);
+      SDL_Texture* texture = SDL_CreateTexture(window->getRenderer(), SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
       SDL_SetRenderTarget(window->getRenderer(), texture);
       SDL_UpdateTexture(texture, NULL, surface->pixels, surface->pitch);
       SDL_SetRenderTarget(window->getRenderer(), NULL);
+
       textures.push(texture);
+
       SDL_FreeSurface(surface);
       delete[] pixel;
     };
