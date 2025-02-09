@@ -1,9 +1,9 @@
 #pragma once
-#include "Vector.h"
-#include "File.h"
+#include "STL/Vector/Vector.h"
+#include "STL/File/File.h"
 #include <filesystem>
 
-namespace PF{
+namespace PF::STL{
 class Folder{
 private:
   std::string path;
@@ -24,4 +24,4 @@ public:
   void fetchList();
   Folder back();
 };
-}; // namespace PF
+}; // namespace PF::STL

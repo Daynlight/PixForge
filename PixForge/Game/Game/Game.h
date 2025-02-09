@@ -5,9 +5,9 @@
 namespace PF {
 class Game{
 private:
-  Window *window;    
+  Core::Window *window;    
 public:
-  Game(Window *window);
+  Game(Core::Window *window);
   void run();
   void event();
 };

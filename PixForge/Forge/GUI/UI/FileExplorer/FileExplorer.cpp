@@ -1,12 +1,12 @@
-#include "FileExplorerUi.h"
+#include "FileExplorer.h"
 
-PF::FileExplorerUI::FileExplorerUI(const uint8_t id, Vector<iUi*> *uis, Folder folder) : id(id), uis(uis), folder(folder){
+PF::Forge::Ui::FileExplorer::FileExplorer(const uint8_t id, STL::Vector<iUi*> *uis, STL::Folder folder) : id(id), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
-  Log::log("File Explorer UI Window Opened: "+this->folder.getPath());
+  Tools::Log::log("File Explorer UI Window Opened: "+this->folder.getPath());
 };
 
-inline void PF::FileExplorerUI::popUp(){
+inline void PF::Forge::Ui::FileExplorer::popUp(){
   if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered()) {
     ImGui::OpenPopup("Options");
   };
@@ -21,7 +21,7 @@ inline void PF::FileExplorerUI::popUp(){
   };
 };
 
-inline void PF::FileExplorerUI::fileManager() {
+inline void PF::Forge::Ui::FileExplorer::fileManager() {
   if(ImGui::Button("new folder")) create_folder = !create_folder;
   if(create_folder){ 
     ImGui::SameLine();    
@@ -31,7 +31,7 @@ inline void PF::FileExplorerUI::fileManager() {
       folder.openFolder(folder_name).createFolder();
       folder.fetchList();
       create_folder = false;
-      Log::inf("Folder created: "+std::string(folder_name) + "/");
+      Tools::Log::inf("Folder created: "+std::string(folder_name) + "/");
     };
   };
 
@@ -44,12 +44,12 @@ inline void PF::FileExplorerUI::fileManager() {
       folder.openFile(file_name).createFile();
       folder.fetchList();
       create_file = false;
-      Log::inf("File created: "+std::string(file_name));
+      Tools::Log::inf("File created: "+std::string(file_name));
     };
   };
 };
 
-inline void PF::FileExplorerUI::mainMenuBar(){
+inline void PF::Forge::Ui::FileExplorer::mainMenuBar(){
   if(ImGui::BeginMenuBar()){
   ImGui::Text(folder.getPath().c_str());
   
@@ -57,17 +57,17 @@ inline void PF::FileExplorerUI::mainMenuBar(){
   if(ImGui::Button("back")) {
     folder = folder.back();
     folder.fetchList();
-    Log::log("Folder back: "+folder.getPath());
+    Tools::Log::log("Folder back: "+folder.getPath());
   };
   
   if(ImGui::Button("refresh")) folder.fetchList();
   ImGui::SameLine();
-  if(ImGui::Button("exit")) {open = false; Log::log("File Explorer UI Window Closed: "+folder.getPath());};
+  if(ImGui::Button("exit")) {open = false; Tools::Log::log("File Explorer UI Window Closed: "+folder.getPath());};
   ImGui::EndMenuBar();
   };
 };
 
-inline void PF::FileExplorerUI::renderFolder() {
+inline void PF::Forge::Ui::FileExplorer::renderFolder() {
   ImGui::Text("Files:");
   ImGui::Separator();
   
@@ -93,10 +93,10 @@ inline void PF::FileExplorerUI::renderFolder() {
         try{
           folder.remove(folder[i].second);
           folder.fetchList();
-          Log::inf("File/Folder removed: "+folder[i].second);
+          Tools::Log::inf("File/Folder removed: "+folder[i].second);
         }
         catch(const std::exception &e){
-          Log::err("Can't remove file/folder in use!!");
+          Tools::Log::err("Can't remove file/folder in use!!");
         }
       }
       ImGui::EndPopup();
@@ -106,10 +106,10 @@ inline void PF::FileExplorerUI::renderFolder() {
       if(folder[i].first == 'd') {
         folder = folder.openFolder(folder[i].second);
         folder.fetchList();
-        Log::log("Folder open: "+folder.getPath());
+        Tools::Log::log("Folder open: "+folder.getPath());
         break;
       } else {
-        uis->push(new TextEditorUI(generateUniqueID(uis), folder.getPath() + folder[i].second));
+        uis->push(new TextEditor(generateUniqueID(uis), folder.getPath() + folder[i].second));
       }
     }
 
@@ -119,7 +119,7 @@ inline void PF::FileExplorerUI::renderFolder() {
   ImGui::Columns(1);
 };
 
-void PF::FileExplorerUI::render(){
+void PF::Forge::Ui::FileExplorer::render(){
   ImGui::Begin(("File Explorer ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
 
   popUp();
