@@ -19,9 +19,10 @@ private:
   STL::Vec<int, 4> position = {0, 0, 0, 0};
 private:
   unsigned int texture_index = 0;
+  Texture* textures = nullptr;
 public:
-  Sprite(STL::Vec<int, 4> position, unsigned int texture_index) : position(position), texture_index(texture_index) {};
-  Sprite(const STL::Vector<const char*> &record) { load(record); };
+  Sprite(Texture* textures, STL::Vec<int, 4> position, unsigned int texture_index) : textures(textures), position(position), texture_index(texture_index) {};
+  Sprite(Texture* textures, const STL::Vector<const char*> &record) : textures(textures) { load(record); };
 public:
   const char* save() const override;
   const void load(const STL::Vector<const char*> &record) override;

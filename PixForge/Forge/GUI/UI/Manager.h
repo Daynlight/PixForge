@@ -15,7 +15,7 @@ public:
   Core::Renderer::Objects::Manager *objects;
   STL::File file;
 public:
-  Manager(Core::Renderer::Objects::Manager *objects, const std::string& path) : objects(objects), file(path) {};
+  Manager(const std::string& path) : file(path) {};
   ~Manager(){ for(size_t i = 0; i < windows.size(); i++) delete windows[i]; };
   void load();
   void save();

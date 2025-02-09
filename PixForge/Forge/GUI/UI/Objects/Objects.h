@@ -11,7 +11,6 @@ private:
   const uint8_t id;
   bool open = true;
 private:
-  Core::Renderer::Objects::Manager *objects;
   STL::Vec<int, 4> position = {0, 0, 0, 0};
   STL::Vec<float, 4> colour = {0, 0, 0, 0};
   int texture_index = 0;
@@ -28,7 +27,7 @@ private:
   inline void renderColourBoxProperties();
   inline void renderSpriteProperties();
 public:
-  Objects(const uint8_t id, Core::Renderer::Objects::Manager *objects) : id(id), objects(objects) { Tools::Log::log("Objects UI Window Opened"); };
+  Objects(const uint8_t id) : id(id) { Tools::Log::log("Objects UI Window Opened"); };
 public:
   uint8_t getID() override { return id; };
   uint8_t getType() override { return Type::OBJECTS_UI; };

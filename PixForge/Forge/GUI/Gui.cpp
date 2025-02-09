@@ -1,7 +1,7 @@
 #include "Gui.h"
 
-PF::Forge::Gui::Gui(const std::string &path, Core::Window *window, Core::Renderer::Objects::Manager* object) 
-  :window(window), ui(object, path){
+PF::Forge::Gui::Gui(const std::string &path, Core::Window *window) 
+  :window(window), ui(path){
   Tools::Log::log("Gui Created");
 
   IMGUI_CHECKVERSION();

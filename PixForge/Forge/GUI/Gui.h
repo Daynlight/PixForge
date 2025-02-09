@@ -19,7 +19,7 @@ private:
   inline void renderDock();
   inline void renderTopBar();
 public:
-  Gui(const std::string &path, Core::Window* window, Core::Renderer::Objects::Manager* object);
+  Gui(const std::string &path, Core::Window* window);
   ~Gui();
   void renderGui();
   void guiEvent(SDL_Event* event);

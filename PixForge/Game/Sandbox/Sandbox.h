@@ -8,9 +8,8 @@ namespace PF {
 class Sandbox{
 private:
   Core::Window *window;
-  Core::Renderer::Objects::Manager *objects;
 public:
-  Sandbox(Core::Window *window, Core::Renderer::Objects::Manager *objects) : window(window), objects(objects) { Tools::Log::log("Sandbox Created"); };
+  Sandbox(Core::Window *window) : window(window) { Tools::Log::log("Sandbox Created"); };
   void run();
   void event(SDL_Event* event);
 };

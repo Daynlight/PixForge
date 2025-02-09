@@ -8,17 +8,15 @@
 
 namespace PF::Core::Renderer{
 class Texture{
-public:
-  static Texture *texture;
 private:
   STL::Vector<SDL_Texture*> textures;
   STL::File file;
   Window* window;
 public:
-  Texture(const std::string& path, Window* window) : file(path), window(window) { delete Texture::texture; Texture::texture = this; };
+  Texture(const std::string& path, Window* window) : file(path), window(window) {};
   ~Texture(){ clear(); };
 public:
-  inline const void addTextureFromFile(const std::string &path);
+  inline const void addTextureFromFile(const char* path);
   inline const void addTexture(SDL_Texture* texture) { textures.push(texture); };
   const void save();
   const void load();

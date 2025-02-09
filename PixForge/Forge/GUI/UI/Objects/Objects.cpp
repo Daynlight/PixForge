@@ -1,18 +1,18 @@
 #include "Objects.h"
 
 inline void PF::Forge::Ui::Objects::renderObjectsList(){
-  for(size_t i = 0; i < objects->objects.size(); i++){
-    ImGui::Text(objects->objects[i]->getName());
+  for(size_t i = 0; i < Core::Renderer::Objects::Manager::get().size(); i++){
+    ImGui::Text(Core::Renderer::Objects::Manager::get()[i].getName());
     if(ImGui::BeginPopupContextItem(("Object" + std::to_string(i)).c_str())){
       if(ImGui::MenuItem("Delete")){
-        delete objects->objects[i];
-        objects->objects.remove(i);
+        delete &Core::Renderer::Objects::Manager::get()[i];
+        Core::Renderer::Objects::Manager::get().remove(i);
         Tools::Log::log("Object Deleted");
       };
       if(ImGui::MenuItem("Properties")){
         show_properties = true;
         properties_index = i;
-        position = static_cast<Core::Renderer::Objects::ColourBox*>(objects->objects[properties_index])->getPosition();
+        position = static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::get()[properties_index])->getPosition();
         Tools::Log::log("Object Properties");
       };
       ImGui::EndPopup();
@@ -41,7 +41,7 @@ inline void PF::Forge::Ui::Objects::renderAddColourBox() {
     for (size_t i = 0; i < 4; i++) 
       colourTemp[i] = static_cast<char>(colour[i] * 255);
 
-    objects->objects.push(new Core::Renderer::Objects::ColourBox(position, colourTemp));
+      Core::Renderer::Objects::Manager::get().push(new Core::Renderer::Objects::ColourBox(position, colourTemp));
     Tools::Log::inf("Colour Box Added: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
   };
 
@@ -65,7 +65,7 @@ inline void PF::Forge::Ui::Objects::renderAddSprite(){
   ImGui::InputInt("texture: ", &texture_index);
 
   if(ImGui::Button("Add Object")){
-    objects->addSprite(position, texture_index);
+    Core::Renderer::Objects::Manager::get().addSprite(position, texture_index);
     Tools::Log::inf("Sprite Added");
   };
 
@@ -74,8 +74,8 @@ inline void PF::Forge::Ui::Objects::renderAddSprite(){
 
 inline void PF::Forge::Ui::Objects::renderProperties(){
   if(show_properties){
-    if(objects->objects[properties_index]->getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX) renderColourBoxProperties();
-    else if(objects->objects[properties_index]->getType() == Core::Renderer::Objects::iObject::Type::SPRITE) renderSpriteProperties();
+    if(Core::Renderer::Objects::Manager::get()[properties_index].getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX) renderColourBoxProperties();
+    else if(Core::Renderer::Objects::Manager::get()[properties_index].getType() == Core::Renderer::Objects::iObject::Type::SPRITE) renderSpriteProperties();
   }
 };
 
@@ -86,8 +86,8 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
   if(ImGui::Button("exit")) { show_properties = false; Tools::Log::log("Properties Window Closed");}
   ImGui::EndMenuBar();
 
-  if(objects->objects[properties_index]->getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX){
-    ImGui::Text(objects->objects[properties_index]->getName());
+  if(Core::Renderer::Objects::Manager::get()[properties_index].getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX){
+    ImGui::Text(Core::Renderer::Objects::Manager::get()[properties_index].getName());
 
     ImGui::InputInt("X: ", &position[0]);
     ImGui::InputInt("Y: ", &position[1]);
@@ -100,10 +100,10 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
       STL::Vec<char, 4> colourTemp;
       for (size_t i = 0; i < 4; i++) 
         colourTemp[i] = static_cast<char>(colour[i] * 255);          
-      static_cast<Core::Renderer::Objects::ColourBox*>(objects->objects[properties_index])->setColour(colourTemp);
+      static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::get()[properties_index])->setColour(colourTemp);
       Tools::Log::inf("Colour Box Colour Applied: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
     };
-    static_cast<Core::Renderer::Objects::ColourBox*>(objects->objects[properties_index])->setPosition(position);
+    static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::get()[properties_index])->setPosition(position);
   };
 
   ImGui::End();
@@ -116,8 +116,8 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
   if(ImGui::Button("exit")) { show_properties = false; Tools::Log::log("Properties Window Closed");}
   ImGui::EndMenuBar();
 
-  if(objects->objects[properties_index]->getType() == Core::Renderer::Objects::iObject::Type::SPRITE){
-    ImGui::Text(objects->objects[properties_index]->getName());
+  if(Core::Renderer::Objects::Manager::get()[properties_index].getType() == Core::Renderer::Objects::iObject::Type::SPRITE){
+    ImGui::Text(Core::Renderer::Objects::Manager::get()[properties_index].getName());
 
     ImGui::InputInt("X: ", &position[0]);
     ImGui::InputInt("Y: ", &position[1]);
@@ -127,8 +127,8 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
     ImGui::InputInt("texture: ", &texture_index);
 
     if(ImGui::Button("Apply")){
-      static_cast<Core::Renderer::Objects::Sprite*>(objects->objects[properties_index])->setPosition(position);
-      static_cast<Core::Renderer::Objects::Sprite*>(objects->objects[properties_index])->setTextureIndex(texture_index);
+      static_cast<Core::Renderer::Objects::Sprite*>(&Core::Renderer::Objects::Manager::get()[properties_index])->setPosition(position);
+      static_cast<Core::Renderer::Objects::Sprite*>(&Core::Renderer::Objects::Manager::get()[properties_index])->setTextureIndex(texture_index);
       Tools::Log::inf("Sprite Properties Applied");
     };
   };

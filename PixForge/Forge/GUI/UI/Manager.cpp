@@ -18,7 +18,7 @@ void PF::Forge::Ui::Manager::load(){
       if(type == Ui::iUi::Type::LOG) windows.push(new Ui::Log(id));
       if(type == Ui::iUi::Type::FILE_EXPLORER) windows.push(new Ui::FileExplorer(id, &windows, STL::Folder(record[2])));
       if(type == Ui::iUi::Type::TEXT_EDITOR) windows.push(new Ui::TextEditor(id, record[2]));
-      if(type == Ui::iUi::Type::OBJECTS_UI) windows.push(new Ui::Objects(id, objects));
+      if(type == Ui::iUi::Type::OBJECTS_UI) windows.push(new Ui::Objects(id));
     };
   };
   Tools::Log::inf("UI Windows Loaded: "+std::to_string(windows.size()));
@@ -49,5 +49,5 @@ void PF::Forge::Ui::Manager::addWindow(iUi::Type type) {
   if (type == iUi::LOG) { windows.push(new Log(iUi::generateUniqueID(&windows))); };
   if (type == iUi::FILE_EXPLORER) { windows.push(new FileExplorer(iUi::generateUniqueID(&windows), &windows, STL::Folder("assets/"))); };
   if (type == iUi::TEXT_EDITOR) { windows.push(new TextEditor(iUi::generateUniqueID(&windows), "assets/texture/")); };
-  if (type == iUi::OBJECTS_UI) { windows.push(new Objects(iUi::generateUniqueID(&windows), objects)); };
+  if (type == iUi::OBJECTS_UI) { windows.push(new Objects(iUi::generateUniqueID(&windows))); };
 };

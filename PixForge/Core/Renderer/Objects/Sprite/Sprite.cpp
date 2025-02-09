@@ -26,8 +26,8 @@ const void PF::Core::Renderer::Objects::Sprite::load(const STL::Vector<const cha
 
 const void PF::Core::Renderer::Objects::Sprite::render(const PF::Core::Window *window) const {
   SDL_Rect rect = {position[0], position[1], position[2], position[3]};
-  if(texture_index < Texture::texture->size())
-    SDL_RenderCopy(window->getRenderer(), Texture::texture->operator[](texture_index), NULL, &rect);
+  if(texture_index < textures->size())
+    SDL_RenderCopy(window->getRenderer(), (*textures)[texture_index], NULL, &rect);
   else
-    SDL_RenderCopy(window->getRenderer(), Assets::null_texture, NULL, &rect);
+    SDL_RenderCopy(window->getRenderer(), Assets::get().getNullTexture(), NULL, &rect);
 };
