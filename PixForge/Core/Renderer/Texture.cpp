@@ -14,23 +14,24 @@ inline const void PF::Core::Renderer::Texture::addTextureFromFile(const char* pa
 const void PF::Core::Renderer::Texture::save() {
   if(file.notExist()) file.createFile();
   file.clear();
-  for(int i = 0; i < textures.size(); i++){
+  for(unsigned int i = 0; i < textures.size(); i++){
     int width, height;
     SDL_QueryTexture(textures[i], NULL, NULL, &width, &height);
-    Uint32* pixels = new Uint32[width * height];
+    unsigned int* pixels = new unsigned int[width * height];
     SDL_Rect rect =  SDL_Rect({0,0,width,height});
-    int pitch = width * sizeof(Uint32);
+    unsigned int pitch = width * sizeof(unsigned int);
     SDL_SetRenderTarget(window->getRenderer(), textures[i]);
     SDL_RenderReadPixels(window->getRenderer(), &rect, SDL_PIXELFORMAT_RGBA32, pixels, pitch);
     SDL_SetRenderTarget(window->getRenderer(), NULL);
 
+    // [NOTE] This is temporary solution to time that i rework STL
     STL::Vector<std::string> record;
     record.push(std::to_string(width));
     record.push(std::to_string(height));
     record.push(std::to_string(pitch));
-    for(int y = 0; y < height; y++){
-      for(int x = 0; x < width; x++){
-        Uint32 pixel = pixels[y * width + x];
+    for(unsigned int y = 0; y < height; y++){
+      for(unsigned int x = 0; x < width; x++){
+        unsigned int pixel = pixels[y * width + x];
         record.push(std::to_string(pixel));
       };
     };
@@ -44,16 +45,18 @@ const void PF::Core::Renderer::Texture::save() {
 const void PF::Core::Renderer::Texture::load() { 
   file.read();
   while(textures.size()) SDL_DestroyTexture(textures.pop());
+
+  // [NOTE] This is temporary solution to time that i rework STL
   STL::Vector<STL::Vector<std::string>> file = this->file.split(';');
-  for(size_t i = 0; i < file.size(); i++){
+  for(unsigned int i = 0; i < file.size(); i++){
 
-    int width = std::stoi(file[i][0]);
-    int height = std::stoi(file[i][1]);
-    int pitch = std::stoi(file[i][2]);
-    Uint32* pixel = new Uint32[width * height];
+    unsigned int width = std::stoul(file[i][0]);
+    unsigned int height = std::stoul(file[i][1]);
+    unsigned int pitch = std::stoul(file[i][2]);
+    unsigned int* pixel = new unsigned int[width * height];
 
-    for(int y = 0; y < height; y++){
-      for(int x = 0; x < width; x++){
+    for(unsigned int y = 0; y < height; y++){
+      for(unsigned int x = 0; x < width; x++){
         pixel[y * width + x] = std::stoul(file[i][3 + y * width + x]);
       };
     };
