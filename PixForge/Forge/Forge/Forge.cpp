@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge::Forge()
-  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &textures, &window), 
+  :window("PixEditor"), textures("textures.bin", &window), objects("objects.bin", &window), 
   gui("settings/gui_window.ini", &window, &objects), sandbox(&window, &objects){
   Tools::Log::log("Window Created");
   Tools::Log::log("Objects Created");

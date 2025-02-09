@@ -9,6 +9,8 @@ PF::Core::Window::Window(const char* title) {
   
   createWindow(title);
   createRenderer();
+
+  Renderer::Assets::init(renderer);
 };
 
 PF::Core::Window::~Window(){

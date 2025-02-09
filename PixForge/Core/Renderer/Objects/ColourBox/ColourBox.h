@@ -1,27 +1,37 @@
 #pragma once
 #include "Window/Window.h"
-#include "Renderer/Objects/Object.h"
+#include "STL/Vector/Vector.h"
 #include "STL/Vec/Vec.h"
+
+#include "STL/Convert/IntChar.h"
+#include "STL/Convert/CharInt.h"
+#include "STL/Convert/UintChar.h"
+#include "STL/Convert/CharUint.h"
+
+#include "Renderer/Objects/Object.h"
 
 namespace PF::Core::Renderer::Objects{
 class ColourBox : public iObject{
 private:
+  const char* name = "Colour Box";
+  STL::Vec<int, 4> position = {0,0,0,0};
 private:
-  STL::Vec<int, 4> position;
   STL::Vec<char, 4> colour = {0,0,0,0};
 public:
-  ColourBox(STL::Vec<int, 4> position, STL::Vec<char, 4> colour);
-  ColourBox(STL::Vector<std::string> record) { load(record); };
+  ColourBox(const STL::Vec<int, 4> &position, const STL::Vec<char, 4> &colour);
+  ColourBox(const STL::Vector<const char*> &record) { load(record); };
 public:
-  const char* getName() override { return "Colour Box"; };
-  Type getType() override { return Type::COLOUR_BOX; };
-  const std::string save() override;
-  void load(STL::Vector<std::string> record) override;
-  void render(Window *window) override;
+  const char* save() const override;
+  const void load(const STL::Vector<const char*> &record) override;
+  const void render(const Window *window) const override;
 public:
-  void setPosition(STL::Vec<int, 4> position){ for(size_t i = 0; i < 4; i++) this->position[i] = position[i]; };
-  void setColour(STL::Vec<char, 4> colour){ this->colour = colour; };
-  STL::Vec<char, 4> getColour(){ return { colour[0], colour[1], colour[2], colour[3] }; };
-  STL::Vec<int, 4> getPosition(){ return { position[0], position[1], position[2], position[3] }; };
+  const Type getType() const override { return Type::COLOUR_BOX; };
+  const char* getName() const override { return name; };
+  const void setName(const char* name) override { delete[] this->name; this->name = name; };
+  const STL::Vec<int, 4> getPosition() const override { return { position[0], position[1], position[2], position[3] }; };
+  const void setPosition(const STL::Vec<int, 4> &position) { this->position = position; };
+public:
+  const STL::Vec<char, 4> getColour() const { return { colour[0], colour[1], colour[2], colour[3] }; };
+  const void setColour(const STL::Vec<char, 4> &colour){ this->colour = colour; };
 };
 }; // namespace PF::Core::Renderer::Objects

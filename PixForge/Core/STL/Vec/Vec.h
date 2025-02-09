@@ -17,6 +17,7 @@ public:
   void operator%(T value){ for(size_t i = 0; i < S; i++) data[i] %= value; };
   void operator/=(T value) { for(size_t i = 0; i < S; i++) data[i] /= value; };
   T& operator[](size_t i){ return data[i]; }
+  const T& operator[](size_t i) const { return data[i]; }
   ~Vec(){};
 };
 }; // namespace PF::STL

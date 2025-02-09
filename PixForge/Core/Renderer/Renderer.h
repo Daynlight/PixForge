@@ -2,11 +2,9 @@
 #include "Window/Window.h"
 
 namespace PF::Core::Renderer{
-inline void background(Window* window, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+inline const void background(const Window* window, const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a) {
   SDL_SetRenderDrawColor(window->getRenderer(), r, g, b, a); 
   SDL_RenderClear(window->getRenderer());
 };
-
-inline void background(Window* window, SDL_Colour colour) { background(window, colour.r, colour.g, colour.b, colour.a); };
-    
+inline const void background(Window* window, const SDL_Colour &colour) { background(window, colour.r, colour.g, colour.b, colour.a); };
 }; // namespace PF::Core::Renderer

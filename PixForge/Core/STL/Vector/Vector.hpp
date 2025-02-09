@@ -4,7 +4,7 @@ template<typename T>
 PF::STL::Vector<T>::Vector(const size_t capacity) :capacity(capacity) { data = new T[capacity]; }
 
 template<typename T>
-size_t PF::STL::Vector<T>::size() { return _size; };
+const size_t PF::STL::Vector<T>::size() const { return _size; };
 
 template<typename T>
 void PF::STL::Vector<T>::resize(){

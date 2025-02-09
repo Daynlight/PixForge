@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include "STL/File/File.h"
 #include "STL/Folder/Folder.h"
+#include "Renderer/Assets.h"
 
 #include "SDL2/SDL.h"
 #include "imgui.h"
@@ -31,8 +32,8 @@ public:
   void windowEvent(const SDL_Event event);
   SDL_Rect getWindowSizesAndPosition();
 public:
-  SDL_Renderer* getRenderer() { return renderer; };
-  SDL_Window* getWindow() { return window; };
+  SDL_Renderer* getRenderer() const { return renderer; };
+  SDL_Window* getWindow() const { return window; };
   bool isRunning() { return running; };
 }; 
 }; // namespace PF::Core
