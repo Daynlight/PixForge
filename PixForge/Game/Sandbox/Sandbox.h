@@ -1,16 +1,15 @@
 #pragma once
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/Objects/ObjectManager.h"
+#include "Renderer/Objects/Manager.h"
 #include "Tools/Log.h"
 
 namespace PF {
 class Sandbox{
 private:
-  Window *window;
-  ObjectManager *objects;
+  Core::Window *window;
 public:
-  Sandbox(Window *window, ObjectManager *objects) : window(window), objects(objects) { Log::log("Sandbox Created"); };
+  Sandbox(Core::Window *window) : window(window) { Tools::Log::log("Sandbox Created"); };
   void run();
   void event(SDL_Event* event);
 };

@@ -2,7 +2,7 @@
 
 int WinMain(){
   //[FEATURE] Get data from file and set Game Window Title
-  PF::Window window = PF::Window("Game");
+  PF::Core::Window window = PF::Core::Window("Game");
   PF::Game game = PF::Game(&window);
   game.run();
   

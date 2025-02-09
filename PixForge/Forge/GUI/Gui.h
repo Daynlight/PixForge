@@ -5,23 +5,23 @@
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 
-#include "Renderer/Objects/ObjectManager.h"
-#include "Ui/UiManager.h"
+#include "Renderer/Objects/Manager.h"
+#include "Ui/Manager.h"
 
 #include "Tools/Log.h"
 
-namespace PF{
+namespace PF::Forge{
 class Gui{
 private:
-  Window* window;
-  UIManager ui;
+  Core::Window* window;
+  Ui::Manager ui;
 private:
   inline void renderDock();
   inline void renderTopBar();
 public:
-  Gui(const std::string &path, Window* window, ObjectManager* object);
+  Gui(const std::string &path, Core::Window* window);
   ~Gui();
   void renderGui();
   void guiEvent(SDL_Event* event);
 };
-}; // namespace PF
+}; // namespace PF::Forge

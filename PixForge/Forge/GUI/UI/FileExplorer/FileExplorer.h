@@ -1,8 +1,8 @@
 #pragma once
 #include "Gui/Ui/Ui.h"
 #include "Tools/Log.h"
-#include "Gui/Ui/TextEditorUi.h"
-#include "STL/Folder.h"
+#include "Gui/Ui/TextEditor/TextEditor.h"
+#include "STL/Folder/Folder.h"
 
 #define FILE_BOX_WIDTH 100
 #define FILE_BOX_BORDER 1
@@ -10,12 +10,12 @@
 
 // [BUG] sometimes buttons have same name and this causes errors for imGui, when you open two same files
 
-namespace PF{
-class FileExplorerUI : public iUi{
+namespace PF::Forge::Ui{
+class FileExplorer : public iUi{
 private:
   const uint8_t id;
-  Vector<iUi*> *uis;
-  Folder folder;
+  STL::Vector<iUi*> *uis;
+  STL::Folder folder;
   bool open = true;
 private:
   char folder_name[128] = "", file_name[128] = "";
@@ -26,12 +26,12 @@ private:
   inline void mainMenuBar();
   inline void renderFolder();
 public:
-  FileExplorerUI(const uint8_t id, Vector<iUi*> *uis, Folder folder);
-  Folder* getFolder() { return &folder; };
+  FileExplorer(const uint8_t id, STL::Vector<iUi*> *uis, STL::Folder folder);
+  STL::Folder* getFolder() { return &folder; };
 public:
   uint8_t getID() override { return id; };
   uint8_t getType() override { return iUi::Type::FILE_EXPLORER; };
   bool isOpen() { return open; };
   void render() override;
 };
-}; // namespace PF
+}; // namespace PF::Forge::Ui

@@ -1,20 +1,20 @@
 #pragma once
 #include "Gui/Ui/Ui.h"
-#include "STL/File.h"
+#include "STL/File/File.h"
 #include "Tools/Log.h"
 
-namespace PF{
-class TextEditorUI : public iUi{
+namespace PF::Forge::Ui{
+class TextEditor : public iUi{
 private:
   const uint8_t id;
   bool open = true;
 private:
   char text[1024 * 1024] = ""; // aloc 1 MB of memory
-  File file;
+  STL::File file;
 private:
   void read();
 public:
-  TextEditorUI(const uint8_t id, const std::string &path) : id(id), file(path) { read(); Log::log("Text Editor UI Window Opened: " + file.getPath() ); };
+TextEditor(const uint8_t id, const std::string &path) : id(id), file(path) { read(); Tools::Log::log("Text Editor UI Window Opened: " + file.getPath() ); };
   const std::string getPath() { return file.getPath(); };
 public:
   uint8_t getID() override { return id; };
@@ -22,4 +22,4 @@ public:
   bool isOpen() { return open; };
   void render() override;
 };
-}; // namespace PF
+}; // namespace PF::Forge::Ui

@@ -1,6 +1,6 @@
 #include "Game.h"
 
-PF::Game::Game(Window* window) :window(window){};
+PF::Game::Game(Core::Window* window) :window(window){};
 
 void PF::Game::run(){
   while (window->isRunning()){

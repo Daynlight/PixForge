@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 
 file(GLOB_RECURSE src "**.cpp" "**.h")  
 
-file(GLOB_RECURSE core "../Core/*.cpp")
-file(GLOB_RECURSE game "../Game/Game/*.cpp" "../Game/Sandbox/*.cpp")
+file(GLOB_RECURSE core "../Core/**.cpp")
+file(GLOB_RECURSE game "../Game/Game/**.cpp" "../Game/Sandbox/**.cpp")
 list(FILTER game EXCLUDE REGEX ".*Main\\.cpp$")
 
-file(GLOB_RECURSE libs "../vendor/imgui/*.cpp")
+file(GLOB_RECURSE libs "../vendor/imgui/**.cpp")
 
 project(Forge VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)

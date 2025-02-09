@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 
-namespace PF{
+namespace PF::STL{
 template<typename T, size_t S>
 class Vec{
 public:
@@ -17,6 +17,7 @@ public:
   void operator%(T value){ for(size_t i = 0; i < S; i++) data[i] %= value; };
   void operator/=(T value) { for(size_t i = 0; i < S; i++) data[i] /= value; };
   T& operator[](size_t i){ return data[i]; }
+  const T& operator[](size_t i) const { return data[i]; }
   ~Vec(){};
 };
-}; // namespace PF
+}; // namespace PF::STL

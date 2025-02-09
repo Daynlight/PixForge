@@ -1,24 +1,26 @@
 #include "Window.h"
 
-PF::Window::Window(const char* title) {
-  Folder settings = Folder("settings/");
+PF::Core::Window::Window(const char* title) {
+  STL::Folder settings = STL::Folder("settings/");
   if(!settings.exist()) settings.createFolder();
-  loadWindowSettings();
+  load();
 
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
   
   createWindow(title);
   createRenderer();
+
+  Renderer::Assets::init(renderer);
 };
 
-PF::Window::~Window(){
-  saveWindowSettings();
+PF::Core::Window::~Window(){
+  save();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
 };
 
-inline void PF::Window::createWindow(const char *title){
+inline const void PF::Core::Window::createWindow(const char *title){
   if(!window_settings.size())
     window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
@@ -32,12 +34,12 @@ inline void PF::Window::createWindow(const char *title){
   };
 };
 
-inline void PF::Window::createRenderer(){
+inline const void PF::Core::Window::createRenderer(){
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
 };
 
-inline void PF::Window::saveWindowSettings() {
+inline const void PF::Core::Window::save() {
   SDL_Rect window_location = getWindowSizesAndPosition();
   if(window_settings.notExist()) window_settings.createFile();
   window_settings.clear();
@@ -52,22 +54,21 @@ inline void PF::Window::saveWindowSettings() {
   window_settings.save();
 };
 
-inline void PF::Window::loadWindowSettings() {
-  if(!window_settings.notExist()) window_settings.createFile();
+inline const void PF::Core::Window::load() {
   window_settings.read();
-  Vector<std::string> record = window_settings.split(';')[0];
+  STL::Vector<std::string> record = window_settings.split(';')[0];
   window_settings.clear();
   for(size_t i = 0; i < record.size(); i++) window_settings.push(record[i]);
 };
 
-SDL_Rect PF::Window::getWindowSizesAndPosition(){
+const SDL_Rect PF::Core::Window::getWindowSizesAndPosition() const {
   int x, y, w, h;
   SDL_GetWindowPosition(window ,&x, &y);
   SDL_GetWindowSize(window, &w, &h);
   return {x,y,w,h};
 };
 
-void PF::Window::windowEvent(const SDL_Event event){
+const void PF::Core::Window::windowEvent(const SDL_Event &event){
   if(event.type == SDL_QUIT) running = false;
   if(event.type == SDL_KEYDOWN){
     if(event.key.keysym.sym == SDLK_F11) changeFullScreenDesktop();
@@ -75,7 +76,7 @@ void PF::Window::windowEvent(const SDL_Event event){
 };
 
 // [BUG] This function is not working properly
-inline void PF::Window::changeFullScreenDesktop(){
+inline const void PF::Core::Window::changeFullScreenDesktop() const{
   if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0) SDL_SetWindowFullscreen(window, 0);
   else SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
   SDL_Delay(500);
