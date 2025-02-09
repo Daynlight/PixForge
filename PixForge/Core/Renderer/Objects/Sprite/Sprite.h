@@ -29,7 +29,7 @@ public:
 public:
   const Type getType() const override { return Type::SPRITE; };
   const char* getName() const override { return name; };
-  const void setName(const char* name) override { delete this->name; this->name = name; };
+  const void setName(const char* name) override { this->name = name; };
   const STL::Vec<int, 4> getPosition() const override { return { position[0], position[1], position[2], position[3] }; };
   const void setPosition(const STL::Vec<int, 4> &position) { this->position = position; };
 public:
