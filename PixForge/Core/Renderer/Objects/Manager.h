@@ -4,9 +4,6 @@
 #include "STL/Vec/Vec.h"
 #include "STL/Vector/Vector.h"
 
-#include "STL/Convert/UintChar.h"
-#include "STL/Convert/CharUint.h"
-
 #include "Renderer/Texture.h"
 #include "Renderer/Assets.h"
 
@@ -22,19 +19,20 @@ private:
   STL::Vector<iObject*> objects;
   Texture* textures = nullptr;
   STL::File file;
-public: // Singleton
+public:
   static void init(const std::string &object_path, const std::string &texture_path, Window *window) { 
     if(!manager) {
       manager = new Manager(object_path, window); 
       manager->textures = new Texture(texture_path, window);
     };
   };
+  static void dealloc() { delete manager; };
   static Manager& get() { return *manager; };
   Manager(Manager &manager) = delete;
   Manager operator=(Manager &manager) = delete;
 private:
   Manager(const std::string &object_path, Window *window) : file(object_path), window(window) {};
-  ~Manager() { for(unsigned int i = 0; i < objects.size(); i++) delete objects[i]; };
+  ~Manager() { while(objects.size()) delete objects.pop(); };
 public:
   const void addColourBox(const STL::Vec<int, 4> &position, const STL::Vec<char, 4> &colour) { objects.push(new ColourBox(position, colour)); };
   const void addSprite(const STL::Vec<int, 4> &position, const unsigned int &texture_index) { objects.push(new Sprite(textures, position, texture_index)); };

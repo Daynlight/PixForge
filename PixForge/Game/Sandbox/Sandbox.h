@@ -9,7 +9,7 @@ class Sandbox{
 private:
   Core::Window *window;
 public:
-  Sandbox(Core::Window *window) : window(window) { Tools::Log::log("Sandbox Created"); };
+  Sandbox(Core::Window *window) : window(window) { Tools::Log::get().log("Sandbox Created"); };
   void run();
   void event(SDL_Event* event);
 };

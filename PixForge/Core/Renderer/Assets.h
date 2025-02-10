@@ -13,12 +13,12 @@ private:
   SDL_Renderer *renderer;
 public:
   static const void init(SDL_Renderer *renderer) { if(!assets) assets = new Assets(renderer); }
+  static void dealloc() { delete assets; };
   static Assets& get() { return *assets; };
   Assets(Assets &assets) = delete;
   Assets operator=(Assets &assets) = delete;
 private:
   Assets(SDL_Renderer *renderer) : renderer(renderer) {};
-  ~Assets() { delete assets; };
 private:
   SDL_Texture *null_texture = nullptr;
 public:
