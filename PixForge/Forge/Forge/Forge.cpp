@@ -15,6 +15,7 @@ PF::Forge::Forge::~Forge(){
 
   Tools::Log::log("Window Destroyed");
   Tools::Log::log("Forge Destroyed");
+  Tools::Log::entry.clear();
 };
 
 void PF::Forge::Forge::run(){

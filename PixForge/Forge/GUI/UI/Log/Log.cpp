@@ -10,10 +10,10 @@ void PF::Forge::Ui::Log::render() {
   ImGui::Text("Logs:");
   ImGui::Separator();
   for(int i = Tools::Log::entry.size() - 1; i >= 0; i--) {
-    if(Tools::Log::entry[i].first == 0) ImGui::TextColored(ImVec4(200,200,200,255),Tools:: Log::entry[i].second.c_str());
-    if(Tools::Log::entry[i].first == 1) ImGui::TextColored(ImVec4(255,255,0,255),Tools:: Log::entry[i].second.c_str());
-    if(Tools::Log::entry[i].first == 2) ImGui::TextColored(ImVec4(255,0,0,255),Tools:: Log::entry[i].second.c_str());
-    if(Tools::Log::entry[i].first == 3) ImGui::TextColored(ImVec4(0,255,200,255),Tools:: Log::entry[i].second.c_str());
+    if(Tools::Log::entry[i].first == 0) ImGui::TextColored(ImVec4(200,200,200,255), Tools::Log::entry[i].second.c_str());
+    if(Tools::Log::entry[i].first == 1) ImGui::TextColored(ImVec4(255,255,0,255), Tools::Log::entry[i].second.c_str());
+    if(Tools::Log::entry[i].first == 2) ImGui::TextColored(ImVec4(255,0,0,255), Tools::Log::entry[i].second.c_str());
+    if(Tools::Log::entry[i].first == 3) ImGui::TextColored(ImVec4(0,255,200,255), Tools::Log::entry[i].second.c_str());
   }
   ImGui::End();
 };
