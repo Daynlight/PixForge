@@ -74,7 +74,7 @@ void PF::Core::Window::save() {
 
 void PF::Core::Window::load() {
   window_settings.read();
-  if(window_settings.size()) {
+  if(!window_settings.notExist()) {
     STL::Vector<std::string> *record = window_settings.split(';')[0];
     window_settings.clear();
     for(size_t i = 0; i < record->size(); i++) window_settings.push((*record)[i]);
