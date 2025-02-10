@@ -16,6 +16,9 @@ PF::Forge::Forge::~Forge(){
   Tools::Log::log("Window Destroyed");
   Tools::Log::log("Forge Destroyed");
   Tools::Log::entry.clear();
+
+  Core::Renderer::Objects::Manager::get().dealloc();
+  Core::Renderer::Assets::get().dealloc();
 };
 
 void PF::Forge::Forge::run(){
