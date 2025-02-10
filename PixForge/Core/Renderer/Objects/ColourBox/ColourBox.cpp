@@ -6,16 +6,16 @@ PF::Core::Renderer::Objects::ColourBox::ColourBox(const PF::STL::Vec<int, 4> &po
 
 const std::string PF::Core::Renderer::Objects::ColourBox::save() const {
   STL::Vector<std::string> record;
-  record.push(STL::Convert::UintChar(getType()));
-  for(unsigned int i = 0; i < 4; i++) record.push(STL::Convert::IntChar(position[i]));
-  for(unsigned int i = 0; i < 4; i++) record.push(&STL::Convert::UintChar(static_cast<uint8_t>(colour[i]))[0]);
+  record.push(std::to_string(static_cast<int>(getType())));
+  for(unsigned int i = 0; i < 4; i++) record.push(std::to_string(position[i]));
+  for(unsigned int i = 0; i < 4; i++) record.push(std::to_string(static_cast<int>(colour[i])));
   record.push(name);
   return record.concat(';');
 };
 
 const void PF::Core::Renderer::Objects::ColourBox::load(const STL::Vector<std::string> &record){
   for(unsigned int i = 0; i < 4; i++) position[i] = std::stoi(record[i + 1]);
-  for(unsigned int i = 0; i < 4; i++) colour[i] = static_cast<char>(std::stoi(record[i + 5]));
+  for(unsigned int i = 0; i < 4; i++) colour[i] = static_cast<char>(std::stoul(record[i + 5]));
   name = record[9];
 };
 
