@@ -32,7 +32,7 @@ public:
   Manager operator=(Manager &manager) = delete;
 private:
   Manager(const std::string &object_path, Window *window) : file(object_path), window(window) {};
-  ~Manager() { while(objects.size()) delete objects.pop(); };
+  ~Manager() { while(objects.size()) delete objects.pop(); if(textures) delete textures; };
 public:
   const void addColourBox(const STL::Vec<int, 4> &position, const STL::Vec<char, 4> &colour) { objects.push(new ColourBox(position, colour)); };
   const void addSprite(const STL::Vec<int, 4> &position, const unsigned int &texture_index) { objects.push(new Sprite(textures, position, texture_index)); };

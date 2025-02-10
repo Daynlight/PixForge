@@ -19,6 +19,7 @@ public:
   Assets operator=(Assets &assets) = delete;
 private:
   Assets(SDL_Renderer *renderer) : renderer(renderer) {};
+  ~Assets() { if(null_texture) SDL_DestroyTexture(null_texture); };
 private:
   SDL_Texture *null_texture = nullptr;
 public:
