@@ -21,13 +21,13 @@ PF::Forge::Forge::~Forge(){
 
   
   Core::Renderer::Objects::Manager::get().dealloc();
-  Core::Renderer::Assets::get().dealloc();
+  Core::Renderer::Assets::dealloc();
 };
 
 void PF::Forge::Forge::run(){
   Tools::Log::get().inf("Forge Running");
   while (window.isRunning()){
-    Core::Renderer::Assets::get().background(backgroundColour);
+    Core::Renderer::Assets::background(backgroundColour);
 
     sandbox.run();
 
