@@ -11,7 +11,7 @@ private:
   std::string path;
   std::fstream file;
 public:
-  File(const std::string path) : path(path){ file.open(path, std::ios::in | std::ios::out); };
+  File(const std::string &path) : path(path){ file.open(path, std::ios::in | std::ios::out); };
   ~File() { file.close(); };
   bool notExist() { return file.good(); };
   void createFile() { file.open(path, std::ios::out); };
