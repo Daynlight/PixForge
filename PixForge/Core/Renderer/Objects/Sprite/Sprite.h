@@ -15,22 +15,22 @@
 namespace PF::Core::Renderer::Objects{
 class Sprite : public iObject{
 private:
-  const char* name = "Sprite";
+  std::string name = "Sprite";
   STL::Vec<int, 4> position = {0, 0, 0, 0};
 private:
   unsigned int texture_index = 0;
   Texture* textures = nullptr;
 public:
   Sprite(Texture* textures, STL::Vec<int, 4> position, unsigned int texture_index) : textures(textures), position(position), texture_index(texture_index) {};
-  Sprite(Texture* textures, const STL::Vector<const char*> &record) : textures(textures) { load(record); };
+  Sprite(Texture* textures, const STL::Vector<std::string> &record) : textures(textures) { load(record); };
 public:
-  const char* save() const override;
-  const void load(const STL::Vector<const char*> &record) override;
+  const std::string save() const override;
+  const void load(const STL::Vector<std::string> &record) override;
   const void render(const Window *window) const override;
 public:
   const Type getType() const override { return Type::SPRITE; };
-  const char* getName() const override { return name; };
-  const void setName(const char* name) override { this->name = name; };
+  const std::string getName() const override { return name; };
+  const void setName(const std::string &name) override { this->name = name; };
   const STL::Vec<int, 4> getPosition() const override { return { position[0], position[1], position[2], position[3] }; };
   const void setPosition(const STL::Vec<int, 4> &position) { this->position = position; };
 public:

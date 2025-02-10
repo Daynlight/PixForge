@@ -2,7 +2,7 @@
 
 inline void PF::Forge::Ui::Objects::renderObjectsList(){
   for(size_t i = 0; i < Core::Renderer::Objects::Manager::get().size(); i++){
-    ImGui::Text(Core::Renderer::Objects::Manager::get()[i].getName());
+    ImGui::Text(Core::Renderer::Objects::Manager::get()[i].getName().c_str());
     if(ImGui::BeginPopupContextItem(("Object" + std::to_string(i)).c_str())){
       if(ImGui::MenuItem("Delete")){
         delete &Core::Renderer::Objects::Manager::get()[i];
@@ -87,7 +87,7 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
   ImGui::EndMenuBar();
 
   if(Core::Renderer::Objects::Manager::get()[properties_index].getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX){
-    ImGui::Text(Core::Renderer::Objects::Manager::get()[properties_index].getName());
+    ImGui::Text(Core::Renderer::Objects::Manager::get()[properties_index].getName().c_str());
 
     ImGui::InputInt("X: ", &position[0]);
     ImGui::InputInt("Y: ", &position[1]);
@@ -117,7 +117,7 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
   ImGui::EndMenuBar();
 
   if(Core::Renderer::Objects::Manager::get()[properties_index].getType() == Core::Renderer::Objects::iObject::Type::SPRITE){
-    ImGui::Text(Core::Renderer::Objects::Manager::get()[properties_index].getName());
+    ImGui::Text(Core::Renderer::Objects::Manager::get()[properties_index].getName().c_str());
 
     ImGui::InputInt("X: ", &position[0]);
     ImGui::InputInt("Y: ", &position[1]);

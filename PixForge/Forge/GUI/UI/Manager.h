@@ -12,11 +12,10 @@ namespace PF::Forge::Ui{
 class Manager{
 public:
   STL::Vector<Ui::iUi*> windows;
-  Core::Renderer::Objects::Manager *objects;
   STL::File file;
 public:
   Manager(const std::string& path) : file(path) {};
-  ~Manager(){ for(size_t i = 0; i < windows.size(); i++) delete windows[i]; };
+  ~Manager(){ while(windows.size()) delete windows.pop(); };
   void load();
   void save();
   void addWindow(Ui::iUi::Type type);

@@ -51,21 +51,21 @@ template<typename T>
 T &PF::STL::Vector<T>::operator[](const size_t index){ return data[index]; };
 
 template<typename T>
-PF::STL::Vector<PF::STL::Vector<std::string>> PF::STL::Vector<T>::split(const char sep){
-  Vector<Vector<std::string>> result;
+PF::STL::Vector<PF::STL::Vector<std::string>*> PF::STL::Vector<T>::split(const char sep){
+  Vector<Vector<std::string>*> result;
   for(int i = 0; i < _size; i++){
-    Vector<std::string> temp;
+    Vector<std::string> *temp = new Vector<std::string>();
     std::string line = data[i];
     std::string word = "";
     for(int j = 0; j < line.size(); j++){
       if(line[j] == sep){
-        temp.push(word);
+        temp->push(word);
         word = "";
       }else{
         word += line[j];
       };
     };
-    temp.push(word);
+    temp->push(word);
     result.push(temp);
   };
   return result;
