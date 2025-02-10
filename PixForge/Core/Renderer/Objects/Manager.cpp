@@ -9,7 +9,9 @@ void PF::Core::Renderer::Objects::Manager::init(const std::string &object_path, 
   };
 };
 
-void PF::Core::Renderer::Objects::Manager::dealloc() { delete manager; };
+void PF::Core::Renderer::Objects::Manager::dealloc() { 
+  delete manager; 
+};
 
 PF::Core::Renderer::Objects::Manager::Manager(const std::string &object_path) : file(object_path) {};
 
