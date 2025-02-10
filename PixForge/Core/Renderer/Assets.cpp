@@ -21,9 +21,9 @@ SDL_Texture *PF::Core::Renderer::Assets::getNullTexture()
   return null_texture;
 };
 
-void PF::Core::Renderer::Assets::background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a) {
+void PF::Core::Renderer::Assets::background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a) const {
   SDL_SetRenderDrawColor(window->getRenderer(), r, g, b, a); 
   SDL_RenderClear(window->getRenderer());
 };
 
-void PF::Core::Renderer::Assets::background(const SDL_Colour &colour) { background(colour.r, colour.g, colour.b, colour.a); };
+void PF::Core::Renderer::Assets::background(const SDL_Colour &colour) const { background(colour.r, colour.g, colour.b, colour.a); };
