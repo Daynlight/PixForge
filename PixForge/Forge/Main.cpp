@@ -1,9 +1,11 @@
 #include "Forge/Forge.h"
 
+#define BENCHMARK 1
+
+#if BENCHMARK
 #include "Benchmark.h"
 #include "../Core/STL/File/File.h"
-
-#define BENCHMARK 1
+#endif
 
 int WinMain(){
   #if BENCHMARK
