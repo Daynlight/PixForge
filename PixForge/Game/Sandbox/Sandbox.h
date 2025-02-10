@@ -1,6 +1,5 @@
 #pragma once
 #include "Window/Window.h"
-#include "Renderer/Renderer.h"
 #include "Renderer/Objects/Manager.h"
 #include "Tools/Log.h"
 

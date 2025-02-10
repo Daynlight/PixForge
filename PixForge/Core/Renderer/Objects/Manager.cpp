@@ -1,16 +1,16 @@
 #include "Manager.h"
 
-PF::Core::Renderer::Objects::Manager* PF::Core::Renderer::Objects::Manager::manager = nullptr;
+PF::Core::Renderer::Objects::Manager* PF::Core::Renderer::Objects::Manager::instance = nullptr;
 
 void PF::Core::Renderer::Objects::Manager::init(const std::string &object_path, const std::string &texture_path, Window *window) { 
-  if(!manager) {
-    manager = new Manager(object_path); 
-    manager->textures = new Texture(texture_path, window);
+  if(!instance) {
+    instance = new Manager(object_path); 
+    instance->textures = new Texture(texture_path, window);
   };
 };
 
 void PF::Core::Renderer::Objects::Manager::dealloc() { 
-  delete manager; 
+  delete instance; 
 };
 
 PF::Core::Renderer::Objects::Manager::Manager(const std::string &object_path) : file(object_path) {};
