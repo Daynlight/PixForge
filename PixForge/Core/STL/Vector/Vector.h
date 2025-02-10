@@ -22,6 +22,7 @@ public:
   const T& operator[](const size_t index) const { return data[index]; };
   Vector<Vector<std::string>*> split(const char sep);
   std::string concat(const char sep);
+  void sort(bool (*compare)(T, T));
 };
 }; // namespace PF::STL
 

@@ -1,28 +1,26 @@
 #pragma once
 #include "SDL2/SDL.h"
-
-// Default Window Settings
-#define WINDOW_SIZES 800, 600 
-#define WINDOW_POSITION SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
-#define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+#include "Window/Window.h"
 
 namespace PF::Core::Renderer{
 class Assets{
 private:
-  static Assets* assets;
-  SDL_Renderer *renderer;
+  static Assets* instance;
+  Window *window;
 public:
-  static const void init(SDL_Renderer *renderer) { if(!assets) assets = new Assets(renderer); }
-  static void dealloc() { delete assets; };
-  static Assets& get() { return *assets; };
+  static Assets& get() { return *instance; };
+  static void init(Window* window);
+  static void dealloc();
   Assets(Assets &assets) = delete;
   Assets operator=(Assets &assets) = delete;
 private:
-  Assets(SDL_Renderer *renderer) : renderer(renderer) {};
-  ~Assets() { if(null_texture) SDL_DestroyTexture(null_texture); };
+  Assets(Window *window) : window(window) {};
+  ~Assets();
 private:
   SDL_Texture *null_texture = nullptr;
 public:
-  SDL_Texture* getNullTexture();
+  static SDL_Texture* getNullTexture();
+  static void background(const SDL_Colour &colour);
+  static void background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a);
 };
 }; // namespace PF::Core::Renderer

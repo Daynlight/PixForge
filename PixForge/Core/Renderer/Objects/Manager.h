@@ -14,36 +14,31 @@
 namespace PF::Core::Renderer::Objects{
 class Manager{
 private:
-  static Manager* manager;
-  Window* window;
+  static Manager* instance;
   STL::Vector<iObject*> objects;
   Texture* textures = nullptr;
   STL::File file;
 public:
-  static void init(const std::string &object_path, const std::string &texture_path, Window *window) { 
-    if(!manager) {
-      manager = new Manager(object_path, window); 
-      manager->textures = new Texture(texture_path, window);
-    };
-  };
-  static void dealloc() { delete manager; };
-  static Manager& get() { return *manager; };
+  static Manager& get() { return *instance; };
+  static void init(const std::string &object_path, const std::string &texture_path, Window *window);
+  static void dealloc();
   Manager(Manager &manager) = delete;
   Manager operator=(Manager &manager) = delete;
 private:
-  Manager(const std::string &object_path, Window *window) : file(object_path), window(window) {};
-  ~Manager() { while(objects.size()) delete objects.pop(); if(textures) delete textures; };
+  Manager(const std::string &object_path);
+  ~Manager();
 public:
-  const void addColourBox(const STL::Vec<int, 4> &position, const STL::Vec<char, 4> &colour) { objects.push(new ColourBox(position, colour)); };
-  const void addSprite(const STL::Vec<int, 4> &position, const unsigned int &texture_index) { objects.push(new Sprite(textures, position, texture_index)); };
+  void load();
+  void save();
 public:
-  iObject &operator[](unsigned int index) { return *objects[index]; };
+  void addColourBox(const STL::Vec<int, 5> &position, const STL::Vec<char, 4> &colour);
+  void addSprite(const STL::Vec<int, 5> &position, const unsigned int &texture_index);
+public:
+  void updateZIndex() { objects.sort([](iObject* a, iObject* b) { return a->getRefPosition()[2] > b->getRefPosition()[2]; }); };
+  iObject &operator[](const unsigned int &index) const { return *objects[index]; };
   const size_t size() const { return objects.size(); };
-  const void push(iObject* object) { objects.push(object); };
-  const void remove(unsigned int index) { objects.remove(index); };
-  const void loadAssets() { textures->load(); };
-public:
-  const void load();
-  const void save();
+  void push(iObject* object) { objects.push(object); };
+  void remove(const unsigned int &index) { objects.remove(index); };
+  void refreshAssets() { textures->load(); };
 };
 }; // namespace PF::Core::Renderer::Objects

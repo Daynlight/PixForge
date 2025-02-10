@@ -76,4 +76,17 @@ std::string PF::STL::Vector<T>::concat(const char sep){
   std::string result = "";
   for(size_t i = 0; i < _size; i++) result += data[i] + sep;
   return result;
+}
+
+template <typename T>
+inline void PF::STL::Vector<T>::sort(bool (*compare)(T, T)) {
+  for(size_t i = 0; i < _size; i++){
+    for(size_t j = 0; j < _size - i - 1; j++){
+      if(compare(data[j], data[j + 1])){
+        T temp = data[j];
+        data[j] = data[j + 1];
+        data[j + 1] = temp;
+      };
+    };
+  };
 };
