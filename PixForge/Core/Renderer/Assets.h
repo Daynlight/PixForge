@@ -19,8 +19,8 @@ private:
 private:
   SDL_Texture *null_texture = nullptr;
 public:
-  SDL_Texture* getNullTexture();
-  void background(const SDL_Colour &colour) const;
-  void background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a) const;
+  static SDL_Texture* getNullTexture();
+  static void background(const SDL_Colour &colour);
+  static void background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a);
 };
 }; // namespace PF::Core::Renderer

@@ -34,5 +34,5 @@ void PF::Core::Renderer::Objects::Sprite::render(const PF::Core::Window *window)
   if(texture_index < textures->size())
     SDL_RenderCopy(window->getRenderer(), (*textures)[texture_index], NULL, &rect);
   else
-    SDL_RenderCopy(window->getRenderer(), Assets::get().getNullTexture(), NULL, &rect);
+    SDL_RenderCopy(window->getRenderer(), Assets::getNullTexture(), NULL, &rect);
 };
