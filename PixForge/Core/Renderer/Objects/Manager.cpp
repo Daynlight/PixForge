@@ -5,23 +5,10 @@ PF::Core::Renderer::Objects::Manager* PF::Core::Renderer::Objects::Manager::mana
 const void PF::Core::Renderer::Objects::Manager::load(){
   textures->load();
   file.read();
-
-  // [NOTE] This is temporary solution to time that i rework STL
-  // [WARNING] This convert std::string Vector to const char* vector
-  STL::Vector<STL::Vector<std::string>> file_data = file.split(';');
-  STL::Vector<STL::Vector<const char*>> records;
-  for(unsigned int i = 0; i < file_data.size(); i++){
-    STL::Vector<std::string> data = file_data[i];
-    STL::Vector<const char*> temp;
-    for(unsigned int j = 0; j < data.size(); j++) temp.push(data[j].c_str());
-    records.push(temp);
-  }
-  // [NOTE] This is temporary solution to time that i rework STL
-
+  STL::Vector<STL::Vector<std::string>> records = file.split(';');
   for(unsigned int i = 0; i < file.size(); i++) {
-    STL::Vector<const char*> record = records[i];
-    iObject::Type type = static_cast<iObject::Type>(STL::Convert::CharUint(record[0]));
-
+    STL::Vector<std::string> record = records[i];
+    iObject::Type type = static_cast<iObject::Type>(std::stoul(record[0]));
     switch (type){
       case iObject::Type::SPRITE: objects.push(new Sprite(textures, record)); break;
       case iObject::Type::COLOUR_BOX: objects.push(new Objects::ColourBox(record)); break;

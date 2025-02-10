@@ -22,7 +22,7 @@ private:
   STL::Vector<iObject*> objects;
   Texture* textures = nullptr;
   STL::File file;
-public: // Singleton
+public:
   static void init(const std::string &object_path, const std::string &texture_path, Window *window) { 
     if(!manager) {
       manager = new Manager(object_path, window); 

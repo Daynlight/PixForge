@@ -1,7 +1,7 @@
 #include "Texture.h"
 
-inline const void PF::Core::Renderer::Texture::addTextureFromFile(const char* path) {
-  SDL_Surface* surface = IMG_Load(path);
+inline const void PF::Core::Renderer::Texture::addTextureFromFile(const std::string &path) {
+  SDL_Surface* surface = IMG_Load(path.c_str());
   SDL_Texture* texture = SDL_CreateTexture(window->getRenderer(), SDL_PIXELFORMAT_RGBA32,
     SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
   SDL_SetRenderTarget(window->getRenderer(), texture);
@@ -24,7 +24,6 @@ const void PF::Core::Renderer::Texture::save() {
     SDL_RenderReadPixels(window->getRenderer(), &rect, SDL_PIXELFORMAT_RGBA32, pixels, pitch);
     SDL_SetRenderTarget(window->getRenderer(), NULL);
 
-    // [NOTE] This is temporary solution to time that i rework STL
     STL::Vector<std::string> record;
     record.push(std::to_string(width));
     record.push(std::to_string(height));
@@ -35,8 +34,7 @@ const void PF::Core::Renderer::Texture::save() {
         record.push(std::to_string(pixel));
       };
     };
-    std::string record_string = record.concat(';');
-    file.push(record_string);
+    file.push(record.concat(';'));
     delete[] pixels;
   };
   file.save();
@@ -46,10 +44,8 @@ const void PF::Core::Renderer::Texture::load() {
   file.read();
   while(textures.size()) SDL_DestroyTexture(textures.pop());
 
-  // [NOTE] This is temporary solution to time that i rework STL
   STL::Vector<STL::Vector<std::string>> file = this->file.split(';');
   for(unsigned int i = 0; i < file.size(); i++){
-
     unsigned int width = std::stoul(file[i][0]);
     unsigned int height = std::stoul(file[i][1]);
     unsigned int pitch = std::stoul(file[i][2]);

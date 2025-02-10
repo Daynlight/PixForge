@@ -16,7 +16,7 @@ public:
   Texture(const std::string& path, Window* window) : file(path), window(window) {};
   ~Texture(){ clear(); };
 public:
-  inline const void addTextureFromFile(const char* path);
+  inline const void addTextureFromFile(const std::string &path);
   inline const void addTexture(SDL_Texture* texture) { textures.push(texture); };
   const void save();
   const void load();
