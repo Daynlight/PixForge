@@ -11,8 +11,13 @@ int WinMain(){
   #if BENCHMARK
   { Benchmark::Allocs allocs("Program Allocs");
   #endif
-  PF::Forge::Forge forge;
-  forge.run();
+  
+  {  
+    PF::Forge::Forge forge;
+    forge.run();
+  }
+  
+  PF::Tools::Log::get().dealloc();
   
   #if BENCHMARK
   } PF::STL::File file = PF::STL::File("Benchmark.txt");

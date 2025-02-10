@@ -27,7 +27,7 @@ private:
   inline void renderColourBoxProperties();
   inline void renderSpriteProperties();
 public:
-  Objects(const uint8_t id) : id(id) { Tools::Log::log("Objects UI Window Opened"); };
+  Objects(const uint8_t id) : id(id) { Tools::Log::get().log("Objects UI Window Opened"); };
 public:
   uint8_t getID() override { return id; };
   uint8_t getType() override { return Type::OBJECTS_UI; };

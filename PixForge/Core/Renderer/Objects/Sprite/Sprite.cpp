@@ -2,12 +2,12 @@
 
 const std::string PF::Core::Renderer::Objects::Sprite::save() const {
   STL::Vector<std::string> record;
-  record.push(STL::Convert::UintChar(getType()));
-  record.push(STL::Convert::IntChar(position[0]));
-  record.push(STL::Convert::IntChar(position[1]));
-  record.push(STL::Convert::IntChar(position[2]));
-  record.push(STL::Convert::IntChar(position[3]));
-  record.push(STL::Convert::UintChar(texture_index));
+  record.push(std::to_string(static_cast<int>(getType())));
+  record.push(std::to_string(position[0]));
+  record.push(std::to_string(position[1]));
+  record.push(std::to_string(position[2]));
+  record.push(std::to_string(position[3]));
+  record.push(std::to_string(static_cast<int>(texture_index)));
   record.push(name);
   return record.concat(';').c_str();;
 };
