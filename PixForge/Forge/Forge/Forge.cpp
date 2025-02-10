@@ -39,7 +39,7 @@ inline void PF::Forge::Forge::events(){
   while(SDL_PollEvent(&event)){
     // [NOTE] this solution is not optimal
     if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) 
-      Core::Renderer::Objects::Manager::get().loadAssets();
+      Core::Renderer::Objects::Manager::get().refreshAssets();
 
     sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);

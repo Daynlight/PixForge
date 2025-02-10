@@ -16,6 +16,7 @@ public:
   Vec(const Vec<T, S> &vec){ for(size_t i = 0; i < S; i++) data[i] = vec.data[i]; };
   void operator%(T value){ for(size_t i = 0; i < S; i++) data[i] %= value; };
   void operator/=(T value) { for(size_t i = 0; i < S; i++) data[i] /= value; };
+  void operator=(Vec<T, S> value) { for(size_t i = 0; i < S; i++) data[i] = value[i]; };
   T& operator[](size_t i){ return data[i]; }
   const T& operator[](size_t i) const { return data[i]; }
   ~Vec(){};
