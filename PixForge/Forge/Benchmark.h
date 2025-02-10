@@ -24,7 +24,7 @@ class Timer{
   const std::string label;
   std::chrono::time_point<std::chrono::high_resolution_clock> start;
   public:
-  Timer(const std::string &label = "Timer: ") : label(label), start(std::chrono::high_resolution_clock::now()) {};
+  Timer(const std::string &label = "Timer") : label(label), start(std::chrono::high_resolution_clock::now()) {};
   ~Timer(){
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
@@ -41,13 +41,13 @@ class Timer{
 
 class Allocs{
   private:
-    std::string label;
+    const std::string label;
   public:
-  Allocs(bool count = true, std::string label = "Allocs: ") : label(label)
+  Allocs(const std::string &label = "Allocs", bool count = true) : label(label)
     { Benchmark::get().count_allocs = count; Benchmark::get().allocs = 0; Benchmark::get().deallocs = 0; };
   ~Allocs() { 
     Benchmark::get().count_allocs = false; 
-    Benchmark::get().result.emplace_back(label + ": " + std::to_string(Benchmark::get().allocs) + " allocs, " + std::to_string(Benchmark::get().deallocs) + " deallocs " + std::to_string(Benchmark::get().allocs - Benchmark::get().deallocs) + " leaks"); 
+    Benchmark::get().result.emplace_back(label + ": " + std::to_string(Benchmark::get().allocs) + " allocs, " + std::to_string(Benchmark::get().deallocs) + " deallocs " + std::to_string(Benchmark::get().allocs >= Benchmark::get().deallocs ? Benchmark::get().allocs - Benchmark::get().deallocs : 0 )+ " leaks"); 
   };
   void start() { Benchmark::get().count_allocs = true; };
   void stop() { Benchmark::get().count_allocs = false; };

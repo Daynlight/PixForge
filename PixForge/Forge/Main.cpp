@@ -9,7 +9,7 @@
 
 int WinMain(){
   #if BENCHMARK
-  { Benchmark::Allocs allocs(true, "Program Allocs");
+  { Benchmark::Allocs allocs("Program Allocs");
   #endif
   PF::Forge::Forge forge;
   forge.run();
