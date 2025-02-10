@@ -14,12 +14,12 @@
 namespace PF::Core::Renderer::Objects{
 class Manager{
 private:
-  static Manager* manager;
+  static Manager* instance;
   STL::Vector<iObject*> objects;
   Texture* textures = nullptr;
   STL::File file;
 public:
-  static Manager& get() { return *manager; };
+  static Manager& get() { return *instance; };
   static void init(const std::string &object_path, const std::string &texture_path, Window *window);
   static void dealloc();
   Manager(Manager &manager) = delete;

@@ -10,20 +10,20 @@ namespace PF::Core::Renderer{
 class Texture{
 private:
   STL::Vector<SDL_Texture*> textures;
-  STL::File file;
   Window* window;
+  STL::File file;
 public:
   Texture(const std::string& path, Window* window) : file(path), window(window) {};
   ~Texture(){ clear(); };
 public:
-  inline const void addTextureFromFile(const std::string &path);
-  inline const void addTexture(SDL_Texture* texture) { textures.push(texture); };
-  const void save();
-  const void load();
+  inline void addTextureFromFile(const std::string &path);
+  inline void addTexture(SDL_Texture* texture) { textures.push(texture); };
+  void save();
+  void load();
 public:
   SDL_Texture* operator[](unsigned int index) { return textures[index]; };
   const SDL_Texture* operator[](unsigned int index) const { return textures[index]; };
-  const void clear() { while(textures.size()) SDL_DestroyTexture(textures.pop()); };
+  void clear() { while(textures.size()) SDL_DestroyTexture(textures.pop()); };
   const size_t size() const { return textures.size(); };
 };
 }; // namespace PF::Core::Renderer

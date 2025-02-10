@@ -4,8 +4,11 @@ PF::Forge::Forge::Forge()
   :window("PixEditor"), gui("settings/gui_window.ini", &window), sandbox(&window){
   Tools::Log::get().log("Window Created");
   Tools::Log::get().log("Objects Manager Created");
+  
+  Core::Renderer::Assets::init(&window);
   Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
   Core::Renderer::Objects::Manager::get().load();
+
   Tools::Log::get().log("Forge Created");
 };
 
@@ -24,7 +27,7 @@ PF::Forge::Forge::~Forge(){
 void PF::Forge::Forge::run(){
   Tools::Log::get().inf("Forge Running");
   while (window.isRunning()){
-    Core::Renderer::background(&window, backgroundColour);
+    Core::Renderer::Assets::get().background(backgroundColour);
 
     sandbox.run();
 

@@ -2,10 +2,15 @@
 #include <stdexcept>
 #include "STL/File/File.h"
 #include "STL/Folder/Folder.h"
-#include "Renderer/Assets.h"
 
 #include "SDL2/SDL.h"
 #include "imgui.h"
+
+
+// Default Window Settings
+#define WINDOW_SIZES 800, 600 
+#define WINDOW_POSITION SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
+#define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 
 namespace PF::Core{
 class Window{

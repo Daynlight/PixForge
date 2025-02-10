@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-inline const void PF::Core::Renderer::Texture::addTextureFromFile(const std::string &path) {
+inline void PF::Core::Renderer::Texture::addTextureFromFile(const std::string &path) {
   SDL_Surface* surface = IMG_Load(path.c_str());
   SDL_Texture* texture = SDL_CreateTexture(window->getRenderer(), SDL_PIXELFORMAT_RGBA32,
     SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
@@ -11,7 +11,7 @@ inline const void PF::Core::Renderer::Texture::addTextureFromFile(const std::str
   SDL_FreeSurface(surface);
 };
 
-const void PF::Core::Renderer::Texture::save() {
+void PF::Core::Renderer::Texture::save() {
   if(file.notExist()) file.createFile();
   file.clear();
   for(unsigned int i = 0; i < textures.size(); i++){
@@ -40,7 +40,7 @@ const void PF::Core::Renderer::Texture::save() {
   file.save();
 };
 
-const void PF::Core::Renderer::Texture::load() { 
+void PF::Core::Renderer::Texture::load() { 
   file.read();
   while(textures.size()) SDL_DestroyTexture(textures.pop());
 
