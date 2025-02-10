@@ -1,6 +1,8 @@
 #pragma once
 #include "STL/Vector/Vector.h"
 
+// [NOTE] Convert to singleton
+
 namespace PF::Tools{
   struct Log{
     static STL::Vector<std::pair<char, std::string>> entry;
