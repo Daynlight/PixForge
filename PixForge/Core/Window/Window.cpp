@@ -18,7 +18,7 @@ PF::Core::Window::~Window(){
   SDL_Quit();
 };
 
-inline const void PF::Core::Window::createWindow(const char *title){
+void PF::Core::Window::createWindow(const char *title){
   if(!window_settings.size())
     window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
@@ -27,32 +27,52 @@ inline const void PF::Core::Window::createWindow(const char *title){
     if(!window) throw std::runtime_error("Can't create window");
     
     if(window_settings[4] == "1"){
+      SDL_MaximizeWindow(window);
+    };
+    if(window_settings[5] == "1"){
       SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
     };
   };
 };
 
-inline const void PF::Core::Window::createRenderer(){
+void PF::Core::Window::createRenderer(){
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
 };
 
-inline const void PF::Core::Window::save() {
+void PF::Core::Window::save() {
   SDL_Rect window_location = getWindowSizesAndPosition();
   if(window_settings.notExist()) window_settings.createFile();
   window_settings.clear();
-  window_settings.push(std::to_string(window_location.x));
-  window_settings.push(std::to_string(window_location.y));
-  window_settings.push(std::to_string(window_location.w));
-  window_settings.push(std::to_string(window_location.h));
-  window_settings.push(std::to_string(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0));
+
+  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_MAXIMIZED){
+    window_settings.push(std::to_string(window_location.x));
+    window_settings.push(std::to_string(window_location.y));
+    STL::Vec<int, 2> window_size = {WINDOW_SIZES};
+    window_settings.push(std::to_string(window_size[0]));
+    window_settings.push(std::to_string(window_size[1]));
+  }
+  else{
+    window_settings.push(std::to_string(window_location.x));
+    window_settings.push(std::to_string(window_location.y));
+    window_settings.push(std::to_string(window_location.w));
+    window_settings.push(std::to_string(window_location.h));
+  };
+
+  bool maximized = false;
+  if(SDL_GetWindowFlags(window) & SDL_WINDOW_MAXIMIZED) maximized = true;
+  window_settings.push(std::to_string(maximized));
+  bool fullscreen = false;
+  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP) fullscreen = true;
+  window_settings.push(std::to_string(fullscreen));
+
   std::string record = window_settings.concat(';');
   window_settings.clear();
   window_settings.push(record);
   window_settings.save();
 };
 
-inline const void PF::Core::Window::load() {
+void PF::Core::Window::load() {
   window_settings.read();
   STL::Vector<std::string> *record = window_settings.split(';')[0];
   window_settings.clear();
@@ -67,16 +87,35 @@ const SDL_Rect PF::Core::Window::getWindowSizesAndPosition() const {
   return {x,y,w,h};
 };
 
-const void PF::Core::Window::windowEvent(const SDL_Event &event){
+void PF::Core::Window::windowEvent(const SDL_Event &event){
   if(event.type == SDL_QUIT) running = false;
   if(event.type == SDL_KEYDOWN){
     if(event.key.keysym.sym == SDLK_F11) changeFullScreenDesktop();
+    if(event.key.keysym.sym == SDLK_F10) changeMaximized();
+  };
+  if(event.type == SDL_WINDOWEVENT){
+    if(event.window.event == SDL_WINDOWEVENT_RESTORED) SDL_SetWindowPosition(window, WINDOW_POSITION);
+    if(event.window.event == SDL_WINDOW_FULLSCREEN_DESKTOP) SDL_SetWindowPosition(window, WINDOW_POSITION);
   };
 };
 
-// [BUG] This function is not working properly
-inline const void PF::Core::Window::changeFullScreenDesktop() const{
-  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP != 0) SDL_SetWindowFullscreen(window, 0);
-  else SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+void PF::Core::Window::changeFullScreenDesktop() const{
+  Uint32 flags = SDL_GetWindowFlags(window);
+  if(flags & SDL_WINDOW_FULLSCREEN_DESKTOP) {
+    SDL_SetWindowFullscreen(window, 0);
+    SDL_MaximizeWindow(window);
+    SDL_RestoreWindow(window);
+  } else {
+    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+  }
+  SDL_Delay(500);
+};
+
+void PF::Core::Window::changeMaximized() const {
+  Uint32 flags = SDL_GetWindowFlags(window);
+  if(flags & SDL_WINDOW_MAXIMIZED)
+    SDL_RestoreWindow(window);
+  else
+    SDL_MaximizeWindow(window);
   SDL_Delay(500);
 };
