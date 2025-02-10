@@ -44,16 +44,16 @@ const void PF::Core::Renderer::Texture::load() {
   file.read();
   while(textures.size()) SDL_DestroyTexture(textures.pop());
 
-  STL::Vector<STL::Vector<std::string>> file = this->file.split(';');
+  STL::Vector<STL::Vector<std::string>*> file = this->file.split(';');
   for(unsigned int i = 0; i < file.size(); i++){
-    unsigned int width = std::stoul(file[i][0]);
-    unsigned int height = std::stoul(file[i][1]);
-    unsigned int pitch = std::stoul(file[i][2]);
+    unsigned int width = std::stoul((*file[i])[0]);
+    unsigned int height = std::stoul((*file[i])[1]);
+    unsigned int pitch = std::stoul((*file[i])[2]);
     unsigned int* pixel = new unsigned int[width * height];
 
     for(unsigned int y = 0; y < height; y++){
       for(unsigned int x = 0; x < width; x++){
-        pixel[y * width + x] = std::stoul(file[i][3 + y * width + x]);
+        pixel[y * width + x] = std::stoul((*file[i])[3 + y * width + x]);
       };
     };
 
@@ -67,5 +67,6 @@ const void PF::Core::Renderer::Texture::load() {
 
     SDL_FreeSurface(surface);
     delete[] pixel;
+    delete file[i];
   };
 };

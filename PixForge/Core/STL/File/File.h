@@ -21,7 +21,7 @@ public:
   const std::string getPath() { return path; };
   std::string& operator[](const size_t index) { return data[index]; };
   void remove() { std::filesystem::remove(path); };
-  Vector<Vector<std::string>> split(const char sep){ return data.split(sep); };
+  Vector<Vector<std::string>*> split(const char sep){ return data.split(sep); };
   std::string concat(const char sep){ return data.concat(sep); };
 public:
   void read();

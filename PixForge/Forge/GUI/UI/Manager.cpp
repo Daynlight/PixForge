@@ -9,16 +9,18 @@ uint8_t PF::Forge::Ui::iUi::generateUniqueID(STL::Vector<iUi*> *uis){
 void PF::Forge::Ui::Manager::load(){
   file.read();
   if(!file.notExist()){
-    STL::Vector<STL::Vector<std::string>> records = file.split(';');
+    STL::Vector<STL::Vector<std::string>*> records = file.split(';');
     for(size_t i = 0; i < file.size(); i++) {
-      STL::Vector<std::string> record = records[i];
-      iUi::Type type = static_cast<iUi::Type>(std::stoi(record[0]));
-      uint8_t id = std::stoul(record[1]);
+      STL::Vector<std::string>* record = records[i];
+      iUi::Type type = static_cast<iUi::Type>(std::stoi((*record)[0]));
+      uint8_t id = std::stoul((*record)[1]);
 
       if(type == Ui::iUi::Type::LOG) windows.push(new Ui::Log(id));
-      if(type == Ui::iUi::Type::FILE_EXPLORER) windows.push(new Ui::FileExplorer(id, &windows, STL::Folder(record[2])));
-      if(type == Ui::iUi::Type::TEXT_EDITOR) windows.push(new Ui::TextEditor(id, record[2]));
+      if(type == Ui::iUi::Type::FILE_EXPLORER) windows.push(new Ui::FileExplorer(id, &windows, STL::Folder((*record)[2])));
+      if(type == Ui::iUi::Type::TEXT_EDITOR) windows.push(new Ui::TextEditor(id, (*record)[2]));
       if(type == Ui::iUi::Type::OBJECTS_UI) windows.push(new Ui::Objects(id));
+
+      delete record;
     };
   };
   Tools::Log::inf("UI Windows Loaded: "+std::to_string(windows.size()));

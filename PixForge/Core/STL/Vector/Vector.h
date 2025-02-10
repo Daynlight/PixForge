@@ -12,6 +12,7 @@ private:
   void resize();
 public:
   Vector(const size_t capacity = 1);
+  ~Vector(){ if(data) delete[] data; };
   const size_t size() const;
   void push(const T line);
   T pop();
@@ -19,7 +20,7 @@ public:
   void clear();
   T& operator[](const size_t index);
   const T& operator[](const size_t index) const { return data[index]; };
-  Vector<Vector<std::string>> split(const char sep);
+  Vector<Vector<std::string>*> split(const char sep);
   std::string concat(const char sep);
 };
 }; // namespace PF::STL
