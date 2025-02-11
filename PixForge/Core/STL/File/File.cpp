@@ -1,7 +1,13 @@
 #include "File.h"
 
-void PF::STL::File::read()
-{
+PF::STL::File::File(const std::string &path) 
+  : path(path){ 
+  file.open(path, std::ios::in | std::ios::out); 
+};
+  
+PF::STL::File::~File() { file.close(); };
+
+void PF::STL::File::read() {
   file.seekg(0, std::ios::beg);
   std::string line;
   while(std::getline(file, line)) data.push(line);

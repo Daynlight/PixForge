@@ -8,7 +8,7 @@ uint8_t PF::Forge::Ui::iUi::generateUniqueID(STL::Vector<iUi*> *uis){
 
 void PF::Forge::Ui::Manager::load(){
   file.read();
-  if(!file.notExist()){
+  if(file.exist()){
     STL::Vector<STL::Vector<std::string>*> records = file.split(';');
     for(size_t i = 0; i < file.size(); i++) {
       STL::Vector<std::string>* record = records[i];
@@ -27,8 +27,8 @@ void PF::Forge::Ui::Manager::load(){
 };
 
 void PF::Forge::Ui::Manager::save(){
-  if(file.notExist()) {
-    file.createFile();
+  if(file.exist()) {
+    file.create();
     Tools::Log::war("gui_window file Created");
   };
 

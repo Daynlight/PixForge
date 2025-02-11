@@ -41,7 +41,7 @@ inline void PF::Forge::Ui::FileExplorer::fileManager() {
     ImGui::InputText("##file", file_name, IM_ARRAYSIZE(file_name));
     ImGui::SameLine();
     if(ImGui::Button("create file")){
-      folder.openFile(file_name).createFile();
+      folder.openFile(file_name).create();
       folder.fetchList();
       create_file = false;
       Tools::Log::inf("File created: "+std::string(file_name));

@@ -25,7 +25,7 @@ int WinMain(){
   } PF::STL::File file = PF::STL::File("Benchmark.txt");
   for(auto &line : Benchmark::Benchmark::get().result)
     file.push(line);
-  if(file.notExist()) file.createFile();
+  if(!file.exist()) file.create();
   file.save();
   #endif
   return 0;

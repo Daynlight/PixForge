@@ -20,18 +20,18 @@ PF::Core::Window::~Window(){
 
 void PF::Core::Window::createWindow(const char *title){
   if(!window_settings.size())
-    window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
+  window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
     window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
-      std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
-    if(!window) throw std::runtime_error("Can't create window");
-    
-    if(window_settings[4] == "1"){
-      SDL_MaximizeWindow(window);
-    };
-    if(window_settings[5] == "1"){
-      SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-    };
+    std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
+    if(!window) throw std::runtime_error("Can't create window");  
+  };
+
+  if(window_settings[4] == "1"){
+    SDL_MaximizeWindow(window);
+  };
+  if(window_settings[5] == "1"){
+    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
   };
 };
 
@@ -42,10 +42,15 @@ void PF::Core::Window::createRenderer(){
 
 void PF::Core::Window::save() {
   SDL_Rect window_location = getWindowSizesAndPosition();
-  if(window_settings.notExist()) window_settings.createFile();
+  if(!window_settings.exist()) window_settings.create();
   window_settings.clear();
 
-  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_MAXIMIZED){
+  bool maximized = false;
+  if(SDL_GetWindowFlags(window) & SDL_WINDOW_MAXIMIZED) maximized = true;
+  bool fullscreen = false;
+  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP) fullscreen = true;
+  
+  if(maximized || fullscreen){
     window_settings.push(std::to_string(window_location.x));
     window_settings.push(std::to_string(window_location.y));
     STL::Vec<int, 2> window_size = {WINDOW_SIZES};
@@ -58,14 +63,10 @@ void PF::Core::Window::save() {
     window_settings.push(std::to_string(window_location.w));
     window_settings.push(std::to_string(window_location.h));
   };
-
-  bool maximized = false;
-  if(SDL_GetWindowFlags(window) & SDL_WINDOW_MAXIMIZED) maximized = true;
+  
   window_settings.push(std::to_string(maximized));
-  bool fullscreen = false;
-  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP) fullscreen = true;
   window_settings.push(std::to_string(fullscreen));
-
+  
   std::string record = window_settings.concat(';');
   window_settings.clear();
   window_settings.push(record);
@@ -73,8 +74,8 @@ void PF::Core::Window::save() {
 };
 
 void PF::Core::Window::load() {
-  window_settings.read();
-  if(!window_settings.notExist()) {
+  if(window_settings.exist()) {
+    window_settings.read();
     STL::Vector<std::string> *record = window_settings.split(';')[0];
     window_settings.clear();
     for(size_t i = 0; i < record->size(); i++) window_settings.push((*record)[i]);
