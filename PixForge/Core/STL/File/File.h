@@ -11,8 +11,8 @@ private:
   std::string path;
   std::fstream file;
 public:
-  File(const std::string &path);
-  ~File();
+  File(const std::string &path) : path(path) { file.open(path, std::ios::in | std::ios::out); };
+  ~File() { file.close(); };
 public:
   const bool exist() const { return std::filesystem::exists(path); };
   void create() { file.open(path, std::ios::out); };

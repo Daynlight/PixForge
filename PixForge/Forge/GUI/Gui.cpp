@@ -20,7 +20,7 @@ PF::Forge::Gui::Gui(const std::string &path, Core::Window *window)
 
   STL::Folder settings = STL::Folder("settings/");
   if(!settings.exist()) {
-    settings.createFolder();
+    settings.create();
     Tools::Log::war("settings folder Created");
   };
 

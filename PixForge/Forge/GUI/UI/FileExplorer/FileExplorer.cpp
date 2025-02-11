@@ -1,7 +1,7 @@
 #include "FileExplorer.h"
 
 PF::Forge::Ui::FileExplorer::FileExplorer(const uint8_t id, STL::Vector<iUi*> *uis, STL::Folder folder) : id(id), uis(uis), folder(folder){
-  if(!this->folder.exist()) this->folder.createFolder();
+  if(!this->folder.exist()) this->folder.create();
   this->folder.fetchList();
   Tools::Log::log("File Explorer UI Window Opened: "+this->folder.getPath());
 };
@@ -28,7 +28,7 @@ inline void PF::Forge::Ui::FileExplorer::fileManager() {
     ImGui::InputText("##folder", folder_name, IM_ARRAYSIZE(folder_name));
     ImGui::SameLine();
     if(ImGui::Button("create folder")){
-      folder.openFolder(folder_name).createFolder();
+      folder.openFolder(folder_name).create();
       folder.fetchList();
       create_folder = false;
       Tools::Log::inf("Folder created: "+std::string(folder_name) + "/");
@@ -55,7 +55,7 @@ inline void PF::Forge::Ui::FileExplorer::mainMenuBar(){
   
   ImGui::SameLine();
   if(ImGui::Button("back")) {
-    folder = folder.back();
+    folder = folder.backFolder();
     folder.fetchList();
     Tools::Log::log("Folder back: "+folder.getPath());
   };
