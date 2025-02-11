@@ -14,6 +14,6 @@ void PF::Forge::Ui::Log::render() {
     if(Tools::Log::at(i).first == 1) ImGui::TextColored(ImVec4(255,255,0,255),Tools::Log::at(i).second.c_str());
     if(Tools::Log::at(i).first == 2) ImGui::TextColored(ImVec4(255,0,0,255),Tools::Log::at(i).second.c_str());
     if(Tools::Log::at(i).first == 3) ImGui::TextColored(ImVec4(0,255,200,255),Tools::Log::at(i).second.c_str());
-  }
+  };
   ImGui::End();
 };
