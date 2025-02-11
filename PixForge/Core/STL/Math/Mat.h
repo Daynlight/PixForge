@@ -24,8 +24,8 @@ public:
 public:
   void operator*(Mat<T, S, R> &second);
 public:
-  T& operator[](const unsigned int &index) { return data[index]; };
-  const T& operator[](const unsigned int &index) const { return data[index]; };
+  T& operator()(const unsigned int &row, const unsigned int &col) { return data[row][col]; };
+  const T& operator()(const unsigned int &row, const unsigned int &col) const { return data[row][col]; };
 };// class Mat
 }; // namespace PF::STL
 

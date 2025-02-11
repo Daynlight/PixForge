@@ -23,7 +23,9 @@ public:
   void operator/=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] /= value; };
   void operator%=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] %= value; };
 public:
-  void operator*(Mat<T, S, S> &matrix);
+  template<typename U, unsigned int R>
+  Vec<U, R> operator*(const Mat<U, R, R>& matrix) const;
+public:
   T& operator[](const unsigned int &index) { return data[index]; };
   const T& operator[](const unsigned int &index) const { return data[index]; };
 }; // class Vec

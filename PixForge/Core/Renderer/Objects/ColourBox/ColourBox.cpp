@@ -22,6 +22,10 @@ void PF::Core::Renderer::Objects::ColourBox::load(const STL::Vector<std::string>
 
 void PF::Core::Renderer::Objects::ColourBox::render(const Window *window) const {
   SDL_SetRenderDrawColor(window->getRenderer(), colour[0], colour[1], colour[2], colour[3]);
-  SDL_Rect tempRect = {position[0], position[1], position[3], position[4]};
+  STL::Vec<int, 5> position = this->position;
+  position[0] -= position[3] / 2;
+  position[1] -= position[4] / 2;
+  STL::Vec<float, 5> draw_position = position * transform;
+  SDL_Rect tempRect = {static_cast<int>(draw_position[0]), static_cast<int>(draw_position[1]), static_cast<int>(draw_position[3]), static_cast<int>(draw_position[4])};
   SDL_RenderFillRect(window->getRenderer(), &tempRect);
 };
