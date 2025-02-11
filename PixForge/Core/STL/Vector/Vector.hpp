@@ -76,17 +76,29 @@ std::string PF::STL::Vector<T>::concat(const char sep){
   std::string result = "";
   for(size_t i = 0; i < _size; i++) result += data[i] + sep;
   return result;
-}
+};
 
 template <typename T>
-inline void PF::STL::Vector<T>::sort(bool (*compare)(T, T)) {
-  for(size_t i = 0; i < _size; i++){
-    for(size_t j = 0; j < _size - i - 1; j++){
-      if(compare(data[j], data[j + 1])){
-        T temp = data[j];
-        data[j] = data[j + 1];
-        data[j + 1] = temp;
-      };
+void PF::STL::Vector<T>::sort(bool (*compare)(T, T)) { quickSort(0, _size - 1, compare); };
+
+template <typename T>
+void PF::STL::Vector<T>::quickSort(int a, int b, bool (*compare)(T, T)) {
+  if(a >= b) return;
+  int c = partition(a, b, compare);
+  quickSort(a, c - 1, compare);
+  quickSort(c + 1, b, compare);
+};
+
+template <typename T>
+const int PF::STL::Vector<T>::partition(int a, int b, bool (*compare)(T, T)){
+  T pivot = data[b];
+  int i = a - 1;
+  for(unsigned int j = a; j < b; j++){
+    if(compare(data[j], pivot)){
+      i++;
+      std::swap(data[i], data[j]);
     };
   };
+  std::swap(data[i + 1], data[b]);
+  return i + 1;
 };
