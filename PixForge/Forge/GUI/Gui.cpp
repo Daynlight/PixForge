@@ -73,7 +73,7 @@ inline void PF::Forge::Gui::renderTopBar(){
   };
 };
 
-void PF::Forge::Gui::renderGui(){
+void PF::Forge::Gui::render(){
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame();
   ImGui::NewFrame();

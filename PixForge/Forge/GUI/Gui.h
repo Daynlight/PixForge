@@ -21,7 +21,7 @@ private:
 public:
   Gui(const std::string &path, Core::Window* window);
   ~Gui();
-  void renderGui();
+  void render();
   void guiEvent(SDL_Event* event);
 };
 }; // namespace PF::Forge

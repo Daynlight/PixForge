@@ -2,26 +2,25 @@
 
 PF::Forge::Forge::Forge()
   :window("PixEditor"), gui("settings/gui_window.ini", &window), sandbox(&window){
+  Tools::Log::init();
   Tools::Log::log("Window Created");
-  Tools::Log::log("Objects Manager Created");
   
   Core::Renderer::Assets::init(&window);
+  Tools::Log::log("Assets Initialized");
+
   Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
   Core::Renderer::Objects::Manager::load();
+  Tools::Log::log("Objects Initialized");
 
   Tools::Log::log("Forge Created");
 };
 
 PF::Forge::Forge::~Forge(){
   Core::Renderer::Objects::Manager::save();
-  Tools::Log::log("Objects Manager Destroyed");
+  Tools::Log::log("Objects Saved");
 
   Tools::Log::log("Window Destroyed");
   Tools::Log::log("Forge Destroyed");
-
-  
-  Core::Renderer::Objects::Manager::dealloc();
-  Core::Renderer::Assets::dealloc();
 };
 
 void PF::Forge::Forge::run(){
@@ -30,14 +29,15 @@ void PF::Forge::Forge::run(){
     Core::Renderer::Assets::background(backgroundColour);
 
     sandbox.run();
+    gui.render();
 
-    gui.renderGui();
     events();
+    
     SDL_RenderPresent(window.getRenderer());
   };
 };
 
-inline void PF::Forge::Forge::events(){
+void PF::Forge::Forge::events(){
   SDL_Event event;
   while(SDL_PollEvent(&event)){
     // [NOTE] this solution is not optimal

@@ -17,6 +17,8 @@ int WinMain(){
     forge.run();
   }
   
+  PF::Core::Renderer::Objects::Manager::dealloc();
+  PF::Core::Renderer::Assets::dealloc();
   PF::Tools::Log::dealloc();
   
   #if BENCHMARK
