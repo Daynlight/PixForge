@@ -5,9 +5,9 @@
 #include "Gui/Gui.h"
 #include "Sandbox.h"
 #include "Renderer/Objects/Manager.h"
+#include "Renderer/Assets.h"
 
 #include "Tools/Log.h"
-#include "Settings.h"
 
 namespace PF::Forge{
 class Forge{
