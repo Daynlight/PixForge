@@ -17,9 +17,11 @@ int WinMain(){
     forge.run();
   }
   
+  #if BENCHMARK
+  PF::Core::Renderer::Objects::Manager::dealloc();
+  PF::Core::Renderer::Assets::dealloc();
   PF::Tools::Log::dealloc();
   
-  #if BENCHMARK
   } PF::STL::File file = PF::STL::File("Benchmark.txt");
   for(auto &line : Benchmark::Benchmark::get().result)
     file.push(line);
