@@ -2,22 +2,22 @@
 
 PF::Forge::Forge::Forge()
   :window("PixEditor"), gui("settings/gui_window.ini", &window), sandbox(&window){
-  Tools::Log::get().log("Window Created");
-  Tools::Log::get().log("Objects Manager Created");
+  Tools::Log::log("Window Created");
+  Tools::Log::log("Objects Manager Created");
   
   Core::Renderer::Assets::init(&window);
   Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
   Core::Renderer::Objects::Manager::get().load();
 
-  Tools::Log::get().log("Forge Created");
+  Tools::Log::log("Forge Created");
 };
 
 PF::Forge::Forge::~Forge(){
   Core::Renderer::Objects::Manager::get().save();
-  Tools::Log::get().log("Objects Manager Destroyed");
+  Tools::Log::log("Objects Manager Destroyed");
 
-  Tools::Log::get().log("Window Destroyed");
-  Tools::Log::get().log("Forge Destroyed");
+  Tools::Log::log("Window Destroyed");
+  Tools::Log::log("Forge Destroyed");
 
   
   Core::Renderer::Objects::Manager::get().dealloc();
@@ -25,7 +25,7 @@ PF::Forge::Forge::~Forge(){
 };
 
 void PF::Forge::Forge::run(){
-  Tools::Log::get().inf("Forge Running");
+  Tools::Log::inf("Forge Running");
   while (window.isRunning()){
     Core::Renderer::Assets::background(backgroundColour);
 
