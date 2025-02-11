@@ -36,7 +36,7 @@ inline void PF::Forge::Ui::Objects::renderAddColourBox() {
   ImGui::ColorPicker4("##picker", colour.data);
 
   if(ImGui::Button("Add Object")){
-    STL::Vec<char, 4> colourTemp;
+    STL::Vec<char, 4> colourTemp(0);
     for (size_t i = 0; i < 4; i++) 
       colourTemp[i] = static_cast<char>(colour[i] * 255);
 
@@ -103,7 +103,7 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
     ImGui::ColorPicker4("##picker", colour.data);
 
     if(ImGui::Button("Apply")){
-      STL::Vec<char, 4> colourTemp;
+      STL::Vec<char, 4> colourTemp(0);
       for (size_t i = 0; i < 4; i++) 
         colourTemp[i] = static_cast<char>(colour[i] * 255);          
       static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefColour() = colourTemp;

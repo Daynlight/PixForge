@@ -1,6 +1,7 @@
 #pragma once
 #include "Window/Window.h"
-#include "STL/Vec/Vec.h"
+#include "STL/Math/Vec.h"
+#include "STL/Math/Mat.h"
 #include "STL/Vector/Vector.h"
 
 namespace PF::Core::Renderer::Objects{
@@ -18,5 +19,6 @@ public:
   virtual const Type getType() const = 0;
   virtual std::string &getRefName() = 0;
   virtual STL::Vec<int, 5> &getRefPosition() = 0;
+  virtual STL::Mat<float, 5, 5> &getRefTransform() = 0;
 };
 }; // namespace PF::Core::Renderer::Objects

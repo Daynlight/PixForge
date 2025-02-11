@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "STL/File/File.h"
 #include "STL/Folder/Folder.h"
-#include "STL/Vec/Vec.h"
+#include "STL/Math/Vec.h"
 
 #include "SDL2/SDL.h"
 #include "imgui.h"

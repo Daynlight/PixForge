@@ -43,7 +43,7 @@ void PF::Core::Renderer::Objects::Manager::load() {
 
 void PF::Core::Renderer::Objects::Manager::save() {
   get().textures->save();
-  if(get().file.notExist()) get().file.createFile();
+  if(!get().file.exist()) get().file.create();
   get().file.clear();
   for(unsigned int i = 0; i < get().objects.size(); i++) get().file.push(get().objects[i]->save());
   get().file.save();
