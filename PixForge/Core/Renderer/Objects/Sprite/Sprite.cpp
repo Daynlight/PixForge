@@ -30,7 +30,12 @@ void PF::Core::Renderer::Objects::Sprite::load(const STL::Vector<std::string> &r
 };
 
 void PF::Core::Renderer::Objects::Sprite::render(const PF::Core::Window *window) const {
-  SDL_Rect rect = {position[0], position[1], position[3], position[4]};
+  STL::Vec<int, 5> position = this->position;
+  position[0] -= position[3] / 2;
+  position[1] -= position[4] / 2;
+  STL::Vec<float, 5> draw_position = position * transform;
+  SDL_Rect rect = {static_cast<int>(draw_position[0]), static_cast<int>(draw_position[1]), static_cast<int>(draw_position[3]), static_cast<int>(draw_position[4])};
+  
   if(texture_index < textures->size())
     SDL_RenderCopy(window->getRenderer(), (*textures)[texture_index], NULL, &rect);
   else

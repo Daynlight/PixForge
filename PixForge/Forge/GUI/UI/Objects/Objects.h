@@ -1,7 +1,7 @@
 #pragma once
 #include "Gui/Ui/Ui.h"
 #include "STL/Vector/Vector.h"
-#include "STL/Vec/Vec.h"
+#include "STL/Math/Vec.h"
 #include "Renderer/Objects/Manager.h"
 #include "Tools/Log.h"
 

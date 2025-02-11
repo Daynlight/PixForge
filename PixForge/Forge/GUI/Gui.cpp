@@ -18,12 +18,6 @@ PF::Forge::Gui::Gui(const std::string &path, Core::Window *window)
   ImGui_ImplSDLRenderer2_Init(window->getRenderer());
   Tools::Log::log("ImGui Initialized");
 
-  STL::Folder settings = STL::Folder("settings/");
-  if(!settings.exist()) {
-    settings.createFolder();
-    Tools::Log::war("settings folder Created");
-  };
-
   ui.load();
 };
 

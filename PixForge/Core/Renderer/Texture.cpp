@@ -12,7 +12,7 @@ inline void PF::Core::Renderer::Texture::addTextureFromFile(const std::string &p
 };
 
 void PF::Core::Renderer::Texture::save() {
-  if(file.notExist()) file.createFile();
+  if(!file.exist()) file.create();
   file.clear();
   for(unsigned int i = 0; i < textures.size(); i++){
     int width, height;

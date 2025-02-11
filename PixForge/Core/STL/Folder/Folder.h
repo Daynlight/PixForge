@@ -6,22 +6,23 @@
 namespace PF::STL{
 class Folder{
 private:
+  Vector<std::pair<char, std::string>> data;
   std::string path;
-private:
-  Vector<std::pair<char, std::string>> files;
 public:
-  Folder(const std::string &path) :path(path){};
-  std::pair<char, std::string> &operator[](const size_t &index){ return files[index]; };
-  bool exist() { return std::filesystem::exists(path); };
-  void createFolder(){ std::filesystem::create_directory(path); };
-  File openFile(const std::string &file) { return File(path + file); };
-  void remove(const std::string &file) { std::filesystem::remove_all(path + file); };
-  std::string getPath() { return path; };
-  Folder openFolder(const std::string &folder) { return Folder(path + folder); };
-  std::pair<char, std::string> &operator[](const int index) { return files[index]; };
-  size_t size() { return files.size(); };
+  Folder(const std::string &path) : path(path) {};
+public:
+  const bool exist() const { return std::filesystem::exists(path); };
+  void create();
+  void remove(const std::string &folder) { std::filesystem::remove_all(path + folder); };
 public:
   void fetchList();
-  Folder back();
-};
+  const unsigned int size() const { return data.size(); };
+  File openFile(const std::string &file) { return File(path + file); };
+  Folder openFolder(const std::string &folder) const { return Folder(path + folder); };
+  Folder backFolder() const;
+public:
+  std::string getPath() { return path; };
+  std::pair<char, std::string> &operator[](const unsigned int &index) { return data[index]; };
+  const std::pair<char, std::string> &operator[](const unsigned int &index) const { return data[index]; };
+}; // class Folder
 }; // namespace PF::STL
