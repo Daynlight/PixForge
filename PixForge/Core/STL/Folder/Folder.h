@@ -12,7 +12,7 @@ public:
   Folder(const std::string &path) : path(path) {};
 public:
   const bool exist() const { return std::filesystem::exists(path); };
-  void create() { std::filesystem::create_directory(path); };
+  void create();
   void remove(const std::string &folder) { std::filesystem::remove_all(path + folder); };
 public:
   void fetchList();

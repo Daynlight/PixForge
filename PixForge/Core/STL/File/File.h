@@ -15,7 +15,7 @@ public:
   ~File() { file.close(); };
 public:
   const bool exist() const { return std::filesystem::exists(path); };
-  void create() { file.open(path, std::ios::out); };
+  void create();
   void remove() { std::filesystem::remove(path); };
 public:
   void push(const std::string &line) { data.push(line); };

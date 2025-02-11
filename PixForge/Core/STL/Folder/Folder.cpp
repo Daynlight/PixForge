@@ -9,7 +9,18 @@ PF::STL::Folder PF::STL::Folder::backFolder() const {
   return Folder(path);
 };
 
-void PF::STL::Folder::fetchList() {
+void PF::STL::Folder::create() {
+  std::string temp = ""; 
+  for(unsigned int i = 0; i < path.size(); i++){
+    if(path[i] == '/'){
+      std::filesystem::create_directory(temp);
+    }
+    temp += path[i];
+  };
+  std::filesystem::create_directory(path);
+};
+
+void PF::STL::Folder::fetchList(){
   data.clear(); 
   for(auto& p: std::filesystem::directory_iterator(path)){
     if(p.is_directory()) data.push(std::pair<char, std::string>('d', p.path().filename().string() + "/"));

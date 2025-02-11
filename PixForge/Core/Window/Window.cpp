@@ -1,8 +1,6 @@
 #include "Window.h"
 
 PF::Core::Window::Window(const char* title) {
-  STL::Folder settings = STL::Folder("settings/");
-  if(!settings.exist()) settings.create();
   load();
 
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
