@@ -25,6 +25,7 @@ void PF::Core::Renderer::Objects::ColourBox::render(const Window *window) const 
   STL::Vec<int, 5> position = this->position;
   position[0] -= position[3] / 2;
   position[1] -= position[4] / 2;
+  position -= Assets::getRefWorldPosition();
   STL::Vec<float, 5> draw_position = position * transform;
   SDL_Rect tempRect = {static_cast<int>(draw_position[0]), static_cast<int>(draw_position[1]), static_cast<int>(draw_position[3]), static_cast<int>(draw_position[4])};
   SDL_RenderFillRect(window->getRenderer(), &tempRect);

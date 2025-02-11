@@ -43,6 +43,12 @@ void PF::Forge::Forge::events(){
     // [NOTE] this solution is not optimal
     if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) 
       Core::Renderer::Objects::Manager::refreshAssets();
+    
+    // Mouse Wheel down
+    if(event.type == SDL_MOUSEWHEEL){
+      Core::Renderer::Assets::getRefWorldPosition()[0] += event.wheel.x * MOUSEWHEELSPEED;
+      Core::Renderer::Assets::getRefWorldPosition()[1] += event.wheel.y * MOUSEWHEELSPEED;
+    };
 
     sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
