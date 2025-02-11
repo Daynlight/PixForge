@@ -2,6 +2,8 @@
 #include "SDL2/SDL.h"
 #include "Window/Window.h"
 
+#define backgroundColour 25,25,25,255
+
 namespace PF::Core::Renderer{
 class Assets{
 private:
