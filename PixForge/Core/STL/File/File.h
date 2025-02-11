@@ -32,5 +32,5 @@ public:
 public:
   void read();
   void save();
-};
+}; // class File
 }; // namespace PF::STL

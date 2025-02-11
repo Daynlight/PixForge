@@ -1,7 +1,7 @@
 #pragma once
 #include "Window/Window.h"
 #include "STL/Vector/Vector.h"
-#include "STL/Vec/Vec.h"
+#include "STL/Math/Vec.h"
 
 #include "Renderer/Objects/Object.h"
 

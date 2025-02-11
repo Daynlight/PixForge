@@ -24,5 +24,5 @@ public:
   std::string getPath() { return path; };
   std::pair<char, std::string> &operator[](const unsigned int &index) { return data[index]; };
   const std::pair<char, std::string> &operator[](const unsigned int &index) const { return data[index]; };
-};
+}; // class Folder
 }; // namespace PF::STL
