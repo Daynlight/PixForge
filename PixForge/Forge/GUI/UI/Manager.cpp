@@ -23,13 +23,13 @@ void PF::Forge::Ui::Manager::load(){
       delete record;
     };
   };
-  Tools::Log::get().inf("UI Windows Loaded: "+std::to_string(windows.size()));
+  Tools::Log::inf("UI Windows Loaded: "+std::to_string(windows.size()));
 };
 
 void PF::Forge::Ui::Manager::save(){
   if(file.notExist()) {
     file.createFile();
-    Tools::Log::get().war("gui_window file Created");
+    Tools::Log::war("gui_window file Created");
   };
 
   file.clear();
@@ -44,7 +44,7 @@ void PF::Forge::Ui::Manager::save(){
   };
 
   file.save();
-  Tools::Log::get().inf("UI Windows Saved: "+std::to_string(windows.size()));
+  Tools::Log::inf("UI Windows Saved: "+std::to_string(windows.size()));
 };
 
 void PF::Forge::Ui::Manager::addWindow(iUi::Type type) {
