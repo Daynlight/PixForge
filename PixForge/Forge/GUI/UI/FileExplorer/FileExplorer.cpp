@@ -3,7 +3,7 @@
 PF::Forge::Ui::FileExplorer::FileExplorer(const uint8_t id, STL::Vector<iUi*> *uis, STL::Folder folder) : id(id), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.createFolder();
   this->folder.fetchList();
-  Tools::Log::get().log("File Explorer UI Window Opened: "+this->folder.getPath());
+  Tools::Log::log("File Explorer UI Window Opened: "+this->folder.getPath());
 };
 
 inline void PF::Forge::Ui::FileExplorer::popUp(){
@@ -31,7 +31,7 @@ inline void PF::Forge::Ui::FileExplorer::fileManager() {
       folder.openFolder(folder_name).createFolder();
       folder.fetchList();
       create_folder = false;
-      Tools::Log::get().inf("Folder created: "+std::string(folder_name) + "/");
+      Tools::Log::inf("Folder created: "+std::string(folder_name) + "/");
     };
   };
 
@@ -44,7 +44,7 @@ inline void PF::Forge::Ui::FileExplorer::fileManager() {
       folder.openFile(file_name).createFile();
       folder.fetchList();
       create_file = false;
-      Tools::Log::get().inf("File created: "+std::string(file_name));
+      Tools::Log::inf("File created: "+std::string(file_name));
     };
   };
 };
@@ -57,12 +57,12 @@ inline void PF::Forge::Ui::FileExplorer::mainMenuBar(){
   if(ImGui::Button("back")) {
     folder = folder.back();
     folder.fetchList();
-    Tools::Log::get().log("Folder back: "+folder.getPath());
+    Tools::Log::log("Folder back: "+folder.getPath());
   };
   
   if(ImGui::Button("refresh")) folder.fetchList();
   ImGui::SameLine();
-  if(ImGui::Button("exit")) {open = false; Tools::Log::get().log("File Explorer UI Window Closed: "+folder.getPath());};
+  if(ImGui::Button("exit")) {open = false; Tools::Log::log("File Explorer UI Window Closed: "+folder.getPath());};
   ImGui::EndMenuBar();
   };
 };
@@ -93,10 +93,10 @@ inline void PF::Forge::Ui::FileExplorer::renderFolder() {
         try{
           folder.remove(folder[i].second);
           folder.fetchList();
-          Tools::Log::get().inf("File/Folder removed: "+folder[i].second);
+          Tools::Log::inf("File/Folder removed: "+folder[i].second);
         }
         catch(const std::exception &e){
-          Tools::Log::get().err("Can't remove file/folder in use!!");
+          Tools::Log::err("Can't remove file/folder in use!!");
         }
       }
       ImGui::EndPopup();
@@ -106,7 +106,7 @@ inline void PF::Forge::Ui::FileExplorer::renderFolder() {
       if(folder[i].first == 'd') {
         folder = folder.openFolder(folder[i].second);
         folder.fetchList();
-        Tools::Log::get().log("Folder open: "+folder.getPath());
+        Tools::Log::log("Folder open: "+folder.getPath());
         break;
       } else {
         uis->push(new TextEditor(generateUniqueID(uis), folder.getPath() + folder[i].second));

@@ -14,7 +14,7 @@ private:
 private:
   void read();
 public:
-TextEditor(const uint8_t id, const std::string &path) : id(id), file(path) { read(); Tools::Log::get().log("Text Editor UI Window Opened: " + file.getPath() ); };
+TextEditor(const uint8_t id, const std::string &path) : id(id), file(path) { read(); Tools::Log::log("Text Editor UI Window Opened: " + file.getPath() ); };
   const std::string getPath() { return file.getPath(); };
 public:
   uint8_t getID() override { return id; };
