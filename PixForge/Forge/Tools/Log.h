@@ -17,7 +17,8 @@ public:
 private:
   STL::Vector<std::pair<char, std::string>> entry;
 public:
-  static const STL::Vector<std::pair<char, std::string>> &getEntry() { return get().entry; };
+  static const std::pair<char, std::string> &at(const unsigned int &index) { return get().entry[index]; };
+  static const unsigned int size() { return get().entry.size(); };
   static void log(const std::string &text);
   static void war(const std::string &text);
   static void err(const std::string &text);

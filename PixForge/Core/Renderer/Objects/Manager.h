@@ -28,17 +28,18 @@ private:
   Manager(const std::string &object_path);
   ~Manager();
 public:
-  void load();
-  void save();
+  static void load();
+  static void save();
 public:
-  void addColourBox(const STL::Vec<int, 5> &position, const STL::Vec<char, 4> &colour);
-  void addSprite(const STL::Vec<int, 5> &position, const unsigned int &texture_index);
+  static void addColourBox(const STL::Vec<int, 5> &position, const STL::Vec<char, 4> &colour);
+  static void addSprite(const STL::Vec<int, 5> &position, const unsigned int &texture_index);
 public:
-  void updateZIndex() { objects.sort([](iObject* a, iObject* b) { return a->getRefPosition()[2] > b->getRefPosition()[2]; }); };
+  static void updateZIndex() { get().objects.sort([](iObject* a, iObject* b) { return a->getRefPosition()[2] > b->getRefPosition()[2]; }); };
   iObject &operator[](const unsigned int &index) const { return *objects[index]; };
-  const size_t size() const { return objects.size(); };
-  void push(iObject* object) { objects.push(object); };
-  void remove(const unsigned int &index) { objects.remove(index); };
-  void refreshAssets() { textures->load(); };
+  static iObject &at(const unsigned int &index) { return *get().objects[index]; };
+  static const size_t size() { return get().objects.size(); };
+  static void push(iObject* object) { get().objects.push(object); };
+  static void remove(const unsigned int &index) { get().objects.remove(index); };
+  static void refreshAssets() { get().textures->load(); };
 };
 }; // namespace PF::Core::Renderer::Objects
