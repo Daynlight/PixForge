@@ -6,25 +6,25 @@ template<typename T>
 class Vector{
 private:
   T* data;
-  size_t _size = 0;
-  size_t capacity = 1;
+  unsigned int _size = 0;
+  unsigned int capacity = 1;
 private:
   void resize();
 public:
-  Vector(const size_t capacity = 1);
+  Vector(const unsigned int &capacity = 1);
   ~Vector(){ if(data) delete[] data; };
 public:
-  void push(const T line);
+  void push(const T &line);
   T pop();
-  T remove(const size_t index);
-  const size_t size() const;
+  T remove(const unsigned int &index);
+  const unsigned int size() const;
   void clear();
 public:
-  T& operator[](const size_t index);
-  const T& operator[](const size_t index) const { return data[index]; };
+  T& operator[](const unsigned int &index) { return data[index]; };
+  const T& operator[](const unsigned int &index) const { return data[index]; };
 public:
-  Vector<Vector<std::string>*> split(const char sep);
-  std::string concat(const char sep);
+  Vector<Vector<std::string>*> split(const char &sep) const;
+  std::string concat(const char &sep) const;
 public:
   void sort(bool (*compare)(T, T));
 private:
