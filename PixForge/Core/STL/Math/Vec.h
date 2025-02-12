@@ -15,25 +15,25 @@ public:
 public:
   void operator=(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] = second[i]; };
   Vec<T, S> operator+(const Vec<T, S> &second) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] += second[i]; return temp; };
-  Vec<T, S> operator+=(const Vec<T, S> &second) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] += second[i]; return temp; };
+  void operator+=(const Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] += second[i]; };
   Vec<T, S> operator-(const Vec<T, S> &second) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] -= second[i]; return temp; };
-  Vec<T, S> operator-=(const Vec<T, S> &second) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] -= second[i]; return temp; };
+  void operator-=(const Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] -= second[i]; };
 public:
   Vec<T, S> operator+(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] += value; return temp; };
-  Vec<T, S> operator+=(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] += value; return temp; };
+  void operator+=(const T &value) { for(unsigned int i = 0; i < S; i++) data[i] += value; };
   Vec<T, S> operator-(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] -= value; return temp; };
-  Vec<T, S> operator-=(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] -= value; return temp; };
+  void operator-=(const T &value) { for(unsigned int i = 0; i < S; i++) data[i] -= value; };
   Vec<T, S> operator*(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] *= value; return temp; };
-  Vec<T, S> operator*=(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] *= value; return temp; };
+  void operator*=(const T &value) { for(unsigned int i = 0; i < S; i++) data[i] *= value; };
   Vec<T, S> operator/(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] /= value; return temp; };
-  Vec<T, S> operator/=(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] /= value; return temp; };
+  void operator/=(const T &value) { for(unsigned int i = 0; i < S; i++) data[i] /= value; };
   Vec<T, S> operator%(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] %= value; return temp; };
-  Vec<T, S> operator%=(const T &value) const { Vec<T, S> temp(*this); for(unsigned int i = 0; i < S; i++) temp[i] %= value; return temp; };
+  void operator%=(const T &value) { for(unsigned int i = 0; i < S; i++) data[i] %= value; };
 public:
   template<typename U>
   Vec<T, S> operator*(const Mat<U, S, S> &matrix) const;
   template<typename U>
-  Vec<T, S> operator*=(const Mat<U, S, S> &matrix) const { return *this * matrix; };
+  void operator*=(const Mat<U, S, S> &matrix);
 public:
   T& operator[](const unsigned int &index) { return data[index]; };
   const T& operator[](const unsigned int &index) const { return data[index]; };

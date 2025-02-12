@@ -27,7 +27,7 @@ void PF::Forge::Ui::Manager::load(){
 };
 
 void PF::Forge::Ui::Manager::save(){
-  if(file.exist()) {
+  if(!file.exist()) {
     file.create();
     Tools::Log::war("gui_window file Created");
   };

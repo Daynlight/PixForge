@@ -22,7 +22,7 @@ private:
   ~Assets();
 private:
   SDL_Texture *null_texture = nullptr;
-  STL::Vec<int, 4> world_position = {0, 0, 0, 0, 0};
+  STL::Vec<int, 4> world_position = {0,0,0,0};
 public:
   static SDL_Texture* getNullTexture();
   static STL::Vec<int, 4> &getRefWorldPosition() { return get().world_position; };
