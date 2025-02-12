@@ -34,9 +34,9 @@ void PF::Core::Renderer::Objects::Sprite::render(const PF::Core::Window *window)
   position[0] -= position[2] / 2;
   position[1] -= position[3] / 2;
   position -= Assets::getRefWorldPosition();
-  STL::Vec<float, 4> draw_position = position * transform;
-  SDL_Rect rect = {static_cast<int>(draw_position[0]), static_cast<int>(draw_position[1]), static_cast<int>(draw_position[2]), static_cast<int>(draw_position[3])};
-  
+  position *= transform;
+  SDL_Rect rect = position.getRect();
+
   if(texture_index < textures->size())
     SDL_RenderCopy(window->getRenderer(), (*textures)[texture_index], NULL, &rect);
   else

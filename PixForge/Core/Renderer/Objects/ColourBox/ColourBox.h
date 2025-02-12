@@ -11,7 +11,7 @@ namespace PF::Core::Renderer::Objects{
 class ColourBox : public iObject{
 private:
   std::string name = "Colour Box";
-  STL::Vec<int, 4> position = {0,0,0,0,0};
+  STL::Vec<int, 4> position = {0,0,0,0};
   int zIndex = 0;
   STL::Mat<float, 4, 4> transform = {
     1,0,0,0,
