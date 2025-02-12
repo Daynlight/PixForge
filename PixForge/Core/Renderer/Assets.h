@@ -22,10 +22,10 @@ private:
   ~Assets();
 private:
   SDL_Texture *null_texture = nullptr;
-  STL::Vec<int, 5> world_position = {0, 0, 0, 0, 0};
+  STL::Vec<int, 4> world_position = {0, 0, 0, 0, 0};
 public:
   static SDL_Texture* getNullTexture();
-  static STL::Vec<int, 5> &getRefWorldPosition() { return get().world_position; };
+  static STL::Vec<int, 4> &getRefWorldPosition() { return get().world_position; };
   static void background(const SDL_Colour &colour);
   static void background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a);
 };

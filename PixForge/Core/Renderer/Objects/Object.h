@@ -18,7 +18,8 @@ public:
 public:
   virtual const Type getType() const = 0;
   virtual std::string &getRefName() = 0;
-  virtual STL::Vec<int, 5> &getRefPosition() = 0;
-  virtual STL::Mat<float, 5, 5> &getRefTransform() = 0;
+  virtual STL::Vec<int, 4> &getRefPosition() = 0;
+  virtual int &getRefZIndex() = 0;
+  virtual STL::Mat<float, 4, 4> &getRefTransform() = 0;
 };
 }; // namespace PF::Core::Renderer::Objects
