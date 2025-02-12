@@ -54,16 +54,20 @@ void PF::Forge::Forge::events(){
 
 inline void PF::Forge::Forge::editorMovement(const SDL_Event &event) {
 
-  if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_MIDDLE && !dragging) {
+  if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_MIDDLE) {
     dragging = true;
     lastX = event.button.x;
     lastY = event.button.y;
-  };
-   if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_MIDDLE && dragging) {
+  }
+  else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_MIDDLE) {
+    dragging = false;
+  }
+  else if(event.type == SDL_MOUSEMOTION && dragging) {
     int deltaX = event.motion.x - lastX;
     int deltaY = event.motion.y - lastY;
-    Core::Renderer::Assets::getRefWorldPosition()[0] += deltaX;
-    Core::Renderer::Assets::getRefWorldPosition()[1] += deltaY;
-    dragging = false;
-  };
+    Core::Renderer::Assets::getRefWorldPosition()[0] -= deltaX;
+    Core::Renderer::Assets::getRefWorldPosition()[1] -= deltaY;
+    lastX = event.motion.x;
+    lastY = event.motion.y;
+  }
 };
