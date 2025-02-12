@@ -1,8 +1,10 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include "Window/Window.h"
+#include "STL/Math/Vec.h"
 
 #define backgroundColour 25,25,25,255
+#define MOUSEWHEELSPEED 20
 
 namespace PF::Core::Renderer{
 class Assets{
@@ -20,8 +22,10 @@ private:
   ~Assets();
 private:
   SDL_Texture *null_texture = nullptr;
+  STL::Vec<int, 4> world_position = {0,0,0,0};
 public:
   static SDL_Texture* getNullTexture();
+  static STL::Vec<int, 4> &getRefWorldPosition() { return get().world_position; };
   static void background(const SDL_Colour &colour);
   static void background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a);
 };

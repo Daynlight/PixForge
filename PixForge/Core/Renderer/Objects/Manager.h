@@ -31,10 +31,10 @@ public:
   static void load();
   static void save();
 public:
-  static void addColourBox(const STL::Vec<int, 5> &position, const STL::Vec<char, 4> &colour);
-  static void addSprite(const STL::Vec<int, 5> &position, const unsigned int &texture_index);
+  static void addColourBox(const STL::Vec<int, 4> &position, const STL::Vec<char, 4> &colour);
+  static void addSprite(const STL::Vec<int, 4> &position, const unsigned int &texture_index);
 public:
-  static void updateZIndex() { get().objects.sort([](iObject* a, iObject* b) { return a->getRefPosition()[2] > b->getRefPosition()[2]; }); };
+  static void updateZIndex() { get().objects.sort([](iObject* a, iObject* b) { return a->getRefZIndex() < b->getRefZIndex(); }); };
   iObject &operator[](const unsigned int &index) const { return *objects[index]; };
   static iObject &at(const unsigned int &index) { return *get().objects[index]; };
   static const size_t size() { return get().objects.size(); };

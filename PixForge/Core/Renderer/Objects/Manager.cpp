@@ -18,11 +18,11 @@ PF::Core::Renderer::Objects::Manager::~Manager(){
   delete textures;
 };
 
-void PF::Core::Renderer::Objects::Manager::addColourBox(const STL::Vec<int, 5> &position, const STL::Vec<char, 4> &colour) { 
+void PF::Core::Renderer::Objects::Manager::addColourBox(const STL::Vec<int, 4> &position, const STL::Vec<char, 4> &colour) { 
   get().objects.push(new ColourBox(position, colour)); 
 };
 
-void PF::Core::Renderer::Objects::Manager::addSprite(const STL::Vec<int, 5> &position, const unsigned int &texture_index) { 
+void PF::Core::Renderer::Objects::Manager::addSprite(const STL::Vec<int, 4> &position, const unsigned int &texture_index) { 
   get().objects.push(new Sprite(get().textures, position, texture_index)); 
 };
 
