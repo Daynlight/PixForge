@@ -44,14 +44,26 @@ void PF::Forge::Forge::events(){
     if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) 
       Core::Renderer::Objects::Manager::refreshAssets();
     
-    // Mouse Wheel down
-    if(event.type == SDL_MOUSEWHEEL){
-      Core::Renderer::Assets::getRefWorldPosition()[0] += event.wheel.x * MOUSEWHEELSPEED;
-      Core::Renderer::Assets::getRefWorldPosition()[1] += event.wheel.y * MOUSEWHEELSPEED;
-    };
+    editorMovement(event);
 
     sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
+  };
+}
+
+inline void PF::Forge::Forge::editorMovement(const SDL_Event &event) {
+
+  if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_MIDDLE && !dragging) {
+    dragging = true;
+    lastX = event.button.x;
+    lastY = event.button.y;
+  };
+   if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_MIDDLE && dragging) {
+    int deltaX = event.motion.x - lastX;
+    int deltaY = event.motion.y - lastY;
+    Core::Renderer::Assets::getRefWorldPosition()[0] += deltaX;
+    Core::Renderer::Assets::getRefWorldPosition()[1] += deltaY;
+    dragging = false;
   };
 };
