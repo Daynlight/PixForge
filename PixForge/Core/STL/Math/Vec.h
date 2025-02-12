@@ -12,18 +12,18 @@ public:
   Vec(const Vec<T, S> &second){ for(unsigned int i = 0; i < S; i++) data[i] = second.data[i]; };
 public:
   void operator=(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] = second[i]; };
-  Vec<T, S> operator+(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] += second[i]; };
-  Vec<T, S> operator-(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] -= second[i]; };
+  void operator+(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] += second[i]; };
+  void operator-(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] -= second[i]; };
   Vec<T, S> operator+=(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] += second[i]; return *this; };
   Vec<T, S> operator-=(Vec<T, S> &second) { for(unsigned int i = 0; i < S; i++) data[i] -= second[i]; return *this; };
-  Vec<T, S> operator*(T &value) { for(unsigned int i = 0; i < S; i++) data[i] *= value; };
-  Vec<T, S> operator/(T &value) { for(unsigned int i = 0; i < S; i++) data[i] /= value; };
-  Vec<T, S> operator%(T &value) { for(unsigned int i = 0; i < S; i++) data[i] %= value; };
-  Vec<T, S> operator+=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] += value; };
-  Vec<T, S> operator-=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] -= value; };
-  Vec<T, S> operator*=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] *= value; };
-  Vec<T, S> operator/=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] /= value; };
-  Vec<T, S> operator%=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] %= value; };
+  void operator*(T &value) { for(unsigned int i = 0; i < S; i++) data[i] *= value; };
+  void operator/(T &value) { for(unsigned int i = 0; i < S; i++) data[i] /= value; };
+  void operator%(T &value) { for(unsigned int i = 0; i < S; i++) data[i] %= value; };
+  void operator+=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] += value; };
+  void operator-=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] -= value; };
+  void operator*=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] *= value; };
+  void operator/=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] /= value; };
+  void operator%=(T &value) { for(unsigned int i = 0; i < S; i++) data[i] %= value; };
 public:
   template<typename U, unsigned int R>
   Vec<U, R> operator*(const Mat<U, R, R>& matrix) const;

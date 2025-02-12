@@ -11,18 +11,18 @@ public:
   Mat(const Mat<T, S, R> &second){ for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] = second.data[i][j]; };
 public:
   void operator=(Mat<T, S, R> &second) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] = second[i][j]; };
-  Mat<T, S, R> operator+(Mat<T, S, R> &second) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] += second[i][j]; };
-  Mat<T, S, R> operator-(Mat<T, S, R> &second) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] -= second[i][j]; };
-  Mat<T, S, R> operator*(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] *= value; };
-  Mat<T, S, R> operator/(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] /= value; };
-  Mat<T, S, R> operator%(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] %= value; };
-  Mat<T, S, R> operator+=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] += value; };
-  Mat<T, S, R> operator-=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] -= value; };
-  Mat<T, S, R> operator*=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] *= value; };
-  Mat<T, S, R> operator/=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] /= value; };
-  Mat<T, S, R> operator%=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] %= value; };
+  void operator+(Mat<T, S, R> &second) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] += second[i][j]; };
+  void operator-(Mat<T, S, R> &second) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] -= second[i][j]; };
+  void operator*(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] *= value; };
+  void operator/(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] /= value; };
+  void operator%(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] %= value; };
+  void operator+=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] += value; };
+  void operator-=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] -= value; };
+  void operator*=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] *= value; };
+  void operator/=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] /= value; };
+  void operator%=(T &value) { for(unsigned int i = 0; i < S; i++) for(unsigned int j = 0; j < R; j++) data[i][j] %= value; };
 public:
-  Mat<T, S, R> operator*(Mat<T, S, R> &second);
+  void operator*(Mat<T, S, R> &second);
 public:
   T& operator()(const unsigned int &row, const unsigned int &col) { return data[row][col]; };
   const T& operator()(const unsigned int &row, const unsigned int &col) const { return data[row][col]; };
