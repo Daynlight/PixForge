@@ -11,7 +11,8 @@ private:
   const uint8_t id;
   bool open = true;
 private:
-  STL::Vec<int, 5> position = {0, 0, 0, 0, 0};
+  STL::Vec<int, 4> position = {0, 0, 0, 0};
+  int zIndex = 0;
   STL::Vec<float, 4> colour = {0, 0, 0, 0};
   int texture_index = 0;
 private:

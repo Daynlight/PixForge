@@ -88,17 +88,18 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
   if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX){
     ImGui::Text(Core::Renderer::Objects::Manager::at(properties_index).getRefName().c_str());
 
-    STL::Vec<int, 5> *pos = &static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefPosition();
+    STL::Vec<int, 4> *pos = &static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefPosition();
+    int *zIndex = &Core::Renderer::Objects::Manager::at(properties_index).getRefZIndex();
 
-    int last_z_index = (*pos)[2];
+    int last_z_index = *zIndex;
 
     ImGui::InputInt("X: ", &(*pos)[0]);
     ImGui::InputInt("Y: ", &(*pos)[1]);
-    ImGui::InputInt("Z: ", &(*pos)[2]);
-    ImGui::InputInt("Width: ", &(*pos)[3]);
-    ImGui::InputInt("Height: ", &(*pos)[4]);
+    ImGui::InputInt("Z: ", zIndex);
+    ImGui::InputInt("Width: ", &(*pos)[2]);
+    ImGui::InputInt("Height: ", &(*pos)[3]);
+    if((*pos)[2] < 0) (*pos)[2] = 0;
     if((*pos)[3] < 0) (*pos)[3] = 0;
-    if((*pos)[4] < 0) (*pos)[4] = 0;
 
     ImGui::ColorPicker4("##picker", colour.data);
 
@@ -110,7 +111,7 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
       Tools::Log::inf("Colour Box Colour Applied: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
     };
 
-    if((*pos)[2] != last_z_index) {
+    if(*zIndex != last_z_index) {
       Core::Renderer::Objects::Manager::updateZIndex();
       show_properties = false;
       Tools::Log::inf("ZIndex Updated");
@@ -130,25 +131,26 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
   if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::SPRITE){
     ImGui::Text(Core::Renderer::Objects::Manager::at(properties_index).getRefName().c_str());
 
-    STL::Vec<int, 5> *pos = &static_cast<Core::Renderer::Objects::Sprite*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefPosition();
+    STL::Vec<int, 4> *pos = &static_cast<Core::Renderer::Objects::Sprite*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefPosition();
 
-    int last_z_index = (*pos)[2];
+    int last_z_index = Core::Renderer::Objects::Manager::at(properties_index).getRefZIndex();
 
     ImGui::InputInt("X: ", &(*pos)[0]);
     ImGui::InputInt("Y: ", &(*pos)[1]);
-    ImGui::InputInt("Z: ", &(*pos)[2]);
-    ImGui::InputInt("Width: ", &(*pos)[3]);
-    ImGui::InputInt("Height: ", &(*pos)[4]);
+    ImGui::InputInt("Z: ", &Core::Renderer::Objects::Manager::at(properties_index).getRefZIndex());
+    ImGui::InputInt("Width: ", &(*pos)[2]);
+    ImGui::InputInt("Height: ", &(*pos)[3]);
+    if((*pos)[2] < 0) (*pos)[3] = 0;
     if((*pos)[3] < 0) (*pos)[3] = 0;
-    if((*pos)[4] < 0) (*pos)[4] = 0;
 
     ImGui::InputInt("texture: ", reinterpret_cast<int*>(&static_cast<Core::Renderer::Objects::Sprite*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefTextureIndex()));
-    if(last_z_index != (*pos)[2]) {
+    
+    if(last_z_index != Core::Renderer::Objects::Manager::at(properties_index).getRefZIndex()) {
       Core::Renderer::Objects::Manager::updateZIndex();
       show_properties = false;
       Tools::Log::inf("ZIndex Updated");
-    }
-    Tools::Log::inf("Sprite Properties Applied");  };
+    };
+  };
 
   ImGui::End();
 };
