@@ -1,16 +1,5 @@
 #include "Texture.h"
 
-inline void PF::Core::Renderer::Texture::addTextureFromFile(const std::string &path) {
-  SDL_Surface* surface = IMG_Load(path.c_str());
-  SDL_Texture* texture = SDL_CreateTexture(window->getRenderer(), SDL_PIXELFORMAT_RGBA32,
-    SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
-  SDL_SetRenderTarget(window->getRenderer(), texture);
-  SDL_UpdateTexture(texture, NULL, surface->pixels, surface->pitch);
-  SDL_SetRenderTarget(window->getRenderer(), NULL);
-  textures.push(texture);
-  SDL_FreeSurface(surface);
-};
-
 void PF::Core::Renderer::Texture::save() {
   if(!file.exist()) file.create();
   file.clear();

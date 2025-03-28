@@ -19,8 +19,8 @@ private:
   bool dragging = false;
   int lastX = 0, lastY = 0;
 private:
-  inline void events();
-  inline void editorMovement(const SDL_Event &event);
+  void events();
+  void editorMovement(const SDL_Event &event);
 public:
   Forge();
   ~Forge();
