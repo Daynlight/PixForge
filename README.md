@@ -3,7 +3,7 @@
 # 🎨 PixForge
 
 Welcome to **PixForge**, a simple pixel art game engine designed to streamline the creation of 2D pixel art games.
-
+[NOTES](https://drive.google.com/drive/folders/1LMKUXevwCFGj-_6dag2ksi5pYLjgXfG7?usp=sharing)
 </div>
 
 ## 📜 License
