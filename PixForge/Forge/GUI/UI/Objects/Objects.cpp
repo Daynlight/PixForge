@@ -131,6 +131,16 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
   if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::SPRITE){
     ImGui::Text(Core::Renderer::Objects::Manager::at(properties_index).getRefName().c_str());
 
+    ImGui::InputText("path to texture", path_to_texture, IM_ARRAYSIZE(path_to_texture));
+    if(ImGui::Button("add texture")) { 
+      if(!std::filesystem::exists(path_to_texture)) Tools::Log::err("Texture didn't exists");
+      else{
+        addTextureFromFile(path_to_texture);
+        path_to_texture[0] = '\0';
+        Tools::Log::inf("Texture added"); 
+      };
+    };
+
     STL::Vec<int, 4> *pos = &static_cast<Core::Renderer::Objects::Sprite*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefPosition();
 
     int last_z_index = Core::Renderer::Objects::Manager::at(properties_index).getRefZIndex();

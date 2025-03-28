@@ -16,7 +16,18 @@ public:
   Texture(const std::string& path, Window* window) : file(path), window(window) {};
   ~Texture(){ clear(); };
 public:
-  inline void addTextureFromFile(const std::string &path);
+  inline void addTextureFromFile(const std::string &path) {
+    if(!std::filesystem::exists(path)) return;
+    SDL_Surface* surface = IMG_Load(path.c_str());
+    SDL_Texture* texture = SDL_CreateTexture(window->getRenderer(), SDL_PIXELFORMAT_RGBA32,
+      SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
+    SDL_SetRenderTarget(window->getRenderer(), texture);
+    SDL_UpdateTexture(texture, NULL, surface->pixels, surface->pitch);
+    SDL_SetRenderTarget(window->getRenderer(), NULL);
+    textures.push(texture);
+    SDL_FreeSurface(surface);
+    save();
+  };
   inline void addTexture(SDL_Texture* texture) { textures.push(texture); };
   void save();
   void load();
