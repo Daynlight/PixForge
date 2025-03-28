@@ -37,10 +37,8 @@ void PF::Core::Renderer::Objects::Sprite::render(const PF::Core::Window *window)
   position *= transform;
   SDL_Rect rect = position.getRect();
 
-  if(texture_index < textures->size()){
-      SDL_SetTextureBlendMode((*textures)[texture_index], SDL_BLENDMODE_BLEND);
-      SDL_RenderCopy(window->getRenderer(), (*textures)[texture_index], NULL, &rect);
-    }
+  if(texture_index < textures->size())
+    SDL_RenderCopy(window->getRenderer(), (*textures)[texture_index], NULL, &rect);
   else
     SDL_RenderCopy(window->getRenderer(), Assets::getNullTexture(), NULL, &rect);
 };
