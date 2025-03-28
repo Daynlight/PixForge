@@ -20,6 +20,7 @@ private:
   bool add_sprite = false;
   bool show_properties = false;
   size_t properties_index = 0;
+  char path_to_texture[255] = "";
 private:
   inline void renderObjectsList();
   inline void renderAddColourBox();
@@ -27,6 +28,7 @@ private:
   inline void renderProperties();
   inline void renderColourBoxProperties();
   inline void renderSpriteProperties();
+  inline void addTextureFromFile(const char path[255]) { Core::Renderer::Objects::Manager::get().addTextureFromFile(path); };
 public:
   Objects(const uint8_t id) : id(id) { Tools::Log::log("Objects UI Window Opened"); };
 public:

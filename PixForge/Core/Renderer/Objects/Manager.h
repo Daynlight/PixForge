@@ -41,5 +41,6 @@ public:
   static void push(iObject* object) { get().objects.push(object); };
   static void remove(const unsigned int &index) { get().objects.remove(index); };
   static void refreshAssets() { get().textures->load(); };
+  static inline void addTextureFromFile(const char path[255]) { get().textures->addTextureFromFile(path); };
 };
 }; // namespace PF::Core::Renderer::Objects
