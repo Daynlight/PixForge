@@ -24,6 +24,7 @@ public:
     SDL_SetRenderTarget(window->getRenderer(), texture);
     SDL_UpdateTexture(texture, NULL, surface->pixels, surface->pitch);
     SDL_SetRenderTarget(window->getRenderer(), NULL);
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     textures.push(texture);
     SDL_FreeSurface(surface);
     save();
