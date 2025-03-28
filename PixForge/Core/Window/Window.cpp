@@ -2,9 +2,7 @@
 
 PF::Core::Window::Window(const char* title) {
   load();
-
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
-  
   createWindow(title);
   createRenderer();
 };
@@ -24,7 +22,6 @@ void PF::Core::Window::createWindow(const char *title){
     std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
     if(!window) throw std::runtime_error("Can't create window");  
   };
-
   if(window_settings[4] == "1"){
     SDL_MaximizeWindow(window);
   };

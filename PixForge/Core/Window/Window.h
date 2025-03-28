@@ -18,10 +18,8 @@ class Window{
 private:
   SDL_Window *window;
   SDL_Renderer *renderer;
-private:
   STL::File window_settings = STL::File("settings/window_settings.ini");
   bool running = true;
-private:
   void changeFullScreenDesktop() const;
   void changeMaximized() const;
   void createWindow(const char* title);
@@ -33,9 +31,8 @@ public:
   ~Window();
   void windowEvent(const SDL_Event &event);
   const SDL_Rect getWindowSizesAndPosition() const;
-public:
   SDL_Renderer* getRenderer() const { return renderer; };
   SDL_Window* getWindow() const { return window; };
   const bool isRunning() const { return running; };
-}; 
+}; // class Window
 }; // namespace PF::Core
