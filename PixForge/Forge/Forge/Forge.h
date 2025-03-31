@@ -15,12 +15,12 @@ private:
   Core::Window window;
   Sandbox sandbox;
   Gui gui;
-private:
   bool dragging = false;
   int lastX = 0, lastY = 0;
-private:
   void events();
   void editorMovement(const SDL_Event &event);
+  inline void loadSettings();
+  inline void saveSettings();
 public:
   Forge();
   ~Forge();
