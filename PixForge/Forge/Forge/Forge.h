@@ -3,7 +3,7 @@
 #include "SDL2_image/SDL_image.h"
 
 #include "Gui/Gui.h"
-#include "Sandbox.h"
+#include "Sandbox/Sandbox.h"
 #include "Renderer/Objects/Manager.h"
 #include "Renderer/Assets.h"
 

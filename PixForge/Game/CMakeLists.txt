@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 file(GLOB_RECURSE src "*.cpp", "*.h")
-file(GLOB_RECURSE core "../../Core/**.cpp")
+file(GLOB_RECURSE core "../Core/**.cpp")
 
 project(Game VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
@@ -11,5 +11,5 @@ add_executable(Game WIN32 ${src} ${core})
 target_link_libraries(Game PRIVATE VendorLibraries)
 
 target_include_directories(Game PRIVATE ".")
-target_include_directories(Game PRIVATE "../../Core/")
-target_include_directories(Game PRIVATE "../../vendor/include")
+target_include_directories(Game PRIVATE "../Core/")
+target_include_directories(Game PRIVATE "../vendor/include")
