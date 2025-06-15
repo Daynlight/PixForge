@@ -2,7 +2,7 @@
 #include "STL/Vector/Vector.h"
 #include "Renderer/Objects/Manager.h"
 
-#include "Gui/Ui/Ui.h"
+#include "Ui.h"
 #include "Log/Log.h"
 #include "FileExplorer/FileExplorer.h"
 #include "TextEditor/TextEditor.h"

@@ -1,6 +1,6 @@
 #pragma once
-#include "Gui/Ui/Ui.h"
-#include "Tools/Log.h"
+#include "../Ui.h"
+#include "Utilities/Tools/Log.h"
 
 namespace PF::Forge::Ui{
 class Log : public iUi{

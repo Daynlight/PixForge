@@ -2,12 +2,12 @@
 #include "Window/Window.h"
 #include "SDL2_image/SDL_image.h"
 
-#include "Gui/Gui.h"
+#include "CoreForge/Gui/Gui.h"
 #include "Sandbox/Sandbox.h"
 #include "Renderer/Objects/Manager.h"
 #include "Renderer/Assets.h"
 
-#include "Tools/Log.h"
+#include "Utilities/Tools/Log.h"
 
 namespace PF::Forge{
 class Forge{

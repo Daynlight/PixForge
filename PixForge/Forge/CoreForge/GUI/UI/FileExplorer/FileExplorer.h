@@ -1,7 +1,7 @@
 #pragma once
-#include "Gui/Ui/Ui.h"
-#include "Tools/Log.h"
-#include "Gui/Ui/TextEditor/TextEditor.h"
+#include "../Ui.h"
+#include "../TextEditor/TextEditor.h"
+#include "Utilities/Tools/Log.h"
 #include "STL/Folder/Folder.h"
 
 #define FILE_BOX_WIDTH 100

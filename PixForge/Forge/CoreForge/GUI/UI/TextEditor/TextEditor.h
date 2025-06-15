@@ -1,7 +1,7 @@
 #pragma once
-#include "Gui/Ui/Ui.h"
+#include "../Ui.h"
+#include "Utilities/Tools/Log.h"
 #include "STL/File/File.h"
-#include "Tools/Log.h"
 
 namespace PF::Forge::Ui{
 class TextEditor : public iUi{
