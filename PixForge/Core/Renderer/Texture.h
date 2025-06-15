@@ -4,7 +4,7 @@
 #include "STL/Vector/Vector.h"
 
 #include "SDL2/SDL.h"
-#include "../vendor/SDL2_image/SDL_image.h"
+#include "SDL2_image/SDL_image.h"
 
 namespace PF::Core::Renderer{
 class Texture{

@@ -1,9 +1,9 @@
 #pragma once
 #include "Window/Window.h"
 
-#include "imgui.h"
-#include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer2.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl2.h"
+#include "imgui/imgui_impl_sdlrenderer2.h"
 
 #include "Renderer/Objects/Manager.h"
 #include "Ui/Manager.h"
