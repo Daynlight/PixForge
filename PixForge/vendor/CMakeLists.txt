@@ -10,7 +10,7 @@ file(GLOB_RECURSE STATIC_LIBS
     "lib/**/*.a"
 )
 
-add_library(VendorLibraries SHARED ${FILES})
+add_library(VendorLibraries STATIC ${FILES})
 
 target_include_directories(VendorLibraries PUBLIC
     "include/"
