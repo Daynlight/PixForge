@@ -1,6 +1,6 @@
 #pragma once
 #include "Window/Window.h"
-#include "../vendor/SDL2_image/SDL_image.h"
+#include "SDL2_image/SDL_image.h"
 
 #include "Gui/Gui.h"
 #include "Sandbox.h"
