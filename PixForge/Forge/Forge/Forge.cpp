@@ -25,7 +25,7 @@ void PF::Forge::Forge::run(){
   Utilities::Log::inf("Forge Running");
   while (window.isRunning()){
     Core::Renderer::Assets::background(backgroundColour);
-    sandbox.run();
+    sandbox.render();
     gui.render();
     events();
     SDL_RenderPresent(window.getRenderer());
@@ -38,7 +38,6 @@ void PF::Forge::Forge::events(){
     // [NOTE] this solution is not optimal
     if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) Core::Renderer::Objects::Manager::refreshAssets();
     editorMovement(event);
-    sandbox.event(&event);
     ImGui_ImplSDL2_ProcessEvent(&event);
     window.windowEvent(event);
   };

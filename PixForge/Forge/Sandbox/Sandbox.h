@@ -9,7 +9,7 @@ private:
   Core::Window *window;
 public:
   Sandbox(Core::Window *window) : window(window) { Utilities::Log::log("Sandbox Created"); };
-  void run();
-  void event(SDL_Event* event);
+  void render();
+  void event();
 };
 }; // namespace PF
