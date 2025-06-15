@@ -3,7 +3,7 @@
 #include "STL/Vector/Vector.h"
 #include "STL/Math/Vec.h"
 #include "Renderer/Objects/Manager.h"
-#include "Utilities/Tools/Log.h"
+#include "Utilities/Log.h"
 
 namespace PF::Forge::Ui{
 class Objects : public iUi{
@@ -30,7 +30,7 @@ private:
   inline void renderSpriteProperties();
   inline void addTextureFromFile(const char path[255]) { Core::Renderer::Objects::Manager::get().addTextureFromFile(path); };
 public:
-  Objects(const uint8_t id) : id(id) { Tools::Log::log("Objects UI Window Opened"); };
+  Objects(const uint8_t id) : id(id) { Utilities::Log::log("Objects UI Window Opened"); };
 public:
   uint8_t getID() override { return id; };
   uint8_t getType() override { return Type::OBJECTS_UI; };

@@ -4,7 +4,7 @@ void PF::Forge::Ui::TextEditor::render() {
   ImGui::Begin(("Text Editor ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     ImGui::Text(file.getPath().c_str());
-    if(ImGui::Button("exit")) { open = false; Tools::Log::log("Text Editor UI Window Closed: " + file.getPath() );}
+    if(ImGui::Button("exit")) { open = false; Utilities::Log::log("Text Editor UI Window Closed: " + file.getPath() );}
     ImGui::EndMenuBar();
   };
 
@@ -14,7 +14,7 @@ void PF::Forge::Ui::TextEditor::render() {
     file.clear();
     file.push(text);
     file.save();
-    Tools::Log::inf("File Saved: " + file.getPath());
+    Utilities::Log::inf("File Saved: " + file.getPath());
   };
   
   ImGui::InputTextMultiline("##source", text, IM_ARRAYSIZE(text), ImVec2(-1.0f, -1.0f), ImGuiInputTextFlags_AllowTabInput);
@@ -33,5 +33,5 @@ void PF::Forge::Ui::TextEditor::read(){
       count++;
     };
   };
-  Tools::Log::inf("File Read: " + file.getPath());
+  Utilities::Log::inf("File Read: " + file.getPath());
 };

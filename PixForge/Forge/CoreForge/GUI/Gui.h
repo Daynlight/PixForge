@@ -8,7 +8,7 @@
 #include "Renderer/Objects/Manager.h"
 #include "Ui/Manager.h"
 
-#include "Utilities/Tools/Log.h"
+#include "Utilities/Log.h"
 
 namespace PF::Forge{
 class Gui{

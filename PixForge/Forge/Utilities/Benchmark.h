@@ -4,7 +4,7 @@
 #include <vector>
 
 
-namespace Benchmark{
+namespace PF::Utilities::Benchmark{
 class Benchmark{
   public:
   bool count_allocs = false;
@@ -56,37 +56,37 @@ class Allocs{
 }; // namespace Benchmark
 
 void* operator new(size_t size) noexcept {
-  if(Benchmark::Benchmark::get().count_allocs)
-    Benchmark::Benchmark::get().allocs++;
+  if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
+    PF::Utilities::Benchmark::Benchmark::get().allocs++;
   return malloc(size);
 };
 
 void operator delete(void *ptr) noexcept{
-  if(Benchmark::Benchmark::get().count_allocs)
-    Benchmark::Benchmark::get().deallocs++;
+  if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
+    PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 };
 
 void operator delete(void *ptr, std::size_t size) noexcept {
-  if(Benchmark::Benchmark::get().count_allocs)
-      Benchmark::Benchmark::get().deallocs++;
+  if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
+      PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 }
 
 void* operator new[](std::size_t count) noexcept {
-  if(Benchmark::Benchmark::get().count_allocs)
-    Benchmark::Benchmark::get().allocs++;
+  if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
+    PF::Utilities::Benchmark::Benchmark::get().allocs++;
   return malloc(count);
 }
 
 void operator delete[](void *ptr) noexcept {
-  if(Benchmark::Benchmark::get().count_allocs)
-    Benchmark::Benchmark::get().deallocs++;
+  if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
+    PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 }
 
 void operator delete[](void *ptr, std::size_t size) noexcept {
-  if(Benchmark::Benchmark::get().count_allocs)
-    Benchmark::Benchmark::get().deallocs++;
+  if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
+    PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 }

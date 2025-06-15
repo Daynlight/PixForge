@@ -7,12 +7,12 @@ inline void PF::Forge::Ui::Objects::renderObjectsList(){
       if(ImGui::MenuItem("Delete")){
         delete &Core::Renderer::Objects::Manager::at(i);
         Core::Renderer::Objects::Manager::remove(i);
-        Tools::Log::log("Object Deleted");
+        Utilities::Log::log("Object Deleted");
       };
       if(ImGui::MenuItem("Properties")){
         show_properties = true;
         properties_index = i;
-        Tools::Log::log("Object Properties");
+        Utilities::Log::log("Object Properties");
       };
       ImGui::EndPopup();
     };
@@ -23,7 +23,7 @@ inline void PF::Forge::Ui::Objects::renderAddColourBox() {
   ImGui::Begin("Add Object", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
-  if(ImGui::Button("exit")) {add_colour_box = false; Tools::Log::log("Add Colour Box Window Closed");}
+  if(ImGui::Button("exit")) {add_colour_box = false; Utilities::Log::log("Add Colour Box Window Closed");}
   ImGui::EndMenuBar();
   
   ImGui::InputInt("X: ", &position[0]);
@@ -41,7 +41,7 @@ inline void PF::Forge::Ui::Objects::renderAddColourBox() {
       colourTemp[i] = static_cast<char>(colour[i] * 255);
 
       Core::Renderer::Objects::Manager::push(new Core::Renderer::Objects::ColourBox(position, colourTemp));
-    Tools::Log::inf("Colour Box Added: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
+    Utilities::Log::inf("Colour Box Added: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
   };
 
   ImGui::End();
@@ -51,7 +51,7 @@ inline void PF::Forge::Ui::Objects::renderAddSprite(){
   ImGui::Begin("Add Object", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
-  if(ImGui::Button("exit")) {add_sprite = false; Tools::Log::log("Add Sprite Window Closed");}
+  if(ImGui::Button("exit")) {add_sprite = false; Utilities::Log::log("Add Sprite Window Closed");}
   ImGui::EndMenuBar();
 
   ImGui::InputInt("X: ", &position[0]);
@@ -65,7 +65,7 @@ inline void PF::Forge::Ui::Objects::renderAddSprite(){
 
   if(ImGui::Button("Add Object")){
     Core::Renderer::Objects::Manager::addSprite(position, texture_index);
-    Tools::Log::inf("Sprite Added");
+    Utilities::Log::inf("Sprite Added");
   };
 
   ImGui::End();
@@ -82,7 +82,7 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
   ImGui::Begin("Properties", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
-  if(ImGui::Button("exit")) { show_properties = false; Tools::Log::log("Properties Window Closed");}
+  if(ImGui::Button("exit")) { show_properties = false; Utilities::Log::log("Properties Window Closed");}
   ImGui::EndMenuBar();
 
   if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX){
@@ -108,13 +108,13 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
       for (size_t i = 0; i < 4; i++) 
         colourTemp[i] = static_cast<char>(colour[i] * 255);          
       static_cast<Core::Renderer::Objects::ColourBox*>(&Core::Renderer::Objects::Manager::at(properties_index))->getRefColour() = colourTemp;
-      Tools::Log::inf("Colour Box Colour Applied: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
+      Utilities::Log::inf("Colour Box Colour Applied: " + std::to_string((uint8_t)colourTemp[0]) + " " + std::to_string((uint8_t)colourTemp[1]) + " " + std::to_string((uint8_t)colourTemp[2]) + " " + std::to_string((uint8_t)colourTemp[3]));
     };
 
     if(*zIndex != last_z_index) {
       Core::Renderer::Objects::Manager::updateZIndex();
       show_properties = false;
-      Tools::Log::inf("ZIndex Updated");
+      Utilities::Log::inf("ZIndex Updated");
     };
   };
 
@@ -125,7 +125,7 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
   ImGui::Begin("Properties", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
-  if(ImGui::Button("exit")) { show_properties = false; Tools::Log::log("Properties Window Closed");}
+  if(ImGui::Button("exit")) { show_properties = false; Utilities::Log::log("Properties Window Closed");}
   ImGui::EndMenuBar();
 
   if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::SPRITE){
@@ -133,11 +133,11 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
 
     ImGui::InputText("path to texture", path_to_texture, IM_ARRAYSIZE(path_to_texture));
     if(ImGui::Button("add texture")) { 
-      if(!std::filesystem::exists(path_to_texture)) Tools::Log::err("Texture didn't exists");
+      if(!std::filesystem::exists(path_to_texture)) Utilities::Log::err("Texture didn't exists");
       else{
         addTextureFromFile(path_to_texture);
         path_to_texture[0] = '\0';
-        Tools::Log::inf("Texture added"); 
+        Utilities::Log::inf("Texture added"); 
       };
     };
 
@@ -158,7 +158,7 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
     if(last_z_index != Core::Renderer::Objects::Manager::at(properties_index).getRefZIndex()) {
       Core::Renderer::Objects::Manager::updateZIndex();
       show_properties = false;
-      Tools::Log::inf("ZIndex Updated");
+      Utilities::Log::inf("ZIndex Updated");
     };
   };
 
@@ -168,7 +168,7 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
 void PF::Forge::Ui::Objects::render(){
   ImGui::Begin(("Objects (" + std::to_string(id) + ")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if (ImGui::BeginMenuBar()){
-    if(ImGui::Button("exit")) {open = false; Tools::Log::log("Objects UI Window Closed");}
+    if(ImGui::Button("exit")) {open = false; Utilities::Log::log("Objects UI Window Closed");}
     if(ImGui::BeginMenu("Add")){
       if(ImGui::MenuItem("ColourBox")) add_colour_box = !add_colour_box;
       if(ImGui::MenuItem("Sprite")) add_sprite = !add_sprite;

@@ -2,7 +2,7 @@
 
 PF::Forge::Gui::Gui(const std::string &path, Core::Window *window) 
   :window(window), ui(path){
-  Tools::Log::log("Gui Created");
+  Utilities::Log::log("Gui Created");
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -16,7 +16,7 @@ PF::Forge::Gui::Gui(const std::string &path, Core::Window *window)
  
   ImGui_ImplSDL2_InitForSDLRenderer(window->getWindow(), window->getRenderer());
   ImGui_ImplSDLRenderer2_Init(window->getRenderer());
-  Tools::Log::log("ImGui Initialized");
+  Utilities::Log::log("ImGui Initialized");
 
   ui.load();
 };
@@ -26,8 +26,8 @@ PF::Forge::Gui::~Gui(){
   ImGui_ImplSDLRenderer2_Shutdown();
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
-  Tools::Log::inf("ImGui Destroyed");
-  Tools::Log::inf("Gui Destroyed");
+  Utilities::Log::inf("ImGui Destroyed");
+  Utilities::Log::inf("Gui Destroyed");
 };
 
 inline void PF::Forge::Gui::renderDock() {

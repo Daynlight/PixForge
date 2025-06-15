@@ -9,7 +9,7 @@
 
 int WinMain(){
   #if BENCHMARK
-  { Benchmark::Allocs allocs("Program Allocs");
+  { PF::Utilities::Benchmark::Allocs allocs("Program Allocs");
   #endif
   
   {  
@@ -20,10 +20,10 @@ int WinMain(){
   #if BENCHMARK
   PF::Core::Renderer::Objects::Manager::dealloc();
   PF::Core::Renderer::Assets::dealloc();
-  PF::Tools::Log::dealloc();
+  PF::Utilities::Log::dealloc();
   
   } PF::STL::File file = PF::STL::File("Benchmark.txt");
-  for(auto &line : Benchmark::Benchmark::get().result)
+  for(auto &line : PF::Utilities::Benchmark::Benchmark::get().result)
     file.push(line);
   if(!file.exist()) file.create();
   file.save();

@@ -1,7 +1,7 @@
 #pragma once
 #include "STL/Vector/Vector.h"
 
-namespace PF::Tools{
+namespace PF::Utilities{
 class Log{
 private:
   static Log *instance;

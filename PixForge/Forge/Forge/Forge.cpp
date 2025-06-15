@@ -2,27 +2,27 @@
 
 PF::Forge::Forge::Forge()
   :window("PixEditor"), gui("settings/gui_window.ini", &window), sandbox(&window){
-  Tools::Log::init();
-  Tools::Log::log("Window Created");
+  Utilities::Log::init();
+  Utilities::Log::log("Window Created");
   Core::Renderer::Assets::init(&window);
   loadSettings();
-  Tools::Log::log("Assets Initialized");
+  Utilities::Log::log("Assets Initialized");
   Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
   Core::Renderer::Objects::Manager::load();
-  Tools::Log::log("Objects Initialized");
-  Tools::Log::log("Forge Created");
+  Utilities::Log::log("Objects Initialized");
+  Utilities::Log::log("Forge Created");
 };
 
 PF::Forge::Forge::~Forge(){
   Core::Renderer::Objects::Manager::save();
   saveSettings();
-  Tools::Log::log("Objects Saved");
-  Tools::Log::log("Window Destroyed");
-  Tools::Log::log("Forge Destroyed");
+  Utilities::Log::log("Objects Saved");
+  Utilities::Log::log("Window Destroyed");
+  Utilities::Log::log("Forge Destroyed");
 };
 
 void PF::Forge::Forge::run(){
-  Tools::Log::inf("Forge Running");
+  Utilities::Log::inf("Forge Running");
   while (window.isRunning()){
     Core::Renderer::Assets::background(backgroundColour);
     sandbox.run();

@@ -7,7 +7,7 @@
 #include "Renderer/Objects/Manager.h"
 #include "Renderer/Assets.h"
 
-#include "Utilities/Tools/Log.h"
+#include "Utilities/Log.h"
 
 namespace PF::Forge{
 class Forge{
