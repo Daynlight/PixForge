@@ -13,7 +13,7 @@
 #define WINDOW_POSITION SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
 #define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 
-namespace PF::Core{
+namespace PF::CoreForge{
 class Window{
 private:
   SDL_Window *window;
@@ -35,4 +35,4 @@ public:
   SDL_Window* getWindow() const { return window; };
   const bool isRunning() const { return running; };
 }; // class Window
-}; // namespace PF::Core
+}; // namespace PF::CoreForge

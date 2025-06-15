@@ -1,4 +1,5 @@
 #pragma once
+#include "CoreForge/Window/Window.h"
 #include "Window/Window.h"
 #include "SDL2_image/SDL_image.h"
 
@@ -12,9 +13,10 @@
 namespace PF::Forge{
 class Forge{
 private:
-  Core::Window window;
+  CoreForge::Window window;
+  Core::Window coreWindow;
   Sandbox sandbox;
-  Gui gui;
+  CoreForge::Gui gui;
   bool dragging = false;
   int lastX = 0, lastY = 0;
   void events();

@@ -1,5 +1,5 @@
 #pragma once
-#include "Window/Window.h"
+#include "CoreForge/Window/Window.h"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl2.h"
@@ -10,18 +10,18 @@
 
 #include "Utilities/Log.h"
 
-namespace PF::Forge{
+namespace PF::CoreForge{
 class Gui{
 private:
-  Core::Window* window;
+  CoreForge::Window* window;
   Ui::Manager ui;
 private:
   inline void renderDock();
   inline void renderTopBar();
 public:
-  Gui(const std::string &path, Core::Window* window);
+  Gui(const std::string &path, CoreForge::Window* window);
   ~Gui();
   void render();
   void guiEvent(SDL_Event* event);
 };
-}; // namespace PF::Forge
+}; // namespace PF::CoreForge

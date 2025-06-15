@@ -1,6 +1,6 @@
 #include "Gui.h"
 
-PF::Forge::Gui::Gui(const std::string &path, Core::Window *window) 
+PF::CoreForge::Gui::Gui(const std::string &path, CoreForge::Window *window) 
   :window(window), ui(path){
   Utilities::Log::log("Gui Created");
 
@@ -21,7 +21,7 @@ PF::Forge::Gui::Gui(const std::string &path, Core::Window *window)
   ui.load();
 };
 
-PF::Forge::Gui::~Gui(){
+PF::CoreForge::Gui::~Gui(){
   ui.save();
   ImGui_ImplSDLRenderer2_Shutdown();
   ImGui_ImplSDL2_Shutdown();
@@ -30,7 +30,7 @@ PF::Forge::Gui::~Gui(){
   Utilities::Log::inf("Gui Destroyed");
 };
 
-inline void PF::Forge::Gui::renderDock() {
+inline void PF::CoreForge::Gui::renderDock() {
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
   ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -54,7 +54,7 @@ inline void PF::Forge::Gui::renderDock() {
   ImGui::End();
 };
 
-inline void PF::Forge::Gui::renderTopBar(){
+inline void PF::CoreForge::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
         if (ImGui::MenuItem("Log")) ui.addWindow(Ui::iUi::Type::LOG);
@@ -67,7 +67,7 @@ inline void PF::Forge::Gui::renderTopBar(){
   };
 };
 
-void PF::Forge::Gui::render(){
+void PF::CoreForge::Gui::render(){
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame();
   ImGui::NewFrame();
@@ -83,6 +83,6 @@ void PF::Forge::Gui::render(){
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
 };
 
-void PF::Forge::Gui::guiEvent(SDL_Event* event){
+void PF::CoreForge::Gui::guiEvent(SDL_Event* event){
   ImGui_ImplSDL2_ProcessEvent(event);
 };

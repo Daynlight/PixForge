@@ -1,6 +1,6 @@
 #include "Objects.h"
 
-inline void PF::Forge::Ui::Objects::renderObjectsList(){
+inline void PF::CoreForge::Ui::Objects::renderObjectsList(){
   for(size_t i = 0; i < Core::Renderer::Objects::Manager::size(); i++){
     ImGui::Text(Core::Renderer::Objects::Manager::at(i).getRefName().c_str());
     if(ImGui::BeginPopupContextItem(("Object" + std::to_string(i)).c_str())){
@@ -19,7 +19,7 @@ inline void PF::Forge::Ui::Objects::renderObjectsList(){
   };
 };
 
-inline void PF::Forge::Ui::Objects::renderAddColourBox() {
+inline void PF::CoreForge::Ui::Objects::renderAddColourBox() {
   ImGui::Begin("Add Object", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
@@ -47,7 +47,7 @@ inline void PF::Forge::Ui::Objects::renderAddColourBox() {
   ImGui::End();
 };
 
-inline void PF::Forge::Ui::Objects::renderAddSprite(){
+inline void PF::CoreForge::Ui::Objects::renderAddSprite(){
   ImGui::Begin("Add Object", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
@@ -71,14 +71,14 @@ inline void PF::Forge::Ui::Objects::renderAddSprite(){
   ImGui::End();
 };
 
-inline void PF::Forge::Ui::Objects::renderProperties(){
+inline void PF::CoreForge::Ui::Objects::renderProperties(){
   if(show_properties){
     if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::COLOUR_BOX) renderColourBoxProperties();
     else if(Core::Renderer::Objects::Manager::at(properties_index).getType() == Core::Renderer::Objects::iObject::Type::SPRITE) renderSpriteProperties();
   }
 };
 
-inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
+inline void PF::CoreForge::Ui::Objects::renderColourBoxProperties(){
   ImGui::Begin("Properties", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
@@ -121,7 +121,7 @@ inline void PF::Forge::Ui::Objects::renderColourBoxProperties(){
   ImGui::End();
 };
 
-inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
+inline void PF::CoreForge::Ui::Objects::renderSpriteProperties(){
   ImGui::Begin("Properties", nullptr, ImGuiWindowFlags_MenuBar);
 
   ImGui::BeginMenuBar();
@@ -165,7 +165,7 @@ inline void PF::Forge::Ui::Objects::renderSpriteProperties(){
   ImGui::End();
 };
 
-void PF::Forge::Ui::Objects::render(){
+void PF::CoreForge::Ui::Objects::render(){
   ImGui::Begin(("Objects (" + std::to_string(id) + ")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if (ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")) {open = false; Utilities::Log::log("Objects UI Window Closed");}

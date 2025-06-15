@@ -10,7 +10,7 @@
 
 // [BUG] sometimes buttons have same name and this causes errors for imGui, when you open two same files
 
-namespace PF::Forge::Ui{
+namespace PF::CoreForge::Ui{
 class FileExplorer : public iUi{
 private:
   const uint8_t id;
@@ -34,4 +34,4 @@ public:
   bool isOpen() { return open; };
   void render() override;
 };
-}; // namespace PF::Forge::Ui
+}; // namespace PF::CoreForge::Ui

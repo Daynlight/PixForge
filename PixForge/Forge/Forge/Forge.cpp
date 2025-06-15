@@ -1,13 +1,13 @@
 #include "Forge.h"
 
 PF::Forge::Forge::Forge()
-  :window("PixEditor"), gui("settings/gui_window.ini", &window), sandbox(&window){
+  :window("PixEditor"), gui("settings/gui_window.ini", &window), coreWindow("Sandbox"), sandbox(&coreWindow){
   Utilities::Log::init();
   Utilities::Log::log("Window Created");
-  Core::Renderer::Assets::init(&window);
+  Core::Renderer::Assets::init(&coreWindow);
   loadSettings();
   Utilities::Log::log("Assets Initialized");
-  Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
+  Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &coreWindow);
   Core::Renderer::Objects::Manager::load();
   Utilities::Log::log("Objects Initialized");
   Utilities::Log::log("Forge Created");

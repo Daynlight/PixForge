@@ -2,7 +2,7 @@
 #include "../Ui.h"
 #include "Utilities/Log.h"
 
-namespace PF::Forge::Ui{
+namespace PF::CoreForge::Ui{
 class Log : public iUi{
 private:
   const uint8_t id;
@@ -15,4 +15,4 @@ public:
   bool isOpen() override { return open; };
   void render() override;
 };
-}; // namespace PF::Forge::Ui
+}; // namespace PF::CoreForge::Ui

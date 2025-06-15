@@ -3,7 +3,7 @@
 #include "Utilities/Log.h"
 #include "STL/File/File.h"
 
-namespace PF::Forge::Ui{
+namespace PF::CoreForge::Ui{
 class TextEditor : public iUi{
 private:
   const uint8_t id;
@@ -22,4 +22,4 @@ public:
   bool isOpen() { return open; };
   void render() override;
 };
-}; // namespace PF::Forge::Ui
+}; // namespace PF::CoreForge::Ui

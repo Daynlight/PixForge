@@ -1,12 +1,12 @@
 #include "FileExplorer.h"
 
-PF::Forge::Ui::FileExplorer::FileExplorer(const uint8_t id, STL::Vector<iUi*> *uis, STL::Folder folder) : id(id), uis(uis), folder(folder){
+PF::CoreForge::Ui::FileExplorer::FileExplorer(const uint8_t id, STL::Vector<iUi*> *uis, STL::Folder folder) : id(id), uis(uis), folder(folder){
   if(!this->folder.exist()) this->folder.create();
   this->folder.fetchList();
   Utilities::Log::log("File Explorer UI Window Opened: "+this->folder.getPath());
 };
 
-inline void PF::Forge::Ui::FileExplorer::popUp(){
+inline void PF::CoreForge::Ui::FileExplorer::popUp(){
   if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered()) {
     ImGui::OpenPopup("Options");
   };
@@ -21,7 +21,7 @@ inline void PF::Forge::Ui::FileExplorer::popUp(){
   };
 };
 
-inline void PF::Forge::Ui::FileExplorer::fileManager() {
+inline void PF::CoreForge::Ui::FileExplorer::fileManager() {
   if(ImGui::Button("new folder")) create_folder = !create_folder;
   if(create_folder){ 
     ImGui::SameLine();    
@@ -49,7 +49,7 @@ inline void PF::Forge::Ui::FileExplorer::fileManager() {
   };
 };
 
-inline void PF::Forge::Ui::FileExplorer::mainMenuBar(){
+inline void PF::CoreForge::Ui::FileExplorer::mainMenuBar(){
   if(ImGui::BeginMenuBar()){
   ImGui::Text(folder.getPath().c_str());
   
@@ -67,7 +67,7 @@ inline void PF::Forge::Ui::FileExplorer::mainMenuBar(){
   };
 };
 
-inline void PF::Forge::Ui::FileExplorer::renderFolder() {
+inline void PF::CoreForge::Ui::FileExplorer::renderFolder() {
   ImGui::Text("Files:");
   ImGui::Separator();
   
@@ -119,7 +119,7 @@ inline void PF::Forge::Ui::FileExplorer::renderFolder() {
   ImGui::Columns(1);
 };
 
-void PF::Forge::Ui::FileExplorer::render(){
+void PF::CoreForge::Ui::FileExplorer::render(){
   ImGui::Begin(("File Explorer ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
 
   popUp();

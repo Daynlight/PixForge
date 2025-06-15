@@ -1,6 +1,6 @@
 #include "TextEditor.h"
 
-void PF::Forge::Ui::TextEditor::render() {
+void PF::CoreForge::Ui::TextEditor::render() {
   ImGui::Begin(("Text Editor ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     ImGui::Text(file.getPath().c_str());
@@ -22,7 +22,7 @@ void PF::Forge::Ui::TextEditor::render() {
   ImGui::End();
 };
 
-void PF::Forge::Ui::TextEditor::read(){
+void PF::CoreForge::Ui::TextEditor::read(){
   file.clear();
   file.read();
   size_t count = 0;

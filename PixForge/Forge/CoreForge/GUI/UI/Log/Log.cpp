@@ -1,6 +1,6 @@
 #include "Log.h"
 
-void PF::Forge::Ui::Log::render() {
+void PF::CoreForge::Ui::Log::render() {
   ImGui::Begin(("Logs ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
   if(ImGui::BeginMenuBar()){
     if(ImGui::Button("exit")) {open = false; Utilities::Log::log("Log UI Window Closed");}

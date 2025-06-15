@@ -1,12 +1,12 @@
 #include "Manager.h"
 
-uint8_t PF::Forge::Ui::iUi::generateUniqueID(STL::Vector<iUi*> *uis){
+uint8_t PF::CoreForge::Ui::iUi::generateUniqueID(STL::Vector<iUi*> *uis){
   uint8_t id = 0;
   for(size_t i = 0; i < uis->size(); i++) if((*uis)[i]->getID() == id) id++;
   return id;
 };
 
-void PF::Forge::Ui::Manager::load(){
+void PF::CoreForge::Ui::Manager::load(){
   file.read();
   if(file.exist()){
     STL::Vector<STL::Vector<std::string>*> records = file.split(';');
@@ -26,7 +26,7 @@ void PF::Forge::Ui::Manager::load(){
   Utilities::Log::inf("UI Windows Loaded: "+std::to_string(windows.size()));
 };
 
-void PF::Forge::Ui::Manager::save(){
+void PF::CoreForge::Ui::Manager::save(){
   if(!file.exist()) {
     file.create();
     Utilities::Log::war("gui_window file Created");
@@ -47,7 +47,7 @@ void PF::Forge::Ui::Manager::save(){
   Utilities::Log::inf("UI Windows Saved: "+std::to_string(windows.size()));
 };
 
-void PF::Forge::Ui::Manager::addWindow(iUi::Type type) {
+void PF::CoreForge::Ui::Manager::addWindow(iUi::Type type) {
   if (type == iUi::LOG) { windows.push(new Log(iUi::generateUniqueID(&windows))); };
   if (type == iUi::FILE_EXPLORER) { windows.push(new FileExplorer(iUi::generateUniqueID(&windows), &windows, STL::Folder("assets/"))); };
   if (type == iUi::TEXT_EDITOR) { windows.push(new TextEditor(iUi::generateUniqueID(&windows), "assets/texture/")); };

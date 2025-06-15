@@ -1,20 +1,20 @@
 #include "Window.h"
 
-PF::Core::Window::Window(const char* title) {
+PF::CoreForge::Window::Window(const char* title) {
   load();
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
   createWindow(title);
   createRenderer();
 };
 
-PF::Core::Window::~Window(){
+PF::CoreForge::Window::~Window(){
   save();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
 };
 
-void PF::Core::Window::createWindow(const char *title){
+void PF::CoreForge::Window::createWindow(const char *title){
   if(!window_settings.size())
   window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
   else{
@@ -30,12 +30,12 @@ void PF::Core::Window::createWindow(const char *title){
   };
 };
 
-void PF::Core::Window::createRenderer(){
+void PF::CoreForge::Window::createRenderer(){
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
 };
 
-void PF::Core::Window::save() {
+void PF::CoreForge::Window::save() {
   SDL_Rect window_location = getWindowSizesAndPosition();
   if(!window_settings.exist()) window_settings.create();
   window_settings.clear();
@@ -68,7 +68,7 @@ void PF::Core::Window::save() {
   window_settings.save();
 };
 
-void PF::Core::Window::load() {
+void PF::CoreForge::Window::load() {
   if(window_settings.exist()) {
     window_settings.read();
     STL::Vector<std::string> *record = window_settings.split(';')[0];
@@ -78,14 +78,14 @@ void PF::Core::Window::load() {
   }
 };
 
-const SDL_Rect PF::Core::Window::getWindowSizesAndPosition() const {
+const SDL_Rect PF::CoreForge::Window::getWindowSizesAndPosition() const {
   int x, y, w, h;
   SDL_GetWindowPosition(window ,&x, &y);
   SDL_GetWindowSize(window, &w, &h);
   return {x,y,w,h};
 };
 
-void PF::Core::Window::windowEvent(const SDL_Event &event){
+void PF::CoreForge::Window::windowEvent(const SDL_Event &event){
   if(event.type == SDL_QUIT) running = false;
   if(event.type == SDL_KEYDOWN){
     if(event.key.keysym.sym == SDLK_F11) changeFullScreenDesktop();
@@ -97,7 +97,7 @@ void PF::Core::Window::windowEvent(const SDL_Event &event){
   };
 };
 
-void PF::Core::Window::changeFullScreenDesktop() const{
+void PF::CoreForge::Window::changeFullScreenDesktop() const{
   Uint32 flags = SDL_GetWindowFlags(window);
   if(flags & SDL_WINDOW_FULLSCREEN_DESKTOP) {
     SDL_SetWindowFullscreen(window, 0);
@@ -109,7 +109,7 @@ void PF::Core::Window::changeFullScreenDesktop() const{
   SDL_Delay(500);
 };
 
-void PF::Core::Window::changeMaximized() const {
+void PF::CoreForge::Window::changeMaximized() const {
   Uint32 flags = SDL_GetWindowFlags(window);
   if(flags & SDL_WINDOW_MAXIMIZED)
     SDL_RestoreWindow(window);

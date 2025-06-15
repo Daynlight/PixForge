@@ -8,7 +8,7 @@
 #include "TextEditor/TextEditor.h"
 #include "Objects/Objects.h"
 
-namespace PF::Forge::Ui{
+namespace PF::CoreForge::Ui{
 class Manager{
 public:
   STL::Vector<Ui::iUi*> windows;
@@ -20,4 +20,4 @@ public:
   void save();
   void addWindow(Ui::iUi::Type type);
 };
-}; // namespace PF::Forge
+}; // namespace PF::CoreForge

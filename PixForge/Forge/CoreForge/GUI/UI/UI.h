@@ -3,7 +3,7 @@
 #include "imgui/imgui.h"
 #include <cstdint>
 
-namespace PF::Forge::Ui{
+namespace PF::CoreForge::Ui{
 class iUi{
 public:
   enum Type{
@@ -20,4 +20,4 @@ public:
   virtual bool isOpen() = 0;
   virtual void render() = 0;
 };
-}; // namespace PF::Forge::Ui
+}; // namespace PF::CoreForge::Ui
