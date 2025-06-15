@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge::Forge()
-  :window("PixEditor"), gui("settings/gui_window.ini", &window), coreWindow("Sandbox"), sandbox(&coreWindow){
+  :window("PixEditor"), coreWindow("Sandbox"), gui("settings/gui_window.ini", &window), sandbox(&coreWindow){
   Utilities::Log::init();
   Utilities::Log::log("Window Created");
   Core::Renderer::Assets::init(&coreWindow);
