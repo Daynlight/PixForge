@@ -8,15 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Game WIN32 ${src} ${core})
-
-file(GLOB_RECURSE libraries "../../vendor/lib/SDL2/**.a")
-target_link_libraries(Game PRIVATE 
-    ${libraries}
-    winmm
-    imm32 
-    version
-    setupapi
-)
+target_link_libraries(Game PRIVATE VendorLibraries)
 
 target_include_directories(Game PRIVATE ".")
 target_include_directories(Game PRIVATE "../../Core/")
