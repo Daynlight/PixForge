@@ -34,19 +34,19 @@ public:
 
     ImGui::Begin("Sandbox Preview", &open);
 
-    SDL_Texture* tex = sandbox->render();
+    // SDL_Texture* tex = sandbox->getViewportTexture();
 
-    if (tex) {
-      Core::Window* target_window = sandbox->getWindow();
-      if (target_window) {
-        auto sizeData = target_window->getWindowSizesAndPosition();
-        ImVec2 size = ImVec2(static_cast<float>(sizeData.w), static_cast<float>(sizeData.h));
-        // Cast SDL_Texture* to ImTextureID only if ImGui_ImplSDLRenderer is used
-        ImGui::Image((ImTextureID)tex, size);
-      }
-    } else {
-      ImGui::Text("No preview texture available.");
-    }
+    // if (tex) {
+    //   Core::Window* target_window = sandbox->getWindow();
+    //   if (target_window) {
+    //     auto sizeData = target_window->getWindowSizesAndPosition();
+    //     ImVec2 size = ImVec2(static_cast<float>(sizeData.w), static_cast<float>(sizeData.h));
+    //     // Cast SDL_Texture* to ImTextureID only if ImGui_ImplSDLRenderer is used
+    //     ImGui::Image((ImTextureID)tex, size);
+    //   }
+    // } else {
+    //   ImGui::Text("No preview texture available.");
+    // }
 
     ImGui::End();
   }

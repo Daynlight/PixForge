@@ -21,7 +21,7 @@ PF::Forge::Forge::~Forge(){
 void PF::Forge::Forge::run(){
   Utilities::Log::inf("Forge Running");
   while (window.isRunning()){
-    Core::Renderer::Assets::background(backgroundColour);
+    // Core::Renderer::Assets::background(backgroundColour);
     gui.render();
     events();
     SDL_RenderPresent(window.getRenderer());
