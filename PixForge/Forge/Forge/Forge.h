@@ -1,6 +1,5 @@
 #pragma once
 #include "CoreForge/Window/Window.h"
-#include "Window/Window.h"
 #include "SDL2_image/SDL_image.h"
 
 #include "CoreForge/Gui/Gui.h"
@@ -14,7 +13,6 @@ namespace PF::Forge{
 class Forge{
 private:
   CoreForge::Window window;
-  Core::Window coreWindow;
   Sandbox sandbox;
   CoreForge::Gui gui;
   bool dragging = false;

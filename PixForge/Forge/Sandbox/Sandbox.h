@@ -6,13 +6,13 @@
 namespace PF {
 class Sandbox{
 private:
-  Core::Window *window;
+  Core::Window window;
   SDL_Texture* renderTexture = nullptr;
 public:
-  Sandbox(Core::Window *window);
+  Sandbox();
   ~Sandbox();
   SDL_Texture* render();
-  Core::Window *getWindow() { return window; };
+  Core::Window *getWindow() { return &window; };
   void event();
 };
 }; // namespace PF

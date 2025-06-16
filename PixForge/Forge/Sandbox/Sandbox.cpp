@@ -1,11 +1,14 @@
 #include "Sandbox.h"
 
-PF::Sandbox::Sandbox(Core::Window* window) : window(window) {
+PF::Sandbox::Sandbox()
+  : window("Sandbox") {
   Utilities::Log::log("Sandbox Created");
-
-  SDL_Renderer* renderer = window->getRenderer();
-  int width = window->getWindowSizesAndPosition().w;
-  int height = window->getWindowSizesAndPosition().h;
+  Core::Renderer::Assets::init(&window);
+  Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
+  Core::Renderer::Objects::Manager::load();
+  SDL_Renderer* renderer = window.getRenderer();
+  int width = window.getWindowSizesAndPosition().w;
+  int height = window.getWindowSizesAndPosition().h;
 
   renderTexture = SDL_CreateTexture(
     renderer,
@@ -26,7 +29,7 @@ PF::Sandbox::~Sandbox() {
 };
 
 SDL_Texture* PF::Sandbox::render() {
-    SDL_Renderer* renderer = window->getRenderer();
+    SDL_Renderer* renderer = window.getRenderer();
 
     // Save previous render target
     SDL_Texture* previousTarget = SDL_GetRenderTarget(renderer);
@@ -45,7 +48,7 @@ SDL_Texture* PF::Sandbox::render() {
     Core::Renderer::Assets::background(backgroundColour);
 
     for (size_t i = 0; i < Core::Renderer::Objects::Manager::size(); i++) {
-        Core::Renderer::Objects::Manager::at(i).render(window);
+        Core::Renderer::Objects::Manager::at(i).render(&window);
     }
 
     // Reset render target back to window
@@ -56,7 +59,7 @@ SDL_Texture* PF::Sandbox::render() {
     SDL_RenderClear(renderer);
 
     // Copy the offscreen texture to the window renderer
-    auto sizeData = window->getWindowSizesAndPosition();
+    auto sizeData = window.getWindowSizesAndPosition();
     SDL_Rect destRect{ 0, 0, sizeData.w, sizeData.h };
     if (SDL_RenderCopy(renderer, renderTexture, nullptr, &destRect) != 0) {
         Utilities::Log::err("Failed to render texture to window: " + std::string(SDL_GetError()));
