@@ -4,8 +4,6 @@
 
 #include "CoreForge/Gui/Gui.h"
 #include "Sandbox/Sandbox.h"
-#include "Renderer/Objects/Manager.h"
-#include "Renderer/Assets.h"
 
 #include "Utilities/Log.h"
 

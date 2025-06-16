@@ -1,7 +1,7 @@
 #include "Forge.h"
 
 PF::Forge::Forge::Forge()
-  :window("PixEditor"), gui("settings/gui_window.ini", &window, &sandbox){
+  :window("PixEditor"), sandbox(&window), gui("settings/gui_window.ini", &window, &sandbox) {
   Utilities::Log::init();
   Utilities::Log::log("Window Created");
   loadSettings();
@@ -21,7 +21,8 @@ PF::Forge::Forge::~Forge(){
 void PF::Forge::Forge::run(){
   Utilities::Log::inf("Forge Running");
   while (window.isRunning()){
-    // Core::Renderer::Assets::background(backgroundColour);
+    SDL_SetRenderDrawColor(window.getRenderer(),25,25,25,255); 
+    SDL_RenderClear(window.getRenderer());
     gui.render();
     events();
     SDL_RenderPresent(window.getRenderer());

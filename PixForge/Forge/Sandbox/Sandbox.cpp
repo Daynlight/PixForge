@@ -1,6 +1,7 @@
 #include "Sandbox.h"
 
-PF::Sandbox::Sandbox() {
+PF::Sandbox::Sandbox(CoreForge::Window *window) 
+  : forgeWindow(window) {
   Utilities::Log::log("Sandbox Created");
   // Core::Renderer::Assets::init(&window);
   // Core::Renderer::Objects::Manager::init("objects.bin", "textures.bin", &window);
