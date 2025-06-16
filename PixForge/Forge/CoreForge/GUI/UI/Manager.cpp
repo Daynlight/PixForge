@@ -52,4 +52,5 @@ void PF::CoreForge::Ui::Manager::addWindow(iUi::Type type) {
   if (type == iUi::FILE_EXPLORER) { windows.push(new FileExplorer(iUi::generateUniqueID(&windows), &windows, STL::Folder("assets/"))); };
   if (type == iUi::TEXT_EDITOR) { windows.push(new TextEditor(iUi::generateUniqueID(&windows), "assets/texture/")); };
   if (type == iUi::OBJECTS_UI) { windows.push(new Objects(iUi::generateUniqueID(&windows))); };
+  if (type == iUi::SANDBOX) { windows.push(new SandboxWindow(iUi::generateUniqueID(&windows), sandbox)); };
 };

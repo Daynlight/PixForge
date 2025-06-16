@@ -7,9 +7,12 @@ namespace PF {
 class Sandbox{
 private:
   Core::Window *window;
+  SDL_Texture* renderTexture = nullptr;
 public:
-  Sandbox(Core::Window *window) : window(window) { Utilities::Log::log("Sandbox Created"); };
-  void render();
+  Sandbox(Core::Window *window);
+  ~Sandbox();
+  SDL_Texture* render();
+  Core::Window *getWindow() { return window; };
   void event();
 };
 }; // namespace PF

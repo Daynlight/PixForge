@@ -10,7 +10,8 @@ public:
     LOG,
     FILE_EXPLORER,
     TEXT_EDITOR,
-    OBJECTS_UI
+    OBJECTS_UI,
+    SANDBOX
   };
 public:
   static uint8_t generateUniqueID(STL::Vector<iUi*> *uis);

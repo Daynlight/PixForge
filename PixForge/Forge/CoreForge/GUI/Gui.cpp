@@ -1,7 +1,7 @@
 #include "Gui.h"
 
-PF::CoreForge::Gui::Gui(const std::string &path, CoreForge::Window *window) 
-  :window(window), ui(path){
+PF::CoreForge::Gui::Gui(const std::string &path, CoreForge::Window *window, Sandbox *sandbox) 
+  :window(window), ui(path, sandbox){
   Utilities::Log::log("Gui Created");
 
   IMGUI_CHECKVERSION();
@@ -61,6 +61,7 @@ inline void PF::CoreForge::Gui::renderTopBar(){
         if (ImGui::MenuItem("File Explorer [assets]")) ui.addWindow(Ui::iUi::Type::FILE_EXPLORER);
         if (ImGui::MenuItem("Text Editor")) ui.addWindow(Ui::iUi::Type::TEXT_EDITOR);
         if (ImGui::MenuItem("Objects")) ui.addWindow(Ui::iUi::Type::OBJECTS_UI);
+        if (ImGui::MenuItem("Sandbox")) ui.addWindow(Ui::iUi::Type::SANDBOX);
         ImGui::EndMenu();
     };
     ImGui::EndMainMenuBar();
