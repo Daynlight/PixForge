@@ -1,13 +1,16 @@
 #include "Forge/Forge.h"
+#include "Utilities/Log.h"
 
 #define BENCHMARK 1
 
 #if BENCHMARK
 #include "Utilities/Benchmark.h"
-#include "../Core/STL/File/File.h"
+#include "STL/File/File.h"
 #endif
 
 int WinMain(){
+  PF::Utilities::Log::init();
+  
   #if BENCHMARK
   { PF::Utilities::Benchmark::Allocs allocs("Program Allocs");
   #endif
@@ -18,8 +21,6 @@ int WinMain(){
   }
   
   #if BENCHMARK
-  PF::Core::Renderer::Objects::Manager::dealloc();
-  PF::Core::Renderer::Assets::dealloc();
   PF::Utilities::Log::dealloc();
   
   } PF::STL::File file = PF::STL::File("Benchmark.txt");

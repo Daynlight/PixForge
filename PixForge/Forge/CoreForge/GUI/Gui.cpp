@@ -1,7 +1,7 @@
 #include "Gui.h"
 
 PF::CoreForge::Gui::Gui(const std::string &path, CoreForge::Window *window, Sandbox *sandbox) 
-  :window(window), ui(path, sandbox){
+  :window(window), sandbox(sandbox){
   Utilities::Log::log("Gui Created");
 
   IMGUI_CHECKVERSION();
@@ -17,12 +17,9 @@ PF::CoreForge::Gui::Gui(const std::string &path, CoreForge::Window *window, Sand
   ImGui_ImplSDL2_InitForSDLRenderer(window->getWindow(), window->getRenderer());
   ImGui_ImplSDLRenderer2_Init(window->getRenderer());
   Utilities::Log::log("ImGui Initialized");
-
-  ui.load();
 };
 
 PF::CoreForge::Gui::~Gui(){
-  ui.save();
   ImGui_ImplSDLRenderer2_Shutdown();
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
@@ -57,11 +54,11 @@ inline void PF::CoreForge::Gui::renderDock() {
 inline void PF::CoreForge::Gui::renderTopBar(){
   if (ImGui::BeginMainMenuBar()){
     if (ImGui::BeginMenu("Window")){
-        if (ImGui::MenuItem("Log")) ui.addWindow(Ui::iUi::Type::LOG);
-        if (ImGui::MenuItem("File Explorer [assets]")) ui.addWindow(Ui::iUi::Type::FILE_EXPLORER);
-        if (ImGui::MenuItem("Text Editor")) ui.addWindow(Ui::iUi::Type::TEXT_EDITOR);
-        if (ImGui::MenuItem("Objects")) ui.addWindow(Ui::iUi::Type::OBJECTS_UI);
-        if (ImGui::MenuItem("Sandbox")) ui.addWindow(Ui::iUi::Type::SANDBOX);
+        // if (ImGui::MenuItem("Log")) ui.addWindow(Ui::iUi::Type::LOG);
+        // if (ImGui::MenuItem("File Explorer [assets]")) ui.addWindow(Ui::iUi::Type::FILE_EXPLORER);
+        // if (ImGui::MenuItem("Text Editor")) ui.addWindow(Ui::iUi::Type::TEXT_EDITOR);
+        // if (ImGui::MenuItem("Objects")) ui.addWindow(Ui::iUi::Type::OBJECTS_UI);
+        // if (ImGui::MenuItem("Sandbox")) ui.addWindow(Ui::iUi::Type::SANDBOX);
         ImGui::EndMenu();
     };
     ImGui::EndMainMenuBar();
@@ -75,15 +72,15 @@ void PF::CoreForge::Gui::render(){
 
   renderDock();
 
-  for(size_t i = 0; i < ui.windows.size(); i++) {
-    ui.windows[i]->render();
-    if(!ui.windows[i]->isOpen()) { delete ui.windows.remove(i); };
-  };
+  // for(size_t i = 0; i < ui.windows.size(); i++) {
+  //   ui.windows[i]->render();
+  //   if(!ui.windows[i]->isOpen()) { delete ui.windows.remove(i); };
+  // };
 
   ImGui::Render();
   ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), window->getRenderer());
 };
 
-void PF::CoreForge::Gui::guiEvent(SDL_Event* event){
-  ImGui_ImplSDL2_ProcessEvent(event);
+void PF::CoreForge::Gui::guiEvent(SDL_Event event){
+  ImGui_ImplSDL2_ProcessEvent(&event);
 };

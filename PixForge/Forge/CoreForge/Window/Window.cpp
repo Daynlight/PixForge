@@ -1,81 +1,25 @@
 #include "Window.h"
 
-PF::CoreForge::Window::Window(const char* title) {
-  load();
+PF::CoreForge::Window::Window(const std::string &path, const char* title)
+  : file(path) {
   if(SDL_Init(SDL_INIT_EVERYTHING)) throw std::runtime_error("SDL Init Error");
   createWindow(title);
   createRenderer();
 };
 
 PF::CoreForge::Window::~Window(){
-  save();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
 };
 
 void PF::CoreForge::Window::createWindow(const char *title){
-  if(!window_settings.size())
   window = SDL_CreateWindow(title, WINDOW_POSITION, WINDOW_SIZES, WINDOW_FLAGS);
-  else{
-    window = SDL_CreateWindow(title, std::stoi(window_settings[0]), std::stoi(window_settings[1]), 
-    std::stoi(window_settings[2]), std::stoi(window_settings[3]), WINDOW_FLAGS);
-    if(!window) throw std::runtime_error("Can't create window");  
-  };
-  if(window_settings[4] == "1"){
-    SDL_MaximizeWindow(window);
-  };
-  if(window_settings[5] == "1"){
-    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-  };
 };
 
 void PF::CoreForge::Window::createRenderer(){
   renderer = SDL_CreateRenderer(window, 0, 0);
   if(!renderer) throw std::runtime_error("Can't create renderer");
-};
-
-void PF::CoreForge::Window::save() {
-  SDL_Rect window_location = getWindowSizesAndPosition();
-  if(!window_settings.exist()) window_settings.create();
-  window_settings.clear();
-
-  bool maximized = false;
-  if(SDL_GetWindowFlags(window) & SDL_WINDOW_MAXIMIZED) maximized = true;
-  bool fullscreen = false;
-  if(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN_DESKTOP) fullscreen = true;
-  
-  if(maximized || fullscreen){
-    window_settings.push(std::to_string(window_location.x));
-    window_settings.push(std::to_string(window_location.y));
-    STL::Vec<int, 2> window_size = {WINDOW_SIZES};
-    window_settings.push(std::to_string(window_size[0]));
-    window_settings.push(std::to_string(window_size[1]));
-  }
-  else{
-    window_settings.push(std::to_string(window_location.x));
-    window_settings.push(std::to_string(window_location.y));
-    window_settings.push(std::to_string(window_location.w));
-    window_settings.push(std::to_string(window_location.h));
-  };
-  
-  window_settings.push(std::to_string(maximized));
-  window_settings.push(std::to_string(fullscreen));
-  
-  std::string record = window_settings.concat(';');
-  window_settings.clear();
-  window_settings.push(record);
-  window_settings.save();
-};
-
-void PF::CoreForge::Window::load() {
-  if(window_settings.exist()) {
-    window_settings.read();
-    STL::Vector<std::string> *record = window_settings.split(';')[0];
-    window_settings.clear();
-    for(size_t i = 0; i < record->size(); i++) window_settings.push((*record)[i]);
-    delete record;
-  }
 };
 
 const SDL_Rect PF::CoreForge::Window::getWindowSizesAndPosition() const {

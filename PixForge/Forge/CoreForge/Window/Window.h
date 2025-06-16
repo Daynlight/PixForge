@@ -1,12 +1,9 @@
 #pragma once
 #include <stdexcept>
+#include <string>
 #include "STL/File/File.h"
-#include "STL/Folder/Folder.h"
-#include "STL/Math/Vec.h"
 
 #include "SDL2/SDL.h"
-#include "imgui/imgui.h"
-
 
 // Default Window Settings
 #define WINDOW_SIZES 800, 600 
@@ -18,16 +15,14 @@ class Window{
 private:
   SDL_Window *window;
   SDL_Renderer *renderer;
-  STL::File window_settings = STL::File("settings/window_settings.ini");
+  STL::File file;
   bool running = true;
   void changeFullScreenDesktop() const;
   void changeMaximized() const;
   void createWindow(const char* title);
   void createRenderer();
-  void save();
-  void load();
 public:
-  Window(const char* title);
+  Window(const std::string &path, const char* title);
   ~Window();
   void windowEvent(const SDL_Event &event);
   const SDL_Rect getWindowSizesAndPosition() const;
