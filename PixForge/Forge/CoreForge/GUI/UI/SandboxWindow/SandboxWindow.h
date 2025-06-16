@@ -1,10 +1,10 @@
 #pragma once
-
+#include "Core.h"
 #include "../Ui.h"
-#include "Renderer/Objects/Manager.h"
 #include "Utilities/Log.h"
-#include "Window/Window.h"
 #include "Sandbox/Sandbox.h" 
+
+#include "imgui/imgui.h"
 
 #include <iostream>
 

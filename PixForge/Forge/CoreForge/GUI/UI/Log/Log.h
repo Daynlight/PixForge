@@ -2,6 +2,8 @@
 #include "../Ui.h"
 #include "Utilities/Log.h"
 
+#include "imgui/imgui.h"
+
 namespace PF::CoreForge::Ui{
 class Log : public iUi{
 private:

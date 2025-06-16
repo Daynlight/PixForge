@@ -1,15 +1,14 @@
 #pragma once
-#include "Window/Window.h"
 #include "STL/File/File.h"
 #include "STL/Math/Vec.h"
 #include "STL/Vector/Vector.h"
 
-#include "Renderer/Texture.h"
-#include "Renderer/Assets.h"
+#include "Assets/Texture.h"
+#include "Assets/Assets.h"
 
-#include "Renderer/Objects/Object.h"
-#include "Renderer/Objects/Sprite/Sprite.h"
-#include "Renderer/Objects/ColourBox/ColourBox.h"
+#include "Object.h"
+#include "Sprite/Sprite.h"
+#include "ColourBox/ColourBox.h"
 
 namespace PF::Core::Renderer::Objects{
 class Manager{

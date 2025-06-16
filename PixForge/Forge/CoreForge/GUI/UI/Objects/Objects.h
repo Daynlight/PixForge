@@ -1,9 +1,9 @@
 #pragma once
+#include "Core.h"
 #include "../Ui.h"
-#include "STL/Vector/Vector.h"
-#include "STL/Math/Vec.h"
-#include "Renderer/Objects/Manager.h"
 #include "Utilities/Log.h"
+
+#include "imgui/imgui.h"
 
 namespace PF::CoreForge::Ui{
 class Objects : public iUi{

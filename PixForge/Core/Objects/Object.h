@@ -1,5 +1,4 @@
 #pragma once
-#include "Window/Window.h"
 #include "STL/Math/Vec.h"
 #include "STL/Math/Mat.h"
 #include "STL/Vector/Vector.h"

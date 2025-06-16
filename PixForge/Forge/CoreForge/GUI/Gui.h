@@ -1,4 +1,6 @@
 #pragma once
+#include "Core.h"
+
 #include "CoreForge/Window/Window.h"
 #include "Sandbox/Sandbox.h"
 
@@ -6,9 +8,7 @@
 #include "imgui/imgui_impl_sdl2.h"
 #include "imgui/imgui_impl_sdlrenderer2.h"
 
-#include "Renderer/Objects/Manager.h"
 #include "Ui/Manager.h"
-
 #include "Utilities/Log.h"
 
 namespace PF::CoreForge{

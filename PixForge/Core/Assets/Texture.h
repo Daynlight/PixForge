@@ -1,5 +1,6 @@
 #pragma once
-#include "Window/Window.h"
+
+#ifdef SDL2RENDERER
 #include "STL/File/File.h"
 #include "STL/Vector/Vector.h"
 
@@ -39,3 +40,4 @@ public:
   const size_t size() const { return textures.size(); };
 };
 }; // namespace PF::Core::Renderer
+#endif

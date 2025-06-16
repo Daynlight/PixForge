@@ -1,6 +1,5 @@
 #pragma once
-#include "STL/Vector/Vector.h"
-#include "imgui/imgui.h"
+#include "Core.h"
 #include <cstdint>
 
 namespace PF::CoreForge::Ui{

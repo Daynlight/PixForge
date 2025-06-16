@@ -1,7 +1,5 @@
 #pragma once
-#include "Window/Window.h"
-#include "Renderer/Objects/Manager.h"
-#include "Renderer/Assets.h"
+#include "Core.h"
 
 namespace PF {
 class Game{

@@ -1,7 +1,9 @@
 #pragma once
+#include "Core.h"
 #include "../Ui.h"
 #include "Utilities/Log.h"
-#include "STL/File/File.h"
+
+#include "imgui/imgui.h"
 
 namespace PF::CoreForge::Ui{
 class TextEditor : public iUi{

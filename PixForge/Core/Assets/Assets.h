@@ -1,6 +1,7 @@
 #pragma once
+
+#ifdef SDL2RENDERER
 #include "SDL2/SDL.h"
-#include "Window/Window.h"
 #include "STL/Math/Vec.h"
 
 #define backgroundColour 25,25,25,255
@@ -30,3 +31,5 @@ public:
   static void background(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a);
 };
 }; // namespace PF::Core::Renderer
+
+#endif

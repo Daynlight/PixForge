@@ -1,6 +1,5 @@
 #pragma once
-#include "STL/Vector/Vector.h"
-#include "Renderer/Objects/Manager.h"
+#include "Core.h"
 #include "Sandbox/Sandbox.h"
 
 #include "Ui.h"

@@ -1,5 +1,6 @@
 #include "Assets.h"
 
+#ifdef SDL2RENDERER
 PF::Core::Renderer::Assets* PF::Core::Renderer::Assets::instance = nullptr;
 
 void PF::Core::Renderer::Assets::init(Window* window) { if(!instance) instance = new Assets(window); }
@@ -26,3 +27,4 @@ void PF::Core::Renderer::Assets::background(const unsigned char &r, const unsign
 };
 
 void PF::Core::Renderer::Assets::background(const SDL_Colour &colour) { get().background(colour.r, colour.g, colour.b, colour.a); };
+#endif

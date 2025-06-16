@@ -1,5 +1,6 @@
 #include "Texture.h"
 
+#ifdef SDL2RENDERER
 void PF::Core::Renderer::Texture::save() {
   if(!file.exist()) file.create();
   file.clear();
@@ -60,3 +61,4 @@ void PF::Core::Renderer::Texture::load() {
     delete file[i];
   };
 };
+#endif

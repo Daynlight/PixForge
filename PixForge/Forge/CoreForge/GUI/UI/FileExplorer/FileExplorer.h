@@ -1,8 +1,9 @@
 #pragma once
+#include "Core.h"
 #include "../Ui.h"
-#include "../TextEditor/TextEditor.h"
 #include "Utilities/Log.h"
-#include "STL/Folder/Folder.h"
+
+#include "imgui/imgui.h"
 
 #define FILE_BOX_WIDTH 100
 #define FILE_BOX_BORDER 1
