@@ -1,9 +1,9 @@
 #pragma once
 #include "Sandbox/Sandbox.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl2.h"
-#include "imgui/imgui_impl_sdlrenderer2.h"
+#include "Vendor/include/imgui/imgui.h"
+#include "Vendor/include/imgui/imgui_impl_sdl2.h"
+#include "Vendor/include/imgui/imgui_impl_sdlrenderer2.h"
 #include "Utilities/Log.h"
 
 namespace PF::CoreForge{
