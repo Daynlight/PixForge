@@ -3,7 +3,7 @@
 #include <string>
 #include "STL/File/File.h"
 
-#include "SDL2/SDL.h"
+#include "Vendor/include/SDL2/SDL.h"
 
 // Default Window Settings
 #define WINDOW_SIZES 800, 600 
