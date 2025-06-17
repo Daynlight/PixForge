@@ -6,7 +6,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 file(GLOB_RECURSE FILES "**.hpp" "**.cpp")
 
-add_library(Engine SHARED ${FILES})
+add_library(Engine STATIC ${FILES})
 
 target_link_libraries(Engine PRIVATE STL)
 target_link_libraries(Engine PRIVATE Libraries)
