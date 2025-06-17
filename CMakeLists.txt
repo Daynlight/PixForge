@@ -4,9 +4,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/output)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/output)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
+set(CMAKE_ROOT_DIRECTORY ${CMAKE_SOURCE_DIR}/PixForge)
 
 add_subdirectory(PixForge/vendor)
 add_subdirectory(PixForge/STL)
+add_subdirectory(PixForge/Engine)
 add_subdirectory(PixForge/Forge)
 add_subdirectory(PixForge/Game)
 

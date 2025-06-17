@@ -1,6 +1,6 @@
 #pragma once
-#include "CoreForge/Window/Window.h"
-#include "CoreForge/GUI/Gui.h"
+#include "Engine/Window/Window.h"
+#include "GUI/Gui.h"
 #include "Sandbox/Sandbox.h"
 #include "Utilities/Log.h"
 
