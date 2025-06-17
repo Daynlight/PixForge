@@ -1,4 +1,4 @@
-#ifdef OPENGLRENDERER
+#ifdef OPENGL
 #include "opengl.h"
 #include <iostream>
 

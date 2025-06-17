@@ -8,6 +8,10 @@ file(GLOB_RECURSE FILES "**.hpp" "**.cpp")
 
 add_library(Engine STATIC ${FILES})
 
+if(RENDERER STREQUAL SDL2)
+  target_compile_definitions(Engine PRIVATE SDL2)
+endif()
+
 target_link_libraries(Engine PRIVATE STL)
 target_link_libraries(Engine PRIVATE Libraries)
 
