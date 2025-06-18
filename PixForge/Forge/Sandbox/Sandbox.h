@@ -1,15 +1,13 @@
 #pragma once
-#include "Window/Window.h"
-#include "Renderer/Objects/Manager.h"
-#include "Tools/Log.h"
+#include "Engine/Window/Window.h"
+#include "Utilities/Log.h"
 
 namespace PF {
 class Sandbox{
 private:
-  Core::Window *window;
+  CoreForge::Window *forgeWindow;
 public:
-  Sandbox(Core::Window *window) : window(window) { Tools::Log::log("Sandbox Created"); };
-  void run();
-  void event(SDL_Event* event);
+  Sandbox(CoreForge::Window *window);
+  ~Sandbox();
 };
 }; // namespace PF
