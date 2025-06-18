@@ -1,9 +1,9 @@
 #include "Sandbox.h"
 
-void PF::Sandbox::run(){
-    for(size_t i = 0; i < Core::Renderer::Objects::Manager::size(); i++) Core::Renderer::Objects::Manager::at(i).render(window);
-}
+PF::Sandbox::Sandbox(CoreForge::Window *window) 
+  : forgeWindow(window) {
+  Utilities::Log::log("Sandbox Created");
+};
 
-void PF::Sandbox::event(SDL_Event* event){
-    
+PF::Sandbox::~Sandbox() {
 };
