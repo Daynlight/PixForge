@@ -24,7 +24,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(Forge WIN32 ${src} ${header})
 
 target_link_libraries(Forge PRIVATE STL)
-target_link_libraries(Forge PRIVATE Libraries)
 target_link_libraries(Forge PRIVATE Engine)
 
 target_include_directories(Forge PRIVATE ${CMAKE_ROOT_DIRECTORY})

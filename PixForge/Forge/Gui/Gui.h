@@ -1,9 +1,6 @@
 #pragma once
+#include "Engine/Gui/ImGuiEngine.h"
 #include "Sandbox/Sandbox.h"
-
-#include "Vendor/include/imgui/imgui.h"
-#include "Vendor/include/imgui/imgui_impl_sdl2.h"
-#include "Vendor/include/imgui/imgui_impl_sdlrenderer2.h"
 #include "Utilities/Log.h"
 
 namespace PF::CoreForge{
@@ -11,6 +8,7 @@ class Gui{
 private:
   CoreForge::Window *window;
   Sandbox *sandbox;
+  Engine::ImGuiEngine imGui;
 private:
   inline void renderDock();
   inline void renderTopBar();
