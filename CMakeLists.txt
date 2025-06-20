@@ -15,14 +15,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 
 ############################## Set Renderer and Platform ##############################
-# SDL2, OPENGL
-set(RENDERER SDL2)
-# WIN, UNIX
-set(PLATFORM WIN)
+# OPENGL_WIN
+set(BUILD_CONFIG OPENGL_WIN)
 
 ############################## Add All SubFolders ##############################
-add_subdirectory(PixForge/vendor)
-add_subdirectory(PixForge/STL)
+add_subdirectory(PixForge/Platforms)
 add_subdirectory(PixForge/Engine)
 add_subdirectory(PixForge/Forge)
 add_subdirectory(PixForge/Game)
