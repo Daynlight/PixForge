@@ -2,6 +2,7 @@
 
 PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
+  engine.getRenderer()->createWindow("Test Window");
 };
 
 PF::FORGE::Forge::~Forge(){
@@ -10,13 +11,13 @@ PF::FORGE::Forge::~Forge(){
 
 void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
-  // while (window.isRunning()){
+  while (engine.getRenderer()->isRunning()){
   //   SDL_SetRenderDrawColor(window.getRenderer(),25,25,25,255); 
   //   SDL_RenderClear(window.getRenderer());
   //   gui.render();
   //   SDL_RenderPresent(window.getRenderer());
   //   events();
-  // };
+  };
 };
 
 void PF::FORGE::Forge::events(){

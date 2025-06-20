@@ -8,9 +8,10 @@
 namespace PF::PLATFORMS{
 class Renderer : public iRenderer {
 private:
-GLFWwindow *window;
+    GLFWwindow *window;
+    bool running = true;
 public:
-    Renderer();
-    ~Renderer();
+    bool isRunning() { return running; };
+    void createWindow(const std::string &title);
 }; // class Renderer
 }; // namespace PF::PLATFORMS
