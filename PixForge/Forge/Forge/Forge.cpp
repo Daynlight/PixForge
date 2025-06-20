@@ -1,4 +1,5 @@
 #include "Forge.h"
+#include "Engine.h"
 
 PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
@@ -12,6 +13,7 @@ PF::FORGE::Forge::~Forge(){
 void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
   while (engine.getRenderer()->isRunning()){
+    engine.run();
   //   SDL_SetRenderDrawColor(window.getRenderer(),25,25,25,255); 
   //   SDL_RenderClear(window.getRenderer());
   //   gui.render();

@@ -21,3 +21,15 @@ void PF::PLATFORMS::Renderer::createWindow(const std::string &title) {
     }
     glViewport(0, 0, 800, 600);   
 };
+
+void PF::PLATFORMS::Renderer::pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
+    glfwPollEvents();
+    if (glfwWindowShouldClose(window)) events.push(PF::ENGINE::EventsCodes::Quit);
+};
+
+void PF::PLATFORMS::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event) {
+    if(event == PF::ENGINE::EventsCodes::Quit) {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+        running = false;
+    }
+};
