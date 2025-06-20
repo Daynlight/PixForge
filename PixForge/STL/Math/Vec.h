@@ -1,7 +1,7 @@
 #pragma once
 #include "Mat.h"
 
-namespace PF::ENGINE::STL{
+namespace PF::STL{
 template<typename T, unsigned int S>
 class Vec{
 public:
@@ -36,8 +36,7 @@ public:
 public:
   T& operator[](const unsigned int &index) { return data[index]; };
   const T& operator[](const unsigned int &index) const { return data[index]; };
-  const SDL_Rect getRect() const { return {data[0], data[1], data[2], data[3]}; };
 }; // class Vec
-}; // namespace PF::ENGINE::STL
+}; // namespace PF::STL
 
 #include "Vec.hpp"

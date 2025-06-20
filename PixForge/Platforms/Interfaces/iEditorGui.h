@@ -1,8 +1,7 @@
 #pragma once
 #include <functional>
-#include "Engine/Window/Window.h"
 
-namespace PF::Engine{
+namespace PF::PLATFORMS{
 class ImGuiEngine{
   ENGINE::Window *window;
   public:

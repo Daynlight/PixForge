@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace PF::ENGINE::STL{
+namespace PF::STL{
 template<typename T>
 class Vector{
 private:
@@ -31,6 +31,6 @@ private:
   void quickSort(int a, int b, bool (*compare)(T, T));
   const int partition(int a, int b, bool (*compare)(T, T));
 };
-}; // namespace PF::ENGINE::STL
+}; // namespace PF::STL
 
 #include "Vector.hpp"

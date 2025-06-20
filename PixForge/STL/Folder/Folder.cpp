@@ -1,6 +1,6 @@
 #include "Folder.h"
 
-PF::ENGINE::STL::Folder PF::ENGINE::STL::Folder::backFolder() const {
+PF::STL::Folder PF::STL::Folder::backFolder() const {
   std::string temp = path;
   temp.pop_back();
   while(temp.size() != 0 && temp.back() != '/') 
@@ -9,7 +9,7 @@ PF::ENGINE::STL::Folder PF::ENGINE::STL::Folder::backFolder() const {
   return Folder(path);
 };
 
-void PF::ENGINE::STL::Folder::create() {
+void PF::STL::Folder::create() {
   std::string temp = ""; 
   for(unsigned int i = 0; i < path.size(); i++){
     if(path[i] == '/'){
@@ -20,7 +20,7 @@ void PF::ENGINE::STL::Folder::create() {
   std::filesystem::create_directory(path);
 };
 
-void PF::ENGINE::STL::Folder::fetchList(){
+void PF::STL::Folder::fetchList(){
   data.clear(); 
   for(auto& p: std::filesystem::directory_iterator(path)){
     if(p.is_directory()) data.push(std::pair<char, std::string>('d', p.path().filename().string() + "/"));

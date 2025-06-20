@@ -1,13 +1,13 @@
 #include "Vector.h"
 
 template<typename T>
-PF::ENGINE::STL::Vector<T>::Vector(const unsigned int &capacity) :capacity(capacity) { data = new T[capacity]; }
+PF::STL::Vector<T>::Vector(const unsigned int &capacity) :capacity(capacity) { data = new T[capacity]; }
 
 template<typename T>
-const unsigned int PF::ENGINE::STL::Vector<T>::size() const { return _size; };
+const unsigned int PF::STL::Vector<T>::size() const { return _size; };
 
 template<typename T>
-void PF::ENGINE::STL::Vector<T>::resize(){
+void PF::STL::Vector<T>::resize(){
   capacity *= 2;
   T* temp = new T[capacity];
   for(unsigned int i = 0; i < _size; i++) temp[i] = data[i];
@@ -16,14 +16,14 @@ void PF::ENGINE::STL::Vector<T>::resize(){
 };
 
 template<typename T>
-void PF::ENGINE::STL::Vector<T>::push(const T &line){
+void PF::STL::Vector<T>::push(const T &line){
   if(_size >= capacity) resize();
   data[_size] = line;
   _size++;
 };
 
 template<typename T>
-T PF::ENGINE::STL::Vector<T>::pop(){
+T PF::STL::Vector<T>::pop(){
   if(_size >= 0){ 
       _size--;
       return data[_size];
@@ -32,7 +32,7 @@ T PF::ENGINE::STL::Vector<T>::pop(){
 };
 
 template<typename T>
-void PF::ENGINE::STL::Vector<T>::clear(){
+void PF::STL::Vector<T>::clear(){
   delete[] data;
   data = new T[1];
   capacity = 1;
@@ -40,7 +40,7 @@ void PF::ENGINE::STL::Vector<T>::clear(){
 };
 
 template <typename T>
-inline T PF::ENGINE::STL::Vector<T>::remove(const unsigned int &index){
+inline T PF::STL::Vector<T>::remove(const unsigned int &index){
   T temp = data[index];
   for(unsigned int i = index; i < _size - 1; i++) data[i] = data[i + 1];
   _size--;
@@ -48,7 +48,7 @@ inline T PF::ENGINE::STL::Vector<T>::remove(const unsigned int &index){
 };
 
 template<typename T>
-PF::ENGINE::STL::Vector<PF::ENGINE::STL::Vector<std::string>*> PF::ENGINE::STL::Vector<T>::split(const char &sep) const {
+PF::STL::Vector<PF::STL::Vector<std::string>*> PF::STL::Vector<T>::split(const char &sep) const {
   Vector<Vector<std::string>*> result;
   for(int i = 0; i < _size; i++){
     Vector<std::string> *temp = new Vector<std::string>();
@@ -69,17 +69,17 @@ PF::ENGINE::STL::Vector<PF::ENGINE::STL::Vector<std::string>*> PF::ENGINE::STL::
 };
 
 template<typename T>
-std::string PF::ENGINE::STL::Vector<T>::concat(const char &sep) const {
+std::string PF::STL::Vector<T>::concat(const char &sep) const {
   std::string result = "";
   for(unsigned int i = 0; i < _size; i++) result += data[i] + sep;
   return result;
 };
 
 template <typename T>
-void PF::ENGINE::STL::Vector<T>::sort(bool (*compare)(T, T)) { quickSort(0, _size - 1, compare); };
+void PF::STL::Vector<T>::sort(bool (*compare)(T, T)) { quickSort(0, _size - 1, compare); };
 
 template <typename T>
-void PF::ENGINE::STL::Vector<T>::quickSort(int a, int b, bool (*compare)(T, T)) {
+void PF::STL::Vector<T>::quickSort(int a, int b, bool (*compare)(T, T)) {
   if(a >= b) return;
   int c = partition(a, b, compare);
   quickSort(a, c - 1, compare);
@@ -87,7 +87,7 @@ void PF::ENGINE::STL::Vector<T>::quickSort(int a, int b, bool (*compare)(T, T)) 
 };
 
 template <typename T>
-const int PF::ENGINE::STL::Vector<T>::partition(int a, int b, bool (*compare)(T, T)){
+const int PF::STL::Vector<T>::partition(int a, int b, bool (*compare)(T, T)){
   T pivot = data[b];
   int i = a - 1;
   for(unsigned int j = a; j < b; j++){

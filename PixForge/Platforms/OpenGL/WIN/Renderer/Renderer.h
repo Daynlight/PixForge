@@ -1,11 +1,12 @@
 #pragma once
 
-#ifdef OPENGL
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "Interfaces/iRenderer.h"
 #include <string>
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 
-class Renderer {
+namespace PF::PLATFORMS{
+class Renderer : public iRenderer {
 public:
     Renderer();
     ~Renderer();
@@ -21,5 +22,5 @@ private:
 
     bool CreateShaders();
     GLuint CompileShader(GLenum type, const std::string& source);
-};
-#endif
+}; // class Renderer
+}; // namespace PF::PLATFORMS

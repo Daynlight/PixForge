@@ -19,6 +19,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-lib
 set(BUILD_CONFIG OPENGL_WIN)
 
 ############################## Add All SubFolders ##############################
+add_subdirectory(PixForge/STL)
 add_subdirectory(PixForge/Platforms)
 add_subdirectory(PixForge/Engine)
 add_subdirectory(PixForge/Forge)

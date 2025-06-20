@@ -2,8 +2,8 @@
 
 template<typename T, unsigned int S>
 template<typename U>
-PF::ENGINE::STL::Vec<T, S> PF::ENGINE::STL::Vec<T, S>::operator*(const Mat<U, S, S>& matrix) const {
-    PF::ENGINE::STL::Vec<T, S> result;
+PF::STL::Vec<T, S> PF::STL::Vec<T, S>::operator*(const Mat<U, S, S>& matrix) const {
+    PF::STL::Vec<T, S> result;
     for (unsigned int i = 0; i < S; i++) {
         U temp = 0;
         for (unsigned int j = 0; j < S; j++) {
@@ -16,7 +16,7 @@ PF::ENGINE::STL::Vec<T, S> PF::ENGINE::STL::Vec<T, S>::operator*(const Mat<U, S,
 
 template <typename T, unsigned int S>
 template <typename U>
-inline void PF::ENGINE::STL::Vec<T, S>::operator*=(const Mat<U, S, S> &matrix) {
+inline void PF::STL::Vec<T, S>::operator*=(const Mat<U, S, S> &matrix) {
     for (unsigned int i = 0; i < S; i++) {
         U temp = 0;
         for (unsigned int j = 0; j < S; j++) {

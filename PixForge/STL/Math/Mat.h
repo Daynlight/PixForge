@@ -1,6 +1,6 @@
 #pragma once
 
-namespace PF::ENGINE::STL{
+namespace PF::STL{
 template<typename T, unsigned int S, unsigned int R>
 class Mat{
 public:
@@ -33,6 +33,6 @@ public:
   T& operator()(const unsigned int &row, const unsigned int &col) { return data[row][col]; };
   const T& operator()(const unsigned int &row, const unsigned int &col) const { return data[row][col]; };
 };// class Mat
-}; // namespace PF::ENGINE::STL
+}; // namespace PF::STL
 
 #include "Mat.hpp"

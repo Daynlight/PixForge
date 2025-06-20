@@ -1,6 +1,4 @@
-#ifdef OPENGL
-#include "opengl.h"
-#include <iostream>
+#include "Renderer.h"
 
 const char* vertexSrc = R"(
 #version 330 core
@@ -18,13 +16,13 @@ void main() {
 }
 )";
 
-Renderer::Renderer() : VAO(0), VBO(0), shaderProgram(0) {}
+PF::PLATFORMS::Renderer::Renderer() : VAO(0), VBO(0), shaderProgram(0) {}
 
-Renderer::~Renderer() {
+PF::PLATFORMS::Renderer::~Renderer() {
     Shutdown();
 }
 
-bool Renderer::Init() {
+bool PF::PLATFORMS::Renderer::Init() {
     float vertices[] = {
          0.0f,  0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
@@ -34,7 +32,7 @@ bool Renderer::Init() {
     if (!CreateShaders())
         return false;
 
-    // VAO/VBO setup
+    // VAO/VBO setup`
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     
@@ -49,24 +47,24 @@ bool Renderer::Init() {
     return true;
 }
 
-void Renderer::Clear(float r, float g, float b, float a) {
+void PF::PLATFORMS::Renderer::Clear(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Renderer::Draw() {
+void PF::PLATFORMS::Renderer::Draw() {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void Renderer::Shutdown() {
+void PF::PLATFORMS::Renderer::Shutdown() {
     glDeleteProgram(shaderProgram);
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
 }
 
-bool Renderer::CreateShaders() {
+bool PF::PLATFORMS::Renderer::CreateShaders() {
     GLuint vs = CompileShader(GL_VERTEX_SHADER, vertexSrc);
     GLuint fs = CompileShader(GL_FRAGMENT_SHADER, fragmentSrc);
 
@@ -82,7 +80,6 @@ bool Renderer::CreateShaders() {
     if (!success) {
         char info[512];
         glGetProgramInfoLog(shaderProgram, 512, nullptr, info);
-        std::cerr << "Shader Program Linking Failed:\n" << info << "\n";
         return false;
     }
 
@@ -91,7 +88,7 @@ bool Renderer::CreateShaders() {
     return true;
 }
 
-GLuint Renderer::CompileShader(GLenum type, const std::string& source) {
+GLuint PF::PLATFORMS::Renderer::CompileShader(GLenum type, const std::string& source) {
     GLuint shader = glCreateShader(type);
     const char* src = source.c_str();
     glShaderSource(shader, 1, &src, nullptr);
@@ -102,10 +99,8 @@ GLuint Renderer::CompileShader(GLenum type, const std::string& source) {
     if (!compiled) {
         char info[512];
         glGetShaderInfoLog(shader, 512, nullptr, info);
-        std::cerr << "Shader Compilation Error:\n" << info << "\n";
         return 0;
     }
 
     return shader;
 }
-#endif

@@ -1,9 +1,9 @@
 #pragma once
-#include "Engine/STL/Vector/Vector.h"
-#include "Engine/STL/File/File.h"
+#include "STL/Vector/Vector.h"
+#include "STL/File/File.h"
 #include <filesystem>
 
-namespace PF::ENGINE::STL{
+namespace PF::STL{
 class Folder{
 private:
   Vector<std::pair<char, std::string>> data;
@@ -25,4 +25,4 @@ public:
   std::pair<char, std::string> &operator[](const unsigned int &index) { return data[index]; };
   const std::pair<char, std::string> &operator[](const unsigned int &index) const { return data[index]; };
 }; // class Folder
-}; // namespace PF::ENGINE::STL
+}; // namespace PF::STL
