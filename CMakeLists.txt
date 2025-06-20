@@ -23,7 +23,7 @@ add_subdirectory(PixForge/STL)
 add_subdirectory(PixForge/Platforms)
 add_subdirectory(PixForge/Engine)
 add_subdirectory(PixForge/Forge)
-add_subdirectory(PixForge/Game)
+# add_subdirectory(PixForge/Game)
 
 ############################## Set for VS ##############################
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Forge)

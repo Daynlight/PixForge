@@ -4,6 +4,7 @@ project(Platforms LANGUAGES CXX C)
 file(GLOB_RECURSE FILES
   "Interface/iEditorGui.h"
   "Interface/iRenderer.h"
+  "Platform.h"
 )
 
 ######################### Load Libraries for current setup #########################
@@ -33,18 +34,18 @@ if (BUILD_CONFIG STREQUAL OPENGL_WIN)
   add_library(Platforms STATIC ${GLAD} ${IMGUI} ${FILES} ${SPECIFIC_FILES})
 
   #### [Link Libraries] ####
-  target_link_libraries(Platforms PRIVATE
+  target_link_libraries(Platforms PUBLIC
     STL
-    glfw3
+    glfw
     winmm
     imm32 
     version
     setupapi
   )
   #### [Include] ####
-  target_include_directories(Platforms PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glad-3.3/include)
-  target_include_directories(Platforms PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-1.91.9b)
-  target_include_directories(Platforms PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glfw-3.4/include)
+  target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glad-3.3/include)
+  target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-1.91.9b)
+  target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glfw-3.4/include)
 else()
     message(FATAL_ERROR "Current BUILD_CONFIG is invalid set")
 endif()

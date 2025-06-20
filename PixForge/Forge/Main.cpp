@@ -16,7 +16,7 @@ int WinMain(){
   #endif
   
   {  
-    PF::Forge::Forge forge;
+    PF::FORGE::Forge forge;
     forge.run();
   }
   
