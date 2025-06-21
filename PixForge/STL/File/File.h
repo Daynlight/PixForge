@@ -26,6 +26,7 @@ public:
   const std::string getPath() const { return path; };
   std::string& operator[](const unsigned int &index) { return data[index]; };
   const std::string& operator[](const unsigned int &index) const { return data[index]; };
+  File& operator=(const File &second) { data = second.data; path = second.path; return *this; };
 public:
   Vector<Vector<std::string>*> split(const char &sep) { return data.split(sep); };
   std::string concat(const char &sep) { return data.concat(sep); };

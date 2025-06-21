@@ -2,6 +2,7 @@
 
 namespace PF::ENGINE{
   enum EventsCodes{
-    Quit
+    Quit,
+    WindowResize
   };
 }; // PF::ENGINE

@@ -4,6 +4,7 @@
 PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
   engine.getRenderer()->createWindow("Test Window");
+  engine.getRenderer()->createRenderer();
 };
 
 PF::FORGE::Forge::~Forge(){

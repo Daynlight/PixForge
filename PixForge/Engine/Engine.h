@@ -1,6 +1,7 @@
 #pragma once
 #include "Platforms/Platform.h"
 #include "STL/Vector/Vector.h"
+#include "STL/Math/Vec.h"
 #include "Events.h"
 
 namespace PF::ENGINE{
@@ -9,7 +10,6 @@ private:
   PLATFORMS::Renderer renderer;
   STL::Vector<EventsCodes> events;
 public:
-  Engine();
   void run();
   PLATFORMS::Renderer* getRenderer() { return &renderer; };
 };
