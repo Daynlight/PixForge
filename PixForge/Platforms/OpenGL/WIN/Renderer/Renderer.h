@@ -48,7 +48,7 @@ public:
 public:
     void render();
     void renderBackground(STL::Vec<float, 4> colour);
-    void renderColourBox(STL::Vec<int, 5> position, STL::Vec<float, 4> colour);
+    void renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour);
     void renderTexture();
     void bindVertexShader(PF::ENGINE::Shader shader);
     void bindFragmentShader(PF::ENGINE::Shader shader);

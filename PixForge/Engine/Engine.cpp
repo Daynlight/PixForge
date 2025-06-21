@@ -9,7 +9,7 @@ void PF::ENGINE::Engine::run(){
 
   renderer.renderBackground({50, 50, 50, 255});
 
-  renderer.renderColourBox({200, 300, 0, 200, 200}, {0, 255, 0, 255});
-  renderer.renderColourBox({200, 200, -1, 200, 200}, {200, 0, 0, 255});
+  renderer.renderColourBox({200, 300, 0.9, 200, 200}, {0, 255, 0, 255});
+  renderer.renderColourBox({200, 200, 0.6, 200, 200}, {200, 0, 0, 255});
   renderer.render();
 };

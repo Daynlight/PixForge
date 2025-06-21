@@ -44,6 +44,7 @@ void PF::PLATFORMS::Renderer::createBox(){
 
 void PF::PLATFORMS::Renderer::createRenderer() {
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     compileShader();
     createBox();
 };
@@ -76,14 +77,14 @@ void PF::PLATFORMS::Renderer::renderBackground(STL::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
 };
 
-void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<int, 5> position, STL::Vec<float, 4> colour){
+void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour){
     if (compiledShader == 0 || boxVAO == 0) return;
     glUseProgram(compiledShader);
-    float x = (float)position[0] / (width/2) - 1.0f;
-    float y = 1.0f - (float)position[1] / (height/2);
-    float z = (float)position[2];
-    float w = (float)position[3] / (width/2);
-    float h = (float)position[4] / (height/2);
+    float x = position[0] / (width/2) - 1.0f;
+    float y = 1.0f - position[1] / (height/2);
+    float z = 1.0f - position[2];
+    float w = position[3] / (width/2);
+    float h = position[4] / (height/2);
     GLint posLoc = glGetUniformLocation(compiledShader, "uPos");
     GLint sizeLoc = glGetUniformLocation(compiledShader, "uSize");
     GLint colorLoc = glGetUniformLocation(compiledShader, "uColor");
