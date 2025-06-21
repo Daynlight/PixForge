@@ -43,6 +43,7 @@ void PF::PLATFORMS::Renderer::createBox(){
 };
 
 void PF::PLATFORMS::Renderer::createRenderer() {
+    glEnable(GL_DEPTH_TEST);
     compileShader();
     createBox();
 };
@@ -69,11 +70,10 @@ void PF::PLATFORMS::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event)
     }
 };
 
-void PF::PLATFORMS::Renderer::render(){ glfwSwapBuffers(window); };
+void PF::PLATFORMS::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };
 
 void PF::PLATFORMS::Renderer::renderBackground(STL::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 };
 
 void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<int, 5> position, STL::Vec<float, 4> colour){
