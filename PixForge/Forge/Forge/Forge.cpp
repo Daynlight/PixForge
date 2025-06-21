@@ -3,7 +3,7 @@
 
 PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
-  engine.getRenderer()->createWindow("Test Window");
+  engine.getRenderer()->createWindow("Test Window", "settings/window.ini");
   engine.getRenderer()->createRenderer();
 };
 

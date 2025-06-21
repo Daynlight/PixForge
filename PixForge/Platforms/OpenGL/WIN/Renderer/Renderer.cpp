@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
-void PF::PLATFORMS::Renderer::createWindow(const std::string &title){
+void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::string &path){
+    window_settings.setPath(path);
     if (!glfwInit()){
         running = false;
         return;
@@ -42,10 +43,14 @@ void PF::PLATFORMS::Renderer::createBox(){
     glBindVertexArray(0);
 };
 
+PF::PLATFORMS::Renderer::~Renderer() {
+    glfwDestroyWindow(window);
+};
+
 void PF::PLATFORMS::Renderer::createRenderer() {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    compileShader();
+    bindDefaultColourBoxShader();
     createBox();
 };
 
@@ -102,8 +107,18 @@ void PF::PLATFORMS::Renderer::renderTexture(){
 
 void PF::PLATFORMS::Renderer::bindVertexShader(PF::ENGINE::Shader shader) { vertexShader = shader; }
 void PF::PLATFORMS::Renderer::bindFragmentShader(PF::ENGINE::Shader shader) { fragmentShader = shader; }
-void PF::PLATFORMS::Renderer::bindDefaultVertexShader() { vertexShader = PF::ENGINE::Shader(defaultVertexShader, ""); };
-void PF::PLATFORMS::Renderer::bindDefaultFragmentShader() { fragmentShader = PF::ENGINE::Shader(defaultFragmentShader, ""); }
+
+void PF::PLATFORMS::Renderer::bindDefaultColourBoxShader(){
+    bindDefaultColourBoxVertexShader();
+    bindDefaultColourBoxFragmentShader();
+    compileShader();
+};
+void PF::PLATFORMS::Renderer::bindDefaultTextureShader() {
+
+};
+void PF::PLATFORMS::Renderer::bindDefaultColourBoxVertexShader() { vertexShader = PF::ENGINE::Shader(defaultColourBoxVertexShader, ""); };
+void PF::PLATFORMS::Renderer::bindDefaultColourBoxFragmentShader() { fragmentShader = PF::ENGINE::Shader(defaultColourBoxFragmentShader, ""); };
+
 void PF::PLATFORMS::Renderer::compileShader() {
     GLuint vertexShaderPart = glCreateShader(GL_VERTEX_SHADER);
     const char* vertexShaderData = vertexShader.getData();
