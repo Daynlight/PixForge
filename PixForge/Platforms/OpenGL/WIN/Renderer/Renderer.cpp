@@ -11,9 +11,8 @@ void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     window_settings.clear();
     window_settings.read();
-    if(window_settings.exist() && window_settings.size() == 2){    
+    if(window_settings.exist() && window_settings.size() == 2)
         window = glfwCreateWindow(std::stoi(window_settings[0]), std::stoi(window_settings[1]), title.c_str(), nullptr, nullptr);
-    }
     else 
         window = glfwCreateWindow(800, 600, title.c_str(), nullptr, nullptr);
 
