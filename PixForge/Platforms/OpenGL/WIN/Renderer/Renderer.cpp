@@ -9,7 +9,14 @@ void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    window = glfwCreateWindow(800, 600, title.c_str(), nullptr, nullptr);
+    window_settings.clear();
+    window_settings.read();
+    if(window_settings.exist() && window_settings.size() == 2){    
+        window = glfwCreateWindow(std::stoi(window_settings[0]), std::stoi(window_settings[1]), title.c_str(), nullptr, nullptr);
+    }
+    else 
+        window = glfwCreateWindow(800, 600, title.c_str(), nullptr, nullptr);
+
     if (!window) {
         glfwTerminate();
         running = false;
@@ -44,6 +51,10 @@ void PF::PLATFORMS::Renderer::createBox(){
 };
 
 PF::PLATFORMS::Renderer::~Renderer() {
+    window_settings.clear();
+    window_settings.push(std::to_string(width));
+    window_settings.push(std::to_string(height));
+    window_settings.save();
     glfwDestroyWindow(window);
 };
 

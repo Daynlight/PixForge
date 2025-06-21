@@ -24,7 +24,7 @@ public:
   void clear() { while(size() > 0) pop(); };
 public:
   const std::string getPath() const { return path; };
-  void setPath(const std::string &new_path) { path = new_path; };
+  void setPath(const std::string &new_path) { file.close(); path = new_path; file.open(path, std::ios::in | std::ios::out); };
   std::string& operator[](const unsigned int &index) { return data[index]; };
   const std::string& operator[](const unsigned int &index) const { return data[index]; };
   File& operator=(const File &second) { data = second.data; path = second.path; return *this; };

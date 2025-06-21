@@ -3,6 +3,7 @@
 // #include "GUI/Gui.h"
 // #include "Sandbox/Sandbox.h"
 #include "Utilities/Log.h"
+#include "STL/Folder/Folder.h"
 
 namespace PF::FORGE{
 class Forge{
