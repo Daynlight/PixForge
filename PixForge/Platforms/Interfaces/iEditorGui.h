@@ -1,15 +1,14 @@
 #pragma once
+#include "Platforms/Interfaces/iRenderer.h"
 #include <functional>
+#include "Engine/Events.h"
 
-namespace PF::PLATFORMS{
-class ImGuiEngine{
-  ENGINE::Window *window;
+namespace PF::PLATFORM{
+class iEditorGui{
   public:
-    ImGuiEngine(const std::string &path, ENGINE::Window* window);
-    ~ImGuiEngine();
-    void dock(std::function<void()> func);
-    void topBar(std::function<void()> func);
-    void events(SDL_Event event);
-    void render(std::function<void()> func);
+    virtual void dock(std::function<void()> func) = 0;
+    virtual void topBar(std::function<void()> func) = 0;
+    virtual void events(ENGINE::EventsCodes event) = 0;
+    virtual void render(std::function<void()> func) = 0;
 }; // class ImGuiEngine
 }; // namespace PF::Engine

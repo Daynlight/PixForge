@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::string &path){
+void PF::PLATFORM::Renderer::createWindow(const std::string &title, const std::string &path){
     window_settings.setPath(path);
     if (!glfwInit()){
         running = false;
@@ -30,7 +30,7 @@ void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::
     glViewport(0, 0, width, height);
 };
 
-void PF::PLATFORMS::Renderer::createBox(){
+void PF::PLATFORM::Renderer::createBox(){
     const float quadVertices[] = {
         0.0f, 0.0f,
         1.0f, 0.0f,
@@ -49,7 +49,7 @@ void PF::PLATFORMS::Renderer::createBox(){
     glBindVertexArray(0);
 };
 
-PF::PLATFORMS::Renderer::~Renderer() {
+PF::PLATFORM::Renderer::~Renderer() {
     window_settings.clear();
     window_settings.push(std::to_string(width));
     window_settings.push(std::to_string(height));
@@ -57,14 +57,14 @@ PF::PLATFORMS::Renderer::~Renderer() {
     glfwDestroyWindow(window);
 };
 
-void PF::PLATFORMS::Renderer::createRenderer() {
+void PF::PLATFORM::Renderer::createRenderer() {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     bindDefaultColourBoxShader();
     createBox();
 };
 
-void PF::PLATFORMS::Renderer::pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
+void PF::PLATFORM::Renderer::pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
     glfwPollEvents();
     if (glfwWindowShouldClose(window)) events.push(PF::ENGINE::EventsCodes::Quit);
     int new_width, new_height;
@@ -72,7 +72,7 @@ void PF::PLATFORMS::Renderer::pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &e
     if (new_height != height || new_width != width) { events.push(PF::ENGINE::EventsCodes::WindowResize); };
 };
 
-void PF::PLATFORMS::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event) {
+void PF::PLATFORM::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event) {
     if(event == PF::ENGINE::EventsCodes::Quit) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
         running = false;
@@ -86,13 +86,13 @@ void PF::PLATFORMS::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event)
     }
 };
 
-void PF::PLATFORMS::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };
+void PF::PLATFORM::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };
 
-void PF::PLATFORMS::Renderer::renderBackground(STL::Vec<float, 4> colour){
+void PF::PLATFORM::Renderer::renderBackground(STL::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
 };
 
-void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour){
+void PF::PLATFORM::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour){
     if (compiledShader == 0 || boxVAO == 0) return;
     glUseProgram(compiledShader);
     float x = position[0] / (width/2) - 1.0f;
@@ -111,25 +111,25 @@ void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::
     glBindVertexArray(0);
 };
 
-void PF::PLATFORMS::Renderer::renderTexture(){
+void PF::PLATFORM::Renderer::renderTexture(){
 
 };
 
-void PF::PLATFORMS::Renderer::bindVertexShader(PF::ENGINE::Shader shader) { vertexShader = shader; }
-void PF::PLATFORMS::Renderer::bindFragmentShader(PF::ENGINE::Shader shader) { fragmentShader = shader; }
+void PF::PLATFORM::Renderer::bindVertexShader(PF::ENGINE::Shader shader) { vertexShader = shader; }
+void PF::PLATFORM::Renderer::bindFragmentShader(PF::ENGINE::Shader shader) { fragmentShader = shader; }
 
-void PF::PLATFORMS::Renderer::bindDefaultColourBoxShader(){
+void PF::PLATFORM::Renderer::bindDefaultColourBoxShader(){
     bindDefaultColourBoxVertexShader();
     bindDefaultColourBoxFragmentShader();
     compileShader();
 };
-void PF::PLATFORMS::Renderer::bindDefaultTextureShader() {
+void PF::PLATFORM::Renderer::bindDefaultTextureShader() {
 
 };
-void PF::PLATFORMS::Renderer::bindDefaultColourBoxVertexShader() { vertexShader = PF::ENGINE::Shader(defaultColourBoxVertexShader, ""); };
-void PF::PLATFORMS::Renderer::bindDefaultColourBoxFragmentShader() { fragmentShader = PF::ENGINE::Shader(defaultColourBoxFragmentShader, ""); };
+void PF::PLATFORM::Renderer::bindDefaultColourBoxVertexShader() { vertexShader = PF::ENGINE::Shader(defaultColourBoxVertexShader, ""); };
+void PF::PLATFORM::Renderer::bindDefaultColourBoxFragmentShader() { fragmentShader = PF::ENGINE::Shader(defaultColourBoxFragmentShader, ""); };
 
-void PF::PLATFORMS::Renderer::compileShader() {
+void PF::PLATFORM::Renderer::compileShader() {
     GLuint vertexShaderPart = glCreateShader(GL_VERTEX_SHADER);
     const char* vertexShaderData = vertexShader.getData();
     glShaderSource(vertexShaderPart, 1, &vertexShaderData, nullptr);

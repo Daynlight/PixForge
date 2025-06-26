@@ -9,7 +9,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-namespace PF::PLATFORMS{
+namespace PF::PLATFORM {
 class Renderer : public iRenderer {
 private:
     const char* defaultColourBoxVertexShader = R"(
@@ -43,6 +43,7 @@ private:
     void createBox();
 public:
     ~Renderer();
+    GLFWwindow* getWindow() { return window; };
     bool isRunning() { return running; };
     void createWindow(const std::string &title, const std::string &path);
     void createRenderer();

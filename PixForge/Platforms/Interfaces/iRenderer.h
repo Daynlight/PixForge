@@ -6,7 +6,7 @@
 #include "Engine/Events.h"
 #include "Engine/Shader.h"
 
-namespace PF::PLATFORMS{
+namespace PF::PLATFORM{
 class iRenderer{
 public:
   virtual void createWindow(const std::string &title, const std::string &path) = 0;

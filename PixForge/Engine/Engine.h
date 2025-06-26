@@ -7,10 +7,16 @@
 namespace PF::ENGINE{
 class Engine{
 private:
-  PLATFORMS::Renderer renderer;
+  PLATFORM::iRenderer* renderer = nullptr;
+  PLATFORM::iEditorGui* editor_gui = nullptr;
   STL::Vector<EventsCodes> events;
 public:
+  Engine() :renderer(new PF::PLATFORM::Renderer()) {
+    editor_gui = new PLATFORM::EditorGui("settings/editor_gui.ini", static_cast<PLATFORM::Renderer*>(renderer));
+  };
+  ~Engine() { delete editor_gui; delete renderer; };
   void run();
-  PLATFORMS::Renderer* getRenderer() { return &renderer; };
+  PLATFORM::iRenderer* getRenderer() { return renderer; };
+  PLATFORM::iEditorGui* getEditorGui() { return editor_gui; };
 };
 }; // namespace PF::ENGINE
