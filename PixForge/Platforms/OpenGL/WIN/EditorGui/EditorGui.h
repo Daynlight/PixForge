@@ -12,7 +12,7 @@ class EditorGui : public iEditorGui{
 private:
   Renderer* renderer;
 public:
-  EditorGui(const std::string &path, Renderer* renderer);
+  EditorGui(const std::string &path, iRenderer* renderer);
   ~EditorGui();
   void dock(std::function<void()> func);
   void topBar(std::function<void()> func);

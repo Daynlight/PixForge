@@ -4,9 +4,7 @@ PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
   STL::Folder settings_folder("settings");
   if(!settings_folder.exist()) settings_folder.create();
-  engine.getRenderer()->createWindow("Test Window", "settings/window.ini");
-  engine.getRenderer()->createRenderer();
-  engine.initEditorGui("settings/editor_gui.ini");
+  engine.Init("PixForge Editor");
 };
 
 PF::FORGE::Forge::~Forge(){

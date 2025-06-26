@@ -1,7 +1,7 @@
 #include "EditorGui.h"
 
-PF::PLATFORM::EditorGui::EditorGui(const std::string &path, Renderer* renderer)
-  : renderer(renderer) {
+PF::PLATFORM::EditorGui::EditorGui(const std::string &path, iRenderer* renderer)
+  : renderer(static_cast<Renderer*>(renderer)) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();  (void)io;
@@ -12,7 +12,7 @@ PF::PLATFORM::EditorGui::EditorGui(const std::string &path, Renderer* renderer)
 
   ImGui::StyleColorsDark();
  
-  ImGui_ImplGlfw_InitForOpenGL(renderer->getWindow(), true);
+  ImGui_ImplGlfw_InitForOpenGL(this->renderer->getWindow(), true);
   ImGui_ImplOpenGL3_Init("#version 330");
 };
 

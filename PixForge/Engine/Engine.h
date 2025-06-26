@@ -11,11 +11,10 @@ private:
   PLATFORM::iEditorGui* editor_gui = nullptr;
   STL::Vector<EventsCodes> events;
 public:
-  Engine() :renderer(new PF::PLATFORM::Renderer()) {};
-  ~Engine() { delete editor_gui; delete renderer; };
+  void Init(const std::string &window_title);
+  ~Engine();
   void run();
   PLATFORM::iRenderer* getRenderer() { return renderer; };
   PLATFORM::iEditorGui* getEditorGui() { return editor_gui; };
-  void initEditorGui(const std::string &path) {  editor_gui = new PLATFORM::EditorGui(path, static_cast<PLATFORM::Renderer*>(renderer)); };
 };
 }; // namespace PF::ENGINE
