@@ -8,7 +8,7 @@ PF::PLATFORM::EditorGui::EditorGui(const std::string &path, Renderer* renderer)
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-  io.IniFilename = "settings/imgui.ini";
+  io.IniFilename = path.c_str();
 
   ImGui::StyleColorsDark();
  

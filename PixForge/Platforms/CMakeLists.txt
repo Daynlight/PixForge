@@ -20,8 +20,8 @@ if (BUILD_CONFIG STREQUAL OPENGL_WIN)
     "Vendor/imgui-docking/imgui_draw.cpp"
     "Vendor/imgui-docking/imgui_tables.cpp"
     "Vendor/imgui-docking/imgui_widgets.cpp"
-    "Vendor/imgui-docking/backend/imgui_impl_glfw.cpp"
-    "Vendor/imgui-docking/backend/imgui_impl_opengl3.cpp"
+    "Vendor/imgui-docking/backends/imgui_impl_glfw.cpp"
+    "Vendor/imgui-docking/backends/imgui_impl_opengl3.cpp"
   )
 
   #### [Files] ####

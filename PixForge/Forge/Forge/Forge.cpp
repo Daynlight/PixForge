@@ -6,6 +6,7 @@ PF::FORGE::Forge::Forge() {
   if(!settings_folder.exist()) settings_folder.create();
   engine.getRenderer()->createWindow("Test Window", "settings/window.ini");
   engine.getRenderer()->createRenderer();
+  engine.initEditorGui("settings/editor_gui.ini");
 };
 
 PF::FORGE::Forge::~Forge(){
@@ -16,6 +17,10 @@ void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
   while (engine.getRenderer()->isRunning()){
     engine.run();
+    engine.getEditorGui()->render([this](){
+      this->engine.getEditorGui()->dock([](){});
+      this->engine.getEditorGui()->topBar([](){});
+    });
   //   SDL_SetRenderDrawColor(window.getRenderer(),25,25,25,255); 
   //   SDL_RenderClear(window.getRenderer());
   //   gui.render();
