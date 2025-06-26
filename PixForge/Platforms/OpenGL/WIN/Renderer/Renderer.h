@@ -9,7 +9,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-namespace PF::PLATFORMS{
+namespace PF::PLATFORM {
 class Renderer : public iRenderer {
 private:
     const char* defaultColourBoxVertexShader = R"(
@@ -35,19 +35,19 @@ private:
     bool running = true;
     ENGINE::Shader vertexShader = ENGINE::Shader(defaultColourBoxVertexShader, "");
     ENGINE::Shader fragmentShader = ENGINE::Shader(defaultColourBoxFragmentShader, "");
-    int width, height;
+    int x, y, width, height;
     GLuint boxVAO = 0;
     GLuint boxVBO = 0;
     GLuint compiledShader;
-    STL::File window_settings = STL::File("");
     void createBox();
 public:
     ~Renderer();
+    GLFWwindow* getWindow() { return window; };
     bool isRunning() { return running; };
-    void createWindow(const std::string &title, const std::string &path);
+    void createWindow(const std::string &title, int width, int height);
     void createRenderer();
-    void pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events);
-    void proccessEvent(const PF::ENGINE::EventsCodes event);
+    void pullEventsAndProccessWindowEvents(STL::Vector<PF::ENGINE::EventsCodes> &events);
+    STL::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
 public:
     void render();
     void renderBackground(STL::Vec<float, 4> colour);

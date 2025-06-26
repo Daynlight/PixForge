@@ -1,7 +1,6 @@
 #include "Renderer.h"
 
-void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::string &path){
-    window_settings.setPath(path);
+void PF::PLATFORM::Renderer::createWindow(const std::string &title, int width, int height){
     if (!glfwInit()){
         running = false;
         return;
@@ -9,12 +8,7 @@ void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    window_settings.clear();
-    window_settings.read();
-    if(window_settings.exist() && window_settings.size() == 2)
-        window = glfwCreateWindow(std::stoi(window_settings[0]), std::stoi(window_settings[1]), title.c_str(), nullptr, nullptr);
-    else 
-        window = glfwCreateWindow(800, 600, title.c_str(), nullptr, nullptr);
+    window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
     if (!window) {
         glfwTerminate();
@@ -26,11 +20,12 @@ void PF::PLATFORMS::Renderer::createWindow(const std::string &title, const std::
         running = false;
         return;
     };
-    glfwGetFramebufferSize(window, &width, &height);
+    glfwGetFramebufferSize(window, &this->width, &this->height);
+    glfwGetWindowPos(window, &x, &y);
     glViewport(0, 0, width, height);
 };
 
-void PF::PLATFORMS::Renderer::createBox(){
+void PF::PLATFORM::Renderer::createBox(){
     const float quadVertices[] = {
         0.0f, 0.0f,
         1.0f, 0.0f,
@@ -49,50 +44,50 @@ void PF::PLATFORMS::Renderer::createBox(){
     glBindVertexArray(0);
 };
 
-PF::PLATFORMS::Renderer::~Renderer() {
-    window_settings.clear();
-    window_settings.push(std::to_string(width));
-    window_settings.push(std::to_string(height));
-    window_settings.save();
+PF::PLATFORM::Renderer::~Renderer() {
     glfwDestroyWindow(window);
 };
 
-void PF::PLATFORMS::Renderer::createRenderer() {
+void PF::PLATFORM::Renderer::createRenderer() {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     bindDefaultColourBoxShader();
     createBox();
 };
 
-void PF::PLATFORMS::Renderer::pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
+void PF::PLATFORM::Renderer::pullEventsAndProccessWindowEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
     glfwPollEvents();
-    if (glfwWindowShouldClose(window)) events.push(PF::ENGINE::EventsCodes::Quit);
-    int new_width, new_height;
-    glfwGetFramebufferSize(window, &new_width, &new_height);
-    if (new_height != height || new_width != width) { events.push(PF::ENGINE::EventsCodes::WindowResize); };
-};
-
-void PF::PLATFORMS::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event) {
-    if(event == PF::ENGINE::EventsCodes::Quit) {
+    if (glfwWindowShouldClose(window)){
+        events.push(PF::ENGINE::EventsCodes::Quit);
         glfwSetWindowShouldClose(window, GLFW_TRUE);
         running = false;
     }
-    else if(event == PF::ENGINE::EventsCodes::WindowResize){
-        int new_width, new_height;
-        glfwGetFramebufferSize(window, &new_width, &new_height);
+
+    int new_width, new_height;
+    glfwGetFramebufferSize(window, &new_width, &new_height);
+    if (new_height != height || new_width != width) { 
+        events.push(PF::ENGINE::EventsCodes::WindowResize); 
         width = new_width;
         height = new_height;
         glViewport(0, 0, width, height);
-    }
+    };
+    
+    int new_x, new_y;
+    glfwGetWindowPos(window, &new_x, &new_y);
+    if (new_x != x || new_y != y) { 
+        events.push(PF::ENGINE::EventsCodes::WindowMove); 
+        x = new_x;
+        y = new_y;
+    };
 };
 
-void PF::PLATFORMS::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };
+void PF::PLATFORM::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };
 
-void PF::PLATFORMS::Renderer::renderBackground(STL::Vec<float, 4> colour){
+void PF::PLATFORM::Renderer::renderBackground(STL::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
 };
 
-void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour){
+void PF::PLATFORM::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour){
     if (compiledShader == 0 || boxVAO == 0) return;
     glUseProgram(compiledShader);
     float x = position[0] / (width/2) - 1.0f;
@@ -111,25 +106,25 @@ void PF::PLATFORMS::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::
     glBindVertexArray(0);
 };
 
-void PF::PLATFORMS::Renderer::renderTexture(){
+void PF::PLATFORM::Renderer::renderTexture(){
 
 };
 
-void PF::PLATFORMS::Renderer::bindVertexShader(PF::ENGINE::Shader shader) { vertexShader = shader; }
-void PF::PLATFORMS::Renderer::bindFragmentShader(PF::ENGINE::Shader shader) { fragmentShader = shader; }
+void PF::PLATFORM::Renderer::bindVertexShader(PF::ENGINE::Shader shader) { vertexShader = shader; }
+void PF::PLATFORM::Renderer::bindFragmentShader(PF::ENGINE::Shader shader) { fragmentShader = shader; }
 
-void PF::PLATFORMS::Renderer::bindDefaultColourBoxShader(){
+void PF::PLATFORM::Renderer::bindDefaultColourBoxShader(){
     bindDefaultColourBoxVertexShader();
     bindDefaultColourBoxFragmentShader();
     compileShader();
 };
-void PF::PLATFORMS::Renderer::bindDefaultTextureShader() {
+void PF::PLATFORM::Renderer::bindDefaultTextureShader() {
 
 };
-void PF::PLATFORMS::Renderer::bindDefaultColourBoxVertexShader() { vertexShader = PF::ENGINE::Shader(defaultColourBoxVertexShader, ""); };
-void PF::PLATFORMS::Renderer::bindDefaultColourBoxFragmentShader() { fragmentShader = PF::ENGINE::Shader(defaultColourBoxFragmentShader, ""); };
+void PF::PLATFORM::Renderer::bindDefaultColourBoxVertexShader() { vertexShader = PF::ENGINE::Shader(defaultColourBoxVertexShader, ""); };
+void PF::PLATFORM::Renderer::bindDefaultColourBoxFragmentShader() { fragmentShader = PF::ENGINE::Shader(defaultColourBoxFragmentShader, ""); };
 
-void PF::PLATFORMS::Renderer::compileShader() {
+void PF::PLATFORM::Renderer::compileShader() {
     GLuint vertexShaderPart = glCreateShader(GL_VERTEX_SHADER);
     const char* vertexShaderData = vertexShader.getData();
     glShaderSource(vertexShaderPart, 1, &vertexShaderData, nullptr);

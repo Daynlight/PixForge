@@ -16,19 +16,18 @@ if (BUILD_CONFIG STREQUAL OPENGL_WIN)
   )  
   add_subdirectory(Vendor/glfw-3.4)
   file(GLOB_RECURSE IMGUI
-    "imgui-1.91.9b/imgui.cpp"
-    "imgui-1.91.9b/imgui_draw.cpp"
-    "imgui-1.91.9b/imgui_tables.cpp"
-    "imgui-1.91.9b/imgui_widgets.cpp"
-    "imgui-1.91.9b/backend/imgui_impl_glfw.cpp"
-    "imgui-1.91.9b/backend/imgui_impl_opengl3.cpp"
-    "imgui-1.91.9b/backend/imgui_impl_opengl3_loader.cpp"
+    "Vendor/imgui-docking/imgui.cpp"
+    "Vendor/imgui-docking/imgui_draw.cpp"
+    "Vendor/imgui-docking/imgui_tables.cpp"
+    "Vendor/imgui-docking/imgui_widgets.cpp"
+    "Vendor/imgui-docking/backends/imgui_impl_glfw.cpp"
+    "Vendor/imgui-docking/backends/imgui_impl_opengl3.cpp"
   )
 
   #### [Files] ####
   file(GLOB_RECURSE SPECIFIC_FILES
-    "EditorGui/ImGui.cpp"
     "OpenGL/Win/Renderer/Renderer.cpp"
+    "OpenGL/Win/EditorGui/EditorGui.cpp"
   )
 
   add_library(Platforms STATIC ${GLAD} ${IMGUI} ${FILES} ${SPECIFIC_FILES})
@@ -44,7 +43,7 @@ if (BUILD_CONFIG STREQUAL OPENGL_WIN)
   )
   #### [Include] ####
   target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glad-3.3/include)
-  target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-1.91.9b)
+  target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking)
   target_include_directories(Platforms PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glfw-3.4/include)
 else()
     message(FATAL_ERROR "Current BUILD_CONFIG is invalid set")
