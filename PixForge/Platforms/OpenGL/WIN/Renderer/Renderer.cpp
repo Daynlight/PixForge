@@ -1,7 +1,6 @@
 #include "Renderer.h"
 
-void PF::PLATFORM::Renderer::createWindow(const std::string &title, const std::string &path){
-    window_settings.setPath(path);
+void PF::PLATFORM::Renderer::createWindow(const std::string &title, int width, int height){
     if (!glfwInit()){
         running = false;
         return;
@@ -9,12 +8,7 @@ void PF::PLATFORM::Renderer::createWindow(const std::string &title, const std::s
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    window_settings.clear();
-    window_settings.read();
-    if(window_settings.exist() && window_settings.size() == 2)
-        window = glfwCreateWindow(std::stoi(window_settings[0]), std::stoi(window_settings[1]), title.c_str(), nullptr, nullptr);
-    else 
-        window = glfwCreateWindow(800, 600, title.c_str(), nullptr, nullptr);
+    window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
     if (!window) {
         glfwTerminate();
@@ -26,7 +20,8 @@ void PF::PLATFORM::Renderer::createWindow(const std::string &title, const std::s
         running = false;
         return;
     };
-    glfwGetFramebufferSize(window, &width, &height);
+    glfwGetFramebufferSize(window, &this->width, &this->height);
+    glfwGetWindowPos(window, &x, &y);
     glViewport(0, 0, width, height);
 };
 
@@ -50,10 +45,6 @@ void PF::PLATFORM::Renderer::createBox(){
 };
 
 PF::PLATFORM::Renderer::~Renderer() {
-    window_settings.clear();
-    window_settings.push(std::to_string(width));
-    window_settings.push(std::to_string(height));
-    window_settings.save();
     glfwDestroyWindow(window);
 };
 
@@ -64,26 +55,30 @@ void PF::PLATFORM::Renderer::createRenderer() {
     createBox();
 };
 
-void PF::PLATFORM::Renderer::pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
+void PF::PLATFORM::Renderer::pullEventsAndProccessWindowEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
     glfwPollEvents();
-    if (glfwWindowShouldClose(window)) events.push(PF::ENGINE::EventsCodes::Quit);
-    int new_width, new_height;
-    glfwGetFramebufferSize(window, &new_width, &new_height);
-    if (new_height != height || new_width != width) { events.push(PF::ENGINE::EventsCodes::WindowResize); };
-};
-
-void PF::PLATFORM::Renderer::proccessEvent(const PF::ENGINE::EventsCodes event) {
-    if(event == PF::ENGINE::EventsCodes::Quit) {
+    if (glfwWindowShouldClose(window)){
+        events.push(PF::ENGINE::EventsCodes::Quit);
         glfwSetWindowShouldClose(window, GLFW_TRUE);
         running = false;
     }
-    else if(event == PF::ENGINE::EventsCodes::WindowResize){
-        int new_width, new_height;
-        glfwGetFramebufferSize(window, &new_width, &new_height);
+
+    int new_width, new_height;
+    glfwGetFramebufferSize(window, &new_width, &new_height);
+    if (new_height != height || new_width != width) { 
+        events.push(PF::ENGINE::EventsCodes::WindowResize); 
         width = new_width;
         height = new_height;
         glViewport(0, 0, width, height);
-    }
+    };
+    
+    int new_x, new_y;
+    glfwGetWindowPos(window, &new_x, &new_y);
+    if (new_x != x || new_y != y) { 
+        events.push(PF::ENGINE::EventsCodes::WindowMove); 
+        x = new_x;
+        y = new_y;
+    };
 };
 
 void PF::PLATFORM::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };

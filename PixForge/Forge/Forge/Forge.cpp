@@ -4,27 +4,33 @@ PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
   STL::Folder settings_folder("settings");
   if(!settings_folder.exist()) settings_folder.create();
-  engine.Init("PixForge Editor");
+  window_settings.clear();
+  window_settings.read();
+  if(window_settings.size() != 2)
+    engine.Init("PixForge Editor", 800, 600);
+  else
+    engine.Init("PixForge Editor", std::stoi(window_settings[0]), std::stoi(window_settings[1]));
 };
 
 PF::FORGE::Forge::~Forge(){
+  STL::Vec<int, 4> window_rect = engine.getWindowRect();
+  window_settings.clear();
+  window_settings.push(std::to_string(window_rect[2]));
+  window_settings.push(std::to_string(window_rect[3]));
+  window_settings.save();
+  Utilities::Log::log("Window Settings Saved");
   Utilities::Log::log("Forge Destroyed");
 };
 
 void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
-  while (engine.getRenderer()->isRunning()){
-    engine.run();
-    engine.getEditorGui()->render([this](){
-      this->engine.getEditorGui()->dock([](){});
-      this->engine.getEditorGui()->topBar([](){});
+  engine.run([&](){
+    engine.generateFrame();
+    engine.getEditorGui()->render([&](){
+      engine.getEditorGui()->topBar([](){});
+      engine.getEditorGui()->dock([](){});
     });
-  //   SDL_SetRenderDrawColor(window.getRenderer(),25,25,25,255); 
-  //   SDL_RenderClear(window.getRenderer());
-  //   gui.render();
-  //   SDL_RenderPresent(window.getRenderer());
-  //   events();
-  };
+  });
 };
 
 void PF::FORGE::Forge::events(){

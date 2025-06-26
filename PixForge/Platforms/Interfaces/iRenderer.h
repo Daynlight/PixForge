@@ -9,11 +9,11 @@
 namespace PF::PLATFORM{
 class iRenderer{
 public:
-  virtual void createWindow(const std::string &title, const std::string &path) = 0;
+  virtual void createWindow(const std::string &title, int width, int height) = 0;
   virtual void createRenderer() = 0;
   virtual bool isRunning() = 0;
-  virtual void pullEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) = 0;
-  virtual void proccessEvent(const PF::ENGINE::EventsCodes) = 0;
+  virtual STL::Vec<int, 4> getWindowRect() = 0;
+  virtual void pullEventsAndProccessWindowEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) = 0;
 public:
   virtual void render() = 0;
   virtual void renderBackground(STL::Vec<float, 4> colour) = 0;
