@@ -4,11 +4,9 @@ void PF::ENGINE::Engine::Init(const std::string &window_title, int width, int he
   renderer = new PF::PLATFORM::Renderer();
   renderer->createWindow(window_title, width, height);
   renderer->createRenderer();
-  editor_gui = new PLATFORM::EditorGui("settings/editor_gui.ini", renderer);
 };
 
 PF::ENGINE::Engine::~Engine() {
-  delete editor_gui; 
   delete renderer;
 };
 

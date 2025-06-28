@@ -9,7 +9,6 @@ namespace PF::ENGINE{
 class Engine{
 private:
   PLATFORM::iRenderer* renderer = nullptr;
-  PLATFORM::iEditorGui* editor_gui = nullptr;
   STL::Vector<EventsCodes> events;
 public:
   void Init(const std::string &window_title, int width, int height);
@@ -19,7 +18,6 @@ public:
   void run(std::function<void()> func = nullptr);
   void event(EventsCodes event);
   PLATFORM::iRenderer* getRenderer() { return renderer; };
-  PLATFORM::iEditorGui* getEditorGui() { return editor_gui; };
   STL::Vec<int, 4> getWindowRect() { return renderer->getWindowRect(); };
 };
 }; // namespace PF::ENGINE
