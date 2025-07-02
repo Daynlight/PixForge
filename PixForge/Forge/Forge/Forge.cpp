@@ -10,6 +10,8 @@ PF::FORGE::Forge::Forge() {
     engine.Init("PixForge Editor", 800, 600);
   else
     engine.Init("PixForge Editor", std::stoi(window_settings[0]), std::stoi(window_settings[1]));
+
+  editor_gui = new PLATFORM::EditorGui("settings/editor_gui.ini", engine.getRenderer());
 };
 
 PF::FORGE::Forge::~Forge(){
@@ -19,6 +21,7 @@ PF::FORGE::Forge::~Forge(){
   window_settings.push(std::to_string(window_rect[3]));
   window_settings.save();
   Utilities::Log::log("Window Settings Saved");
+  delete editor_gui;
   Utilities::Log::log("Forge Destroyed");
 };
 
@@ -26,9 +29,9 @@ void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
   engine.run([&](){
     engine.generateFrame();
-    engine.getEditorGui()->render([&](){
-      engine.getEditorGui()->topBar([](){});
-      engine.getEditorGui()->dock([](){});
+    editor_gui->render([&](){
+      editor_gui->topBar([](){});
+      editor_gui->dock([](){});
     });
   });
 };

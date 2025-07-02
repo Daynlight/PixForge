@@ -55,7 +55,7 @@ class Allocs{
 
 }; // namespace Benchmark
 
-void* operator new(size_t size) noexcept {
+void* operator new(size_t size) {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().allocs++;
   return malloc(size);
@@ -73,7 +73,7 @@ void operator delete(void *ptr, std::size_t size) noexcept {
   free(ptr);
 }
 
-void* operator new[](std::size_t count) noexcept {
+void* operator new[](std::size_t count) {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().allocs++;
   return malloc(count);
