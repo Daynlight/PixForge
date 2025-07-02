@@ -25,8 +25,10 @@ CREATE TABLE User (
 ----------- [Assets] ----------- 
 CREATE TABLE Assets (
   id INTEGER PRIMARY KEY,
+  user TEXT NOT NULL,
   name TEXT NOT NULL,
-  type TEXT NOT NULL
+  type TEXT NOT NULL,
+  FOREIGN KEY (user) REFERENCES User(nick) ON DELETE CASCADE
 );
 
 CREATE TABLE Texture (
