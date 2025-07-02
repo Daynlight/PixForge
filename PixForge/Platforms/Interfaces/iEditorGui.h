@@ -7,8 +7,7 @@ namespace PF::PLATFORM{
 class iEditorGui{
   public:
     virtual void dock(std::function<void()> func) = 0;
-    virtual void topBar(std::function<void()> func) = 0;
-    virtual void events(ENGINE::EventsCodes event) = 0;
-    virtual void render(std::function<void()> func) = 0;
+    virtual void topBar() = 0;
+    virtual void render() = 0;
 }; // class ImGuiEngine
 }; // namespace PF::Engine

@@ -29,10 +29,7 @@ void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
   engine.run([&](){
     engine.generateFrame();
-    editor_gui->render([&](){
-      editor_gui->topBar([](){});
-      editor_gui->dock([](){});
-    });
+    editor_gui->render();
   });
 };
 
