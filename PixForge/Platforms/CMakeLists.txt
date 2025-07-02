@@ -3,6 +3,7 @@ project(Platforms LANGUAGES CXX C)
 
 file(GLOB_RECURSE FILES
   "Interface/iEditorGui.h"
+  "Interface/iEditorGui.cpp"
   "Interface/iRenderer.h"
   "Platform.h"
 )

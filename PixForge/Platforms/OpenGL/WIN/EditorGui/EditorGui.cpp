@@ -39,13 +39,6 @@ uint16_t PF::PLATFORM::EditorGui::generateUnique(){
   return id;
 };
 
-void PF::PLATFORM::EditorGui::addWindow(WindowType type) {
-  if(type == WindowType::LOG) {
-    WindowGui* new_window = static_cast<WindowGui*>(new WindowLogGui(generateUnique()));
-    ui.push(new_window);
-  };
-};
-
 void PF::PLATFORM::EditorGui::dock(std::function<void()> func){
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -76,6 +69,17 @@ void PF::PLATFORM::EditorGui::topBar() {
       ImGui::EndMenu();
     };
     ImGui::EndMainMenuBar();
+  };
+};
+
+void PF::PLATFORM::EditorGui::addWindow(WindowType type) {
+  if(type == WindowType::LOG) {
+    WindowGui* new_window = static_cast<WindowGui*>(new WindowLogGui(generateUnique()));
+    ui.push(new_window);
+  }
+  else if(type == WindowType::OBJECTS){
+    WindowGui* new_window = static_cast<WindowGui*>(new WindowObjectGui(generateUnique()));
+    ui.push(new_window);
   };
 };
 
@@ -111,5 +115,37 @@ void PF::PLATFORM::WindowLogGui::render() {
     if(Utilities::Log::at(i).first == 2) ImGui::TextColored(ImVec4(255,0,0,255),Utilities::Log::at(i).second.c_str());
     if(Utilities::Log::at(i).first == 3) ImGui::TextColored(ImVec4(0,255,200,255),Utilities::Log::at(i).second.c_str());
   };
+  ImGui::End();
+};
+
+void PF::PLATFORM::WindowObjectGui::render(){
+  ImGui::Begin(("Logs ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+
+  if (ImGui::BeginMenuBar()) {
+    if (ImGui::Button("exit")) { open = false; Utilities::Log::log("Objects UI Window Closed"); }
+    if (ImGui::Button("Add Block")) { add_colour_box = true; }
+    ImGui::EndMenuBar();
+  };
+
+  ImGui::Text("Objects:");
+
+  // for (size_t i = 0; i < Core::Renderer::Objects::Manager::size(); i++) {
+  //   auto& obj = Core::Renderer::Objects::Manager::at(i);
+  //   if (obj.getType() != Core::Renderer::Objects::iObject::Type::COLOUR_BOX) continue;
+
+    // ImGui::Text(obj.getRefName().c_str());
+    // if (ImGui::BeginPopupContextItem(("Object" + std::to_string(i)).c_str())) {
+      if (ImGui::MenuItem("Delete")) {
+        
+        Utilities::Log::log("Object Deleted");
+      }
+      if (ImGui::MenuItem("Properties")) {
+
+        Utilities::Log::log("Object Properties");
+      }
+      // ImGui::EndPopup();
+    // }
+  // }
+
   ImGui::End();
 };

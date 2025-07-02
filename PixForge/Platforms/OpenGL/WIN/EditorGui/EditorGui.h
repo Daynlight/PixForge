@@ -7,16 +7,7 @@
 #include "Platforms/Vendor/imgui-docking/backends/imgui_impl_glfw.h"
 #include "Platforms/Vendor/imgui-docking/backends/imgui_impl_opengl3.h"
 
-#include "Forge/Utilities/Log.h"
-
 namespace PF::PLATFORM{
-class WindowGui{
-public:
-  virtual void render() = 0;
-  virtual uint16_t getId() = 0;
-  virtual bool isOpen() = 0;
-}; // class WindowLogGui
-
 class EditorGui : public iEditorGui{
 private:
   enum WindowType{
@@ -35,6 +26,8 @@ public:
   void render();
 }; // class EditorGui
 
+
+
 class WindowLogGui : public WindowGui{
 private:
   bool open = true;
@@ -45,6 +38,20 @@ public:
   bool isOpen() { return open; };
   void render();
 }; // class WindowLogGui
+
+
+class WindowObjectGui : public WindowGui{
+private:
+  bool open = true;
+  bool add_colour_box = false;
+  uint16_t id = 0;
+public:
+  WindowObjectGui(uint16_t id) : id(id) {};
+  uint16_t getId() { return id; };
+  bool isOpen() { return open; };
+  void render();
+}; // class WindowLogGui
+
 }; // namespace PF::PLATFORM
 
 
