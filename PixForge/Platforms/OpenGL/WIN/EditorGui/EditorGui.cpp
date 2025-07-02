@@ -119,16 +119,15 @@ void PF::PLATFORM::WindowLogGui::render() {
 };
 
 void PF::PLATFORM::WindowObjectGui::render(){
-  ImGui::Begin(("Logs ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
+  ImGui::Begin(("Objects ("+std::to_string(id)+")").c_str(), nullptr, ImGuiWindowFlags_MenuBar);
 
   if (ImGui::BeginMenuBar()) {
     if (ImGui::Button("exit")) { open = false; Utilities::Log::log("Objects UI Window Closed"); }
-    if (ImGui::Button("Add Block")) { add_colour_box = true; }
+    // if (ImGui::Button("Add Object")) { };
     ImGui::EndMenuBar();
   };
 
   ImGui::Text("Objects:");
-
   // for (size_t i = 0; i < Core::Renderer::Objects::Manager::size(); i++) {
   //   auto& obj = Core::Renderer::Objects::Manager::at(i);
   //   if (obj.getType() != Core::Renderer::Objects::iObject::Type::COLOUR_BOX) continue;

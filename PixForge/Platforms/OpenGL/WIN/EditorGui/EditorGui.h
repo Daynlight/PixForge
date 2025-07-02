@@ -43,7 +43,6 @@ public:
 class WindowObjectGui : public WindowGui{
 private:
   bool open = true;
-  bool add_colour_box = false;
   uint16_t id = 0;
 public:
   WindowObjectGui(uint16_t id) : id(id) {};

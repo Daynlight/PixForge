@@ -20,6 +20,10 @@ void PF::ENGINE::Engine::run(std::function<void()> func) {
   };
 };
 
+void PF::ENGINE::Engine::render(){
+  renderer->render();
+};
+
 void PF::ENGINE::Engine::event(EventsCodes event) {
 
 };
@@ -29,5 +33,4 @@ void PF::ENGINE::Engine::generateFrame(){
 
   renderer->renderColourBox({200, 300, 0.9, 200, 200}, {0, 255, 0, 255});
   renderer->renderColourBox({200, 200, 0.6, 200, 200}, {200, 0, 0, 255});
-  renderer->render();
 };

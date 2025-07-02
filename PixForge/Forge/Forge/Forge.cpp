@@ -30,6 +30,7 @@ void PF::FORGE::Forge::run(){
   engine.run([&](){
     engine.generateFrame();
     editor_gui->render();
+    engine.render();
   });
 };
 
