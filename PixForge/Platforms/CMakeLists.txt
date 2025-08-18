@@ -57,12 +57,11 @@ if (BUILD_CONFIG_DATA STREQUAL SQLITE)
 
   #### [Libraries] ####
   set(DATA_LIBS
-    "SQLite::SQLite3")
+    SQLite::SQLite3)
 
   #### [Include] ####
   set(DATA_INCLUDE
-    "${SQLite3_INCLUDE_DIRS}"
-    "${CMAKE_SOURCE_DIR}/external/sqlite_orm")
+    "${SQLite3_INCLUDE_DIRS}")
 
 else()
     message(FATAL_ERROR "Current BUILD_CONFIG_DATA is invalid set")
