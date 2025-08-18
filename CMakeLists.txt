@@ -16,7 +16,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-lib
 
 ############################## Set Renderer and Platform ##############################
 # OPENGL_WIN
-set(BUILD_CONFIG OPENGL_WIN)
+set(BUILD_CONFIG_RENDERER OPENGL_WIN)
+set(BUILD_CONFIG_DATA SQLITE)
 
 ############################## Add All SubFolders ##############################
 add_subdirectory(PixForge/STL)
