@@ -1,20 +1,29 @@
 #pragma once
-#include "Platforms/Interfaces/iDB.h"
+#include "Platforms/Interfaces/iSQL.h"
 #include "Forge/Utilities/Log.h"
 #include <string>
 #include <vector>
 #include "sqlite3.h"
 
 namespace PF::PLATFORM{
-class Data : public iDB{
+class SQL : public iSQL{
 private:
 std::string path = "";
 sqlite3* db = nullptr;
 
-public:
-Data(const std::string& path) { setPath(path); };
+private:
+SQL() = default;
+SQL(const SQL&) = delete;
+SQL& operator=(const SQL&) = delete;
 
-~Data() override {
+public:
+static SQL& get() 
+{
+  static SQL instance;
+  return instance;
+};
+
+~SQL() override {
   if (db) sqlite3_close(db);
 }
 

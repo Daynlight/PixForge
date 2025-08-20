@@ -52,15 +52,15 @@ if (BUILD_CONFIG_DATA STREQUAL SQLITE)
   find_package(SQLite3 REQUIRED)
 
   #### [Files] ####
-  set(DATA
-    "Data/DB.h")
+  set(SQL
+    "SQL/SQL.h")
 
   #### [Libraries] ####
-  set(DATA_LIBS
+  set(SQL_LIBS
     SQLite::SQLite3)
 
   #### [Include] ####
-  set(DATA_INCLUDE
+  set(SQL_INCLUDE
     "${SQLite3_INCLUDE_DIRS}")
 
 else()
@@ -68,11 +68,11 @@ else()
 endif()
 
 ######################### Finishing #########################
-add_library(Platforms STATIC ${RENDERER} ${DATA} ${FILES})
+add_library(Platforms STATIC ${RENDERER} ${SQL} ${FILES})
 target_link_libraries(Platforms PUBLIC ${RENDERER_LIBS})
-target_link_libraries(Platforms PUBLIC ${DATA_LIBS})
+target_link_libraries(Platforms PUBLIC ${SQL_LIBS})
 target_include_directories(Platforms PUBLIC ${RENDERER_INCLUDE})
-target_include_directories(Platforms PUBLIC ${DATA_INCLUDE})
+target_include_directories(Platforms PUBLIC ${SQL_INCLUDE})
 
 ######################### Include Folders #########################
 target_include_directories(Platforms PRIVATE ${CMAKE_ROOT_DIRECTORY})

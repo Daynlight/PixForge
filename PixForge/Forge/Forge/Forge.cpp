@@ -6,6 +6,19 @@ PF::FORGE::Forge::Forge() {
   if(!settings_folder.exist()) settings_folder.create();
   window_settings.clear();
   window_settings.read();
+
+  // PLATFORM::SQL::get().setPath("PixForge.db");
+  // auto users = PLATFORM::SQL::get().select("Select * from User;");
+  // for (const auto& row : users)
+  // {
+  //   std::string user = "User: ";
+  //   for (const auto& col : row)
+  //   {
+  //     user += col + " ";
+  //   };
+  //   Utilities::Log::inf(user);
+  // };
+
   if(window_settings.size() != 2)
     engine.Init("PixForge Editor", 800, 600);
   else
