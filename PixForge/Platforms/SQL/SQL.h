@@ -27,6 +27,13 @@ static SQL& get()
   if (db) sqlite3_close(db);
 }
 
+std::vector<std::vector<std::string>> getProjects(const std::string& nick)
+{
+  std::vector<std::vector<std::string>> projects =
+    PLATFORM::SQL::get().select("Select U.nick, P.name, P.owner_id, C.width, C.height from Project as P join Contributors as C on C.project=P.id join User as U on U.nick=C.user Where U.nick Like '"+nick+"';");
+  return projects;
+};
+
 void setPath(const std::string& path) override { 
   this->path = path; 
   if (sqlite3_open(path.c_str(), &db) != SQLITE_OK)

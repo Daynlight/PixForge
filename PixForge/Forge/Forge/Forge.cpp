@@ -8,21 +8,18 @@ PF::FORGE::Forge::Forge() {
   window_settings.read();
 
   // PLATFORM::SQL::get().setPath("PixForge.db");
-  // auto users = PLATFORM::SQL::get().select("Select * from User;");
-  // for (const auto& row : users)
+  // auto projects = PLATFORM::SQL::get().getProjects("daynlight");
+  // for (const auto& row : projects)
   // {
-  //   std::string user = "User: ";
+  //   std::string project = "Project: ";
   //   for (const auto& col : row)
   //   {
-  //     user += col + " ";
+  //     project += col + " ";
   //   };
-  //   Utilities::Log::inf(user);
+  //   Utilities::Log::inf(project);
   // };
 
-  if(window_settings.size() != 2)
-    engine.Init("PixForge Editor", 800, 600);
-  else
-    engine.Init("PixForge Editor", std::stoi(window_settings[0]), std::stoi(window_settings[1]));
+  engine.Init("PixForge Editor", 800, 600);
 
   editor_gui = new PLATFORM::EditorGui("settings/editor_gui.ini", engine.getRenderer());
 };
