@@ -19,6 +19,17 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-lib
 set(BUILD_CONFIG_RENDERER OPENGL_WIN)
 set(BUILD_CONFIG_DATA SQLITE)
 
+############################## Set Renderer Conan ##############################
+set(CONAN_BUILD_DIR "${CMAKE_SOURCE_DIR}/build/conan/")
+execute_process(
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CONAN_BUILD_DIR}"
+)
+execute_process(
+    COMMAND conan install "${CMAKE_SOURCE_DIR}" --output-folder ${CONAN_BUILD_DIR} --build=missing
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+)
+set(CMAKE_TOOLCHAIN_FILE "${CONAN_BUILD_DIR}/conan_toolchain.cmake" CACHE STRING "")
+
 ############################## Add All SubFolders ##############################
 add_subdirectory(PixForge/STL)
 add_subdirectory(PixForge/Platforms)

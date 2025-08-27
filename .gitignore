@@ -17,3 +17,4 @@ output/
 *.bin
 *.exe
 *.db
+venv/
