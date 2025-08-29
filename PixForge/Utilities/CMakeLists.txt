@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
-project(Utilities LANGUAGES CXX C)
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+project(Utilities LANGUAGES CXX C)
 
 file(GLOB_RECURSE FILES 
   "File/File.h" 
