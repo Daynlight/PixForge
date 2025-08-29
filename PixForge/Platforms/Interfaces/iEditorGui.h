@@ -1,7 +1,6 @@
 #pragma once
 #include "Platforms/Interfaces/iRenderer.h"
 #include <functional>
-#include "Engine/Events.h"
 #include "Forge/Utilities/Log.h"
 
 namespace PF::PLATFORM{

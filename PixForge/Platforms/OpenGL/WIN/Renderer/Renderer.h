@@ -1,10 +1,9 @@
 #pragma once
 #include <string>
 #include "Platforms/Interfaces/iRenderer.h"
-#include "STL/Vector/Vector.h"
-#include "STL/Math/Vec.h"
-#include "STL/File/File.h"
-#include "Engine/Events.h"
+#include "Utilities/STL/Vector/Vector.h"
+#include "Utilities/STL/Math/Vec.h"
+#include "Utilities/STL/File/File.h"
 #include "Engine/Shader.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -46,7 +45,7 @@ public:
     bool isRunning() { return running; };
     void createWindow(const std::string &title, int width, int height);
     void createRenderer();
-    void pullEventsAndProccessWindowEvents(STL::Vector<PF::ENGINE::EventsCodes> &events);
+    void events();
     STL::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
 public:
     void render();

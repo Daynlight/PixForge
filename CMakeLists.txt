@@ -30,8 +30,11 @@ if(NOT conan_result EQUAL 0)
 endif()
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/conan/conan_toolchain.cmake" CACHE STRING "Conan toolchain file")
 
+
+
+
 ############################## Add All SubFolders ##############################
-add_subdirectory(PixForge/STL)
+add_subdirectory(PixForge/Utilities)
 add_subdirectory(PixForge/Platforms)
 add_subdirectory(PixForge/Engine)
 add_subdirectory(PixForge/Forge)

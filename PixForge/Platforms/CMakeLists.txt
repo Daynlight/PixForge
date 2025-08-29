@@ -29,7 +29,6 @@ if (BUILD_CONFIG_RENDERER STREQUAL OPENGL_WIN)
 
   #### [Libraries] ####
   set(RENDERER_LIBS 
-    "STL"
     "glfw"
     "winmm"
     "imm32"

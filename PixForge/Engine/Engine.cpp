@@ -11,10 +11,8 @@ PF::ENGINE::Engine::~Engine() {
 };
 
 void PF::ENGINE::Engine::run(std::function<void()> func) {
-  while (renderer->isRunning()){
-    renderer->pullEventsAndProccessWindowEvents(events);
-    for(size_t i = 0; i < events.size(); i++)
-      event(events.pop());
+  while (renderer->isRunning()) {
+    renderer->events();
 
     func();
   };
@@ -22,10 +20,6 @@ void PF::ENGINE::Engine::run(std::function<void()> func) {
 
 void PF::ENGINE::Engine::render(){
   renderer->render();
-};
-
-void PF::ENGINE::Engine::event(EventsCodes event) {
-
 };
 
 void PF::ENGINE::Engine::generateFrame(){

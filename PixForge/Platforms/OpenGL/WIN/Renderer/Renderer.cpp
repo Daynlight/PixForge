@@ -55,33 +55,15 @@ void PF::PLATFORM::Renderer::createRenderer() {
     createBox();
 };
 
-void PF::PLATFORM::Renderer::pullEventsAndProccessWindowEvents(STL::Vector<PF::ENGINE::EventsCodes> &events) {
+void PF::PLATFORM::Renderer::events() {
+    if(glfwWindowShouldClose(window)) running = false;
     glfwPollEvents();
-    if (glfwWindowShouldClose(window)){
-        events.push(PF::ENGINE::EventsCodes::Quit);
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
-        running = false;
-    }
-
-    int new_width, new_height;
-    glfwGetFramebufferSize(window, &new_width, &new_height);
-    if (new_height != height || new_width != width) { 
-        events.push(PF::ENGINE::EventsCodes::WindowResize); 
-        width = new_width;
-        height = new_height;
-        glViewport(0, 0, width, height);
-    };
-    
-    int new_x, new_y;
-    glfwGetWindowPos(window, &new_x, &new_y);
-    if (new_x != x || new_y != y) { 
-        events.push(PF::ENGINE::EventsCodes::WindowMove); 
-        x = new_x;
-        y = new_y;
-    };
 };
 
-void PF::PLATFORM::Renderer::render(){ glfwSwapBuffers(window);  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); };
+void PF::PLATFORM::Renderer::render(){ 
+    glfwSwapBuffers(window);  
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+};
 
 void PF::PLATFORM::Renderer::renderBackground(STL::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
@@ -107,7 +89,7 @@ void PF::PLATFORM::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::V
 };
 
 void PF::PLATFORM::Renderer::renderTexture(){
-
+    
 };
 
 void PF::PLATFORM::Renderer::bindVertexShader(PF::ENGINE::Shader shader) { vertexShader = shader; }
