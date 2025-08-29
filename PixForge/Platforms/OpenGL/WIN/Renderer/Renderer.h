@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
 #include "Platforms/Interfaces/iRenderer.h"
-#include "Utilities/STL/Vector/Vector.h"
-#include "Utilities/STL/Math/Vec.h"
-#include "Utilities/STL/File/File.h"
+#include "Utilities/Vector/Vector.h"
+#include "Utilities/Math/Vec.h"
+#include "Utilities/File/File.h"
 #include "Engine/Shader.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -46,11 +46,11 @@ public:
     void createWindow(const std::string &title, int width, int height);
     void createRenderer();
     void events();
-    STL::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
+    UTILITIES::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
 public:
     void render();
-    void renderBackground(STL::Vec<float, 4> colour);
-    void renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour);
+    void renderBackground(UTILITIES::Vec<float, 4> colour);
+    void renderColourBox(UTILITIES::Vec<float, 5> position, UTILITIES::Vec<float, 4> colour);
     void renderTexture();
     void bindVertexShader(PF::ENGINE::Shader shader);
     void bindFragmentShader(PF::ENGINE::Shader shader);

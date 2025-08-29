@@ -15,7 +15,7 @@ private:
     OBJECTS
   };
   Renderer* renderer;
-  STL::Vector<WindowGui*> ui;
+  UTILITIES::Vector<WindowGui*> ui;
 public:
   EditorGui(const std::string &path, iRenderer* renderer);
   ~EditorGui();

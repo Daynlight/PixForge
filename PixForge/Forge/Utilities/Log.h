@@ -1,11 +1,11 @@
 #pragma once
-#include "Utilities/STL/Vector/Vector.h"
+#include "Utilities/Vector/Vector.h"
 
 namespace PF::Utilities{
 class Log{
 private:
   static Log *instance;
-  STL::Vector<std::pair<char, std::string>> entry;
+  UTILITIES::Vector<std::pair<char, std::string>> entry;
 public:
   static Log &get() { init(); return *instance; };
   static void init();

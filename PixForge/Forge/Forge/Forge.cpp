@@ -2,7 +2,7 @@
 
 PF::FORGE::Forge::Forge() {
   Utilities::Log::log("Forge Created");
-  STL::Folder settings_folder("settings");
+  UTILITIES::Folder settings_folder("settings");
   if(!settings_folder.exist()) settings_folder.create();
   window_settings.clear();
   window_settings.read();
@@ -25,7 +25,7 @@ PF::FORGE::Forge::Forge() {
 };
 
 PF::FORGE::Forge::~Forge(){
-  STL::Vec<int, 4> window_rect = engine.getWindowRect();
+  UTILITIES::Vec<int, 4> window_rect = engine.getWindowRect();
   window_settings.clear();
   window_settings.push(std::to_string(window_rect[2]));
   window_settings.push(std::to_string(window_rect[3]));

@@ -1,8 +1,8 @@
 #pragma once
 #include <functional>
 #include "Platforms/Platform.h"
-#include "Utilities/STL/Vector/Vector.h"
-#include "Utilities/STL/Math/Vec.h"
+#include "Utilities/Vector/Vector.h"
+#include "Utilities/Math/Vec.h"
 
 namespace PF::ENGINE{
 class Engine{
@@ -15,6 +15,6 @@ public:
   void render();
   void run(std::function<void()> func = nullptr);
   PLATFORM::iRenderer* getRenderer() { return renderer; };
-  STL::Vec<int, 4> getWindowRect() { return renderer->getWindowRect(); };
+  UTILITIES::Vec<int, 4> getWindowRect() { return renderer->getWindowRect(); };
 };
 }; // namespace PF::ENGINE

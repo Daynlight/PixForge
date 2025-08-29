@@ -4,7 +4,7 @@
 // #include "GUI/Gui.h"
 // #include "Sandbox/Sandbox.h"
 #include "Utilities/Log.h"
-#include "Utilities/STL/Folder/Folder.h"
+#include "Utilities/Folder/Folder.h"
 
 namespace PF::FORGE{
 class Forge{
@@ -13,7 +13,7 @@ private:
   // Sandbox sandbox;
   // CoreForge::Gui gui;
   PLATFORM::iEditorGui* editor_gui = nullptr;
-  STL::File window_settings = STL::File("settings/window.ini");
+  UTILITIES::File window_settings = UTILITIES::File("settings/window.ini");
   bool dragging = false;
   int lastX = 0, lastY = 0;
   void events();

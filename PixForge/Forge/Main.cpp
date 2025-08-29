@@ -5,7 +5,7 @@
 
 #if BENCHMARK
 #include "Utilities/Benchmark.h"
-#include "Utilities/STL/File/File.h"
+#include "Utilities/File/File.h"
 #endif
 
 int WinMain(){
@@ -23,7 +23,7 @@ int WinMain(){
   #if BENCHMARK
   PF::Utilities::Log::dealloc();
   
-  } PF::STL::File file = PF::STL::File("Benchmark.txt");
+  } PF::UTILITIES::File file = PF::UTILITIES::File("Benchmark.txt");
   for(auto &line : PF::Utilities::Benchmark::Benchmark::get().result)
     file.push(line);
   if(!file.exist()) file.create();

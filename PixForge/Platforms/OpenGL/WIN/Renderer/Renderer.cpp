@@ -65,11 +65,11 @@ void PF::PLATFORM::Renderer::render(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 };
 
-void PF::PLATFORM::Renderer::renderBackground(STL::Vec<float, 4> colour){
+void PF::PLATFORM::Renderer::renderBackground(UTILITIES::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
 };
 
-void PF::PLATFORM::Renderer::renderColourBox(STL::Vec<float, 5> position, STL::Vec<float, 4> colour){
+void PF::PLATFORM::Renderer::renderColourBox(UTILITIES::Vec<float, 5> position, UTILITIES::Vec<float, 4> colour){
     if (compiledShader == 0 || boxVAO == 0) return;
     glUseProgram(compiledShader);
     float x = position[0] / (width/2) - 1.0f;
