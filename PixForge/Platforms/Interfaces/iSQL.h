@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Forge/Forge/Log.h"
+#include "Forge/Log.h"
 
 namespace PF::PLATFORM{
 class iSQL{

@@ -2,18 +2,14 @@ cmake_minimum_required(VERSION 3.10)
 
 file(GLOB_RECURSE src 
   "Main.cpp"
-  "Forge/Forge.cpp"
-  "Gui/Gui.cpp"
-  "Sandbox/Sandbox.cpp"
-  "Forge/Log.cpp"
+  "Forge.cpp"
+  "Log.cpp"
   "Debug/Benchmark.cpp"
 )
 
 file(GLOB_RECURSE header 
-  "Forge/Forge.h"
-  "Gui/Gui.h"
-  "Sandbox/Sandbox.h"
-  "Forge/Log.h"
+  "Forge.h"
+  "Log.h"
   "Debug/Benchmark.h"
 )
 
