@@ -3,6 +3,11 @@
 template<typename T>
 PF::UTILITIES::Vector<T>::Vector(const unsigned int &capacity) :capacity(capacity) { data = new T[capacity]; }
 
+template <typename T>
+inline PF::UTILITIES::Vector<T>::~Vector(){
+  if(data) delete[] data;
+};
+
 template<typename T>
 const unsigned int PF::UTILITIES::Vector<T>::size() const { return _size; };
 
@@ -74,6 +79,12 @@ std::string PF::UTILITIES::Vector<T>::concat(const char &sep) const {
   for(unsigned int i = 0; i < _size; i++) result += data[i] + sep;
   return result;
 };
+
+template<typename T>
+T& PF::UTILITIES::Vector<T>::operator[](const unsigned int &index) { return data[index]; };
+
+template<typename T>
+const T& PF::UTILITIES::Vector<T>::operator[](const unsigned int &index) const { return data[index]; };
 
 template <typename T>
 void PF::UTILITIES::Vector<T>::sort(bool (*compare)(T, T)) { quickSort(0, _size - 1, compare); };

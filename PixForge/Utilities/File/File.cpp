@@ -1,5 +1,14 @@
 #include "File.h"
 
+PF::UTILITIES::File::File(const std::string &path)
+: path(path) { file.open(path, std::ios::in | std::ios::out); }
+
+PF::UTILITIES::File::~File()
+{ file.close(); };
+
+const bool PF::UTILITIES::File::exist() const
+{ return std::filesystem::exists(path); };
+
 void PF::UTILITIES::File::create(){
   std::string temp = "";
   for(unsigned int i = 0; i < path.size(); i++){
@@ -9,7 +18,43 @@ void PF::UTILITIES::File::create(){
     temp += path[i];
   };
   file.open(path, std::ios::out);
-};
+}
+
+void PF::UTILITIES::File::remove()
+{ std::filesystem::remove(path); }
+
+void PF::UTILITIES::File::push(const std::string &line)
+{ data.push(line); };
+
+std::string PF::UTILITIES::File::pop()
+{ return data.pop(); };
+
+const unsigned int PF::UTILITIES::File::size() const
+{ return data.size(); };
+
+void PF::UTILITIES::File::clear()
+{ while(size() > 0) pop(); };
+
+const std::string PF::UTILITIES::File::getPath() const
+{ return path; };
+
+void PF::UTILITIES::File::setPath(const std::string &new_path)
+{ file.close(); path = new_path; file.open(path, std::ios::in | std::ios::out); };
+
+const std::string& PF::UTILITIES::File::operator[](const unsigned int &index) const
+{ return data[index]; };
+
+std::string& PF::UTILITIES::File::operator[](const unsigned int &index)
+{ return data[index]; }
+
+PF::UTILITIES::File &PF::UTILITIES::File::operator=(const File &second)
+{ data = second.data; path = second.path; return *this; }
+
+PF::UTILITIES::Vector<PF::UTILITIES::Vector<std::string>*> PF::UTILITIES::File::split(const char &sep)
+{ return data.split(sep); }
+
+std::string PF::UTILITIES::File::concat(const char &sep)
+{ return data.concat(sep); };
 
 void PF::UTILITIES::File::read(){
   file.seekg(0, std::ios::beg);

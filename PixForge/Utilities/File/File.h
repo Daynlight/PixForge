@@ -11,27 +11,22 @@ private:
   std::string path;
   std::fstream file;
 public:
-  File(const std::string &path) : path(path) { file.open(path, std::ios::in | std::ios::out); };
-  ~File() { file.close(); };
-public:
-  const bool exist() const { return std::filesystem::exists(path); };
+  File(const std::string &path);
+  ~File();
+  const bool exist() const;
   void create();
-  void remove() { std::filesystem::remove(path); };
-public:
-  void push(const std::string &line) { data.push(line); };
-  std::string pop() { return data.pop(); };
-  const unsigned int size() const { return data.size(); };
-  void clear() { while(size() > 0) pop(); };
-public:
-  const std::string getPath() const { return path; };
-  void setPath(const std::string &new_path) { file.close(); path = new_path; file.open(path, std::ios::in | std::ios::out); };
-  std::string& operator[](const unsigned int &index) { return data[index]; };
-  const std::string& operator[](const unsigned int &index) const { return data[index]; };
-  File& operator=(const File &second) { data = second.data; path = second.path; return *this; };
-public:
-  Vector<Vector<std::string>*> split(const char &sep) { return data.split(sep); };
-  std::string concat(const char &sep) { return data.concat(sep); };
-public:
+  void remove();
+  void push(const std::string &line);
+  std::string pop();
+  const unsigned int size() const;
+  void clear();
+  const std::string getPath() const;
+  void setPath(const std::string &new_path);
+  const std::string& operator[](const unsigned int &index) const;
+  std::string& operator[](const unsigned int &index);
+  File& operator=(const File &second);
+  Vector<Vector<std::string>*> split(const char &sep);
+  std::string concat(const char &sep);
   void read();
   void save();
 }; // class File
