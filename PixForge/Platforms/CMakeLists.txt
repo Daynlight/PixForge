@@ -52,17 +52,14 @@ if (BUILD_CONFIG_DATA STREQUAL SQLITE)
   find_package(SQLite3 REQUIRED)
 
   #### [Files] ####
-  set(SQL
-    "SQL/SQL.h")
+  set(SQL "SQL/SQL.h")
 
   #### [Libraries] ####
-  set(SQL_LIBS
-    SQLite::SQLite3)
+  set(SQL_LIBS "${SQLite3_LIBRARIES}")
 
   #### [Include] ####
   set(SQL_INCLUDE
-    "${SQLite3_INCLUDE_DIRS}")
-
+    "${SQLite3_INCLUDE}")
 else()
     message(FATAL_ERROR "Current BUILD_CONFIG_DATA is invalid set")
 endif()

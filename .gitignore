@@ -18,3 +18,5 @@ output/
 *.exe
 *.db
 venv/
+CMakeUserPresets.json
+CMakePresets.json
