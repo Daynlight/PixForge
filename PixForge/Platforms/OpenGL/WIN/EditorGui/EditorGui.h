@@ -10,13 +10,48 @@
 namespace PF::PLATFORM{
 class EditorGui : public iEditorGui{
 private:
+  enum WindowType{
+    LOG,
+    OBJECTS
+  };
   Renderer* renderer;
+  UTILITIES::Vector<WindowGui*> ui;
 public:
   EditorGui(const std::string &path, iRenderer* renderer);
   ~EditorGui();
+  uint16_t generateUnique();
+  void addWindow(WindowType type);
   void dock(std::function<void()> func);
-  void topBar(std::function<void()> func);
-  void events(ENGINE::EventsCodes event);
-  void render(std::function<void()> func);
+  void topBar();
+  void render();
 }; // class EditorGui
+
+
+
+class WindowLogGui : public WindowGui{
+private:
+  bool open = true;
+  uint16_t id = 0;
+public:
+  WindowLogGui(uint16_t id) : id(id) {};
+  uint16_t getId() { return id; };
+  bool isOpen() { return open; };
+  void render();
+}; // class WindowLogGui
+
+
+class WindowObjectGui : public WindowGui{
+private:
+  bool open = true;
+  uint16_t id = 0;
+public:
+  WindowObjectGui(uint16_t id) : id(id) {};
+  uint16_t getId() { return id; };
+  bool isOpen() { return open; };
+  void render();
+}; // class WindowLogGui
+
 }; // namespace PF::PLATFORM
+
+
+
