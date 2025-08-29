@@ -1,7 +1,7 @@
 #pragma once
 #include "Platforms/Interfaces/iRenderer.h"
 #include <functional>
-#include "Forge/Utilities/Log.h"
+#include "Forge/Forge/Log.h"
 
 namespace PF::PLATFORM{
 class iEditorGui{

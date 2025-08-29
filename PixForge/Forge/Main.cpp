@@ -1,10 +1,10 @@
 #include "Forge/Forge.h"
-#include "Utilities/Log.h"
+#include "Forge/Log.h"
 
 #define BENCHMARK 1
 
 #if BENCHMARK
-#include "Utilities/Benchmark.h"
+#include "Debug/Benchmark.h"
 #include "Utilities/File/File.h"
 #endif
 

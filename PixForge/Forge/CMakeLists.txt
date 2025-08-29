@@ -5,16 +5,16 @@ file(GLOB_RECURSE src
   "Forge/Forge.cpp"
   "Gui/Gui.cpp"
   "Sandbox/Sandbox.cpp"
-  "Utilities/Log.cpp"
-  "Utilities/Benchmark.cpp"
+  "Forge/Log.cpp"
+  "Debug/Benchmark.cpp"
 )
 
 file(GLOB_RECURSE header 
   "Forge/Forge.h"
   "Gui/Gui.h"
   "Sandbox/Sandbox.h"
-  "Utilities/Log.h"
-  "Utilities/Benchmark.h"
+  "Forge/Log.h"
+  "Debug/Benchmark.h"
 )
 
 project(Forge VERSION 1.0 LANGUAGES CXX)
