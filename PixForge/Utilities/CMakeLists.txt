@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(STL LANGUAGES CXX C)
+project(Utilities LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -14,7 +14,7 @@ file(GLOB_RECURSE FILES
   "Vector/Vector.cpp"
 )
 
-add_library(STL STATIC ${FILES})
+add_library(Utilities STATIC ${FILES})
 
-target_include_directories(STL PRIVATE ${CMAKE_ROOT_DIRECTORY})
-target_include_directories(STL PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(Utilities PRIVATE ${CMAKE_ROOT_DIRECTORY})
+target_include_directories(Utilities PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

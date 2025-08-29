@@ -12,7 +12,7 @@ file(GLOB_RECURSE FILES
 
 add_library(Engine STATIC ${FILES})
 
-target_link_libraries(Engine PRIVATE STL)
+target_link_libraries(Engine PRIVATE Utilities)
 target_link_libraries(Engine PUBLIC Platforms)
 target_include_directories(Engine PUBLIC ${CMAKE_ROOT_DIRECTORY})
 target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
