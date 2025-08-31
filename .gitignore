@@ -21,3 +21,4 @@ output/
 venv/
 CMakeUserPresets.json
 CMakePresets.json
+out/

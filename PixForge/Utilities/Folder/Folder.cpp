@@ -30,8 +30,12 @@ void PF::UTILITIES::Folder::remove(const std::string &folder)
 const unsigned int PF::UTILITIES::Folder::size() const
 { return data.size(); }
 
-PF::UTILITIES::File PF::UTILITIES::Folder::openFile(const std::string &file)
-{ if(!std::filesystem::exists(path + file)) File(path + file).create(); return File(path + file); }
+PF::UTILITIES::File PF::UTILITIES::Folder::openFile(const std::string &file) { 
+  auto full = std::filesystem::path(path) / file;
+  if(!std::filesystem::exists(path + file)) File(path + file).create(); 
+  if(!std::filesystem::exists(full)) File(full.string()).create();
+  return File(full.string());
+}
 
 PF::UTILITIES::Folder PF::UTILITIES::Folder::openFolder(const std::string &folder) const
 { if(!std::filesystem::exists(path + folder)) return *this; return Folder(path + folder); };
@@ -49,7 +53,7 @@ void PF::UTILITIES::Folder::fetchList(){
 };
 
 const std::pair<char, std::string>& PF::UTILITIES::Folder::operator[](const unsigned int &index) const
-{ if(data.size() <= index) std::out_of_range("index out of range"); return data[index]; };
+{ if(data.size() <= index) throw std::out_of_range("index out of range"); return data[index]; };
 
 std::pair<char, std::string>& PF::UTILITIES::Folder::operator[](const unsigned int &index)
-{ if(data.size() <= index) std::out_of_range("index out of range"); return data[index]; };
+{ if(data.size() <= index) throw std::out_of_range("index out of range"); return data[index]; };

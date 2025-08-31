@@ -5,7 +5,7 @@ namespace PF::Utilities{
 class Log{
 private:
   static Log *instance;
-  UTILITIES::Vector<std::pair<char, std::string>> entry;
+  UTILITIES::Vector<std::pair<char, std::string>> entry = UTILITIES::Vector<std::pair<char, std::string>>(64);
 public:
   static Log &get() { init(); return *instance; };
   static void init();
