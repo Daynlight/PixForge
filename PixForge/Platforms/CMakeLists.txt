@@ -12,24 +12,17 @@ file(GLOB_RECURSE FILES
 ######################### Load Libraries for current setup #########################
 ############ [OPENGL_WIN] ############
 if (BUILD_CONFIG_RENDERER STREQUAL OPENGL_WIN)
-  #### [Add Folders] ####
-  add_subdirectory(Vendor/glfw-3.4)
-
   #### [Files] ####
   set(RENDERER
     "Vendor/glad-3.3/src/glad.c"
-    "Vendor/imgui-docking/imgui.cpp"
-    "Vendor/imgui-docking/imgui_draw.cpp"
-    "Vendor/imgui-docking/imgui_tables.cpp"
-    "Vendor/imgui-docking/imgui_widgets.cpp"
-    "Vendor/imgui-docking/backends/imgui_impl_glfw.cpp"
-    "Vendor/imgui-docking/backends/imgui_impl_opengl3.cpp"
-    "OpenGL/Win/Renderer/Renderer.cpp"
-    "OpenGL/Win/EditorGui/EditorGui.cpp")  
+    "Renderer/Renderer.cpp"
+    )  
+
+  find_package(glfw3 3.4 REQUIRED)
 
   #### [Libraries] ####
   set(RENDERER_LIBS 
-    "glfw"
+    glfw
     "winmm"
     "imm32"
     "version"
@@ -38,8 +31,7 @@ if (BUILD_CONFIG_RENDERER STREQUAL OPENGL_WIN)
   #### [Include] ####
   set(RENDERER_INCLUDE
     "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glad-3.3/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glfw-3.4/include")
+  )
 
 else()
     message(FATAL_ERROR "Current BUILD_CONFIG_RENDERER is invalid set")

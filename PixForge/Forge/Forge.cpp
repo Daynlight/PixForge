@@ -2,35 +2,41 @@
 
 PF::FORGE::Forge::Forge() 
   : allocs(new PF::Utilities::Benchmark::Allocs("Program Allocs")) {
+  PF::Utilities::Benchmark::Timer("Startup Time");
+
   Utilities::Log::log("Forge Created");
   UTILITIES::Folder settings_folder("settings");
+
   if(!settings_folder.exist()) settings_folder.create();
   window_settings.clear();
   window_settings.read();
-  
-  engine.Init("PixForge Editor", 800, 600);
 
-  editor_gui = new PLATFORM::EditorGui("settings/editor_gui.ini", engine.getRenderer());
+  renderer = new FORGE::Renderer();
+  renderer->createRenderer();
+  renderer->createWindow("PixForge Editor", 800, 600);
+  gui = new FORGE::Gui("settings/editor_gui.ini", renderer);
 };
 
 PF::FORGE::Forge::~Forge(){
-  UTILITIES::Vec<int, 4> window_rect = engine.getWindowRect();
+  UTILITIES::Vec<int, 4> window_rect = renderer->getWindowRect();
   window_settings.clear();
   window_settings.push(std::to_string(window_rect[2]));
   window_settings.push(std::to_string(window_rect[3]));
   window_settings.save();
-  delete editor_gui;
+
+  delete gui;
+  delete renderer;
   delete allocs;
   PF::Utilities::Log::get().save();
 };
 
 void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
-  engine.run([&](){
-    engine.generateFrame();
-    editor_gui->render();
-    engine.render();
-  });
+  // engine.run([&](){
+  //   engine.generateFrame();
+  //   editor_gui->render();
+  //   engine.render();
+  // });
 };
 
 void PF::FORGE::Forge::events(){

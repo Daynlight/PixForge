@@ -1,5 +1,5 @@
 #include "Forge/Forge.h"
-#include "Forge/Log.h"
+#include "Debug/Log.h"
 
 
 int WinMain(){

@@ -1,6 +1,6 @@
 #pragma once
 #include "Platforms/Interfaces/iSQL.h"
-#include "Forge/Log.h"
+#include "Debug/Log.h"
 #include <string>
 #include <vector>
 #include "sqlite3.h"
