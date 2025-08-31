@@ -9,9 +9,8 @@
 namespace PF::FORGE{
 class Forge{
 private:
+  PF::Utilities::Benchmark::Allocs *allocs; 
   ENGINE::Engine engine;
-  // Sandbox sandbox;
-  // CoreForge::Gui gui;
   PLATFORM::iEditorGui* editor_gui = nullptr;
   UTILITIES::File window_settings = UTILITIES::File("settings/window.ini");
   bool dragging = false;
