@@ -1,4 +1,5 @@
 #pragma once
+#include <stdexcept>
 
 namespace PF::UTILITIES{
 template<typename T, unsigned int S>

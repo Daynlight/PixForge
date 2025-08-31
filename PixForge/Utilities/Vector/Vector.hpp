@@ -4,15 +4,14 @@ template<typename T>
 PF::UTILITIES::Vector<T>::Vector(const unsigned int &capacity) :capacity(capacity) { data = new T[capacity]; }
 
 template <typename T>
-inline PF::UTILITIES::Vector<T>::~Vector(){
-  if(data) delete[] data;
-};
+inline PF::UTILITIES::Vector<T>::~Vector() { if(data) delete[] data; };
 
 template<typename T>
 const unsigned int PF::UTILITIES::Vector<T>::size() const { return _size; };
 
 template<typename T>
 void PF::UTILITIES::Vector<T>::resize(){
+  if(capacity < 1) capacity = 1;
   capacity *= 2;
   T* temp = new T[capacity];
   for(unsigned int i = 0; i < _size; i++) temp[i] = data[i];
@@ -21,7 +20,7 @@ void PF::UTILITIES::Vector<T>::resize(){
 };
 
 template<typename T>
-void PF::UTILITIES::Vector<T>::push(const T &line){
+void PF::UTILITIES::Vector<T>::push(const T &line) {
   if(_size >= capacity) resize();
   data[_size] = line;
   _size++;
@@ -29,11 +28,9 @@ void PF::UTILITIES::Vector<T>::push(const T &line){
 
 template<typename T>
 T PF::UTILITIES::Vector<T>::pop(){
-  if(_size >= 0){ 
-      _size--;
-      return data[_size];
-    }
-  return T();
+  if(_size < 1) return T(); 
+  _size--;
+  return data[_size];
 };
 
 template<typename T>
@@ -45,7 +42,8 @@ void PF::UTILITIES::Vector<T>::clear(){
 };
 
 template <typename T>
-inline T PF::UTILITIES::Vector<T>::remove(const unsigned int &index){
+inline T PF::UTILITIES::Vector<T>::remove(const unsigned int &index) {
+  if(index >= _size) return T();
   T temp = data[index];
   for(unsigned int i = index; i < _size - 1; i++) data[i] = data[i + 1];
   _size--;
@@ -84,7 +82,7 @@ template<typename T>
 T& PF::UTILITIES::Vector<T>::operator[](const unsigned int &index) { return data[index]; };
 
 template<typename T>
-const T& PF::UTILITIES::Vector<T>::operator[](const unsigned int &index) const { return data[index]; };
+const T& PF::UTILITIES::Vector<T>::operator[](const unsigned int &index) const { if(index >= _size) return T(); return data[index]; };
 
 template <typename T>
 void PF::UTILITIES::Vector<T>::sort(bool (*compare)(T, T)) { quickSort(0, _size - 1, compare); };

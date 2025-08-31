@@ -1,7 +1,7 @@
 #include "File.h"
 
 PF::UTILITIES::File::File(const std::string &path)
-: path(path) { file.open(path, std::ios::in | std::ios::out); }
+: path(path) { std::filesystem::create_directory(path); file.open(path, std::ios::in | std::ios::out); }
 
 PF::UTILITIES::File::~File()
 { file.close(); };
@@ -27,7 +27,7 @@ void PF::UTILITIES::File::push(const std::string &line)
 { data.push(line); };
 
 std::string PF::UTILITIES::File::pop()
-{ return data.pop(); };
+{ if(data.size() < 1) return ""; return data.pop(); };
 
 const unsigned int PF::UTILITIES::File::size() const
 { return data.size(); };
@@ -42,10 +42,10 @@ void PF::UTILITIES::File::setPath(const std::string &new_path)
 { file.close(); path = new_path; file.open(path, std::ios::in | std::ios::out); };
 
 const std::string& PF::UTILITIES::File::operator[](const unsigned int &index) const
-{ return data[index]; };
+{ if(index >= data.size()) std::out_of_range("index out of range"); return data[index]; };
 
 std::string& PF::UTILITIES::File::operator[](const unsigned int &index)
-{ return data[index]; }
+{ if(index >= data.size()) throw std::out_of_range("index out of range"); return data[index]; }
 
 PF::UTILITIES::File &PF::UTILITIES::File::operator=(const File &second)
 { data = second.data; path = second.path; return *this; }
@@ -62,7 +62,7 @@ void PF::UTILITIES::File::read(){
   while(std::getline(file, line)) data.push(line);
 };
 
-void PF::UTILITIES::File::save(){
+void PF::UTILITIES::File::save() {
   file.close();
   file.open(path, std::ios::out | std::ios::trunc);
   for(unsigned int i = 0; i < data.size(); i++) file << data[i] << std::endl;  
