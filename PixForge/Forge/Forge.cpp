@@ -12,8 +12,8 @@ PF::FORGE::Forge::Forge()
   window_settings.read();
 
   renderer = new FORGE::Renderer();
-  renderer->createRenderer();
   renderer->createWindow("PixForge Editor", 800, 600);
+  renderer->createRenderer();
   gui = new FORGE::Gui("settings/editor_gui.ini", renderer);
 };
 
@@ -32,17 +32,15 @@ PF::FORGE::Forge::~Forge(){
 
 void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
-  // engine.run([&](){
-  //   engine.generateFrame();
-  //   editor_gui->render();
-  //   engine.render();
-  // });
+  while(renderer->isRunning()){
+    //  engine.run([&](){
+    //   engine.generateFrame();
+    //   editor_gui->render();
+    //   engine.render();
+    //  });
+  };
 };
 
 void PF::FORGE::Forge::events(){
-  // SDL_Event event;
-  // while(SDL_PollEvent(&event)){
-  //   gui.guiEvent(event);
-  //   window.windowEvent(event);
-  // };
+
 };

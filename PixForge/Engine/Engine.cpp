@@ -11,11 +11,8 @@ PF::ENGINE::Engine::~Engine() {
 };
 
 void PF::ENGINE::Engine::run(std::function<void()> func) {
-  while (renderer->isRunning()) {
-    renderer->events();
-
-    func();
-  };
+  renderer->events();
+  func();
 };
 
 void PF::ENGINE::Engine::render(){
