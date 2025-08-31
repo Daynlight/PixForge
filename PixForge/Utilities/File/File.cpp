@@ -1,7 +1,14 @@
 #include "File.h"
 
 PF::UTILITIES::File::File(const std::string &path)
-: path(path) { std::filesystem::create_directory(path); file.open(path, std::ios::in | std::ios::out); }
+: path(path) { 
+  auto parent = std::filesystem::path(path).parent_path();
+  if (!parent.empty()) std::filesystem::create_directories(parent);
+
+  file.open(path, std::ios::in | std::ios::out | std::ios::app);
+  file.close();
+  file.open(path, std::ios::in | std::ios::out);
+}
 
 PF::UTILITIES::File::~File()
 { file.close(); };
@@ -27,7 +34,7 @@ void PF::UTILITIES::File::push(const std::string &line)
 { data.push(line); };
 
 std::string PF::UTILITIES::File::pop()
-{ if(data.size() < 1) return ""; return data.pop(); };
+{ if(data.size() < 1) throw std::out_of_range("File is empty"); return data.pop(); };
 
 const unsigned int PF::UTILITIES::File::size() const
 { return data.size(); };
@@ -42,7 +49,7 @@ void PF::UTILITIES::File::setPath(const std::string &new_path)
 { file.close(); path = new_path; file.open(path, std::ios::in | std::ios::out); };
 
 const std::string& PF::UTILITIES::File::operator[](const unsigned int &index) const
-{ if(index >= data.size()) std::out_of_range("index out of range"); return data[index]; };
+{ if(index >= data.size()) throw std::out_of_range("index out of range"); return data[index]; };
 
 std::string& PF::UTILITIES::File::operator[](const unsigned int &index)
 { if(index >= data.size()) throw std::out_of_range("index out of range"); return data[index]; }
@@ -63,9 +70,14 @@ void PF::UTILITIES::File::read(){
 };
 
 void PF::UTILITIES::File::save() {
-  file.close();
-  file.open(path, std::ios::out | std::ios::trunc);
-  for(unsigned int i = 0; i < data.size(); i++) file << data[i] << std::endl;  
+std::ofstream out(path, std::ios::out | std::ios::trunc);
+  if(!out.is_open()) throw std::runtime_error("Failed to open file for saving");
+
+  for(unsigned int i = 0; i < data.size(); i++)
+      out << data[i] << std::endl;
+  out.close();
+  
   file.close();
   file.open(path, std::ios::in | std::ios::out);
+  if(!file.is_open()) throw std::runtime_error("Failed to reopen file after saving");
 };

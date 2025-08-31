@@ -30,9 +30,7 @@ PF::FORGE::Forge::~Forge(){
   window_settings.push(std::to_string(window_rect[2]));
   window_settings.push(std::to_string(window_rect[3]));
   window_settings.save();
-  Utilities::Log::log("Window Settings Saved");
   delete editor_gui;
-  Utilities::Log::log("Forge Destroyed");
 };
 
 void PF::FORGE::Forge::run(){
