@@ -20,5 +20,4 @@ output/
 *.db
 venv/
 CMakeUserPresets.json
-CMakePresets.json
 out/

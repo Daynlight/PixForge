@@ -19,15 +19,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-lib
 set(BUILD_CONFIG_RENDERER OPENGL_WIN)
 set(BUILD_CONFIG_DATA SQLITE)
 
-############################## install libs with conan ##############################
-execute_process(
-    COMMAND conan install ${CMAKE_SOURCE_DIR} --output-folder=${CMAKE_BINARY_DIR}/conan --build=missing
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    RESULT_VARIABLE conan_result
-)
-if(NOT conan_result EQUAL 0)
-    message(FATAL_ERROR "Conan install failed!")
-endif()
+############################## set toolchain to conan ##############################
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/conan/conan_toolchain.cmake" CACHE STRING "Conan toolchain file")
 
 

@@ -16,9 +16,17 @@ void PF::UTILITIES::Vector<T>::resize(){
   if(new_capacity <= capacity) new_capacity = capacity + 1;
   T* temp = new T[new_capacity];
   for(unsigned int i = 0; i < _size; i++) temp[i] = data[i];
-  delete[] data;
+  if(data) delete[] data;
   data = temp;
   capacity = new_capacity;
+};
+
+template <typename T>
+inline void PF::UTILITIES::Vector<T>::reserve(const unsigned int size) {
+  if(data) delete[] data;
+  data = new T[size];
+  capacity = size;
+  _size = 0;
 };
 
 template<typename T>
@@ -37,7 +45,7 @@ T PF::UTILITIES::Vector<T>::pop(){
 
 template<typename T>
 void PF::UTILITIES::Vector<T>::clear(){
-  delete[] data;
+  if(data) delete[] data;
   data = new T[1];
   capacity = 1;
   _size = 0;
