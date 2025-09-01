@@ -55,37 +55,37 @@ class Allocs{
 
 }; // namespace Benchmark
 
-void* operator new(size_t size) {
+inline void* operator new(size_t size) {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().allocs++;
   return malloc(size);
 };
 
-void operator delete(void *ptr) noexcept{
+inline void operator delete(void *ptr) noexcept{
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 };
 
-void operator delete(void *ptr, std::size_t size) noexcept {
+inline void operator delete(void *ptr, std::size_t size) noexcept {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
       PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 }
 
-void* operator new[](std::size_t count) {
+inline void* operator new[](std::size_t count) {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().allocs++;
   return malloc(count);
 }
 
-void operator delete[](void *ptr) noexcept {
+inline void operator delete[](void *ptr) noexcept {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);
 }
 
-void operator delete[](void *ptr, std::size_t size) noexcept {
+inline void operator delete[](void *ptr, std::size_t size) noexcept {
   if(PF::Utilities::Benchmark::Benchmark::get().count_allocs)
     PF::Utilities::Benchmark::Benchmark::get().deallocs++;
   free(ptr);

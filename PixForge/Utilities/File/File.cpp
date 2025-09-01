@@ -1,7 +1,7 @@
 #include "File.h"
 
-PF::UTILITIES::File::File(const std::string &path)
-: path(path) { 
+PF::UTILITIES::File::File(const std::string &path, const unsigned int size) 
+: path(path), data(size) {
   auto parent = std::filesystem::path(path).parent_path();
   if (!parent.empty()) std::filesystem::create_directories(parent);
 

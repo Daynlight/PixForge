@@ -6,7 +6,7 @@ namespace PF::UTILITIES{
 template<typename T>
 class Vector{
 private:
-  T* data;
+  T* data = nullptr;
   unsigned int _size = 0;
   unsigned int capacity = 1;
 public:
@@ -18,6 +18,7 @@ public:
   T remove(const unsigned int &index);
   const unsigned int size() const;
   void resize();
+  void reserve(const unsigned int size);
   void clear();
   T& operator[](const unsigned int &index);
   const T& operator[](const unsigned int &index) const;

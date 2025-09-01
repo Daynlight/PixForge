@@ -11,7 +11,7 @@ private:
   std::string path;
   std::fstream file;
 public:
-  File(const std::string &path);
+  File(const std::string &path, const unsigned int size = 1);
   ~File();
   const bool exist() const;
   void create();
