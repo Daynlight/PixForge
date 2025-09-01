@@ -8,7 +8,7 @@
 namespace PF::PLATFORM{
 class iRenderer{
 public:
-  virtual void createWindow(const std::string &title, int width, int height) = 0;
+  virtual void createWindow(const std::string &title, int width, int height, bool for_editor) = 0;
   virtual void createRenderer() = 0;
   virtual bool isRunning() = 0;
   virtual UTILITIES::Vec<int, 4> getWindowRect() = 0;
@@ -26,3 +26,5 @@ public:
   virtual void compileShader() = 0;
 };
 }; // namespace PF::PLATFORM
+
+extern "C" PF::PLATFORM::iRenderer* CreateRenderer();

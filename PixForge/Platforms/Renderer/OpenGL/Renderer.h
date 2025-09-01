@@ -9,7 +9,7 @@
 #include "GLFW/glfw3.h"
 
 namespace PF::PLATFORM {
-class Renderer : public iRenderer {
+class OpenGLRenderer : public iRenderer {
 private:
     const char* defaultColourBoxVertexShader = R"(
     #version 330 core
@@ -40,10 +40,10 @@ private:
     GLuint compiledShader;
     void createBox();
 public:
-    ~Renderer();
+    ~OpenGLRenderer();
     GLFWwindow* getWindow() { return window; };
     bool isRunning() { return running; };
-    void createWindow(const std::string &title, int width, int height);
+    void createWindow(const std::string &title, int width, int height, bool for_editor = false);
     void createRenderer();
     void events();
     UTILITIES::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };

@@ -30,3 +30,9 @@ target_link_libraries(OpenGLRenderer PUBLIC Utilities)
 target_include_directories(OpenGLRenderer PUBLIC ${RENDERER_INCLUDE})
 target_include_directories(OpenGLRenderer PRIVATE ${CMAKE_ROOT_DIRECTORY})
 target_include_directories(OpenGLRenderer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+set_target_properties(OpenGLRenderer PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_OUTPUT_RENDERER}"   # For DLLs (Windows)
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_OUTPUT_RENDERER}"   # For shared libraries (.so, .dylib)
+)

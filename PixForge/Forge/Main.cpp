@@ -2,7 +2,7 @@
 #include "Debug/Log.h"
 
 
-int WinMain(){
+int main(){
   PF::Utilities::Log::init(); 
   { 
     PF::FORGE::Forge forge;

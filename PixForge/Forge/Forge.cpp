@@ -15,6 +15,13 @@ PF::FORGE::Forge::Forge()
   renderer->createWindow("PixForge Editor", 800, 600);
   renderer->createRenderer();
   gui = new FORGE::Gui("settings/editor_gui.ini", renderer);
+
+  PF::UTILITIES::Vector<std::string> renderers = engine.getRenderers();
+  for(unsigned int i = 0; i < renderers.size(); i++)
+    PF::Utilities::Log::inf("Renderer: " + renderers[i]);
+
+  engine.loadRenderer(renderers[0]);
+  engine.Init("Game Window", 800, 600, true);
 };
 
 PF::FORGE::Forge::~Forge(){
@@ -35,15 +42,17 @@ void PF::FORGE::Forge::run(){
   while(renderer->isRunning()){
     renderer->renderBackground({50, 50, 50, 255});
 
-    renderer->renderColourBox({200, 300, 0.9, 200, 200}, {0, 255, 0, 255});
-    renderer->renderColourBox({200, 200, 0.6, 200, 200}, {200, 0, 0, 255});
-
-    renderer->events();
+    events();
     gui->render();
     renderer->render();
+    
+    engine.generateFrame();
+    engine.render();
+    
   };
 };
 
 void PF::FORGE::Forge::events(){
-
+  renderer->events();
+  engine.events();
 };
