@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 void PF::ENGINE::Engine::Init(const std::string &window_title, int width, int height){
-  renderer = new PF::PLATFORM::Renderer();
+  // renderer = new PF::PLATFORM::iRenderer();
   renderer->createWindow(window_title, width, height);
   renderer->createRenderer();
 };
