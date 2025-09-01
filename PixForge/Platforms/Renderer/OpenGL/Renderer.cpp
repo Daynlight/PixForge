@@ -66,6 +66,28 @@ void PF::PLATFORM::OpenGLRenderer::render(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 };
 
+GLuint* PF::PLATFORM::OpenGLRenderer::renderEditorWindow(){ 
+    static GLuint gameTxt = 0;
+    if (gameTxt == 0) {
+        glGenTextures(1, &gameTxt);
+        glBindTexture(GL_TEXTURE_2D, gameTxt);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    glBindTexture(GL_TEXTURE_2D, gameTxt);
+
+    // Read pixels from the default framebuffer
+    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 800, 600, 0);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    return &gameTxt;
+};
+
 void PF::PLATFORM::OpenGLRenderer::renderBackground(UTILITIES::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
 };

@@ -5,6 +5,8 @@
 #include "Utilities/File/File.h" 
 #include "Engine/Shader.h"
 
+#include "../Renderer/OpenGL/Vendor/glad-3.3/include/glad/glad.h"
+
 namespace PF::PLATFORM{
 class iRenderer{
 public:
@@ -14,6 +16,7 @@ public:
   virtual UTILITIES::Vec<int, 4> getWindowRect() = 0;
 public:
   virtual void render() = 0;
+  virtual GLuint* renderEditorWindow() = 0;
   virtual void events() = 0;
   virtual void renderBackground(UTILITIES::Vec<float, 4> colour) = 0;
   virtual void renderColourBox(UTILITIES::Vec<float, 5> position, UTILITIES::Vec<float, 4> colour) = 0;

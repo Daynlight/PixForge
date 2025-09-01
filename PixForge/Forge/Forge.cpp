@@ -21,7 +21,7 @@ PF::FORGE::Forge::Forge()
     PF::Utilities::Log::inf("Renderer: " + renderers[i]);
 
   engine.loadRenderer(renderers[0]);
-  engine.Init("Game Window", 800, 600, true);
+  // engine.Init("Game Window", 800, 600, false);
 };
 
 PF::FORGE::Forge::~Forge(){
@@ -40,19 +40,16 @@ PF::FORGE::Forge::~Forge(){
 void PF::FORGE::Forge::run(){
   Utilities::Log::inf("Forge Running");
   while(renderer->isRunning()){
+    
     renderer->renderBackground({50, 50, 50, 255});
-
-    events();
     gui->render();
     renderer->render();
+    renderer->events();
     
-    engine.generateFrame();
-    engine.render();
+    // engine.events();
+    // // engine.generateFrame();
+    // // GLuint* engineTxt = engine.renderEditorWindow();
+    // engine.render();
     
   };
-};
-
-void PF::FORGE::Forge::events(){
-  renderer->events();
-  engine.events();
 };

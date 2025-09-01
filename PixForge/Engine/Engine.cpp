@@ -48,6 +48,10 @@ void PF::ENGINE::Engine::render(){
   renderer->render();
 };
 
+GLuint* PF::ENGINE::Engine::renderEditorWindow(){
+  return renderer->renderEditorWindow();
+};
+
 void PF::ENGINE::Engine::generateFrame(){
   renderer->renderBackground({50, 50, 50, 255});
 

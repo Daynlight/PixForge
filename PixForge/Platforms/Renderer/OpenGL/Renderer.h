@@ -32,8 +32,8 @@ private:
 private:
     GLFWwindow *window;
     bool running = true;
-    ENGINE::Shader vertexShader = ENGINE::Shader(defaultColourBoxVertexShader, "");
-    ENGINE::Shader fragmentShader = ENGINE::Shader(defaultColourBoxFragmentShader, "");
+    ENGINE::Shader vertexShader = ENGINE::Shader(defaultColourBoxVertexShader, "vertex.shader");
+    ENGINE::Shader fragmentShader = ENGINE::Shader(defaultColourBoxFragmentShader, "fragment.shader");
     int x, y, width, height;
     GLuint boxVAO = 0;
     GLuint boxVBO = 0;
@@ -49,6 +49,7 @@ public:
     UTILITIES::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
 public:
     void render();
+    GLuint* renderEditorWindow();
     void renderBackground(UTILITIES::Vec<float, 4> colour);
     void renderColourBox(UTILITIES::Vec<float, 5> position, UTILITIES::Vec<float, 4> colour);
     void renderTexture();

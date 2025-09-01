@@ -15,7 +15,6 @@ private:
   FORGE::Gui* gui;
 
   UTILITIES::File window_settings = UTILITIES::File("settings/window.ini");
-  void events();
 public:
   Forge();
   ~Forge();

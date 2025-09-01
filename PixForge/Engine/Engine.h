@@ -22,6 +22,7 @@ public:
   void loadRenderer(const std::string& dllPath); 
   void generateFrame();
   void render();
+  GLuint* renderEditorWindow();
   void run(std::function<void()> func = nullptr);
   void events();
   PLATFORM::iRenderer* getRenderer() { return renderer; };
