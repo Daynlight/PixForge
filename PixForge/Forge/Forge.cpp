@@ -21,7 +21,7 @@ PF::FORGE::Forge::Forge()
     PF::Utilities::Log::inf("Renderer: " + renderers[i]);
 
   engine.loadRenderer(renderers[0]);
-  // engine.Init("Game Window", 800, 600, false);
+  // engine.InitForEditor("Game Window", 800, 600);
 };
 
 PF::FORGE::Forge::~Forge(){

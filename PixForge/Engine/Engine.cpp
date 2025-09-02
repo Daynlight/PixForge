@@ -1,8 +1,12 @@
 #include "Engine.h"
 
-void PF::ENGINE::Engine::Init(const std::string &window_title, int width, int height, bool for_editor){
-  renderer->createWindow(window_title, width, height, for_editor);
+void PF::ENGINE::Engine::Init(const std::string &window_title, int width, int height){
+  renderer->createWindow(window_title, width, height);
   renderer->createRenderer();
+}
+
+void PF::ENGINE::Engine::InitForEditor(const std::string &window_title, int width, int height) {
+  //  renderer->createRenderer();
 };
 
 PF::ENGINE::Engine::~Engine() {
@@ -48,8 +52,8 @@ void PF::ENGINE::Engine::render(){
   renderer->render();
 };
 
-GLuint* PF::ENGINE::Engine::renderEditorWindow(){
-  return renderer->renderEditorWindow();
+PF::ENGINE::Texture* PF::ENGINE::Engine::renderToTexture(){
+  return renderer->renderToTexture();
 };
 
 void PF::ENGINE::Engine::generateFrame(){

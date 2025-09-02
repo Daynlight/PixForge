@@ -5,6 +5,7 @@
 #include "Utilities/Math/Vec.h"
 #include "Utilities/File/File.h"
 #include "Engine/Shader.h"
+#include "Engine/Texture.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
@@ -43,13 +44,13 @@ public:
     ~OpenGLRenderer();
     GLFWwindow* getWindow() { return window; };
     bool isRunning() { return running; };
-    void createWindow(const std::string &title, int width, int height, bool for_editor = false);
+    void createWindow(const std::string &title, int width, int height);
     void createRenderer();
     void events();
     UTILITIES::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
 public:
     void render();
-    GLuint* renderEditorWindow();
+    PF::ENGINE::Texture* renderToTexture();
     void renderBackground(UTILITIES::Vec<float, 4> colour);
     void renderColourBox(UTILITIES::Vec<float, 5> position, UTILITIES::Vec<float, 4> colour);
     void renderTexture();

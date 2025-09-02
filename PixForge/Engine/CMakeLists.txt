@@ -6,6 +6,7 @@ file(GLOB_RECURSE FILES
 "Engine.h"
 "Engine.cpp" 
 "Shader.h"
+"Texture.h"
 )
 
 project(Engine LANGUAGES CXX C)

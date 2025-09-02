@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-void PF::PLATFORM::OpenGLRenderer::createWindow(const std::string &title, int width, int height, bool for_editor){
+void PF::PLATFORM::OpenGLRenderer::createWindow(const std::string &title, int width, int height){
     if (!glfwInit()){
         running = false;
         return;
@@ -8,7 +8,6 @@ void PF::PLATFORM::OpenGLRenderer::createWindow(const std::string &title, int wi
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    if(for_editor) glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
     if (!window) {
@@ -66,8 +65,10 @@ void PF::PLATFORM::OpenGLRenderer::render(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 };
 
-GLuint* PF::PLATFORM::OpenGLRenderer::renderEditorWindow(){ 
+PF::ENGINE::Texture* PF::PLATFORM::OpenGLRenderer::renderToTexture() { 
     static GLuint gameTxt = 0;
+    static PF::ENGINE::Texture* textureWrapper = nullptr;
+
     if (gameTxt == 0) {
         glGenTextures(1, &gameTxt);
         glBindTexture(GL_TEXTURE_2D, gameTxt);
@@ -76,17 +77,36 @@ GLuint* PF::PLATFORM::OpenGLRenderer::renderEditorWindow(){
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glBindTexture(GL_TEXTURE_2D, 0);
+
+        // CPU-side wrapper (RGBA8, width=800, height=600)
+        textureWrapper = new PF::ENGINE::Texture(800, 600);
     }
 
+    // Copy framebuffer into GPU texture
     glBindTexture(GL_TEXTURE_2D, gameTxt);
-
-    // Read pixels from the default framebuffer
-    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 800, 600, 0);
-
+    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0,
+                     textureWrapper->getWidth(),
+                     textureWrapper->getHeight(),
+                     0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    return &gameTxt;
-};
+    // Read pixels back to CPU memory
+    std::vector<unsigned char> pixels(
+        textureWrapper->getWidth() * textureWrapper->getHeight() * 4);
+
+    glReadPixels(0, 0,
+                 textureWrapper->getWidth(),
+                 textureWrapper->getHeight(),
+                 GL_RGBA,
+                 GL_UNSIGNED_BYTE,
+                 pixels.data());
+
+    // Update Texture’s CPU-side buffer
+    textureWrapper->setData(pixels.data(), pixels.size());
+
+    return textureWrapper;
+}
+
 
 void PF::PLATFORM::OpenGLRenderer::renderBackground(UTILITIES::Vec<float, 4> colour){
   glClearColor(colour[0]/255, colour[1]/255, colour[2]/255, colour[3]/255);
