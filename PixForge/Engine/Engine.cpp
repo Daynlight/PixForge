@@ -5,7 +5,7 @@ void PF::ENGINE::Engine::Init(const std::string &window_title, int width, int he
   renderer->createRenderer();
 }
 
-void PF::ENGINE::Engine::InitForEditor(const std::string &window_title, int width, int height) {
+void PF::ENGINE::Engine::InitHeadLess(const std::string &window_title, int width, int height) {
   //  renderer->createRenderer();
 };
 
@@ -52,7 +52,7 @@ void PF::ENGINE::Engine::render(){
   renderer->render();
 };
 
-PF::ENGINE::Texture* PF::ENGINE::Engine::renderToTexture(){
+PF::ENGINE::Texture* PF::ENGINE::Engine::getHeadlessTexture(){
   return renderer->renderToTexture();
 };
 

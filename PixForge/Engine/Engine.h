@@ -17,13 +17,13 @@ private:
   PLATFORM::iRenderer* renderer = nullptr;
 public:
   void Init(const std::string &window_title, int width, int height);
-  void InitForEditor(const std::string &window_title, int width, int height);
+  void InitHeadLess(const std::string &window_title, int width, int height);
   ~Engine();
   PF::UTILITIES::Vector<std::string> getRenderers();
   void loadRenderer(const std::string& dllPath); 
   void generateFrame();
   void render();
-  PF::ENGINE::Texture* renderToTexture();
+  PF::ENGINE::Texture* getHeadlessTexture();
   void run(std::function<void()> func = nullptr);
   void events();
   PLATFORM::iRenderer* getRenderer() { return renderer; };
