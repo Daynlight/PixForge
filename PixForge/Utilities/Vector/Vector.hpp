@@ -5,6 +5,15 @@ PF::UTILITIES::Vector<T>::Vector(const unsigned int &capacity) :capacity(capacit
 
 template <typename T>
 inline PF::UTILITIES::Vector<T>::~Vector() { if(data) delete[] data; };
+template<>
+inline PF::UTILITIES::Vector<PF::UTILITIES::Vector<std::string>*>::~Vector() {
+    if (data) {
+        for (unsigned int i = 0; i < _size; ++i) {
+            delete data[i]; // free each heap object
+        }
+        delete[] data;
+    }
+}
 
 template<typename T>
 const unsigned int PF::UTILITIES::Vector<T>::size() const { return _size; };

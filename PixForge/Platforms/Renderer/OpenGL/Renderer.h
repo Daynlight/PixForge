@@ -5,11 +5,12 @@
 #include "Utilities/Math/Vec.h"
 #include "Utilities/File/File.h"
 #include "Engine/Shader.h"
+#include "Engine/Texture.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
 namespace PF::PLATFORM {
-class Renderer : public iRenderer {
+class OpenGLRenderer : public iRenderer {
 private:
     const char* defaultColourBoxVertexShader = R"(
     #version 330 core
@@ -32,15 +33,15 @@ private:
 private:
     GLFWwindow *window;
     bool running = true;
-    ENGINE::Shader vertexShader = ENGINE::Shader(defaultColourBoxVertexShader, "");
-    ENGINE::Shader fragmentShader = ENGINE::Shader(defaultColourBoxFragmentShader, "");
+    ENGINE::Shader vertexShader = ENGINE::Shader(defaultColourBoxVertexShader, "vertex.shader");
+    ENGINE::Shader fragmentShader = ENGINE::Shader(defaultColourBoxFragmentShader, "fragment.shader");
     int x, y, width, height;
     GLuint boxVAO = 0;
     GLuint boxVBO = 0;
     GLuint compiledShader;
     void createBox();
 public:
-    ~Renderer();
+    ~OpenGLRenderer();
     GLFWwindow* getWindow() { return window; };
     bool isRunning() { return running; };
     void createWindow(const std::string &title, int width, int height);
@@ -49,6 +50,7 @@ public:
     UTILITIES::Vec<int, 4> getWindowRect() { return {x, y, width, height}; };
 public:
     void render();
+    PF::ENGINE::Texture* renderToTexture();
     void renderBackground(UTILITIES::Vec<float, 4> colour);
     void renderColourBox(UTILITIES::Vec<float, 5> position, UTILITIES::Vec<float, 4> colour);
     void renderTexture();

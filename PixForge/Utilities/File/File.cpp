@@ -11,7 +11,7 @@ PF::UTILITIES::File::File(const std::string &path, const unsigned int size)
 }
 
 PF::UTILITIES::File::~File()
-{ file.close(); };
+{ if(file.is_open() && path != "") file.close(); };
 
 const bool PF::UTILITIES::File::exist() const
 { return std::filesystem::exists(path); };

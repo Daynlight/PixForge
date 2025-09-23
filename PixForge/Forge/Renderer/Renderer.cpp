@@ -46,6 +46,7 @@ void PF::FORGE::Renderer::createBox(){
 
 PF::FORGE::Renderer::~Renderer() {
     glfwDestroyWindow(window);
+    glfwTerminate();
 };
 
 void PF::FORGE::Renderer::createRenderer() {

@@ -10,12 +10,11 @@ class Forge{
 private:
   PF::Utilities::Benchmark::Allocs *allocs; 
   
-  // ENGINE::Engine engine;
+  ENGINE::Engine engine;
   FORGE::Renderer* renderer;
   FORGE::Gui* gui;
 
   UTILITIES::File window_settings = UTILITIES::File("settings/window.ini");
-  void events();
 public:
   Forge();
   ~Forge();
