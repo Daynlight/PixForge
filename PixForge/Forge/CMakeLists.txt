@@ -5,28 +5,37 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(Forge VERSION 1.0 LANGUAGES CXX)
 
 set(RENDERER
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glad-3.3/src/glad.c"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking/imgui.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking/imgui_draw.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking/imgui_tables.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking/imgui_widgets.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking/backends/imgui_impl_glfw.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking/backends/imgui_impl_opengl3.cpp"
+  "${CMAKE_SOURCE_DIR}/vendor/glad/src/glad.c"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_tables.cpp"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_glfw.cpp"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_opengl3.cpp"
 )
-
-find_package(glfw3 3.4 REQUIRED)
 
 set(RENDERER_LIBS
   glfw
-  "winmm"
-  "imm32"
-  "version"
-  "setupapi"
 )
+if(WIN32)
+  list(APPEND RENDERER_LIBS
+    "winmm"
+    "imm32"
+    "version"
+    "setupapi"
+  )
+elseif(UNIX)
+  list(APPEND RENDERER_LIBS
+    X11
+    Xrandr
+    Xcursor
+    Xi
+  )
+endif()
 
 set(RENDERER_INCLUDE
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/glad-3.3/include"
-  "${CMAKE_CURRENT_SOURCE_DIR}/Vendor/imgui-docking"
+  "${CMAKE_SOURCE_DIR}/vendor/glad/include"
+  "${CMAKE_SOURCE_DIR}/vendor/imgui"
 )
 
 file(GLOB_RECURSE src 

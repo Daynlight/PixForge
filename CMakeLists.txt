@@ -19,11 +19,9 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-lib
 set(BUILD_CONFIG_RENDERER OPENGL_WIN)
 set(BUILD_CONFIG_DATA SQLITE)
 
-############################## set toolchain to conan ##############################
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/conan/conan_toolchain.cmake" CACHE STRING "Conan toolchain file")
-
-
-
+############################## build submodules ##############################
+add_subdirectory(vendor/glfw)
+add_subdirectory(vendor/sqlite)
 
 ############################## Add All SubFolders ##############################
 add_subdirectory(PixForge/Utilities)

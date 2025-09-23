@@ -7,8 +7,6 @@ set(RENDERER
   "Renderer.cpp"
   )  
 
-find_package(glfw3 3.4 REQUIRED)
-
 #### [Libraries] ####
 set(RENDERER_LIBS 
   glfw
