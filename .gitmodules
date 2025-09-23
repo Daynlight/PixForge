@@ -1,0 +1,10 @@
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "vendor/sqlite"]
+	path = vendor/sqlite
+	url = https://github.com/SRombauts/SQLiteCpp
+[submodule "vendor/imgui"]
+	path = vendor/imgui
+	url = https://github.com/ocornut/imgui
+	branch = docking

@@ -4,8 +4,8 @@
 #include "Debug/Log.h"
 
 #include "imgui.h"
-#include "backends/imGui_impl_glfw.h"
-#include "backends/imGui_impl_opengl3.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 
 namespace PF::FORGE{
 class WindowGui{

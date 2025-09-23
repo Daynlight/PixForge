@@ -7,15 +7,25 @@ set(RENDERER
   "Renderer.cpp"
   )  
 
-find_package(glfw3 3.4 REQUIRED)
-
 #### [Libraries] ####
-set(RENDERER_LIBS 
+set(RENDERER_LIBS
   glfw
-  "winmm"
-  "imm32"
-  "version"
-  "setupapi")
+)
+if(WIN32)
+  list(APPEND RENDERER_LIBS
+    "winmm"
+    "imm32"
+    "version"
+    "setupapi"
+  )
+elseif(UNIX)
+  list(APPEND RENDERER_LIBS
+    X11
+    Xrandr
+    Xcursor
+    Xi
+  )
+endif()
 
 #### [Include] ####
 set(RENDERER_INCLUDE
