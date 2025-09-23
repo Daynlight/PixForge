@@ -14,17 +14,16 @@ add_subdirectory(Renderer)
 ######################### Data #########################
 ######################### SQLITE #########################
 if (BUILD_CONFIG_DATA STREQUAL SQLITE)
-  find_package(SQLite3 REQUIRED)
 
   #### [Files] ####
   set(SQL "SQL/SQL.h")
 
   #### [Libraries] ####
-  set(SQL_LIBS "${SQLite3_LIBRARIES}")
+  set(SQL_LIBS sqlite3)
 
   #### [Include] ####
   set(SQL_INCLUDE
-    "${SQLite3_INCLUDE}")
+    vendor/sqlite/include)
 else()
     message(FATAL_ERROR "Current BUILD_CONFIG_DATA is invalid set")
 endif()

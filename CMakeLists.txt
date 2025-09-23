@@ -9,6 +9,7 @@ set(CMAKE_ROOT_DIRECTORY ${CMAKE_SOURCE_DIR}/PixForge)
 ######################### Set Project Language #########################
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 ############################## Add libstdc++ as Static Lib ##############################
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
@@ -19,11 +20,9 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-lib
 set(BUILD_CONFIG_RENDERER OPENGL_WIN)
 set(BUILD_CONFIG_DATA SQLITE)
 
-############################## set toolchain to conan ##############################
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/conan/conan_toolchain.cmake" CACHE STRING "Conan toolchain file")
-
-
-
+############################## build submodules ##############################
+add_subdirectory(vendor/glfw)
+add_subdirectory(vendor/sqlite)
 
 ############################## Add All SubFolders ##############################
 add_subdirectory(PixForge/Utilities)
