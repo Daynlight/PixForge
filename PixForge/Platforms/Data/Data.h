@@ -1,36 +1,36 @@
 #pragma once
-#include "Platforms/Interfaces/iSQL.h"
+#include "Platforms/Interfaces/iData.h"
 #include "Debug/Log.h"
 #include <string>
 #include <vector>
 #include "sqlite3.h"
 
 namespace PF::PLATFORM{
-class SQL : public iSQL{
+class Data : public iData{
 private:
 std::string path = "";
 sqlite3* db = nullptr;
 
 private:
-SQL() = default;
-SQL(const SQL&) = delete;
-SQL& operator=(const SQL&) = delete;
+Data() = default;
+Data(const Data&) = delete;
+Data& operator=(const Data&) = delete;
 
 public:
-static SQL& get() 
+static Data& get() 
 {
-  static SQL instance;
+  static Data instance;
   return instance;
 };
 
-~SQL() override {
+~Data() override {
   if (db) sqlite3_close(db);
 }
 
 std::vector<std::vector<std::string>> getProjects(const std::string& nick)
 {
   std::vector<std::vector<std::string>> projects =
-    PLATFORM::SQL::get().select("Select U.nick, P.name, P.owner_id, C.width, C.height from Project as P join Contributors as C on C.project=P.id join User as U on U.nick=C.user Where U.nick Like '"+nick+"';");
+    PLATFORM::Data::get().select("Select U.nick, P.name, P.owner_id, C.width, C.height from Project as P join Contributors as C on C.project=P.id join User as U on U.nick=C.user Where U.nick Like '"+nick+"';");
   return projects;
 };
 

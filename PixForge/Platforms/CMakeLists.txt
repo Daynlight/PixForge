@@ -3,7 +3,7 @@ project(Platforms LANGUAGES CXX C)
 
 file(GLOB_RECURSE FILES
   "Interface/iRenderer.h"
-  "Interface/iDB.h"
+  "Interface/iData.h"
   "Platform.h"
   "Platform.cpp"
 )
@@ -12,24 +12,11 @@ file(GLOB_RECURSE FILES
 add_subdirectory(Renderer)
 
 ######################### Data #########################
-######################### SQLITE #########################
-if (BUILD_CONFIG_DATA STREQUAL SQLITE)
+set(Data "Data/Data.h")
+set(SQL_LIBS sqlite3)
+set(SQL_INCLUDE vendor/sqlite/include)
 
-  #### [Files] ####
-  set(SQL "SQL/SQL.h")
-
-  #### [Libraries] ####
-  set(SQL_LIBS sqlite3)
-
-  #### [Include] ####
-  set(SQL_INCLUDE
-    vendor/sqlite/include)
-else()
-    message(FATAL_ERROR "Current BUILD_CONFIG_DATA is invalid set")
-endif()
-
-######################### Finishing #########################
-add_library(Platforms STATIC ${SQL} ${FILES})
+add_library(Platforms STATIC ${Data} ${FILES})
 target_link_libraries(Platforms PUBLIC ${SQL_LIBS})
 target_include_directories(Platforms PUBLIC ${SQL_INCLUDE})
 

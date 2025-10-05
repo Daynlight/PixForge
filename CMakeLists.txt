@@ -16,11 +16,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 
-############################## Set Renderer and Platform ##############################
-# OPENGL_WIN
-set(BUILD_CONFIG_RENDERER OPENGL_WIN)
-set(BUILD_CONFIG_DATA SQLITE)
-
 ############################## build submodules ##############################
 add_subdirectory(vendor/glfw)
 add_subdirectory(vendor/sqlite)
