@@ -15,10 +15,17 @@ PF::ENGINE::Engine::~Engine() {
 
 PF::UTILITIES::Vector<std::string> PF::ENGINE::Engine::getRenderers() {
   PF::UTILITIES::Vector<std::string> dlls;
+
   for (auto& p : std::filesystem::directory_iterator("renderers/")) {
-      if (p.path().extension() == ".dll") { 
-          dlls.push(p.path().string());
+    #ifdef WIN32
+      if (p.path().extension() == ".dll") {
+        dlls.push(p.path().string());
       }
+    #else
+      if (p.path().extension() == ".so") {
+        dlls.push(p.path().string());
+      }
+    #endif 
   }
   return dlls;
 }
